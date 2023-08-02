@@ -24,14 +24,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     organizationId := "organizationId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.DataRetentionPoliciesAPI.GetDataRetentionPolicies(context.Background(), organizationId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DataRetentionPoliciesAPI.GetDataRetentionPolicies``: %v\n", err)
@@ -92,15 +92,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     organizationId := "organizationId_example" // string | 
-    apiDataRetentionPoliciesDTO := *iqclient.NewApiDataRetentionPoliciesDTO() // ApiDataRetentionPoliciesDTO |  (optional)
+    apiDataRetentionPoliciesDTO := *sonatypeiq.NewApiDataRetentionPoliciesDTO() // ApiDataRetentionPoliciesDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.DataRetentionPoliciesAPI.SetDataRetentionPolicies(context.Background(), organizationId).ApiDataRetentionPoliciesDTO(apiDataRetentionPoliciesDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DataRetentionPoliciesAPI.SetDataRetentionPolicies``: %v\n", err)

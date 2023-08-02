@@ -24,7 +24,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -34,8 +34,8 @@ func main() {
     generateCycloneDx := true // bool |  (optional) (default to false)
     spdxVersion := "spdxVersion_example" // string |  (optional) (default to "2.3")
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.SpdxAPI.GetByScanId(context.Background(), applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SpdxAPI.GetByScanId``: %v\n", err)
@@ -99,7 +99,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -109,8 +109,8 @@ func main() {
     generateCycloneDx := true // bool |  (optional) (default to false)
     spdxVersion := "spdxVersion_example" // string |  (optional) (default to "2.3")
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.SpdxAPI.GetLatestForStage(context.Background(), applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SpdxAPI.GetLatestForStage``: %v\n", err)

@@ -25,13 +25,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigSourceControlAPI.DeleteConfiguration5(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigSourceControlAPI.DeleteConfiguration5``: %v\n", err)
@@ -82,13 +82,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigSourceControlAPI.GetConfiguration5(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigSourceControlAPI.GetConfiguration5``: %v\n", err)
@@ -141,14 +141,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     body := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigSourceControlAPI.SetConfiguration5(context.Background()).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigSourceControlAPI.SetConfiguration5``: %v\n", err)

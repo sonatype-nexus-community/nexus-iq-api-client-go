@@ -27,14 +27,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiUserDTO := *iqclient.NewApiUserDTO() // ApiUserDTO |  (optional)
+    apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.UsersAPI.Add(context.Background()).ApiUserDTO(apiUserDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Add``: %v\n", err)
@@ -89,15 +89,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     username := "username_example" // string | 
     realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.UsersAPI.Delete1(context.Background(), username).Realm(realm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Delete1``: %v\n", err)
@@ -157,15 +157,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     username := "username_example" // string | 
     realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.UsersAPI.Get1(context.Background(), username).Realm(realm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Get1``: %v\n", err)
@@ -227,14 +227,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.UsersAPI.GetAll2(context.Background()).Realm(realm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetAll2``: %v\n", err)
@@ -291,15 +291,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     username := "username_example" // string | 
-    apiUserDTO := *iqclient.NewApiUserDTO() // ApiUserDTO |  (optional)
+    apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.UsersAPI.Update(context.Background(), username).ApiUserDTO(apiUserDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Update``: %v\n", err)

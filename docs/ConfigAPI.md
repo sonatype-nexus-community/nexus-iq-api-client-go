@@ -27,14 +27,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     property := []string{"Inner_example"} // []string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigAPI.DeleteConfiguration(context.Background()).Property(property).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigAPI.DeleteConfiguration``: %v\n", err)
@@ -89,14 +89,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     feature := "feature_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigAPI.DisableFeature(context.Background(), feature).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigAPI.DisableFeature``: %v\n", err)
@@ -155,14 +155,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     feature := "feature_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigAPI.EnabledFeature(context.Background(), feature).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigAPI.EnabledFeature``: %v\n", err)
@@ -221,14 +221,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     property := []string{"Inner_example"} // []string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigAPI.GetConfiguration(context.Background()).Property(property).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigAPI.GetConfiguration``: %v\n", err)
@@ -285,14 +285,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     requestBody := map[string]map[string]interface{}{"key": map[string]interface{}(123)} // map[string]map[string]interface{} |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigAPI.SetConfiguration(context.Background()).RequestBody(requestBody).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigAPI.SetConfiguration``: %v\n", err)

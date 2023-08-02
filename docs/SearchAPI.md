@@ -26,13 +26,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.SearchAPI.CreateSearchIndexAsync(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.CreateSearchIndexAsync``: %v\n", err)
@@ -83,15 +83,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     query := "query_example" // string |  (optional)
     allComponents := true // bool |  (optional) (default to false)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.SearchAPI.GetExportResults(context.Background()).Query(query).AllComponents(allComponents).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.GetExportResults``: %v\n", err)
@@ -147,17 +147,17 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     stageId := "stageId_example" // string |  (optional)
     hash := "hash_example" // string |  (optional)
-    componentIdentifier := map[string][]iqclient.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
+    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
     packageUrl := "packageUrl_example" // string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.SearchAPI.SearchComponent(context.Background()).StageId(stageId).Hash(hash).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchComponent``: %v\n", err)
@@ -217,7 +217,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -226,8 +226,8 @@ func main() {
     page := int32(56) // int32 |  (optional)
     allComponents := true // bool |  (optional) (default to false)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.SearchAPI.SearchIndex(context.Background()).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchIndex``: %v\n", err)

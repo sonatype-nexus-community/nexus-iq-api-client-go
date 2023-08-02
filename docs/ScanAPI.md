@@ -25,14 +25,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     sinceUtcTimestamp := int64(789) // int64 |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ScanAPI.GetIdeUsersOverview(context.Background()).SinceUtcTimestamp(sinceUtcTimestamp).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ScanAPI.GetIdeUsersOverview``: %v\n", err)
@@ -89,15 +89,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     applicationId := "applicationId_example" // string | 
     scanRequestId := "scanRequestId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ScanAPI.GetScanStatus(context.Background(), applicationId, scanRequestId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ScanAPI.GetScanStatus``: %v\n", err)
@@ -160,7 +160,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -169,8 +169,8 @@ func main() {
     stageId := "stageId_example" // string |  (optional) (default to "build")
     body := "body_example" // string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ScanAPI.ScanComponents(context.Background(), applicationId, source).StageId(stageId).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ScanAPI.ScanComponents``: %v\n", err)

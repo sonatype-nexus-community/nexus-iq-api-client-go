@@ -23,14 +23,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     apiType := "apiType_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.EndpointsAPI.GetOpenAPI(context.Background(), apiType).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndpointsAPI.GetOpenAPI``: %v\n", err)

@@ -28,15 +28,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     applicationId := "applicationId_example" // string | 
-    apiSourceControlEvaluationRequestDTO := *iqclient.NewApiSourceControlEvaluationRequestDTO() // ApiSourceControlEvaluationRequestDTO |  (optional)
+    apiSourceControlEvaluationRequestDTO := *sonatypeiq.NewApiSourceControlEvaluationRequestDTO() // ApiSourceControlEvaluationRequestDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.EvaluationAPI.DeprecatedManifestEvaluation(context.Background(), applicationId).ApiSourceControlEvaluationRequestDTO(apiSourceControlEvaluationRequestDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EvaluationAPI.DeprecatedManifestEvaluation``: %v\n", err)
@@ -98,15 +98,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     applicationId := "applicationId_example" // string | 
-    apiComponentEvaluationRequestDTOV2 := *iqclient.NewApiComponentEvaluationRequestDTOV2() // ApiComponentEvaluationRequestDTOV2 |  (optional)
+    apiComponentEvaluationRequestDTOV2 := *sonatypeiq.NewApiComponentEvaluationRequestDTOV2() // ApiComponentEvaluationRequestDTOV2 |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.EvaluationAPI.EvaluateComponents(context.Background(), applicationId).ApiComponentEvaluationRequestDTOV2(apiComponentEvaluationRequestDTOV2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EvaluationAPI.EvaluateComponents``: %v\n", err)
@@ -168,15 +168,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     applicationId := "applicationId_example" // string | 
-    apiSourceControlEvaluationRequestDTO := *iqclient.NewApiSourceControlEvaluationRequestDTO() // ApiSourceControlEvaluationRequestDTO |  (optional)
+    apiSourceControlEvaluationRequestDTO := *sonatypeiq.NewApiSourceControlEvaluationRequestDTO() // ApiSourceControlEvaluationRequestDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.EvaluationAPI.EvaluateSourceControl(context.Background(), applicationId).ApiSourceControlEvaluationRequestDTO(apiSourceControlEvaluationRequestDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EvaluationAPI.EvaluateSourceControl``: %v\n", err)
@@ -238,15 +238,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     applicationId := "applicationId_example" // string | 
     statusId := "statusId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.EvaluationAPI.GetApplicationEvaluationStatus(context.Background(), applicationId, statusId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EvaluationAPI.GetApplicationEvaluationStatus``: %v\n", err)
@@ -309,15 +309,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     applicationId := "applicationId_example" // string | 
     resultId := "resultId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.EvaluationAPI.GetComponentEvaluation(context.Background(), applicationId, resultId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EvaluationAPI.GetComponentEvaluation``: %v\n", err)
@@ -380,15 +380,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     applicationId := "applicationId_example" // string | 
-    apiPromoteScanRequestDTOV2 := *iqclient.NewApiPromoteScanRequestDTOV2() // ApiPromoteScanRequestDTOV2 |  (optional)
+    apiPromoteScanRequestDTOV2 := *sonatypeiq.NewApiPromoteScanRequestDTOV2() // ApiPromoteScanRequestDTOV2 |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.EvaluationAPI.PromoteScan(context.Background(), applicationId).ApiPromoteScanRequestDTOV2(apiPromoteScanRequestDTOV2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EvaluationAPI.PromoteScan``: %v\n", err)

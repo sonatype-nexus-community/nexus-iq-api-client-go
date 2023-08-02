@@ -29,13 +29,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.UserTokensAPI.CreateUserToken(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.CreateUserToken``: %v\n", err)
@@ -88,13 +88,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.UserTokensAPI.DeleteCurrentUserToken(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.DeleteCurrentUserToken``: %v\n", err)
@@ -145,14 +145,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     userCode := "userCode_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.UserTokensAPI.DeleteUserTokenByUserCode(context.Background(), userCode).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.DeleteUserTokenByUserCode``: %v\n", err)
@@ -211,15 +211,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     username := "username_example" // string | 
     realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.UserTokensAPI.GetUserTokenByUsernameAndRealmId(context.Background(), username).Realm(realm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokenByUsernameAndRealmId``: %v\n", err)
@@ -281,13 +281,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.UserTokensAPI.GetUserTokenExistsForCurrentUser(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokenExistsForCurrentUser``: %v\n", err)
@@ -340,7 +340,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -348,8 +348,8 @@ func main() {
     createdBefore := "createdBefore_example" // string |  (optional)
     realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.UserTokensAPI.GetUserTokensByCreatedBetweenAndRealmId(context.Background()).CreatedAfter(createdAfter).CreatedBefore(createdBefore).Realm(realm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokensByCreatedBetweenAndRealmId``: %v\n", err)
@@ -408,13 +408,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.UserTokensAPI.PurgeUserTokens(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.PurgeUserTokens``: %v\n", err)

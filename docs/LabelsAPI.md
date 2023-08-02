@@ -28,16 +28,16 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     ownerId := "ownerId_example" // string | 
-    apiLabelDTO := *iqclient.NewApiLabelDTO() // ApiLabelDTO |  (optional)
+    apiLabelDTO := *sonatypeiq.NewApiLabelDTO() // ApiLabelDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.LabelsAPI.AddLabel(context.Background(), ownerType, ownerId).ApiLabelDTO(apiLabelDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LabelsAPI.AddLabel``: %v\n", err)
@@ -101,7 +101,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -109,8 +109,8 @@ func main() {
     ownerId := "ownerId_example" // string | 
     labelId := "labelId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.LabelsAPI.DeleteLabel(context.Background(), ownerType, ownerId, labelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LabelsAPI.DeleteLabel``: %v\n", err)
@@ -173,7 +173,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -181,8 +181,8 @@ func main() {
     ownerId := "ownerId_example" // string | 
     labelId := "labelId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.LabelsAPI.GetApplicableContexts(context.Background(), ownerType, ownerId, labelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LabelsAPI.GetApplicableContexts``: %v\n", err)
@@ -247,15 +247,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     ownerId := "ownerId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.LabelsAPI.GetApplicableLabels(context.Background(), ownerType, ownerId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LabelsAPI.GetApplicableLabels``: %v\n", err)
@@ -318,7 +318,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -326,8 +326,8 @@ func main() {
     ownerId := "ownerId_example" // string | 
     inherit := true // bool |  (optional) (default to false)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.LabelsAPI.GetLabels(context.Background(), ownerType, ownerId).Inherit(inherit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LabelsAPI.GetLabels``: %v\n", err)
@@ -391,16 +391,16 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     ownerId := "ownerId_example" // string | 
-    apiLabelDTO := *iqclient.NewApiLabelDTO() // ApiLabelDTO |  (optional)
+    apiLabelDTO := *sonatypeiq.NewApiLabelDTO() // ApiLabelDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.LabelsAPI.UpdateLabel(context.Background(), ownerType, ownerId).ApiLabelDTO(apiLabelDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LabelsAPI.UpdateLabel``: %v\n", err)

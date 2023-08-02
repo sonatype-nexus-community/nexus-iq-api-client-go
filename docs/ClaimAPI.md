@@ -26,14 +26,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     hash := "hash_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ClaimAPI.Delete(context.Background(), hash).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Delete``: %v\n", err)
@@ -92,14 +92,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     hash := "hash_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ClaimAPI.Get(context.Background(), hash).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Get``: %v\n", err)
@@ -160,13 +160,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ClaimAPI.GetAll(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.GetAll``: %v\n", err)
@@ -219,14 +219,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiHashComponentIdentifierDTO := *iqclient.NewApiHashComponentIdentifierDTO() // ApiHashComponentIdentifierDTO |  (optional)
+    apiHashComponentIdentifierDTO := *sonatypeiq.NewApiHashComponentIdentifierDTO() // ApiHashComponentIdentifierDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ClaimAPI.Set(context.Background()).ApiHashComponentIdentifierDTO(apiHashComponentIdentifierDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Set``: %v\n", err)

@@ -23,19 +23,19 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     refId := "refId_example" // string | 
-    componentIdentifier := map[string][]iqclient.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
+    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
     identificationSource := "identificationSource_example" // string |  (optional)
     scanId := "scanId_example" // string |  (optional)
     ownerType := "ownerType_example" // string |  (optional)
     ownerId := "ownerId_example" // string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.VulnerabilitiesAPI.GetSecurityVulnerabilityDetails(context.Background(), refId).ComponentIdentifier(componentIdentifier).IdentificationSource(identificationSource).ScanId(scanId).OwnerType(ownerType).OwnerId(ownerId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesAPI.GetSecurityVulnerabilityDetails``: %v\n", err)

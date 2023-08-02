@@ -26,13 +26,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigMailAPI.DeleteConfiguration2(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigMailAPI.DeleteConfiguration2``: %v\n", err)
@@ -83,13 +83,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigMailAPI.GetConfiguration2(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigMailAPI.GetConfiguration2``: %v\n", err)
@@ -142,14 +142,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiMailConfigurationDTO := *iqclient.NewApiMailConfigurationDTO() // ApiMailConfigurationDTO |  (optional)
+    apiMailConfigurationDTO := *sonatypeiq.NewApiMailConfigurationDTO() // ApiMailConfigurationDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigMailAPI.SetConfiguration2(context.Background()).ApiMailConfigurationDTO(apiMailConfigurationDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigMailAPI.SetConfiguration2``: %v\n", err)
@@ -204,15 +204,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     recipientEmail := "recipientEmail_example" // string | 
-    apiMailConfigurationDTO := *iqclient.NewApiMailConfigurationDTO() // ApiMailConfigurationDTO |  (optional)
+    apiMailConfigurationDTO := *sonatypeiq.NewApiMailConfigurationDTO() // ApiMailConfigurationDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigMailAPI.TestConfiguration(context.Background(), recipientEmail).ApiMailConfigurationDTO(apiMailConfigurationDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigMailAPI.TestConfiguration``: %v\n", err)

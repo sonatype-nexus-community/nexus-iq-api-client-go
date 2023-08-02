@@ -23,7 +23,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -31,8 +31,8 @@ func main() {
     componentPurl := "componentPurl_example" // string |  (optional)
     ownerId := "ownerId_example" // string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.SecurityOverridesAPI.GetSecurityVulnerabilityOverrides(context.Background()).RefId(refId).ComponentPurl(componentPurl).OwnerId(ownerId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SecurityOverridesAPI.GetSecurityVulnerabilityOverrides``: %v\n", err)

@@ -23,15 +23,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.CompositeSourceControlAPI.GetCompositeSourceControlByOwner(context.Background(), ownerType, internalOwnerId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CompositeSourceControlAPI.GetCompositeSourceControlByOwner``: %v\n", err)

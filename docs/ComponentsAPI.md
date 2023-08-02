@@ -27,7 +27,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -36,8 +36,8 @@ func main() {
     componentHash := "componentHash_example" // string | 
     labelName := "labelName_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ComponentsAPI.DeleteComponentLabel(context.Background(), ownerType, internalOwnerId, componentHash, labelName).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.DeleteComponentLabel``: %v\n", err)
@@ -102,14 +102,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiComponentDetailsRequestDTOV2 := *iqclient.NewApiComponentDetailsRequestDTOV2() // ApiComponentDetailsRequestDTOV2 |  (optional)
+    apiComponentDetailsRequestDTOV2 := *sonatypeiq.NewApiComponentDetailsRequestDTOV2() // ApiComponentDetailsRequestDTOV2 |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ComponentsAPI.GetComponentDetails(context.Background()).ApiComponentDetailsRequestDTOV2(apiComponentDetailsRequestDTOV2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetComponentDetails``: %v\n", err)
@@ -166,14 +166,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiComponentOrPurlIdentifierDTOV2 := *iqclient.NewApiComponentOrPurlIdentifierDTOV2() // ApiComponentOrPurlIdentifierDTOV2 |  (optional)
+    apiComponentOrPurlIdentifierDTOV2 := *sonatypeiq.NewApiComponentOrPurlIdentifierDTOV2() // ApiComponentOrPurlIdentifierDTOV2 |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ComponentsAPI.GetComponentVersions(context.Background()).ApiComponentOrPurlIdentifierDTOV2(apiComponentOrPurlIdentifierDTOV2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetComponentVersions``: %v\n", err)
@@ -230,7 +230,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -239,10 +239,10 @@ func main() {
     stageId := "stageId_example" // string |  (optional)
     identificationSource := "identificationSource_example" // string |  (optional)
     scanId := "scanId_example" // string |  (optional)
-    apiComponentDTOV2 := *iqclient.NewApiComponentDTOV2() // ApiComponentDTOV2 |  (optional)
+    apiComponentDTOV2 := *sonatypeiq.NewApiComponentDTOV2() // ApiComponentDTOV2 |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponent``: %v\n", err)
@@ -309,7 +309,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -318,8 +318,8 @@ func main() {
     componentHash := "componentHash_example" // string | 
     labelName := "labelName_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ComponentsAPI.SetComponentLabel(context.Background(), ownerType, internalOwnerId, componentHash, labelName).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.SetComponentLabel``: %v\n", err)

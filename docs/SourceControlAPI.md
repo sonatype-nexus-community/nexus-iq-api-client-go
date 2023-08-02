@@ -27,15 +27,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     publicId := "publicId_example" // string |  (optional)
     repositoryUrl := "repositoryUrl_example" // string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.SourceControlAPI.AddOrUpdateSourceControl(context.Background()).PublicId(publicId).RepositoryUrl(repositoryUrl).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.AddOrUpdateSourceControl``: %v\n", err)
@@ -93,16 +93,16 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
-    apiSourceControlDTO := *iqclient.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
+    apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.SourceControlAPI.AddSourceControl(context.Background(), ownerType, internalOwnerId).ApiSourceControlDTO(apiSourceControlDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.AddSourceControl``: %v\n", err)
@@ -166,15 +166,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.SourceControlAPI.DeleteSourceControl(context.Background(), ownerType, internalOwnerId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.DeleteSourceControl``: %v\n", err)
@@ -235,15 +235,15 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.SourceControlAPI.GetSourceControl1(context.Background(), ownerType, internalOwnerId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.GetSourceControl1``: %v\n", err)
@@ -306,16 +306,16 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
-    apiSourceControlDTO := *iqclient.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
+    apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.SourceControlAPI.UpdateSourceControl(context.Background(), ownerType, internalOwnerId).ApiSourceControlDTO(apiSourceControlDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.UpdateSourceControl``: %v\n", err)

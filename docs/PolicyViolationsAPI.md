@@ -28,14 +28,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     violationId := "violationId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.PolicyViolationsAPI.GetApplicableWaivers(context.Background(), violationId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationsAPI.GetApplicableWaivers``: %v\n", err)
@@ -96,14 +96,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     constituentId := "constituentId_example" // string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.PolicyViolationsAPI.GetCrossStagePolicyViolationByConstituentId(context.Background()).ConstituentId(constituentId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationsAPI.GetCrossStagePolicyViolationByConstituentId``: %v\n", err)
@@ -160,14 +160,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     violationId := "violationId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.PolicyViolationsAPI.GetCrossStagePolicyViolationById(context.Background(), violationId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationsAPI.GetCrossStagePolicyViolationById``: %v\n", err)
@@ -228,14 +228,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     p := []string{"Inner_example"} // []string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.PolicyViolationsAPI.GetPolicyViolations(context.Background()).P(p).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationsAPI.GetPolicyViolations``: %v\n", err)
@@ -292,19 +292,19 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     ownerId := "ownerId_example" // string | 
     scanId := "scanId_example" // string | 
-    componentIdentifier := map[string][]iqclient.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
+    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
     packageUrl := "packageUrl_example" // string |  (optional)
     hash := "hash_example" // string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.PolicyViolationsAPI.GetTransitivePolicyViolationsByAppScanComponent(context.Background(), ownerType, ownerId, scanId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationsAPI.GetTransitivePolicyViolationsByAppScanComponent``: %v\n", err)
@@ -372,19 +372,19 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     ownerId := "ownerId_example" // string | 
     stageId := "stageId_example" // string | 
-    componentIdentifier := map[string][]iqclient.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
+    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
     packageUrl := "packageUrl_example" // string |  (optional)
     hash := "hash_example" // string |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.PolicyViolationsAPI.GetTransitivePolicyViolationsByOwnerStageComponent(context.Background(), ownerType, ownerId, stageId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationsAPI.GetTransitivePolicyViolationsByOwnerStageComponent``: %v\n", err)

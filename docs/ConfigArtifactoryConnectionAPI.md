@@ -30,16 +30,16 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
-    apiArtifactoryConnectionDTO := *iqclient.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
+    apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.AddArtifactoryConnection(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.AddArtifactoryConnection``: %v\n", err)
@@ -103,7 +103,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -111,8 +111,8 @@ func main() {
     internalOwnerId := "internalOwnerId_example" // string | 
     artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigArtifactoryConnectionAPI.DeleteArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.DeleteArtifactoryConnection``: %v\n", err)
@@ -175,7 +175,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -183,8 +183,8 @@ func main() {
     internalOwnerId := "internalOwnerId_example" // string | 
     artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.GetArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.GetArtifactoryConnection``: %v\n", err)
@@ -249,7 +249,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -257,8 +257,8 @@ func main() {
     internalOwnerId := "internalOwnerId_example" // string | 
     inherit := true // bool |  (optional) (default to false)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.GetOwnerArtifactoryConnection(context.Background(), ownerType, internalOwnerId).Inherit(inherit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.GetOwnerArtifactoryConnection``: %v\n", err)
@@ -322,16 +322,16 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
-    apiArtifactoryConnectionDTO := *iqclient.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
+    apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.TestArtifactoryConnection(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection``: %v\n", err)
@@ -395,7 +395,7 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
@@ -403,8 +403,8 @@ func main() {
     internalOwnerId := "internalOwnerId_example" // string | 
     artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.TestArtifactoryConnection1(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection1``: %v\n", err)
@@ -469,17 +469,17 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
     artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
-    apiArtifactoryConnectionDTO := *iqclient.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
+    apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.UpdateArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.UpdateArtifactoryConnection``: %v\n", err)
@@ -545,16 +545,16 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
     ownerType := "ownerType_example" // string | 
     internalOwnerId := "internalOwnerId_example" // string | 
-    apiArtifactoryConnectionStatusRequestDTO := *iqclient.NewApiArtifactoryConnectionStatusRequestDTO() // ApiArtifactoryConnectionStatusRequestDTO |  (optional)
+    apiArtifactoryConnectionStatusRequestDTO := *sonatypeiq.NewApiArtifactoryConnectionStatusRequestDTO() // ApiArtifactoryConnectionStatusRequestDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigArtifactoryConnectionAPI.UpdateOwnerArtifactoryConnectionStatus(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionStatusRequestDTO(apiArtifactoryConnectionStatusRequestDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.UpdateOwnerArtifactoryConnectionStatus``: %v\n", err)

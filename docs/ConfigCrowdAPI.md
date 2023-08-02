@@ -26,13 +26,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigCrowdAPI.DeleteCrowdConfiguration(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.DeleteCrowdConfiguration``: %v\n", err)
@@ -83,13 +83,13 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigCrowdAPI.GetCrowdConfiguration(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.GetCrowdConfiguration``: %v\n", err)
@@ -142,14 +142,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiCrowdConfigurationDTO := *iqclient.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
+    apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     r, err := apiClient.ConfigCrowdAPI.InsertOrUpdateCrowdConfiguration(context.Background()).ApiCrowdConfigurationDTO(apiCrowdConfigurationDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.InsertOrUpdateCrowdConfiguration``: %v\n", err)
@@ -204,14 +204,14 @@ import (
     "context"
     "fmt"
     "os"
-    iqclient "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiCrowdConfigurationDTO := *iqclient.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
+    apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
 
-    configuration := iqclient.NewConfiguration()
-    apiClient := iqclient.NewAPIClient(configuration)
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
     resp, r, err := apiClient.ConfigCrowdAPI.TestCrowdConfiguration(context.Background()).ApiCrowdConfigurationDTO(apiCrowdConfigurationDTO).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.TestCrowdConfiguration``: %v\n", err)
