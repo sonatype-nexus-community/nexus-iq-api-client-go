@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 ## GetApplications
 
-> []ApiApplicationCategoryDTO GetApplications(ctx).PublicId(publicId).IncludeCategories(includeCategories).Execute()
+> ApiApplicationListDTO GetApplications(ctx).PublicId(publicId).IncludeCategories(includeCategories).Execute()
 
 
 
@@ -319,7 +319,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ApplicationsAPI.GetApplications``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetApplications`: []ApiApplicationCategoryDTO
+    // response from `GetApplications`: ApiApplicationListDTO
     fmt.Fprintf(os.Stdout, "Response from `ApplicationsAPI.GetApplications`: %v\n", resp)
 }
 ```
@@ -340,7 +340,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ApiApplicationCategoryDTO**](ApiApplicationCategoryDTO.md)
+[**ApiApplicationListDTO**](ApiApplicationListDTO.md)
 
 ### Authorization
 
