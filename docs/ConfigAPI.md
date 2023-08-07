@@ -31,7 +31,7 @@ import (
 )
 
 func main() {
-    property := []string{"Inner_example"} // []string |  (optional)
+    property := []sonatypeiq.SystemConfigProperty{sonatypeiq.SystemConfigProperty("baseUrl")} // []SystemConfigProperty |  (optional)
 
     configuration := sonatypeiq.NewConfiguration()
     apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiDeleteConfigurationRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **property** | **[]string** |  | 
+ **property** | [**[]SystemConfigProperty**](SystemConfigProperty.md) |  | 
 
 ### Return type
 
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 
 ## GetConfiguration
 
-> map[string]map[string]interface{} GetConfiguration(ctx).Property(property).Execute()
+> SystemConfig GetConfiguration(ctx).Property(property).Execute()
 
 
 
@@ -225,7 +225,7 @@ import (
 )
 
 func main() {
-    property := []string{"Inner_example"} // []string |  (optional)
+    property := []sonatypeiq.SystemConfigProperty{sonatypeiq.SystemConfigProperty("baseUrl")} // []SystemConfigProperty |  (optional)
 
     configuration := sonatypeiq.NewConfiguration()
     apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -234,7 +234,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigAPI.GetConfiguration``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetConfiguration`: map[string]map[string]interface{}
+    // response from `GetConfiguration`: SystemConfig
     fmt.Fprintf(os.Stdout, "Response from `ConfigAPI.GetConfiguration`: %v\n", resp)
 }
 ```
@@ -250,11 +250,11 @@ Other parameters are passed through a pointer to a apiGetConfigurationRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **property** | **[]string** |  | 
+ **property** | [**[]SystemConfigProperty**](SystemConfigProperty.md) |  | 
 
 ### Return type
 
-**map[string]map[string]interface{}**
+[**SystemConfig**](SystemConfig.md)
 
 ### Authorization
 
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ## SetConfiguration
 
-> SetConfiguration(ctx).RequestBody(requestBody).Execute()
+> SetConfiguration(ctx).SystemConfig(systemConfig).Execute()
 
 
 
@@ -289,11 +289,11 @@ import (
 )
 
 func main() {
-    requestBody := map[string]map[string]interface{}{"key": map[string]interface{}(123)} // map[string]map[string]interface{} |  (optional)
+    systemConfig := *sonatypeiq.NewSystemConfig() // SystemConfig |  (optional)
 
     configuration := sonatypeiq.NewConfiguration()
     apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigAPI.SetConfiguration(context.Background()).RequestBody(requestBody).Execute()
+    r, err := apiClient.ConfigAPI.SetConfiguration(context.Background()).SystemConfig(systemConfig).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ConfigAPI.SetConfiguration``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -312,7 +312,7 @@ Other parameters are passed through a pointer to a apiSetConfigurationRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestBody** | **map[string]map[string]interface{}** |  | 
+ **systemConfig** | [**SystemConfig**](SystemConfig.md) |  | 
 
 ### Return type
 
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

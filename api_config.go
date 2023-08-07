@@ -27,10 +27,10 @@ type ConfigAPIService service
 type ApiDeleteConfigurationRequest struct {
 	ctx context.Context
 	ApiService *ConfigAPIService
-	property *[]string
+	property *[]SystemConfigProperty
 }
 
-func (r ApiDeleteConfigurationRequest) Property(property []string) ApiDeleteConfigurationRequest {
+func (r ApiDeleteConfigurationRequest) Property(property []SystemConfigProperty) ApiDeleteConfigurationRequest {
 	r.property = &property
 	return r
 }
@@ -92,7 +92,7 @@ func (a *ConfigAPIService) DeleteConfigurationExecute(r ApiDeleteConfigurationRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -310,15 +310,15 @@ func (a *ConfigAPIService) EnabledFeatureExecute(r ApiEnabledFeatureRequest) (*h
 type ApiGetConfigurationRequest struct {
 	ctx context.Context
 	ApiService *ConfigAPIService
-	property *[]string
+	property *[]SystemConfigProperty
 }
 
-func (r ApiGetConfigurationRequest) Property(property []string) ApiGetConfigurationRequest {
+func (r ApiGetConfigurationRequest) Property(property []SystemConfigProperty) ApiGetConfigurationRequest {
 	r.property = &property
 	return r
 }
 
-func (r ApiGetConfigurationRequest) Execute() (map[string]map[string]interface{}, *http.Response, error) {
+func (r ApiGetConfigurationRequest) Execute() (*SystemConfig, *http.Response, error) {
 	return r.ApiService.GetConfigurationExecute(r)
 }
 
@@ -336,13 +336,13 @@ func (a *ConfigAPIService) GetConfiguration(ctx context.Context) ApiGetConfigura
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
-func (a *ConfigAPIService) GetConfigurationExecute(r ApiGetConfigurationRequest) (map[string]map[string]interface{}, *http.Response, error) {
+//  @return SystemConfig
+func (a *ConfigAPIService) GetConfigurationExecute(r ApiGetConfigurationRequest) (*SystemConfig, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarReturnValue  *SystemConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigAPIService.GetConfiguration")
@@ -406,14 +406,6 @@ func (a *ConfigAPIService) GetConfigurationExecute(r ApiGetConfigurationRequest)
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-			var v map[string]map[string]interface{}
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -432,11 +424,11 @@ func (a *ConfigAPIService) GetConfigurationExecute(r ApiGetConfigurationRequest)
 type ApiSetConfigurationRequest struct {
 	ctx context.Context
 	ApiService *ConfigAPIService
-	requestBody *map[string]map[string]interface{}
+	systemConfig *SystemConfig
 }
 
-func (r ApiSetConfigurationRequest) RequestBody(requestBody map[string]map[string]interface{}) ApiSetConfigurationRequest {
-	r.requestBody = &requestBody
+func (r ApiSetConfigurationRequest) SystemConfig(systemConfig SystemConfig) ApiSetConfigurationRequest {
+	r.systemConfig = &systemConfig
 	return r
 }
 
@@ -486,7 +478,7 @@ func (a *ConfigAPIService) SetConfigurationExecute(r ApiSetConfigurationRequest)
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -494,7 +486,7 @@ func (a *ConfigAPIService) SetConfigurationExecute(r ApiSetConfigurationRequest)
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.requestBody
+	localVarPostBody = r.systemConfig
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err

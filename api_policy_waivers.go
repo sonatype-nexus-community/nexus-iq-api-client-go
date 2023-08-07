@@ -866,3 +866,101 @@ func (a *PolicyWaiversAPIService) GetTransitivePolicyWaiversByAppScanComponentEx
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+
+type ApiRequestPolicyWaiverRequest struct {
+	ctx context.Context
+	ApiService *PolicyWaiversAPIService
+	policyViolationId string
+	apiRequestPolicyWaiverDTO *ApiRequestPolicyWaiverDTO
+}
+
+func (r ApiRequestPolicyWaiverRequest) ApiRequestPolicyWaiverDTO(apiRequestPolicyWaiverDTO ApiRequestPolicyWaiverDTO) ApiRequestPolicyWaiverRequest {
+	r.apiRequestPolicyWaiverDTO = &apiRequestPolicyWaiverDTO
+	return r
+}
+
+func (r ApiRequestPolicyWaiverRequest) Execute() (*http.Response, error) {
+	return r.ApiService.RequestPolicyWaiverExecute(r)
+}
+
+/*
+RequestPolicyWaiver Method for RequestPolicyWaiver
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param policyViolationId
+ @return ApiRequestPolicyWaiverRequest
+*/
+func (a *PolicyWaiversAPIService) RequestPolicyWaiver(ctx context.Context, policyViolationId string) ApiRequestPolicyWaiverRequest {
+	return ApiRequestPolicyWaiverRequest{
+		ApiService: a,
+		ctx: ctx,
+		policyViolationId: policyViolationId,
+	}
+}
+
+// Execute executes the request
+func (a *PolicyWaiversAPIService) RequestPolicyWaiverExecute(r ApiRequestPolicyWaiverRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PolicyWaiversAPIService.RequestPolicyWaiver")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/policyWaivers/waiverRequests/{policyViolationId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"policyViolationId"+"}", url.PathEscape(parameterValueToString(r.policyViolationId, "policyViolationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"*/*"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.apiRequestPolicyWaiverDTO
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}

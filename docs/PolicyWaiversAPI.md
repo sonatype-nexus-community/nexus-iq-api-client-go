@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**GetPolicyWaiver**](PolicyWaiversAPI.md#GetPolicyWaiver) | **Get** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
 [**GetPolicyWaivers**](PolicyWaiversAPI.md#GetPolicyWaivers) | **Get** /api/v2/policyWaivers/{ownerType}/{ownerId} | 
 [**GetTransitivePolicyWaiversByAppScanComponent**](PolicyWaiversAPI.md#GetTransitivePolicyWaiversByAppScanComponent) | **Get** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/{scanId} | 
+[**RequestPolicyWaiver**](PolicyWaiversAPI.md#RequestPolicyWaiver) | **Post** /api/v2/policyWaivers/waiverRequests/{policyViolationId} | 
 
 
 
@@ -539,6 +540,74 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RequestPolicyWaiver
+
+> RequestPolicyWaiver(ctx, policyViolationId).ApiRequestPolicyWaiverDTO(apiRequestPolicyWaiverDTO).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+    policyViolationId := "policyViolationId_example" // string | 
+    apiRequestPolicyWaiverDTO := *sonatypeiq.NewApiRequestPolicyWaiverDTO() // ApiRequestPolicyWaiverDTO |  (optional)
+
+    configuration := sonatypeiq.NewConfiguration()
+    apiClient := sonatypeiq.NewAPIClient(configuration)
+    r, err := apiClient.PolicyWaiversAPI.RequestPolicyWaiver(context.Background(), policyViolationId).ApiRequestPolicyWaiverDTO(apiRequestPolicyWaiverDTO).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.RequestPolicyWaiver``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**policyViolationId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRequestPolicyWaiverRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **apiRequestPolicyWaiverDTO** | [**ApiRequestPolicyWaiverDTO**](ApiRequestPolicyWaiverDTO.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

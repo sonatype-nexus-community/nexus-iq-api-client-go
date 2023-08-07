@@ -207,6 +207,7 @@ Class | Method | HTTP request | Description
 *PolicyWaiversAPI* | [**GetPolicyWaiver**](docs/PolicyWaiversAPI.md#getpolicywaiver) | **Get** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
 *PolicyWaiversAPI* | [**GetPolicyWaivers**](docs/PolicyWaiversAPI.md#getpolicywaivers) | **Get** /api/v2/policyWaivers/{ownerType}/{ownerId} | 
 *PolicyWaiversAPI* | [**GetTransitivePolicyWaiversByAppScanComponent**](docs/PolicyWaiversAPI.md#gettransitivepolicywaiversbyappscancomponent) | **Get** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/{scanId} | 
+*PolicyWaiversAPI* | [**RequestPolicyWaiver**](docs/PolicyWaiversAPI.md#requestpolicywaiver) | **Post** /api/v2/policyWaivers/waiverRequests/{policyViolationId} | 
 *ReportsAPI* | [**GetAll1**](docs/ReportsAPI.md#getall1) | **Get** /api/v2/reports/applications | 
 *ReportsAPI* | [**GetByApplicationId**](docs/ReportsAPI.md#getbyapplicationid) | **Get** /api/v2/reports/applications/{applicationId} | 
 *ReportsAPI* | [**GetComponentsInQuarantine**](docs/ReportsAPI.md#getcomponentsinquarantine) | **Get** /api/v2/reports/components/quarantined | 
@@ -372,6 +373,7 @@ Class | Method | HTTP request | Description
  - [ApiRepositoryPathResponseDTO](docs/ApiRepositoryPathResponseDTO.md)
  - [ApiRepositoryPathVersions](docs/ApiRepositoryPathVersions.md)
  - [ApiRepositoryWaiverDTO](docs/ApiRepositoryWaiverDTO.md)
+ - [ApiRequestPolicyWaiverDTO](docs/ApiRequestPolicyWaiverDTO.md)
  - [ApiReverseProxyAuthenticationConfigurationDTO](docs/ApiReverseProxyAuthenticationConfigurationDTO.md)
  - [ApiRoleDTO](docs/ApiRoleDTO.md)
  - [ApiRoleListDTO](docs/ApiRoleListDTO.md)
@@ -452,6 +454,8 @@ Class | Method | HTTP request | Description
  - [SecurityVulnerabilitySeverity](docs/SecurityVulnerabilitySeverity.md)
  - [SecurityVulnerabilityWeakness](docs/SecurityVulnerabilityWeakness.md)
  - [StageData](docs/StageData.md)
+ - [SystemConfig](docs/SystemConfig.md)
+ - [SystemConfigProperty](docs/SystemConfigProperty.md)
  - [TagsByOwnerDTO](docs/TagsByOwnerDTO.md)
  - [TriggerReference](docs/TriggerReference.md)
  - [ValidationResult](docs/ValidationResult.md)
