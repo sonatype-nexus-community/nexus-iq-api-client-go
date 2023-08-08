@@ -21,7 +21,7 @@ var _ MappedNullable = &ApiProxyServerConfigurationDTO{}
 type ApiProxyServerConfigurationDTO struct {
 	ExcludeHosts []string `json:"excludeHosts,omitempty"`
 	Hostname *string `json:"hostname,omitempty"`
-	Password []string `json:"password,omitempty"`
+	Password *string `json:"password,omitempty"`
 	PasswordIsIncluded *bool `json:"passwordIsIncluded,omitempty"`
 	Port *int32 `json:"port,omitempty"`
 	Username *string `json:"username,omitempty"`
@@ -109,17 +109,17 @@ func (o *ApiProxyServerConfigurationDTO) SetHostname(v string) {
 }
 
 // GetPassword returns the Password field value if set, zero value otherwise.
-func (o *ApiProxyServerConfigurationDTO) GetPassword() []string {
+func (o *ApiProxyServerConfigurationDTO) GetPassword() string {
 	if o == nil || IsNil(o.Password) {
-		var ret []string
+		var ret string
 		return ret
 	}
-	return o.Password
+	return *o.Password
 }
 
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ApiProxyServerConfigurationDTO) GetPasswordOk() ([]string, bool) {
+func (o *ApiProxyServerConfigurationDTO) GetPasswordOk() (*string, bool) {
 	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
@@ -135,9 +135,9 @@ func (o *ApiProxyServerConfigurationDTO) HasPassword() bool {
 	return false
 }
 
-// SetPassword gets a reference to the given []string and assigns it to the Password field.
-func (o *ApiProxyServerConfigurationDTO) SetPassword(v []string) {
-	o.Password = v
+// SetPassword gets a reference to the given string and assigns it to the Password field.
+func (o *ApiProxyServerConfigurationDTO) SetPassword(v string) {
+	o.Password = &v
 }
 
 // GetPasswordIsIncluded returns the PasswordIsIncluded field value if set, zero value otherwise.

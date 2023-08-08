@@ -15749,9 +15749,7 @@ components:
     ApiProxyServerConfigurationDTO:
       example:
         hostname: hostname
-        password:
-        - password
-        - password
+        password: password
         port: 0
         excludeHosts:
         - excludeHosts
@@ -15766,9 +15764,7 @@ components:
         hostname:
           type: string
         password:
-          items:
-            type: string
-          type: array
+          type: string
         passwordIsIncluded:
           type: boolean
         port:
