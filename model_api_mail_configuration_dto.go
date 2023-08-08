@@ -20,7 +20,7 @@ var _ MappedNullable = &ApiMailConfigurationDTO{}
 // ApiMailConfigurationDTO struct for ApiMailConfigurationDTO
 type ApiMailConfigurationDTO struct {
 	Hostname *string `json:"hostname,omitempty"`
-	Password []string `json:"password,omitempty"`
+	Password *string `json:"password,omitempty"`
 	PasswordIsIncluded *bool `json:"passwordIsIncluded,omitempty"`
 	Port *int32 `json:"port,omitempty"`
 	SslEnabled *bool `json:"sslEnabled,omitempty"`
@@ -79,17 +79,17 @@ func (o *ApiMailConfigurationDTO) SetHostname(v string) {
 }
 
 // GetPassword returns the Password field value if set, zero value otherwise.
-func (o *ApiMailConfigurationDTO) GetPassword() []string {
+func (o *ApiMailConfigurationDTO) GetPassword() string {
 	if o == nil || IsNil(o.Password) {
-		var ret []string
+		var ret string
 		return ret
 	}
-	return o.Password
+	return *o.Password
 }
 
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ApiMailConfigurationDTO) GetPasswordOk() ([]string, bool) {
+func (o *ApiMailConfigurationDTO) GetPasswordOk() (*string, bool) {
 	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
@@ -105,9 +105,9 @@ func (o *ApiMailConfigurationDTO) HasPassword() bool {
 	return false
 }
 
-// SetPassword gets a reference to the given []string and assigns it to the Password field.
-func (o *ApiMailConfigurationDTO) SetPassword(v []string) {
-	o.Password = v
+// SetPassword gets a reference to the given string and assigns it to the Password field.
+func (o *ApiMailConfigurationDTO) SetPassword(v string) {
+	o.Password = &v
 }
 
 // GetPasswordIsIncluded returns the PasswordIsIncluded field value if set, zero value otherwise.

@@ -14211,9 +14211,7 @@ components:
         systemEmail: systemEmail
         startTlsEnabled: true
         hostname: hostname
-        password:
-        - password
-        - password
+        password: password
         port: 0
         sslEnabled: true
         passwordIsIncluded: true
@@ -14222,9 +14220,7 @@ components:
         hostname:
           type: string
         password:
-          items:
-            type: string
-          type: array
+          type: string
         passwordIsIncluded:
           type: boolean
         port:

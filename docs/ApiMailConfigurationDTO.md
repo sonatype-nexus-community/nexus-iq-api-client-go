@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Hostname** | Pointer to **string** |  | [optional] 
-**Password** | Pointer to **[]string** |  | [optional] 
+**Password** | Pointer to **string** |  | [optional] 
 **PasswordIsIncluded** | Pointer to **bool** |  | [optional] 
 **Port** | Pointer to **int32** |  | [optional] 
 **SslEnabled** | Pointer to **bool** |  | [optional] 
@@ -59,20 +59,20 @@ HasHostname returns a boolean if a field has been set.
 
 ### GetPassword
 
-`func (o *ApiMailConfigurationDTO) GetPassword() []string`
+`func (o *ApiMailConfigurationDTO) GetPassword() string`
 
 GetPassword returns the Password field if non-nil, zero value otherwise.
 
 ### GetPasswordOk
 
-`func (o *ApiMailConfigurationDTO) GetPasswordOk() (*[]string, bool)`
+`func (o *ApiMailConfigurationDTO) GetPasswordOk() (*string, bool)`
 
 GetPasswordOk returns a tuple with the Password field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPassword
 
-`func (o *ApiMailConfigurationDTO) SetPassword(v []string)`
+`func (o *ApiMailConfigurationDTO) SetPassword(v string)`
 
 SetPassword sets Password field to given value.
 
