@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApplicationId** | Pointer to **string** |  | [optional] 
-**ErrorMessage** | Pointer to **string** |  | [optional] 
+**ErrorMessage** | Pointer to **NullableString** |  | [optional] 
 **EvaluationDate** | Pointer to **time.Time** |  | [optional] 
 **IsError** | Pointer to **bool** |  | [optional] 
 **Results** | Pointer to [**[]ApiComponentDetailsDTOV2**](ApiComponentDetailsDTOV2.md) |  | [optional] 
@@ -80,6 +80,16 @@ SetErrorMessage sets ErrorMessage field to given value.
 
 HasErrorMessage returns a boolean if a field has been set.
 
+### SetErrorMessageNil
+
+`func (o *ApiComponentEvaluationResultDTOV2) SetErrorMessageNil(b bool)`
+
+ SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
+
+### UnsetErrorMessage
+`func (o *ApiComponentEvaluationResultDTOV2) UnsetErrorMessage()`
+
+UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
 ### GetEvaluationDate
 
 `func (o *ApiComponentEvaluationResultDTOV2) GetEvaluationDate() time.Time`

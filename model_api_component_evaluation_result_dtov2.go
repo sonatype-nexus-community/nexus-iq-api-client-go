@@ -21,7 +21,7 @@ var _ MappedNullable = &ApiComponentEvaluationResultDTOV2{}
 // ApiComponentEvaluationResultDTOV2 struct for ApiComponentEvaluationResultDTOV2
 type ApiComponentEvaluationResultDTOV2 struct {
 	ApplicationId *string `json:"applicationId,omitempty"`
-	ErrorMessage *string `json:"errorMessage,omitempty"`
+	ErrorMessage NullableString `json:"errorMessage,omitempty"`
 	EvaluationDate *time.Time `json:"evaluationDate,omitempty"`
 	IsError *bool `json:"isError,omitempty"`
 	Results []ApiComponentDetailsDTOV2 `json:"results,omitempty"`
@@ -77,36 +77,46 @@ func (o *ApiComponentEvaluationResultDTOV2) SetApplicationId(v string) {
 	o.ApplicationId = &v
 }
 
-// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
+// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApiComponentEvaluationResultDTOV2) GetErrorMessage() string {
-	if o == nil || IsNil(o.ErrorMessage) {
+	if o == nil || IsNil(o.ErrorMessage.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ErrorMessage
+	return *o.ErrorMessage.Get()
 }
 
 // GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApiComponentEvaluationResultDTOV2) GetErrorMessageOk() (*string, bool) {
-	if o == nil || IsNil(o.ErrorMessage) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ErrorMessage, true
+	return o.ErrorMessage.Get(), o.ErrorMessage.IsSet()
 }
 
 // HasErrorMessage returns a boolean if a field has been set.
 func (o *ApiComponentEvaluationResultDTOV2) HasErrorMessage() bool {
-	if o != nil && !IsNil(o.ErrorMessage) {
+	if o != nil && o.ErrorMessage.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
+// SetErrorMessage gets a reference to the given NullableString and assigns it to the ErrorMessage field.
 func (o *ApiComponentEvaluationResultDTOV2) SetErrorMessage(v string) {
-	o.ErrorMessage = &v
+	o.ErrorMessage.Set(&v)
+}
+// SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
+func (o *ApiComponentEvaluationResultDTOV2) SetErrorMessageNil() {
+	o.ErrorMessage.Set(nil)
+}
+
+// UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
+func (o *ApiComponentEvaluationResultDTOV2) UnsetErrorMessage() {
+	o.ErrorMessage.Unset()
 }
 
 // GetEvaluationDate returns the EvaluationDate field value if set, zero value otherwise.
@@ -250,8 +260,8 @@ func (o ApiComponentEvaluationResultDTOV2) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.ApplicationId) {
 		toSerialize["applicationId"] = o.ApplicationId
 	}
-	if !IsNil(o.ErrorMessage) {
-		toSerialize["errorMessage"] = o.ErrorMessage
+	if o.ErrorMessage.IsSet() {
+		toSerialize["errorMessage"] = o.ErrorMessage.Get()
 	}
 	if !IsNil(o.EvaluationDate) {
 		toSerialize["evaluationDate"] = o.EvaluationDate
