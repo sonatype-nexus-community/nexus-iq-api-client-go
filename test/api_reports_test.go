@@ -1,5 +1,5 @@
 /*
-Sonatype IQ Server
+Sonatype Lifecycle Public REST API
 
 Testing ReportsAPIService
 

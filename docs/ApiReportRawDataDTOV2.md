@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Components** | Pointer to [**[]ApiReportComponentDTOV2**](ApiReportComponentDTOV2.md) |  | [optional] 
+**GlobalInformation** | Pointer to [**ApiGlobalInformationDTOV2**](ApiGlobalInformationDTOV2.md) |  | [optional] 
 **MatchSummary** | Pointer to [**ApiMatchStateSummaryDTOV2**](ApiMatchStateSummaryDTOV2.md) |  | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetComponents sets Components field to given value.
 `func (o *ApiReportRawDataDTOV2) HasComponents() bool`
 
 HasComponents returns a boolean if a field has been set.
+
+### GetGlobalInformation
+
+`func (o *ApiReportRawDataDTOV2) GetGlobalInformation() ApiGlobalInformationDTOV2`
+
+GetGlobalInformation returns the GlobalInformation field if non-nil, zero value otherwise.
+
+### GetGlobalInformationOk
+
+`func (o *ApiReportRawDataDTOV2) GetGlobalInformationOk() (*ApiGlobalInformationDTOV2, bool)`
+
+GetGlobalInformationOk returns a tuple with the GlobalInformation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGlobalInformation
+
+`func (o *ApiReportRawDataDTOV2) SetGlobalInformation(v ApiGlobalInformationDTOV2)`
+
+SetGlobalInformation sets GlobalInformation field to given value.
+
+### HasGlobalInformation
+
+`func (o *ApiReportRawDataDTOV2) HasGlobalInformation() bool`
+
+HasGlobalInformation returns a boolean if a field has been set.
 
 ### GetMatchSummary
 
