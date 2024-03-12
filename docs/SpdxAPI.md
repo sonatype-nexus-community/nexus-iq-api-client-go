@@ -21,26 +21,26 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    scanId := "scanId_example" // string | 
-    format := "format_example" // string |  (optional) (default to "json")
-    generateCycloneDx := true // bool |  (optional) (default to false)
-    spdxVersion := "spdxVersion_example" // string |  (optional) (default to "2.3")
+	applicationId := "applicationId_example" // string | 
+	scanId := "scanId_example" // string | 
+	format := "format_example" // string |  (optional) (default to "json")
+	generateCycloneDx := true // bool |  (optional) (default to false)
+	spdxVersion := "spdxVersion_example" // string |  (optional) (default to "2.3")
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.SpdxAPI.GetByScanId(context.Background(), applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpdxAPI.GetByScanId``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SpdxAPI.GetByScanId(context.Background(), applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SpdxAPI.GetByScanId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -96,26 +96,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    stageId := "stageId_example" // string | 
-    format := "format_example" // string |  (optional) (default to "json")
-    generateCycloneDx := true // bool |  (optional) (default to false)
-    spdxVersion := "spdxVersion_example" // string |  (optional) (default to "2.3")
+	applicationId := "applicationId_example" // string | 
+	stageId := "stageId_example" // string | 
+	format := "format_example" // string |  (optional) (default to "json")
+	generateCycloneDx := true // bool |  (optional) (default to false)
+	spdxVersion := "spdxVersion_example" // string |  (optional) (default to "2.3")
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.SpdxAPI.GetLatestForStage(context.Background(), applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpdxAPI.GetLatestForStage``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SpdxAPI.GetLatestForStage(context.Background(), applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SpdxAPI.GetLatestForStage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

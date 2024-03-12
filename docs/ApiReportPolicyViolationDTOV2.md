@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Constraints** | Pointer to [**[]ApiReportConstraintViolationDTOV2**](ApiReportConstraintViolationDTOV2.md) |  | [optional] 
 **Grandfathered** | Pointer to **bool** |  | [optional] 
+**LegacyViolation** | Pointer to **bool** |  | [optional] 
 **PolicyId** | Pointer to **string** |  | [optional] 
 **PolicyName** | Pointer to **string** |  | [optional] 
 **PolicyThreatCategory** | Pointer to **string** |  | [optional] 
@@ -81,6 +82,31 @@ SetGrandfathered sets Grandfathered field to given value.
 `func (o *ApiReportPolicyViolationDTOV2) HasGrandfathered() bool`
 
 HasGrandfathered returns a boolean if a field has been set.
+
+### GetLegacyViolation
+
+`func (o *ApiReportPolicyViolationDTOV2) GetLegacyViolation() bool`
+
+GetLegacyViolation returns the LegacyViolation field if non-nil, zero value otherwise.
+
+### GetLegacyViolationOk
+
+`func (o *ApiReportPolicyViolationDTOV2) GetLegacyViolationOk() (*bool, bool)`
+
+GetLegacyViolationOk returns a tuple with the LegacyViolation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegacyViolation
+
+`func (o *ApiReportPolicyViolationDTOV2) SetLegacyViolation(v bool)`
+
+SetLegacyViolation sets LegacyViolation field to given value.
+
+### HasLegacyViolation
+
+`func (o *ApiReportPolicyViolationDTOV2) HasLegacyViolation() bool`
+
+HasLegacyViolation returns a boolean if a field has been set.
 
 ### GetPolicyId
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **CriticalComponentCount** | Pointer to **int32** |  | [optional] 
 **CriticalPolicyViolationCount** | Pointer to **int32** |  | [optional] 
 **GrandfatheredPolicyViolationCount** | Pointer to **int32** |  | [optional] 
+**LegacyViolationCount** | Pointer to **int32** |  | [optional] 
 **ModerateComponentCount** | Pointer to **int32** |  | [optional] 
 **ModeratePolicyViolationCount** | Pointer to **int32** |  | [optional] 
 **SevereComponentCount** | Pointer to **int32** |  | [optional] 
@@ -158,6 +159,31 @@ SetGrandfatheredPolicyViolationCount sets GrandfatheredPolicyViolationCount fiel
 `func (o *PolicyEvaluationResult) HasGrandfatheredPolicyViolationCount() bool`
 
 HasGrandfatheredPolicyViolationCount returns a boolean if a field has been set.
+
+### GetLegacyViolationCount
+
+`func (o *PolicyEvaluationResult) GetLegacyViolationCount() int32`
+
+GetLegacyViolationCount returns the LegacyViolationCount field if non-nil, zero value otherwise.
+
+### GetLegacyViolationCountOk
+
+`func (o *PolicyEvaluationResult) GetLegacyViolationCountOk() (*int32, bool)`
+
+GetLegacyViolationCountOk returns a tuple with the LegacyViolationCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegacyViolationCount
+
+`func (o *PolicyEvaluationResult) SetLegacyViolationCount(v int32)`
+
+SetLegacyViolationCount sets LegacyViolationCount field to given value.
+
+### HasLegacyViolationCount
+
+`func (o *PolicyEvaluationResult) HasLegacyViolationCount() bool`
+
+HasLegacyViolationCount returns a boolean if a field has been set.
 
 ### GetModerateComponentCount
 

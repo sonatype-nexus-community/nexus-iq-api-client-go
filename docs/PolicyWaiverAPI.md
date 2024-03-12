@@ -20,24 +20,24 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    policyViolationId := "policyViolationId_example" // string | 
-    ownerType := "ownerType_example" // string | 
-    body := "body_example" // string |  (optional)
+	policyViolationId := "policyViolationId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	body := "body_example" // string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.PolicyWaiverAPI.AddPolicyWaiver(context.Background(), policyViolationId, ownerType).Body(body).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiverAPI.AddPolicyWaiver``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiverAPI.AddPolicyWaiver(context.Background(), policyViolationId, ownerType).Body(body).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiverAPI.AddPolicyWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

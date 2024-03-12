@@ -20,24 +20,24 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiType := "apiType_example" // string | 
+	apiType := "apiType_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndpointsAPI.GetOpenAPI(context.Background(), apiType).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EndpointsAPI.GetOpenAPI``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOpenAPI`: string
-    fmt.Fprintf(os.Stdout, "Response from `EndpointsAPI.GetOpenAPI`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.EndpointsAPI.GetOpenAPI(context.Background(), apiType).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EndpointsAPI.GetOpenAPI``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOpenAPI`: string
+	fmt.Fprintf(os.Stdout, "Response from `EndpointsAPI.GetOpenAPI`: %v\n", resp)
 }
 ```
 

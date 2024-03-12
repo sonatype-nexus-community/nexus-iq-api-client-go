@@ -4,78 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddOrUpdateSourceControl**](SourceControlAPI.md#AddOrUpdateSourceControl) | **Post** /api/v2/sourceControl | 
 [**AddSourceControl**](SourceControlAPI.md#AddSourceControl) | **Post** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
 [**DeleteSourceControl**](SourceControlAPI.md#DeleteSourceControl) | **Delete** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
 [**GetSourceControl1**](SourceControlAPI.md#GetSourceControl1) | **Get** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
 [**UpdateSourceControl**](SourceControlAPI.md#UpdateSourceControl) | **Put** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
 
-
-
-## AddOrUpdateSourceControl
-
-> ApiSourceControlDTO AddOrUpdateSourceControl(ctx).PublicId(publicId).RepositoryUrl(repositoryUrl).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-    publicId := "publicId_example" // string |  (optional)
-    repositoryUrl := "repositoryUrl_example" // string |  (optional)
-
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.SourceControlAPI.AddOrUpdateSourceControl(context.Background()).PublicId(publicId).RepositoryUrl(repositoryUrl).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.AddOrUpdateSourceControl``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddOrUpdateSourceControl`: ApiSourceControlDTO
-    fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.AddOrUpdateSourceControl`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddOrUpdateSourceControlRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **publicId** | **string** |  | 
- **repositoryUrl** | **string** |  | 
-
-### Return type
-
-[**ApiSourceControlDTO**](ApiSourceControlDTO.md)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## AddSourceControl
@@ -90,26 +23,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.SourceControlAPI.AddSourceControl(context.Background(), ownerType, internalOwnerId).ApiSourceControlDTO(apiSourceControlDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.AddSourceControl``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddSourceControl`: ApiSourceControlDTO
-    fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.AddSourceControl`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SourceControlAPI.AddSourceControl(context.Background(), ownerType, internalOwnerId).ApiSourceControlDTO(apiSourceControlDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.AddSourceControl``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddSourceControl`: ApiSourceControlDTO
+	fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.AddSourceControl`: %v\n", resp)
 }
 ```
 
@@ -163,23 +96,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.SourceControlAPI.DeleteSourceControl(context.Background(), ownerType, internalOwnerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.DeleteSourceControl``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SourceControlAPI.DeleteSourceControl(context.Background(), ownerType, internalOwnerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.DeleteSourceControl``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -232,25 +165,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.SourceControlAPI.GetSourceControl1(context.Background(), ownerType, internalOwnerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.GetSourceControl1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSourceControl1`: ApiSourceControlDTO
-    fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.GetSourceControl1`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SourceControlAPI.GetSourceControl1(context.Background(), ownerType, internalOwnerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.GetSourceControl1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSourceControl1`: ApiSourceControlDTO
+	fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.GetSourceControl1`: %v\n", resp)
 }
 ```
 
@@ -303,26 +236,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.SourceControlAPI.UpdateSourceControl(context.Background(), ownerType, internalOwnerId).ApiSourceControlDTO(apiSourceControlDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.UpdateSourceControl``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateSourceControl`: ApiSourceControlDTO
-    fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.UpdateSourceControl`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SourceControlAPI.UpdateSourceControl(context.Background(), ownerType, internalOwnerId).ApiSourceControlDTO(apiSourceControlDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.UpdateSourceControl``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateSourceControl`: ApiSourceControlDTO
+	fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.UpdateSourceControl`: %v\n", resp)
 }
 ```
 

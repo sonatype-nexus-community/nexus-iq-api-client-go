@@ -26,23 +26,23 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReportsAPI.GetAll1(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetAll1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAll1`: []ApiApplicationReportDTOV2
-    fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetAll1`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetAll1(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetAll1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAll1`: []ApiApplicationReportDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetAll1`: %v\n", resp)
 }
 ```
 
@@ -85,24 +85,24 @@ Other parameters are passed through a pointer to a apiGetAll1Request struct via 
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
+	applicationId := "applicationId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReportsAPI.GetByApplicationId(context.Background(), applicationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetByApplicationId``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetByApplicationId`: []ApiApplicationReportDTOV2
-    fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetByApplicationId`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetByApplicationId(context.Background(), applicationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetByApplicationId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetByApplicationId`: []ApiApplicationReportDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetByApplicationId`: %v\n", resp)
 }
 ```
 
@@ -153,23 +153,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReportsAPI.GetComponentsInQuarantine(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetComponentsInQuarantine``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetComponentsInQuarantine`: ApiComponentsInQuarantineDTO
-    fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetComponentsInQuarantine`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetComponentsInQuarantine(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetComponentsInQuarantine``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetComponentsInQuarantine`: ApiComponentsInQuarantineDTO
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetComponentsInQuarantine`: %v\n", resp)
 }
 ```
 
@@ -212,24 +212,24 @@ Other parameters are passed through a pointer to a apiGetComponentsInQuarantineR
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    format := "format_example" // string |  (optional)
+	format := "format_example" // string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReportsAPI.GetComponentsWithWaivers(context.Background()).Format(format).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetComponentsWithWaivers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetComponentsWithWaivers`: ApiComponentWaiversDTO
-    fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetComponentsWithWaivers`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetComponentsWithWaivers(context.Background()).Format(format).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetComponentsWithWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetComponentsWithWaivers`: ApiComponentWaiversDTO
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetComponentsWithWaivers`: %v\n", resp)
 }
 ```
 
@@ -276,22 +276,22 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiMetricsReportingQueryDTOV2 := *sonatypeiq.NewApiMetricsReportingQueryDTOV2() // ApiMetricsReportingQueryDTOV2 |  (optional)
+	apiMetricsReportingQueryDTOV2 := *sonatypeiq.NewApiMetricsReportingQueryDTOV2() // ApiMetricsReportingQueryDTOV2 |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ReportsAPI.GetMetrics(context.Background()).ApiMetricsReportingQueryDTOV2(apiMetricsReportingQueryDTOV2).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetMetrics``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ReportsAPI.GetMetrics(context.Background()).ApiMetricsReportingQueryDTOV2(apiMetricsReportingQueryDTOV2).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -338,26 +338,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    stage := "stage_example" // string |  (optional)
-    limit := int32(56) // int32 |  (optional)
+	applicationId := "applicationId_example" // string | 
+	stage := "stage_example" // string |  (optional)
+	limit := int32(56) // int32 |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReportsAPI.GetReportHistoryForApplication(context.Background(), applicationId).Stage(stage).Limit(limit).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetReportHistoryForApplication``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetReportHistoryForApplication`: ApiReportHistoryDTO
-    fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetReportHistoryForApplication`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetReportHistoryForApplication(context.Background(), applicationId).Stage(stage).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetReportHistoryForApplication``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetReportHistoryForApplication`: ApiReportHistoryDTO
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetReportHistoryForApplication`: %v\n", resp)
 }
 ```
 
@@ -410,23 +410,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReportsAPI.GetStaleWaivers(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetStaleWaivers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetStaleWaivers`: ApiStaleWaiversResponseDTO
-    fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetStaleWaivers`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetStaleWaivers(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetStaleWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetStaleWaivers`: ApiStaleWaiversResponseDTO
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetStaleWaivers`: %v\n", resp)
 }
 ```
 

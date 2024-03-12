@@ -22,21 +22,21 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigProxyServerAPI.DeleteConfiguration3(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.DeleteConfiguration3``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigProxyServerAPI.DeleteConfiguration3(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.DeleteConfiguration3``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -79,23 +79,23 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration3Reques
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigProxyServerAPI.GetConfiguration3(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.GetConfiguration3``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetConfiguration3`: ApiProxyServerConfigurationDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigProxyServerAPI.GetConfiguration3`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigProxyServerAPI.GetConfiguration3(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.GetConfiguration3``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConfiguration3`: ApiProxyServerConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigProxyServerAPI.GetConfiguration3`: %v\n", resp)
 }
 ```
 
@@ -138,22 +138,22 @@ Other parameters are passed through a pointer to a apiGetConfiguration3Request s
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiProxyServerConfigurationDTO := *sonatypeiq.NewApiProxyServerConfigurationDTO() // ApiProxyServerConfigurationDTO |  (optional)
+	apiProxyServerConfigurationDTO := *sonatypeiq.NewApiProxyServerConfigurationDTO() // ApiProxyServerConfigurationDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigProxyServerAPI.SetConfiguration3(context.Background()).ApiProxyServerConfigurationDTO(apiProxyServerConfigurationDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.SetConfiguration3``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigProxyServerAPI.SetConfiguration3(context.Background()).ApiProxyServerConfigurationDTO(apiProxyServerConfigurationDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.SetConfiguration3``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

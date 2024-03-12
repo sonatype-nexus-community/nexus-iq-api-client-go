@@ -27,26 +27,26 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.AddArtifactoryConnection(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.AddArtifactoryConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddArtifactoryConnection`: ApiArtifactoryConnectionDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.AddArtifactoryConnection`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.AddArtifactoryConnection(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.AddArtifactoryConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddArtifactoryConnection`: ApiArtifactoryConnectionDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.AddArtifactoryConnection`: %v\n", resp)
 }
 ```
 
@@ -100,24 +100,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigArtifactoryConnectionAPI.DeleteArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.DeleteArtifactoryConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigArtifactoryConnectionAPI.DeleteArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.DeleteArtifactoryConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -172,26 +172,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.GetArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.GetArtifactoryConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetArtifactoryConnection`: ApiArtifactoryConnectionDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.GetArtifactoryConnection`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.GetArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.GetArtifactoryConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetArtifactoryConnection`: ApiArtifactoryConnectionDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.GetArtifactoryConnection`: %v\n", resp)
 }
 ```
 
@@ -246,26 +246,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    inherit := true // bool |  (optional) (default to false)
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	inherit := true // bool |  (optional) (default to false)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.GetOwnerArtifactoryConnection(context.Background(), ownerType, internalOwnerId).Inherit(inherit).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.GetOwnerArtifactoryConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOwnerArtifactoryConnection`: ApiOwnerArtifactoryConnectionDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.GetOwnerArtifactoryConnection`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.GetOwnerArtifactoryConnection(context.Background(), ownerType, internalOwnerId).Inherit(inherit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.GetOwnerArtifactoryConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOwnerArtifactoryConnection`: ApiOwnerArtifactoryConnectionDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.GetOwnerArtifactoryConnection`: %v\n", resp)
 }
 ```
 
@@ -319,26 +319,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.TestArtifactoryConnection(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `TestArtifactoryConnection`: ApiStatusDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.TestArtifactoryConnection(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TestArtifactoryConnection`: ApiStatusDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection`: %v\n", resp)
 }
 ```
 
@@ -392,26 +392,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.TestArtifactoryConnection1(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `TestArtifactoryConnection1`: ApiStatusDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection1`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.TestArtifactoryConnection1(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TestArtifactoryConnection1`: ApiStatusDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.TestArtifactoryConnection1`: %v\n", resp)
 }
 ```
 
@@ -466,27 +466,27 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
-    apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	artifactoryConnectionId := "artifactoryConnectionId_example" // string | 
+	apiArtifactoryConnectionDTO := *sonatypeiq.NewApiArtifactoryConnectionDTO() // ApiArtifactoryConnectionDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.UpdateArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.UpdateArtifactoryConnection``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateArtifactoryConnection`: ApiArtifactoryConnectionDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.UpdateArtifactoryConnection`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigArtifactoryConnectionAPI.UpdateArtifactoryConnection(context.Background(), ownerType, internalOwnerId, artifactoryConnectionId).ApiArtifactoryConnectionDTO(apiArtifactoryConnectionDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.UpdateArtifactoryConnection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateArtifactoryConnection`: ApiArtifactoryConnectionDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigArtifactoryConnectionAPI.UpdateArtifactoryConnection`: %v\n", resp)
 }
 ```
 
@@ -542,24 +542,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    apiArtifactoryConnectionStatusRequestDTO := *sonatypeiq.NewApiArtifactoryConnectionStatusRequestDTO() // ApiArtifactoryConnectionStatusRequestDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	apiArtifactoryConnectionStatusRequestDTO := *sonatypeiq.NewApiArtifactoryConnectionStatusRequestDTO() // ApiArtifactoryConnectionStatusRequestDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigArtifactoryConnectionAPI.UpdateOwnerArtifactoryConnectionStatus(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionStatusRequestDTO(apiArtifactoryConnectionStatusRequestDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.UpdateOwnerArtifactoryConnectionStatus``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigArtifactoryConnectionAPI.UpdateOwnerArtifactoryConnectionStatus(context.Background(), ownerType, internalOwnerId).ApiArtifactoryConnectionStatusRequestDTO(apiArtifactoryConnectionStatusRequestDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigArtifactoryConnectionAPI.UpdateOwnerArtifactoryConnectionStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

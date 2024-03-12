@@ -32,22 +32,22 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    id := "id_example" // string | 
+	id := "id_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.LicenseLegalMetadataAPI.DeleteAttributionReportTemplate(context.Background(), id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.DeleteAttributionReportTemplate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.LicenseLegalMetadataAPI.DeleteAttributionReportTemplate(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.DeleteAttributionReportTemplate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -98,23 +98,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetAllAttributionReportTemplates(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetAllAttributionReportTemplates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAllAttributionReportTemplates`: []AttributionReportTemplateDTO
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetAllAttributionReportTemplates`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetAllAttributionReportTemplates(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetAllAttributionReportTemplates``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAllAttributionReportTemplates`: []AttributionReportTemplateDTO
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetAllAttributionReportTemplates`: %v\n", resp)
 }
 ```
 
@@ -157,24 +157,24 @@ Other parameters are passed through a pointer to a apiGetAllAttributionReportTem
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    id := "id_example" // string | 
+	id := "id_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetAttributionReportTemplateById(context.Background(), id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetAttributionReportTemplateById``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAttributionReportTemplateById`: AttributionReportTemplateDTO
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetAttributionReportTemplateById`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetAttributionReportTemplateById(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetAttributionReportTemplateById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAttributionReportTemplateById`: AttributionReportTemplateDTO
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetAttributionReportTemplateById`: %v\n", resp)
 }
 ```
 
@@ -225,25 +225,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    stageId := "stageId_example" // string | 
+	applicationId := "applicationId_example" // string | 
+	stageId := "stageId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalApplicationHTMLReport`: string
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalApplicationHTMLReport`: string
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport`: %v\n", resp)
 }
 ```
 
@@ -296,24 +296,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
+	applicationId := "applicationId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport(context.Background(), applicationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalApplicationReport`: ApiLicenseLegalApplicationReportDTO
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport(context.Background(), applicationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalApplicationReport`: ApiLicenseLegalApplicationReportDTO
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport`: %v\n", resp)
 }
 ```
 
@@ -364,25 +364,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    stageId := "stageId_example" // string | 
+	applicationId := "applicationId_example" // string | 
+	stageId := "stageId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport1(context.Background(), applicationId, stageId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalApplicationReport1`: ApiLicenseLegalApplicationReportDTO
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport1`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport1(context.Background(), applicationId, stageId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalApplicationReport1`: ApiLicenseLegalApplicationReportDTO
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalApplicationReport1`: %v\n", resp)
 }
 ```
 
@@ -435,30 +435,30 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
-    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
-    packageUrl := "packageUrl_example" // string |  (optional)
-    hash := "hash_example" // string |  (optional)
-    identificationSource := "identificationSource_example" // string |  (optional)
-    scanId := "scanId_example" // string |  (optional)
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier |  (optional)
+	packageUrl := "packageUrl_example" // string |  (optional)
+	hash := "hash_example" // string |  (optional)
+	identificationSource := "identificationSource_example" // string |  (optional)
+	scanId := "scanId_example" // string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalComponentReport(context.Background(), ownerType, ownerId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).IdentificationSource(identificationSource).ScanId(scanId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalComponentReport``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalComponentReport`: ApiLicenseLegalComponentReportDTO
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalComponentReport`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalComponentReport(context.Background(), ownerType, ownerId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).IdentificationSource(identificationSource).ScanId(scanId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalComponentReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalComponentReport`: ApiLicenseLegalComponentReportDTO
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalComponentReport`: %v\n", resp)
 }
 ```
 
@@ -516,26 +516,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    stageId := "stageId_example" // string | 
-    formDataMultiPart := *sonatypeiq.NewFormDataMultiPart() // FormDataMultiPart |  (optional)
+	applicationId := "applicationId_example" // string | 
+	stageId := "stageId_example" // string | 
+	formDataMultiPart := *sonatypeiq.NewFormDataMultiPart() // FormDataMultiPart |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport(context.Background(), applicationId, stageId).FormDataMultiPart(formDataMultiPart).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalCustomApplicationHTMLReport`: string
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport(context.Background(), applicationId, stageId).FormDataMultiPart(formDataMultiPart).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalCustomApplicationHTMLReport`: string
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport`: %v\n", resp)
 }
 ```
 
@@ -589,26 +589,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    stageId := "stageId_example" // string | 
-    templateId := "templateId_example" // string | 
+	applicationId := "applicationId_example" // string | 
+	stageId := "stageId_example" // string | 
+	templateId := "templateId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1(context.Background(), applicationId, stageId, templateId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalCustomApplicationHTMLReport1`: string
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1(context.Background(), applicationId, stageId, templateId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalCustomApplicationHTMLReport1`: string
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1`: %v\n", resp)
 }
 ```
 
@@ -663,24 +663,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    templateId := "templateId_example" // string | 
+	templateId := "templateId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1(context.Background(), templateId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalCustomMultiApplicationHTMLReport1`: string
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1(context.Background(), templateId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalCustomMultiApplicationHTMLReport1`: string
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1`: %v\n", resp)
 }
 ```
 
@@ -731,23 +731,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalMultiApplicationHTMLReport`: string
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalMultiApplicationHTMLReport`: string
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport`: %v\n", resp)
 }
 ```
 
@@ -790,24 +790,24 @@ Other parameters are passed through a pointer to a apiGetLicenseLegalMultiApplic
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    templateId := "templateId_example" // string | 
+	templateId := "templateId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter(context.Background(), templateId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetLicenseLegalMultiApplicationReportFromActiveUserFilter`: string
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter(context.Background(), templateId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLicenseLegalMultiApplicationReportFromActiveUserFilter`: string
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter`: %v\n", resp)
 }
 ```
 
@@ -858,24 +858,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    attributionReportTemplateDTO := *sonatypeiq.NewAttributionReportTemplateDTO() // AttributionReportTemplateDTO |  (optional)
+	attributionReportTemplateDTO := *sonatypeiq.NewAttributionReportTemplateDTO() // AttributionReportTemplateDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.LicenseLegalMetadataAPI.SaveAttributionReportTemplate(context.Background()).AttributionReportTemplateDTO(attributionReportTemplateDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.SaveAttributionReportTemplate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SaveAttributionReportTemplate`: AttributionReportTemplateDTO
-    fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.SaveAttributionReportTemplate`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.SaveAttributionReportTemplate(context.Background()).AttributionReportTemplateDTO(attributionReportTemplateDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.SaveAttributionReportTemplate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SaveAttributionReportTemplate`: AttributionReportTemplateDTO
+	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.SaveAttributionReportTemplate`: %v\n", resp)
 }
 ```
 

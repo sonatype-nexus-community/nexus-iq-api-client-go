@@ -23,23 +23,23 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    reportId := "reportId_example" // string | 
+	applicationId := "applicationId_example" // string | 
+	reportId := "reportId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.CycloneDxAPI.GetByReportId(context.Background(), applicationId, reportId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CycloneDxAPI.GetByReportId``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.CycloneDxAPI.GetByReportId(context.Background(), applicationId, reportId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CycloneDxAPI.GetByReportId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -92,24 +92,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    reportId := "reportId_example" // string | 
-    cdxVersion := "cdxVersion_example" // string | 
+	applicationId := "applicationId_example" // string | 
+	reportId := "reportId_example" // string | 
+	cdxVersion := "cdxVersion_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.CycloneDxAPI.GetByReportId1(context.Background(), applicationId, reportId, cdxVersion).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CycloneDxAPI.GetByReportId1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.CycloneDxAPI.GetByReportId1(context.Background(), applicationId, reportId, cdxVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CycloneDxAPI.GetByReportId1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -164,23 +164,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    stageId := "stageId_example" // string | 
+	applicationId := "applicationId_example" // string | 
+	stageId := "stageId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.CycloneDxAPI.GetLatest(context.Background(), applicationId, stageId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CycloneDxAPI.GetLatest``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.CycloneDxAPI.GetLatest(context.Background(), applicationId, stageId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CycloneDxAPI.GetLatest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -233,24 +233,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
-    stageId := "stageId_example" // string | 
-    cdxVersion := "cdxVersion_example" // string | 
+	applicationId := "applicationId_example" // string | 
+	stageId := "stageId_example" // string | 
+	cdxVersion := "cdxVersion_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.CycloneDxAPI.GetLatest1(context.Background(), applicationId, stageId, cdxVersion).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CycloneDxAPI.GetLatest1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.CycloneDxAPI.GetLatest1(context.Background(), applicationId, stageId, cdxVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CycloneDxAPI.GetLatest1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

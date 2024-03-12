@@ -20,23 +20,23 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    userAgent := "userAgent_example" // string |  (optional)
-    requestBody := map[string]string{"key": "Inner_example"} // map[string]string |  (optional)
+	userAgent := "userAgent_example" // string |  (optional)
+	requestBody := map[string]string{"key": "Inner_example"} // map[string]string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.TelemetryAPI.PostExternalTelemetry(context.Background()).UserAgent(userAgent).RequestBody(requestBody).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TelemetryAPI.PostExternalTelemetry``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.TelemetryAPI.PostExternalTelemetry(context.Background()).UserAgent(userAgent).RequestBody(requestBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TelemetryAPI.PostExternalTelemetry``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

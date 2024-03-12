@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **ReportHtmlUrl** | Pointer to **string** |  | [optional] 
 **ReportPdfUrl** | Pointer to **string** |  | [optional] 
 **ScanId** | Pointer to **string** |  | [optional] 
+**ScanTriggerType** | Pointer to **string** |  | [optional] 
 **Stage** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -362,6 +363,31 @@ SetScanId sets ScanId field to given value.
 `func (o *ApiReportResultsDTO) HasScanId() bool`
 
 HasScanId returns a boolean if a field has been set.
+
+### GetScanTriggerType
+
+`func (o *ApiReportResultsDTO) GetScanTriggerType() string`
+
+GetScanTriggerType returns the ScanTriggerType field if non-nil, zero value otherwise.
+
+### GetScanTriggerTypeOk
+
+`func (o *ApiReportResultsDTO) GetScanTriggerTypeOk() (*string, bool)`
+
+GetScanTriggerTypeOk returns a tuple with the ScanTriggerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScanTriggerType
+
+`func (o *ApiReportResultsDTO) SetScanTriggerType(v string)`
+
+SetScanTriggerType sets ScanTriggerType field to given value.
+
+### HasScanTriggerType
+
+`func (o *ApiReportResultsDTO) HasScanTriggerType() bool`
+
+HasScanTriggerType returns a boolean if a field has been set.
 
 ### GetStage
 

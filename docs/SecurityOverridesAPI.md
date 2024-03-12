@@ -20,26 +20,26 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    refId := "refId_example" // string |  (optional)
-    componentPurl := "componentPurl_example" // string |  (optional)
-    ownerId := "ownerId_example" // string |  (optional)
+	refId := "refId_example" // string |  (optional)
+	componentPurl := "componentPurl_example" // string |  (optional)
+	ownerId := "ownerId_example" // string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.SecurityOverridesAPI.GetSecurityVulnerabilityOverrides(context.Background()).RefId(refId).ComponentPurl(componentPurl).OwnerId(ownerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SecurityOverridesAPI.GetSecurityVulnerabilityOverrides``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSecurityVulnerabilityOverrides`: ApiSecurityVulnerabilityOverrideResponseDTOV2
-    fmt.Fprintf(os.Stdout, "Response from `SecurityOverridesAPI.GetSecurityVulnerabilityOverrides`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SecurityOverridesAPI.GetSecurityVulnerabilityOverrides(context.Background()).RefId(refId).ComponentPurl(componentPurl).OwnerId(ownerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SecurityOverridesAPI.GetSecurityVulnerabilityOverrides``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSecurityVulnerabilityOverrides`: ApiSecurityVulnerabilityOverrideResponseDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `SecurityOverridesAPI.GetSecurityVulnerabilityOverrides`: %v\n", resp)
 }
 ```
 

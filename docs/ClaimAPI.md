@@ -23,22 +23,22 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    hash := "hash_example" // string | 
+	hash := "hash_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ClaimAPI.Delete(context.Background(), hash).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Delete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ClaimAPI.Delete(context.Background(), hash).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Delete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -89,24 +89,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    hash := "hash_example" // string | 
+	hash := "hash_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ClaimAPI.Get(context.Background(), hash).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Get``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `Get`: ApiHashComponentIdentifierDTO
-    fmt.Fprintf(os.Stdout, "Response from `ClaimAPI.Get`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ClaimAPI.Get(context.Background(), hash).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Get``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `Get`: ApiHashComponentIdentifierDTO
+	fmt.Fprintf(os.Stdout, "Response from `ClaimAPI.Get`: %v\n", resp)
 }
 ```
 
@@ -157,23 +157,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ClaimAPI.GetAll(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.GetAll``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAll`: ApiHashComponentIdentifiersDTO
-    fmt.Fprintf(os.Stdout, "Response from `ClaimAPI.GetAll`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ClaimAPI.GetAll(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.GetAll``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAll`: ApiHashComponentIdentifiersDTO
+	fmt.Fprintf(os.Stdout, "Response from `ClaimAPI.GetAll`: %v\n", resp)
 }
 ```
 
@@ -216,24 +216,24 @@ Other parameters are passed through a pointer to a apiGetAllRequest struct via t
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiHashComponentIdentifierDTO := *sonatypeiq.NewApiHashComponentIdentifierDTO() // ApiHashComponentIdentifierDTO |  (optional)
+	apiHashComponentIdentifierDTO := *sonatypeiq.NewApiHashComponentIdentifierDTO() // ApiHashComponentIdentifierDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ClaimAPI.Set(context.Background()).ApiHashComponentIdentifierDTO(apiHashComponentIdentifierDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Set``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `Set`: ApiHashComponentIdentifierDTO
-    fmt.Fprintf(os.Stdout, "Response from `ClaimAPI.Set`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ClaimAPI.Set(context.Background()).ApiHashComponentIdentifierDTO(apiHashComponentIdentifierDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ClaimAPI.Set``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `Set`: ApiHashComponentIdentifierDTO
+	fmt.Fprintf(os.Stdout, "Response from `ClaimAPI.Set`: %v\n", resp)
 }
 ```
 

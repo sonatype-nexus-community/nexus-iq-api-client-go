@@ -21,26 +21,26 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    repositoryManagerInstanceId := "repositoryManagerInstanceId_example" // string | 
-    repositoryPublicId := "repositoryPublicId_example" // string | 
-    requestBody := []string{"Property_example"} // []string |  (optional)
+	repositoryManagerInstanceId := "repositoryManagerInstanceId_example" // string | 
+	repositoryPublicId := "repositoryPublicId_example" // string | 
+	requestBody := []string{"Property_example"} // []string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.RepositoriesAPI.GetQuarantinedByPath(context.Background(), repositoryManagerInstanceId, repositoryPublicId).RequestBody(requestBody).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.GetQuarantinedByPath``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetQuarantinedByPath`: ApiRepositoryPathResponseDTO
-    fmt.Fprintf(os.Stdout, "Response from `RepositoriesAPI.GetQuarantinedByPath`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.RepositoriesAPI.GetQuarantinedByPath(context.Background(), repositoryManagerInstanceId, repositoryPublicId).RequestBody(requestBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.GetQuarantinedByPath``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetQuarantinedByPath`: ApiRepositoryPathResponseDTO
+	fmt.Fprintf(os.Stdout, "Response from `RepositoriesAPI.GetQuarantinedByPath`: %v\n", resp)
 }
 ```
 
@@ -94,25 +94,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    quarantineId := "quarantineId_example" // string | 
-    body := "body_example" // string |  (optional)
+	quarantineId := "quarantineId_example" // string | 
+	body := "body_example" // string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.RepositoriesAPI.ReleaseQuarantineWithoutReEval(context.Background(), quarantineId).Body(body).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.ReleaseQuarantineWithoutReEval``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReleaseQuarantineWithoutReEval`: ApiComponentReleasedFromQuarantineDTO
-    fmt.Fprintf(os.Stdout, "Response from `RepositoriesAPI.ReleaseQuarantineWithoutReEval`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.RepositoriesAPI.ReleaseQuarantineWithoutReEval(context.Background(), quarantineId).Body(body).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.ReleaseQuarantineWithoutReEval``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReleaseQuarantineWithoutReEval`: ApiComponentReleasedFromQuarantineDTO
+	fmt.Fprintf(os.Stdout, "Response from `RepositoriesAPI.ReleaseQuarantineWithoutReEval`: %v\n", resp)
 }
 ```
 

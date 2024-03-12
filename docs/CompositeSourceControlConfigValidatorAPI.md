@@ -20,24 +20,24 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationId := "applicationId_example" // string | 
+	applicationId := "applicationId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.CompositeSourceControlConfigValidatorAPI.ValidateSourceControlConfig(context.Background(), applicationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CompositeSourceControlConfigValidatorAPI.ValidateSourceControlConfig``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ValidateSourceControlConfig`: ConfigurationValidationResult
-    fmt.Fprintf(os.Stdout, "Response from `CompositeSourceControlConfigValidatorAPI.ValidateSourceControlConfig`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.CompositeSourceControlConfigValidatorAPI.ValidateSourceControlConfig(context.Background(), applicationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CompositeSourceControlConfigValidatorAPI.ValidateSourceControlConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ValidateSourceControlConfig`: ConfigurationValidationResult
+	fmt.Fprintf(os.Stdout, "Response from `CompositeSourceControlConfigValidatorAPI.ValidateSourceControlConfig`: %v\n", resp)
 }
 ```
 

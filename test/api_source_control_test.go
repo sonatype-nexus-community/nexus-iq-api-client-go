@@ -22,18 +22,6 @@ func Test_sonatypeiq_SourceControlAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test SourceControlAPIService AddOrUpdateSourceControl", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.SourceControlAPI.AddOrUpdateSourceControl(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test SourceControlAPIService AddSourceControl", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

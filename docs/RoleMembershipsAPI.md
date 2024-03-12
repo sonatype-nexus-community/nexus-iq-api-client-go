@@ -25,25 +25,25 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.RoleMembershipsAPI.GetRoleMembershipsApplicationOrOrganization(context.Background(), ownerType, internalOwnerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GetRoleMembershipsApplicationOrOrganization``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetRoleMembershipsApplicationOrOrganization`: ApiRoleMemberMappingListDTO
-    fmt.Fprintf(os.Stdout, "Response from `RoleMembershipsAPI.GetRoleMembershipsApplicationOrOrganization`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoleMembershipsAPI.GetRoleMembershipsApplicationOrOrganization(context.Background(), ownerType, internalOwnerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GetRoleMembershipsApplicationOrOrganization``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRoleMembershipsApplicationOrOrganization`: ApiRoleMemberMappingListDTO
+	fmt.Fprintf(os.Stdout, "Response from `RoleMembershipsAPI.GetRoleMembershipsApplicationOrOrganization`: %v\n", resp)
 }
 ```
 
@@ -96,24 +96,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
+	ownerType := "ownerType_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.RoleMembershipsAPI.GetRoleMembershipsGlobalOrRepositoryContainer(context.Background(), ownerType).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GetRoleMembershipsGlobalOrRepositoryContainer``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetRoleMembershipsGlobalOrRepositoryContainer`: ApiRoleMemberMappingListDTO
-    fmt.Fprintf(os.Stdout, "Response from `RoleMembershipsAPI.GetRoleMembershipsGlobalOrRepositoryContainer`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.RoleMembershipsAPI.GetRoleMembershipsGlobalOrRepositoryContainer(context.Background(), ownerType).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GetRoleMembershipsGlobalOrRepositoryContainer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRoleMembershipsGlobalOrRepositoryContainer`: ApiRoleMemberMappingListDTO
+	fmt.Fprintf(os.Stdout, "Response from `RoleMembershipsAPI.GetRoleMembershipsGlobalOrRepositoryContainer`: %v\n", resp)
 }
 ```
 
@@ -164,26 +164,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    roleId := "roleId_example" // string | 
-    memberType := "memberType_example" // string | 
-    memberName := "memberName_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	roleId := "roleId_example" // string | 
+	memberType := "memberType_example" // string | 
+	memberName := "memberName_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.RoleMembershipsAPI.GrantRoleMembershipApplicationOrOrganization(context.Background(), ownerType, internalOwnerId, roleId, memberType, memberName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GrantRoleMembershipApplicationOrOrganization``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.RoleMembershipsAPI.GrantRoleMembershipApplicationOrOrganization(context.Background(), ownerType, internalOwnerId, roleId, memberType, memberName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GrantRoleMembershipApplicationOrOrganization``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -242,25 +242,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    roleId := "roleId_example" // string | 
-    memberType := "memberType_example" // string | 
-    memberName := "memberName_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	roleId := "roleId_example" // string | 
+	memberType := "memberType_example" // string | 
+	memberName := "memberName_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.RoleMembershipsAPI.GrantRoleMembershipGlobalOrRepositoryContainer(context.Background(), ownerType, roleId, memberType, memberName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GrantRoleMembershipGlobalOrRepositoryContainer``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.RoleMembershipsAPI.GrantRoleMembershipGlobalOrRepositoryContainer(context.Background(), ownerType, roleId, memberType, memberName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GrantRoleMembershipGlobalOrRepositoryContainer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -317,26 +317,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    roleId := "roleId_example" // string | 
-    memberType := "memberType_example" // string | 
-    memberName := "memberName_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	roleId := "roleId_example" // string | 
+	memberType := "memberType_example" // string | 
+	memberName := "memberName_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.RoleMembershipsAPI.RevokeRoleMembershipApplicationOrOrganization(context.Background(), ownerType, internalOwnerId, roleId, memberType, memberName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.RevokeRoleMembershipApplicationOrOrganization``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.RoleMembershipsAPI.RevokeRoleMembershipApplicationOrOrganization(context.Background(), ownerType, internalOwnerId, roleId, memberType, memberName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.RevokeRoleMembershipApplicationOrOrganization``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -395,25 +395,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    roleId := "roleId_example" // string | 
-    memberType := "memberType_example" // string | 
-    memberName := "memberName_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	roleId := "roleId_example" // string | 
+	memberType := "memberType_example" // string | 
+	memberName := "memberName_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.RoleMembershipsAPI.RevokeRoleMembershipGlobalOrRepositoryContainer(context.Background(), ownerType, roleId, memberType, memberName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.RevokeRoleMembershipGlobalOrRepositoryContainer``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.RoleMembershipsAPI.RevokeRoleMembershipGlobalOrRepositoryContainer(context.Background(), ownerType, roleId, memberType, memberName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.RevokeRoleMembershipGlobalOrRepositoryContainer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

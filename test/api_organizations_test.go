@@ -34,6 +34,19 @@ func Test_sonatypeiq_OrganizationsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test OrganizationsAPIService DeleteOrganization", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organizationId string
+
+		httpRes, err := apiClient.OrganizationsAPI.DeleteOrganization(context.Background(), organizationId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test OrganizationsAPIService GetOrganization", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

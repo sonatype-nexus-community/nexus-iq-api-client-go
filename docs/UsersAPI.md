@@ -24,22 +24,22 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO |  (optional)
+	apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.UsersAPI.Add(context.Background()).ApiUserDTO(apiUserDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Add``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.UsersAPI.Add(context.Background()).ApiUserDTO(apiUserDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Add``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -86,23 +86,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    username := "username_example" // string | 
-    realm := "realm_example" // string |  (optional) (default to "Internal")
+	username := "username_example" // string | 
+	realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.UsersAPI.Delete1(context.Background(), username).Realm(realm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Delete1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.UsersAPI.Delete1(context.Background(), username).Realm(realm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Delete1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -154,25 +154,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    username := "username_example" // string | 
-    realm := "realm_example" // string |  (optional) (default to "Internal")
+	username := "username_example" // string | 
+	realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.UsersAPI.Get1(context.Background(), username).Realm(realm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Get1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `Get1`: ApiUserDTO
-    fmt.Fprintf(os.Stdout, "Response from `UsersAPI.Get1`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.Get1(context.Background(), username).Realm(realm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Get1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `Get1`: ApiUserDTO
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.Get1`: %v\n", resp)
 }
 ```
 
@@ -224,24 +224,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    realm := "realm_example" // string |  (optional) (default to "Internal")
+	realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.UsersAPI.GetAll2(context.Background()).Realm(realm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetAll2``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAll2`: ApiUserListDTO
-    fmt.Fprintf(os.Stdout, "Response from `UsersAPI.GetAll2`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.GetAll2(context.Background()).Realm(realm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.GetAll2``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAll2`: ApiUserListDTO
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.GetAll2`: %v\n", resp)
 }
 ```
 
@@ -288,25 +288,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    username := "username_example" // string | 
-    apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO |  (optional)
+	username := "username_example" // string | 
+	apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.UsersAPI.Update(context.Background(), username).ApiUserDTO(apiUserDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Update``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `Update`: ApiUserDTO
-    fmt.Fprintf(os.Stdout, "Response from `UsersAPI.Update`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersAPI.Update(context.Background(), username).ApiUserDTO(apiUserDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersAPI.Update``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `Update`: ApiUserDTO
+	fmt.Fprintf(os.Stdout, "Response from `UsersAPI.Update`: %v\n", resp)
 }
 ```
 

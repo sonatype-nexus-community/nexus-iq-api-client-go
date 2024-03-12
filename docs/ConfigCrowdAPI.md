@@ -23,21 +23,21 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigCrowdAPI.DeleteCrowdConfiguration(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.DeleteCrowdConfiguration``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigCrowdAPI.DeleteCrowdConfiguration(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.DeleteCrowdConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -80,23 +80,23 @@ Other parameters are passed through a pointer to a apiDeleteCrowdConfigurationRe
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigCrowdAPI.GetCrowdConfiguration(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.GetCrowdConfiguration``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCrowdConfiguration`: ApiCrowdConfigurationDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigCrowdAPI.GetCrowdConfiguration`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigCrowdAPI.GetCrowdConfiguration(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.GetCrowdConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCrowdConfiguration`: ApiCrowdConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigCrowdAPI.GetCrowdConfiguration`: %v\n", resp)
 }
 ```
 
@@ -139,22 +139,22 @@ Other parameters are passed through a pointer to a apiGetCrowdConfigurationReque
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
+	apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigCrowdAPI.InsertOrUpdateCrowdConfiguration(context.Background()).ApiCrowdConfigurationDTO(apiCrowdConfigurationDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.InsertOrUpdateCrowdConfiguration``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigCrowdAPI.InsertOrUpdateCrowdConfiguration(context.Background()).ApiCrowdConfigurationDTO(apiCrowdConfigurationDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.InsertOrUpdateCrowdConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -201,24 +201,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
+	apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigCrowdAPI.TestCrowdConfiguration(context.Background()).ApiCrowdConfigurationDTO(apiCrowdConfigurationDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.TestCrowdConfiguration``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `TestCrowdConfiguration`: ApiStatusDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigCrowdAPI.TestCrowdConfiguration`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigCrowdAPI.TestCrowdConfiguration(context.Background()).ApiCrowdConfigurationDTO(apiCrowdConfigurationDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigCrowdAPI.TestCrowdConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TestCrowdConfiguration`: ApiStatusDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigCrowdAPI.TestCrowdConfiguration`: %v\n", resp)
 }
 ```
 

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
+**Cpe** | Pointer to **string** |  | [optional] 
 **DependencyData** | Pointer to [**ApiDependencyDataDTO**](ApiDependencyDataDTO.md) |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
@@ -16,6 +17,7 @@ Name | Type | Description | Notes
 **Proprietary** | Pointer to **bool** |  | [optional] 
 **SecurityData** | Pointer to [**ApiSecurityDataDTO**](ApiSecurityDataDTO.md) |  | [optional] 
 **Sha256** | Pointer to **string** |  | [optional] 
+**Swid** | Pointer to [**Swid**](Swid.md) |  | [optional] 
 **ThirdParty** | Pointer to **bool** |  | [optional] 
 
 ## Methods
@@ -61,6 +63,31 @@ SetComponentIdentifier sets ComponentIdentifier field to given value.
 `func (o *ApiReportComponentDTOV2) HasComponentIdentifier() bool`
 
 HasComponentIdentifier returns a boolean if a field has been set.
+
+### GetCpe
+
+`func (o *ApiReportComponentDTOV2) GetCpe() string`
+
+GetCpe returns the Cpe field if non-nil, zero value otherwise.
+
+### GetCpeOk
+
+`func (o *ApiReportComponentDTOV2) GetCpeOk() (*string, bool)`
+
+GetCpeOk returns a tuple with the Cpe field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpe
+
+`func (o *ApiReportComponentDTOV2) SetCpe(v string)`
+
+SetCpe sets Cpe field to given value.
+
+### HasCpe
+
+`func (o *ApiReportComponentDTOV2) HasCpe() bool`
+
+HasCpe returns a boolean if a field has been set.
 
 ### GetDependencyData
 
@@ -336,6 +363,31 @@ SetSha256 sets Sha256 field to given value.
 `func (o *ApiReportComponentDTOV2) HasSha256() bool`
 
 HasSha256 returns a boolean if a field has been set.
+
+### GetSwid
+
+`func (o *ApiReportComponentDTOV2) GetSwid() Swid`
+
+GetSwid returns the Swid field if non-nil, zero value otherwise.
+
+### GetSwidOk
+
+`func (o *ApiReportComponentDTOV2) GetSwidOk() (*Swid, bool)`
+
+GetSwidOk returns a tuple with the Swid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwid
+
+`func (o *ApiReportComponentDTOV2) SetSwid(v Swid)`
+
+SetSwid sets Swid field to given value.
+
+### HasSwid
+
+`func (o *ApiReportComponentDTOV2) HasSwid() bool`
+
+HasSwid returns a boolean if a field has been set.
 
 ### GetThirdParty
 

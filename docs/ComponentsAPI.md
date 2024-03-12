@@ -24,25 +24,25 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    componentHash := "componentHash_example" // string | 
-    labelName := "labelName_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	componentHash := "componentHash_example" // string | 
+	labelName := "labelName_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ComponentsAPI.DeleteComponentLabel(context.Background(), ownerType, internalOwnerId, componentHash, labelName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.DeleteComponentLabel``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ComponentsAPI.DeleteComponentLabel(context.Background(), ownerType, internalOwnerId, componentHash, labelName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.DeleteComponentLabel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -99,24 +99,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiComponentDetailsRequestDTOV2 := *sonatypeiq.NewApiComponentDetailsRequestDTOV2() // ApiComponentDetailsRequestDTOV2 |  (optional)
+	apiComponentDetailsRequestDTOV2 := *sonatypeiq.NewApiComponentDetailsRequestDTOV2() // ApiComponentDetailsRequestDTOV2 |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentsAPI.GetComponentDetails(context.Background()).ApiComponentDetailsRequestDTOV2(apiComponentDetailsRequestDTOV2).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetComponentDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetComponentDetails`: ApiComponentDetailsResultDTOV2
-    fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetComponentDetails`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ComponentsAPI.GetComponentDetails(context.Background()).ApiComponentDetailsRequestDTOV2(apiComponentDetailsRequestDTOV2).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetComponentDetails``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetComponentDetails`: ApiComponentDetailsResultDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetComponentDetails`: %v\n", resp)
 }
 ```
 
@@ -163,24 +163,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiComponentOrPurlIdentifierDTOV2 := *sonatypeiq.NewApiComponentOrPurlIdentifierDTOV2() // ApiComponentOrPurlIdentifierDTOV2 |  (optional)
+	apiComponentOrPurlIdentifierDTOV2 := *sonatypeiq.NewApiComponentOrPurlIdentifierDTOV2() // ApiComponentOrPurlIdentifierDTOV2 |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentsAPI.GetComponentVersions(context.Background()).ApiComponentOrPurlIdentifierDTOV2(apiComponentOrPurlIdentifierDTOV2).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetComponentVersions``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetComponentVersions`: []string
-    fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetComponentVersions`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ComponentsAPI.GetComponentVersions(context.Background()).ApiComponentOrPurlIdentifierDTOV2(apiComponentOrPurlIdentifierDTOV2).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetComponentVersions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetComponentVersions`: []string
+	fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetComponentVersions`: %v\n", resp)
 }
 ```
 
@@ -227,29 +227,29 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
-    stageId := "stageId_example" // string |  (optional)
-    identificationSource := "identificationSource_example" // string |  (optional)
-    scanId := "scanId_example" // string |  (optional)
-    apiComponentDTOV2 := *sonatypeiq.NewApiComponentDTOV2() // ApiComponentDTOV2 |  (optional)
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
+	stageId := "stageId_example" // string |  (optional)
+	identificationSource := "identificationSource_example" // string |  (optional)
+	scanId := "scanId_example" // string |  (optional)
+	apiComponentDTOV2 := *sonatypeiq.NewApiComponentDTOV2() // ApiComponentDTOV2 |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSuggestedRemediationForComponent`: ApiComponentRemediationDTO
-    fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetSuggestedRemediationForComponent`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSuggestedRemediationForComponent`: ApiComponentRemediationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetSuggestedRemediationForComponent`: %v\n", resp)
 }
 ```
 
@@ -306,25 +306,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
-    componentHash := "componentHash_example" // string | 
-    labelName := "labelName_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
+	componentHash := "componentHash_example" // string | 
+	labelName := "labelName_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ComponentsAPI.SetComponentLabel(context.Background(), ownerType, internalOwnerId, componentHash, labelName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.SetComponentLabel``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ComponentsAPI.SetComponentLabel(context.Background(), ownerType, internalOwnerId, componentHash, labelName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.SetComponentLabel``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

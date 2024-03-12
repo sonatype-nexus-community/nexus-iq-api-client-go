@@ -56,9 +56,10 @@ func Test_sonatypeiq_ScanAPIService(t *testing.T) {
 		var applicationId string
 		var source string
 
-		httpRes, err := apiClient.ScanAPI.ScanComponents(context.Background(), applicationId, source).Execute()
+		resp, httpRes, err := apiClient.ScanAPI.ScanComponents(context.Background(), applicationId, source).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

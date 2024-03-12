@@ -20,29 +20,29 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    refId := "refId_example" // string | 
-    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
-    identificationSource := "identificationSource_example" // string |  (optional)
-    scanId := "scanId_example" // string |  (optional)
-    ownerType := "ownerType_example" // string |  (optional)
-    ownerId := "ownerId_example" // string |  (optional)
+	refId := "refId_example" // string | 
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier |  (optional)
+	identificationSource := "identificationSource_example" // string |  (optional)
+	scanId := "scanId_example" // string |  (optional)
+	ownerType := "ownerType_example" // string |  (optional)
+	ownerId := "ownerId_example" // string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.VulnerabilitiesAPI.GetSecurityVulnerabilityDetails(context.Background(), refId).ComponentIdentifier(componentIdentifier).IdentificationSource(identificationSource).ScanId(scanId).OwnerType(ownerType).OwnerId(ownerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesAPI.GetSecurityVulnerabilityDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSecurityVulnerabilityDetails`: SecurityVulnerabilityData
-    fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesAPI.GetSecurityVulnerabilityDetails`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.VulnerabilitiesAPI.GetSecurityVulnerabilityDetails(context.Background(), refId).ComponentIdentifier(componentIdentifier).IdentificationSource(identificationSource).ScanId(scanId).OwnerType(ownerType).OwnerId(ownerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesAPI.GetSecurityVulnerabilityDetails``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSecurityVulnerabilityDetails`: SecurityVulnerabilityData
+	fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesAPI.GetSecurityVulnerabilityDetails`: %v\n", resp)
 }
 ```
 

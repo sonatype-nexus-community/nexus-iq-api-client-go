@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Analysis** | Pointer to [**ApiSecurityIssueAnalysisDTO**](ApiSecurityIssueAnalysisDTO.md) |  | [optional] 
 **CvssVector** | Pointer to **string** |  | [optional] 
 **CvssVectorSource** | Pointer to **string** |  | [optional] 
 **Cwe** | Pointer to **string** |  | [optional] 
@@ -32,6 +33,31 @@ will change when the set of required properties is changed
 NewApiSecurityIssueDTOWithDefaults instantiates a new ApiSecurityIssueDTO object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAnalysis
+
+`func (o *ApiSecurityIssueDTO) GetAnalysis() ApiSecurityIssueAnalysisDTO`
+
+GetAnalysis returns the Analysis field if non-nil, zero value otherwise.
+
+### GetAnalysisOk
+
+`func (o *ApiSecurityIssueDTO) GetAnalysisOk() (*ApiSecurityIssueAnalysisDTO, bool)`
+
+GetAnalysisOk returns a tuple with the Analysis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAnalysis
+
+`func (o *ApiSecurityIssueDTO) SetAnalysis(v ApiSecurityIssueAnalysisDTO)`
+
+SetAnalysis sets Analysis field to given value.
+
+### HasAnalysis
+
+`func (o *ApiSecurityIssueDTO) HasAnalysis() bool`
+
+HasAnalysis returns a boolean if a field has been set.
 
 ### GetCvssVector
 

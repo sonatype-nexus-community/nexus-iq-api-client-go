@@ -23,21 +23,21 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.SearchAPI.CreateSearchIndexAsync(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.CreateSearchIndexAsync``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SearchAPI.CreateSearchIndexAsync(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.CreateSearchIndexAsync``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -80,23 +80,23 @@ Other parameters are passed through a pointer to a apiCreateSearchIndexAsyncRequ
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    query := "query_example" // string |  (optional)
-    allComponents := true // bool |  (optional) (default to false)
+	query := "query_example" // string |  (optional)
+	allComponents := true // bool |  (optional) (default to false)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.SearchAPI.GetExportResults(context.Background()).Query(query).AllComponents(allComponents).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.GetExportResults``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SearchAPI.GetExportResults(context.Background()).Query(query).AllComponents(allComponents).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.GetExportResults``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -144,27 +144,27 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    stageId := "stageId_example" // string |  (optional)
-    hash := "hash_example" // string |  (optional)
-    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
-    packageUrl := "packageUrl_example" // string |  (optional)
+	stageId := "stageId_example" // string |  (optional)
+	hash := "hash_example" // string |  (optional)
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier |  (optional)
+	packageUrl := "packageUrl_example" // string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.SearchAPI.SearchComponent(context.Background()).StageId(stageId).Hash(hash).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchComponent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SearchComponent`: ApiSearchResultsDTOV2
-    fmt.Fprintf(os.Stdout, "Response from `SearchAPI.SearchComponent`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SearchAPI.SearchComponent(context.Background()).StageId(stageId).Hash(hash).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchComponent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SearchComponent`: ApiSearchResultsDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `SearchAPI.SearchComponent`: %v\n", resp)
 }
 ```
 
@@ -214,27 +214,27 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    query := "query_example" // string |  (optional)
-    pageSize := int32(56) // int32 |  (optional) (default to 10)
-    page := int32(56) // int32 |  (optional)
-    allComponents := true // bool |  (optional) (default to false)
+	query := "query_example" // string |  (optional)
+	pageSize := int32(56) // int32 |  (optional) (default to 10)
+	page := int32(56) // int32 |  (optional)
+	allComponents := true // bool |  (optional) (default to false)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.SearchAPI.SearchIndex(context.Background()).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchIndex``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SearchIndex`: SearchResultDTO
-    fmt.Fprintf(os.Stdout, "Response from `SearchAPI.SearchIndex`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SearchAPI.SearchIndex(context.Background()).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchIndex``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SearchIndex`: SearchResultDTO
+	fmt.Fprintf(os.Stdout, "Response from `SearchAPI.SearchIndex`: %v\n", resp)
 }
 ```
 

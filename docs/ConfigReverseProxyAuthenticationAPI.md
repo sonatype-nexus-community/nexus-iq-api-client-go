@@ -22,21 +22,21 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigReverseProxyAuthenticationAPI.DeleteConfiguration4(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.DeleteConfiguration4``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigReverseProxyAuthenticationAPI.DeleteConfiguration4(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.DeleteConfiguration4``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -79,23 +79,23 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration4Reques
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigReverseProxyAuthenticationAPI.GetConfiguration4(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.GetConfiguration4``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetConfiguration4`: ApiReverseProxyAuthenticationConfigurationDTO
-    fmt.Fprintf(os.Stdout, "Response from `ConfigReverseProxyAuthenticationAPI.GetConfiguration4`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigReverseProxyAuthenticationAPI.GetConfiguration4(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.GetConfiguration4``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConfiguration4`: ApiReverseProxyAuthenticationConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigReverseProxyAuthenticationAPI.GetConfiguration4`: %v\n", resp)
 }
 ```
 
@@ -138,22 +138,22 @@ Other parameters are passed through a pointer to a apiGetConfiguration4Request s
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    apiReverseProxyAuthenticationConfigurationDTO := *sonatypeiq.NewApiReverseProxyAuthenticationConfigurationDTO() // ApiReverseProxyAuthenticationConfigurationDTO |  (optional)
+	apiReverseProxyAuthenticationConfigurationDTO := *sonatypeiq.NewApiReverseProxyAuthenticationConfigurationDTO() // ApiReverseProxyAuthenticationConfigurationDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ConfigReverseProxyAuthenticationAPI.SetConfiguration4(context.Background()).ApiReverseProxyAuthenticationConfigurationDTO(apiReverseProxyAuthenticationConfigurationDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.SetConfiguration4``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigReverseProxyAuthenticationAPI.SetConfiguration4(context.Background()).ApiReverseProxyAuthenticationConfigurationDTO(apiReverseProxyAuthenticationConfigurationDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.SetConfiguration4``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

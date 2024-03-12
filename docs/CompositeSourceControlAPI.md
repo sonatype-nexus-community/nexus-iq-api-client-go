@@ -20,25 +20,25 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    internalOwnerId := "internalOwnerId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	internalOwnerId := "internalOwnerId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.CompositeSourceControlAPI.GetCompositeSourceControlByOwner(context.Background(), ownerType, internalOwnerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CompositeSourceControlAPI.GetCompositeSourceControlByOwner``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCompositeSourceControlByOwner`: ApiCompositeSourceControlDTO
-    fmt.Fprintf(os.Stdout, "Response from `CompositeSourceControlAPI.GetCompositeSourceControlByOwner`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.CompositeSourceControlAPI.GetCompositeSourceControlByOwner(context.Background(), ownerType, internalOwnerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CompositeSourceControlAPI.GetCompositeSourceControlByOwner``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCompositeSourceControlByOwner`: ApiCompositeSourceControlDTO
+	fmt.Fprintf(os.Stdout, "Response from `CompositeSourceControlAPI.GetCompositeSourceControlByOwner`: %v\n", resp)
 }
 ```
 

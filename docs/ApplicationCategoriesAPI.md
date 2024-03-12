@@ -29,25 +29,25 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    organizationId := "organizationId_example" // string | 
-    apiApplicationCategoryDTO := *sonatypeiq.NewApiApplicationCategoryDTO() // ApiApplicationCategoryDTO |  (optional)
+	organizationId := "organizationId_example" // string | 
+	apiApplicationCategoryDTO := *sonatypeiq.NewApiApplicationCategoryDTO() // ApiApplicationCategoryDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.AddTag(context.Background(), organizationId).ApiApplicationCategoryDTO(apiApplicationCategoryDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.AddTag``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddTag`: ApiApplicationCategoryDTO
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.AddTag`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.AddTag(context.Background(), organizationId).ApiApplicationCategoryDTO(apiApplicationCategoryDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.AddTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddTag`: ApiApplicationCategoryDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.AddTag`: %v\n", resp)
 }
 ```
 
@@ -99,23 +99,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    organizationId := "organizationId_example" // string | 
-    tagId := "tagId_example" // string | 
+	organizationId := "organizationId_example" // string | 
+	tagId := "tagId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.ApplicationCategoriesAPI.DeleteTag(context.Background(), organizationId, tagId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.DeleteTag``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ApplicationCategoriesAPI.DeleteTag(context.Background(), organizationId, tagId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.DeleteTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -168,24 +168,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.GetApplicableTags(context.Background(), organizationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetApplicableTags``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetApplicableTags`: ApplicableTagsDTO
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetApplicableTags`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.GetApplicableTags(context.Background(), organizationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetApplicableTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetApplicableTags`: ApplicableTagsDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetApplicableTags`: %v\n", resp)
 }
 ```
 
@@ -236,24 +236,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationPublicId := "applicationPublicId_example" // string | 
+	applicationPublicId := "applicationPublicId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.GetApplicableTagsByApplicationPublicId(context.Background(), applicationPublicId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetApplicableTagsByApplicationPublicId``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetApplicableTagsByApplicationPublicId`: []ApiApplicationCategoryDTO
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetApplicableTagsByApplicationPublicId`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.GetApplicableTagsByApplicationPublicId(context.Background(), applicationPublicId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetApplicableTagsByApplicationPublicId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetApplicableTagsByApplicationPublicId`: []ApiApplicationCategoryDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetApplicableTagsByApplicationPublicId`: %v\n", resp)
 }
 ```
 
@@ -304,24 +304,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    applicationPublicId := "applicationPublicId_example" // string | 
+	applicationPublicId := "applicationPublicId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.GetApplicationApplicableTags(context.Background(), applicationPublicId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetApplicationApplicableTags``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetApplicationApplicableTags`: ApplicableTagsDTO
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetApplicationApplicableTags`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.GetApplicationApplicableTags(context.Background(), applicationPublicId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetApplicationApplicableTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetApplicationApplicableTags`: ApplicableTagsDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetApplicationApplicableTags`: %v\n", resp)
 }
 ```
 
@@ -372,24 +372,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.GetAppliedPolicyTags(context.Background(), organizationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetAppliedPolicyTags``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAppliedPolicyTags`: []PolicyTag
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetAppliedPolicyTags`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.GetAppliedPolicyTags(context.Background(), organizationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetAppliedPolicyTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAppliedPolicyTags`: []PolicyTag
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetAppliedPolicyTags`: %v\n", resp)
 }
 ```
 
@@ -440,24 +440,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.GetAppliedTags(context.Background(), organizationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetAppliedTags``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAppliedTags`: AppliedTagsDTO
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetAppliedTags`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.GetAppliedTags(context.Background(), organizationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetAppliedTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAppliedTags`: AppliedTagsDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetAppliedTags`: %v\n", resp)
 }
 ```
 
@@ -508,24 +508,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.GetTags(context.Background(), organizationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetTags``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetTags`: []ApiApplicationCategoryDTO
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetTags`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.GetTags(context.Background(), organizationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTags`: []ApiApplicationCategoryDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetTags`: %v\n", resp)
 }
 ```
 
@@ -576,23 +576,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.GetTagsUsedByApplications(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetTagsUsedByApplications``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetTagsUsedByApplications`: []ApiApplicationCategoryDTO
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetTagsUsedByApplications`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.GetTagsUsedByApplications(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.GetTagsUsedByApplications``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTagsUsedByApplications`: []ApiApplicationCategoryDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.GetTagsUsedByApplications`: %v\n", resp)
 }
 ```
 
@@ -635,25 +635,25 @@ Other parameters are passed through a pointer to a apiGetTagsUsedByApplicationsR
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    organizationId := "organizationId_example" // string | 
-    apiApplicationCategoryDTO := *sonatypeiq.NewApiApplicationCategoryDTO() // ApiApplicationCategoryDTO |  (optional)
+	organizationId := "organizationId_example" // string | 
+	apiApplicationCategoryDTO := *sonatypeiq.NewApiApplicationCategoryDTO() // ApiApplicationCategoryDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.ApplicationCategoriesAPI.UpdateTag(context.Background(), organizationId).ApiApplicationCategoryDTO(apiApplicationCategoryDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.UpdateTag``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateTag`: ApiApplicationCategoryDTO
-    fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.UpdateTag`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationCategoriesAPI.UpdateTag(context.Background(), organizationId).ApiApplicationCategoryDTO(apiApplicationCategoryDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationCategoriesAPI.UpdateTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateTag`: ApiApplicationCategoryDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationCategoriesAPI.UpdateTag`: %v\n", resp)
 }
 ```
 

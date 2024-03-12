@@ -26,23 +26,23 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserTokensAPI.CreateUserToken(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.CreateUserToken``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateUserToken`: ApiUserTokenDTO
-    fmt.Fprintf(os.Stdout, "Response from `UserTokensAPI.CreateUserToken`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserTokensAPI.CreateUserToken(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.CreateUserToken``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateUserToken`: ApiUserTokenDTO
+	fmt.Fprintf(os.Stdout, "Response from `UserTokensAPI.CreateUserToken`: %v\n", resp)
 }
 ```
 
@@ -85,21 +85,21 @@ Other parameters are passed through a pointer to a apiCreateUserTokenRequest str
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.UserTokensAPI.DeleteCurrentUserToken(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.DeleteCurrentUserToken``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.UserTokensAPI.DeleteCurrentUserToken(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.DeleteCurrentUserToken``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -142,22 +142,22 @@ Other parameters are passed through a pointer to a apiDeleteCurrentUserTokenRequ
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    userCode := "userCode_example" // string | 
+	userCode := "userCode_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.UserTokensAPI.DeleteUserTokenByUserCode(context.Background(), userCode).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.DeleteUserTokenByUserCode``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.UserTokensAPI.DeleteUserTokenByUserCode(context.Background(), userCode).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.DeleteUserTokenByUserCode``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -208,25 +208,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    username := "username_example" // string | 
-    realm := "realm_example" // string |  (optional) (default to "Internal")
+	username := "username_example" // string | 
+	realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserTokensAPI.GetUserTokenByUsernameAndRealmId(context.Background(), username).Realm(realm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokenByUsernameAndRealmId``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUserTokenByUsernameAndRealmId`: ApiUserTokenDTO
-    fmt.Fprintf(os.Stdout, "Response from `UserTokensAPI.GetUserTokenByUsernameAndRealmId`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserTokensAPI.GetUserTokenByUsernameAndRealmId(context.Background(), username).Realm(realm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokenByUsernameAndRealmId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserTokenByUsernameAndRealmId`: ApiUserTokenDTO
+	fmt.Fprintf(os.Stdout, "Response from `UserTokensAPI.GetUserTokenByUsernameAndRealmId`: %v\n", resp)
 }
 ```
 
@@ -278,23 +278,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserTokensAPI.GetUserTokenExistsForCurrentUser(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokenExistsForCurrentUser``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUserTokenExistsForCurrentUser`: ApiUserTokenExistsDTO
-    fmt.Fprintf(os.Stdout, "Response from `UserTokensAPI.GetUserTokenExistsForCurrentUser`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserTokensAPI.GetUserTokenExistsForCurrentUser(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokenExistsForCurrentUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserTokenExistsForCurrentUser`: ApiUserTokenExistsDTO
+	fmt.Fprintf(os.Stdout, "Response from `UserTokensAPI.GetUserTokenExistsForCurrentUser`: %v\n", resp)
 }
 ```
 
@@ -337,26 +337,26 @@ Other parameters are passed through a pointer to a apiGetUserTokenExistsForCurre
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    createdAfter := "createdAfter_example" // string |  (optional)
-    createdBefore := "createdBefore_example" // string |  (optional)
-    realm := "realm_example" // string |  (optional) (default to "Internal")
+	createdAfter := "createdAfter_example" // string |  (optional)
+	createdBefore := "createdBefore_example" // string |  (optional)
+	realm := "realm_example" // string |  (optional) (default to "Internal")
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserTokensAPI.GetUserTokensByCreatedBetweenAndRealmId(context.Background()).CreatedAfter(createdAfter).CreatedBefore(createdBefore).Realm(realm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokensByCreatedBetweenAndRealmId``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetUserTokensByCreatedBetweenAndRealmId`: []ApiUserTokenDTO
-    fmt.Fprintf(os.Stdout, "Response from `UserTokensAPI.GetUserTokensByCreatedBetweenAndRealmId`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserTokensAPI.GetUserTokensByCreatedBetweenAndRealmId(context.Background()).CreatedAfter(createdAfter).CreatedBefore(createdBefore).Realm(realm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.GetUserTokensByCreatedBetweenAndRealmId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserTokensByCreatedBetweenAndRealmId`: []ApiUserTokenDTO
+	fmt.Fprintf(os.Stdout, "Response from `UserTokensAPI.GetUserTokensByCreatedBetweenAndRealmId`: %v\n", resp)
 }
 ```
 
@@ -405,21 +405,21 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.UserTokensAPI.PurgeUserTokens(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.PurgeUserTokens``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.UserTokensAPI.PurgeUserTokens(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserTokensAPI.PurgeUserTokens``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

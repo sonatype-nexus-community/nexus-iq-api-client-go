@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ErrorMessage** | Pointer to **string** |  | [optional] 
 **GrandfatheredPolicyViolations** | Pointer to **int32** |  | [optional] 
 **IsError** | Pointer to **bool** |  | [optional] 
+**LegacyViolations** | Pointer to **int32** |  | [optional] 
 **OpenPolicyViolations** | Pointer to [**ApiEvaluationResultCounterDTO**](ApiEvaluationResultCounterDTO.md) |  | [optional] 
 **PolicyAction** | Pointer to **string** |  | [optional] 
 **ReportDataUrl** | Pointer to **string** |  | [optional] 
@@ -158,6 +159,31 @@ SetIsError sets IsError field to given value.
 `func (o *ApiThirdPartyScanResultDTO) HasIsError() bool`
 
 HasIsError returns a boolean if a field has been set.
+
+### GetLegacyViolations
+
+`func (o *ApiThirdPartyScanResultDTO) GetLegacyViolations() int32`
+
+GetLegacyViolations returns the LegacyViolations field if non-nil, zero value otherwise.
+
+### GetLegacyViolationsOk
+
+`func (o *ApiThirdPartyScanResultDTO) GetLegacyViolationsOk() (*int32, bool)`
+
+GetLegacyViolationsOk returns a tuple with the LegacyViolations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegacyViolations
+
+`func (o *ApiThirdPartyScanResultDTO) SetLegacyViolations(v int32)`
+
+SetLegacyViolations sets LegacyViolations field to given value.
+
+### HasLegacyViolations
+
+`func (o *ApiThirdPartyScanResultDTO) HasLegacyViolations() bool`
+
+HasLegacyViolations returns a boolean if a field has been set.
 
 ### GetOpenPolicyViolations
 

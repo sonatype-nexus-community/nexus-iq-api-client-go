@@ -27,25 +27,25 @@ Method | HTTP request | Description
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
-    policyViolationId := "policyViolationId_example" // string | 
-    apiWaiverOptionsDTO := *sonatypeiq.NewApiWaiverOptionsDTO() // ApiWaiverOptionsDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
+	policyViolationId := "policyViolationId_example" // string | 
+	apiWaiverOptionsDTO := *sonatypeiq.NewApiWaiverOptionsDTO() // ApiWaiverOptionsDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.PolicyWaiversAPI.AddPolicyWaiverByPolicyViolationId(context.Background(), ownerType, ownerId, policyViolationId).ApiWaiverOptionsDTO(apiWaiverOptionsDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.AddPolicyWaiverByPolicyViolationId``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiversAPI.AddPolicyWaiverByPolicyViolationId(context.Background(), ownerType, ownerId, policyViolationId).ApiWaiverOptionsDTO(apiWaiverOptionsDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.AddPolicyWaiverByPolicyViolationId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -101,28 +101,28 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
-    scanId := "scanId_example" // string | 
-    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
-    packageUrl := "packageUrl_example" // string |  (optional)
-    hash := "hash_example" // string |  (optional)
-    apiWaiverOptionsDTO := *sonatypeiq.NewApiWaiverOptionsDTO() // ApiWaiverOptionsDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
+	scanId := "scanId_example" // string | 
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier |  (optional)
+	packageUrl := "packageUrl_example" // string |  (optional)
+	hash := "hash_example" // string |  (optional)
+	apiWaiverOptionsDTO := *sonatypeiq.NewApiWaiverOptionsDTO() // ApiWaiverOptionsDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.PolicyWaiversAPI.AddWaiverToTransitivePolicyViolationsByAppScanComponent(context.Background(), ownerType, ownerId, scanId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).ApiWaiverOptionsDTO(apiWaiverOptionsDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.AddWaiverToTransitivePolicyViolationsByAppScanComponent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiversAPI.AddWaiverToTransitivePolicyViolationsByAppScanComponent(context.Background(), ownerType, ownerId, scanId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).ApiWaiverOptionsDTO(apiWaiverOptionsDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.AddWaiverToTransitivePolicyViolationsByAppScanComponent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -181,28 +181,28 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
-    stageId := "stageId_example" // string | 
-    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
-    packageUrl := "packageUrl_example" // string |  (optional)
-    hash := "hash_example" // string |  (optional)
-    apiWaiverOptionsDTO := *sonatypeiq.NewApiWaiverOptionsDTO() // ApiWaiverOptionsDTO |  (optional)
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
+	stageId := "stageId_example" // string | 
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier |  (optional)
+	packageUrl := "packageUrl_example" // string |  (optional)
+	hash := "hash_example" // string |  (optional)
+	apiWaiverOptionsDTO := *sonatypeiq.NewApiWaiverOptionsDTO() // ApiWaiverOptionsDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.PolicyWaiversAPI.AddWaiverToTransitivePolicyViolationsByOwnerStageComponent(context.Background(), ownerType, ownerId, stageId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).ApiWaiverOptionsDTO(apiWaiverOptionsDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.AddWaiverToTransitivePolicyViolationsByOwnerStageComponent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiversAPI.AddWaiverToTransitivePolicyViolationsByOwnerStageComponent(context.Background(), ownerType, ownerId, stageId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).ApiWaiverOptionsDTO(apiWaiverOptionsDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.AddWaiverToTransitivePolicyViolationsByOwnerStageComponent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -261,24 +261,24 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
-    policyWaiverId := "policyWaiverId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
+	policyWaiverId := "policyWaiverId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.PolicyWaiversAPI.DeletePolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.DeletePolicyWaiver``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiversAPI.DeletePolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.DeletePolicyWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -333,26 +333,26 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
-    policyWaiverId := "policyWaiverId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
+	policyWaiverId := "policyWaiverId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.PolicyWaiversAPI.GetPolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetPolicyWaiver``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetPolicyWaiver`: ApiPolicyWaiverDTO
-    fmt.Fprintf(os.Stdout, "Response from `PolicyWaiversAPI.GetPolicyWaiver`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.PolicyWaiversAPI.GetPolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetPolicyWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPolicyWaiver`: ApiPolicyWaiverDTO
+	fmt.Fprintf(os.Stdout, "Response from `PolicyWaiversAPI.GetPolicyWaiver`: %v\n", resp)
 }
 ```
 
@@ -407,25 +407,25 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.PolicyWaiversAPI.GetPolicyWaivers(context.Background(), ownerType, ownerId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetPolicyWaivers``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetPolicyWaivers`: []ApiPolicyWaiverDTO
-    fmt.Fprintf(os.Stdout, "Response from `PolicyWaiversAPI.GetPolicyWaivers`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.PolicyWaiversAPI.GetPolicyWaivers(context.Background(), ownerType, ownerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetPolicyWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPolicyWaivers`: []ApiPolicyWaiverDTO
+	fmt.Fprintf(os.Stdout, "Response from `PolicyWaiversAPI.GetPolicyWaivers`: %v\n", resp)
 }
 ```
 
@@ -478,29 +478,29 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    ownerType := "ownerType_example" // string | 
-    ownerId := "ownerId_example" // string | 
-    scanId := "scanId_example" // string | 
-    componentIdentifier := map[string][]sonatypeiq.ComponentIdentifier{ ... } // ComponentIdentifier |  (optional)
-    packageUrl := "packageUrl_example" // string |  (optional)
-    hash := "hash_example" // string |  (optional)
+	ownerType := "ownerType_example" // string | 
+	ownerId := "ownerId_example" // string | 
+	scanId := "scanId_example" // string | 
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier |  (optional)
+	packageUrl := "packageUrl_example" // string |  (optional)
+	hash := "hash_example" // string |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    resp, r, err := apiClient.PolicyWaiversAPI.GetTransitivePolicyWaiversByAppScanComponent(context.Background(), ownerType, ownerId, scanId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetTransitivePolicyWaiversByAppScanComponent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetTransitivePolicyWaiversByAppScanComponent`: ApiComponentPolicyWaiversDTO
-    fmt.Fprintf(os.Stdout, "Response from `PolicyWaiversAPI.GetTransitivePolicyWaiversByAppScanComponent`: %v\n", resp)
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.PolicyWaiversAPI.GetTransitivePolicyWaiversByAppScanComponent(context.Background(), ownerType, ownerId, scanId).ComponentIdentifier(componentIdentifier).PackageUrl(packageUrl).Hash(hash).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetTransitivePolicyWaiversByAppScanComponent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTransitivePolicyWaiversByAppScanComponent`: ApiComponentPolicyWaiversDTO
+	fmt.Fprintf(os.Stdout, "Response from `PolicyWaiversAPI.GetTransitivePolicyWaiversByAppScanComponent`: %v\n", resp)
 }
 ```
 
@@ -558,23 +558,23 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
 func main() {
-    policyViolationId := "policyViolationId_example" // string | 
-    apiRequestPolicyWaiverDTO := *sonatypeiq.NewApiRequestPolicyWaiverDTO() // ApiRequestPolicyWaiverDTO |  (optional)
+	policyViolationId := "policyViolationId_example" // string | 
+	apiRequestPolicyWaiverDTO := *sonatypeiq.NewApiRequestPolicyWaiverDTO() // ApiRequestPolicyWaiverDTO |  (optional)
 
-    configuration := sonatypeiq.NewConfiguration()
-    apiClient := sonatypeiq.NewAPIClient(configuration)
-    r, err := apiClient.PolicyWaiversAPI.RequestPolicyWaiver(context.Background(), policyViolationId).ApiRequestPolicyWaiverDTO(apiRequestPolicyWaiverDTO).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.RequestPolicyWaiver``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiversAPI.RequestPolicyWaiver(context.Background(), policyViolationId).ApiRequestPolicyWaiverDTO(apiRequestPolicyWaiverDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.RequestPolicyWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.166.0-01
+  version: 1.174.0-01
 servers:
 - url: /
 security:
@@ -9,6 +9,7 @@ security:
 tags:
 - name: Application Categories
 - name: Applications
+- name: Call Flow Analysis
 - name: Claim
 - name: Components
 - name: Composite Source Control
@@ -49,6 +50,7 @@ tags:
 - name: User Tokens
 - name: Users
 - name: Vulnerabilities
+- name: sbom
 paths:
   /api/v2/applicationCategories/application:
     get:
@@ -606,6 +608,112 @@ paths:
           description: default response
       tags:
       - Applications
+  /api/v2/callFlowAnalysis/configuration/{ownerType}/{ownerId}:
+    delete:
+      operationId: deleteCallFlowAnalysisConfig
+      parameters:
+      - explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      tags:
+      - Call Flow Analysis
+    get:
+      operationId: getCallFlowAnalysisConfig
+      parameters:
+      - explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiCallFlowAnalysisConfigDTO'
+          description: default response
+      tags:
+      - Call Flow Analysis
+    put:
+      operationId: upsertCallFlowAnalysisConfig
+      parameters:
+      - explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCallFlowAnalysisConfigDTO'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiCallFlowAnalysisConfigDTO'
+          description: default response
+      tags:
+      - Call Flow Analysis
   /api/v2/claim/components:
     get:
       operationId: getAll
@@ -701,6 +809,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization|repository
@@ -780,6 +889,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -825,6 +935,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -871,6 +982,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -980,6 +1092,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -1021,6 +1134,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -1059,6 +1173,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -1096,6 +1211,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -1135,6 +1251,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -1173,6 +1290,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -1213,6 +1331,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -1259,6 +1378,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -1607,6 +1727,7 @@ paths:
       - Config Source Control
   /api/v2/cycloneDx/{applicationId}/reports/{reportId}:
     get:
+      deprecated: true
       operationId: getByReportId
       parameters:
       - explode: false
@@ -1632,6 +1753,7 @@ paths:
       - Cyclone Dx
   /api/v2/cycloneDx/{applicationId}/stages/{stageId}:
     get:
+      deprecated: true
       operationId: getLatest
       parameters:
       - explode: false
@@ -1678,7 +1800,7 @@ paths:
         name: cdxVersion
         required: true
         schema:
-          pattern: 1.1|1.2|1.3|1.4
+          pattern: 1.1|1.2|1.3|1.4|1.5
           type: string
         style: simple
       responses:
@@ -1712,7 +1834,7 @@ paths:
         name: cdxVersion
         required: true
         schema:
-          pattern: 1.1|1.2|1.3|1.4
+          pattern: 1.1|1.2|1.3|1.4|1.5
           type: string
         style: simple
       responses:
@@ -1765,6 +1887,26 @@ paths:
           description: default response
       tags:
       - Data Retention Policies
+  /api/v2/dataRetentionPolicies/organizations/{organizationId}/parent:
+    get:
+      operationId: getParentDataRetentionPolicies
+      parameters:
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiDataRetentionPoliciesDTO'
+          description: default response
+      tags:
+      - Data Retention Policies
   /api/v2/endpoints/{apiType}:
     get:
       operationId: getOpenAPI
@@ -1791,7 +1933,7 @@ paths:
       - Endpoints
   /api/v2/evaluation/applications/{applicationId}:
     post:
-      operationId: evaluateComponents
+      operationId: evaluateComponents_1
       parameters:
       - explode: false
         in: path
@@ -1811,32 +1953,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiComponentEvaluationTicketDTOV2'
-          description: default response
-      tags:
-      - Evaluation
-  /api/v2/evaluation/applications/{applicationId}/manifestEvaluation:
-    post:
-      deprecated: true
-      operationId: deprecatedManifestEvaluation
-      parameters:
-      - explode: false
-        in: path
-        name: applicationId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ApiSourceControlEvaluationRequestDTO'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiApplicationEvaluationStatusDTOV2'
           description: default response
       tags:
       - Evaluation
@@ -2029,7 +2145,10 @@ paths:
         name: policyId
         required: false
         schema:
-          type: string
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         style: form
       - explode: true
         in: query
@@ -2057,6 +2176,52 @@ paths:
         default:
           content:
             application/json: {}
+          description: default response
+      tags:
+      - Firewall
+  /api/v2/firewall/components/{repositoryManagerId}/{repositoryId}/evaluate:
+    post:
+      operationId: evaluateComponents
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repositoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiRepositoryComponentEvaluationRequestList'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiRepositoryComponentEvaluationResultList'
+          description: default response
+      tags:
+      - Firewall
+  /api/v2/firewall/metrics/embedded:
+    get:
+      operationId: getFirewallMetrics
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/ApiFirewallMetricsResultDTO'
+                type: object
           description: default response
       tags:
       - Firewall
@@ -2146,6 +2311,133 @@ paths:
           description: default response
       tags:
       - Firewall
+  /api/v2/firewall/repositories/configuration/{repositoryManagerId}:
+    get:
+      operationId: getConfiguredRepositories
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: sinceUtcTimestamp
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiRepositoryListDTO'
+          description: default response
+      tags:
+      - Firewall
+    post:
+      operationId: configureRepositories
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiRepositoryListDTO'
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      tags:
+      - Firewall
+  /api/v2/firewall/repositoryContainer:
+    get:
+      operationId: getRepositoryContainer
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiRepositoryContainerDTO'
+          description: default response
+      tags:
+      - Firewall
+  /api/v2/firewall/repositoryManagers:
+    get:
+      operationId: getRepositoryManagers
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiRepositoryManagerListDTO'
+          description: default response
+      tags:
+      - Firewall
+    post:
+      operationId: addRepositoryManager
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiRepositoryManagerDTO'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiRepositoryManagerDTO'
+          description: default response
+      tags:
+      - Firewall
+  /api/v2/firewall/repositoryManagers/{repositoryManagerId}:
+    delete:
+      operationId: deleteRepositoryManager
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      tags:
+      - Firewall
+    get:
+      operationId: getRepositoryManager
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiRepositoryManagerDTO'
+          description: default response
+      tags:
+      - Firewall
   /api/v2/labels/{ownerType}/{ownerId}:
     get:
       operationId: getLabels
@@ -2159,9 +2451,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -2202,9 +2495,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -2240,9 +2534,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -2279,9 +2574,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -2313,9 +2609,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -2354,9 +2651,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -2651,6 +2949,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -2747,6 +3046,23 @@ paths:
       tags:
       - Organizations
   /api/v2/organizations/{organizationId}:
+    delete:
+      operationId: deleteOrganization
+      parameters:
+      - explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            '*/*': {}
+          description: default response
+      tags:
+      - Organizations
     get:
       operationId: getOrganization
       parameters:
@@ -2825,6 +3141,20 @@ paths:
           type: array
           uniqueItems: true
         style: form
+      - explode: true
+        in: query
+        name: openTimeAfter
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: openTimeBefore
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         default:
           content:
@@ -2887,6 +3217,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -2949,6 +3280,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application
@@ -3039,6 +3371,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -3069,6 +3402,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -3134,6 +3468,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application
@@ -3195,6 +3530,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application
@@ -3283,9 +3619,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -3319,9 +3656,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -3363,9 +3701,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -3401,9 +3740,10 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
-          pattern: application|organization|repository|repository_container
+          pattern: application|organization|repository|repository_manager|repository_container
           type: string
         style: simple
       - explode: false
@@ -3631,6 +3971,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: global|repository_container
@@ -3658,6 +3999,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: global|repository_container
@@ -3707,6 +4049,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: global|repository_container
@@ -3757,6 +4100,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -3791,6 +4135,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -3847,6 +4192,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -3903,6 +4249,89 @@ paths:
           description: default response
       tags:
       - Roles
+  /api/v2/sbom/{applicationId}/version/{sbomVersion}:
+    delete:
+      description: Deletes a specific sbom version including it's original contents
+        and updates
+      operationId: deleteSbomVersion
+      parameters:
+      - description: The internal id of the application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: URL Encoded version value of the sbom to be deleted
+        explode: false
+        in: path
+        name: sbomVersion
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Delete successful
+        "404":
+          description: Supplied sbom version not found
+      summary: Delete sbom version
+      tags:
+      - sbom
+    get:
+      description: Downloads a specific sbom version in its original or current form
+      operationId: getSbomVersion
+      parameters:
+      - description: The internal id of the application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: URL Encoded version value of the sbom to be deleted
+        explode: false
+        in: path
+        name: sbomVersion
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "The form of the sbom version. Allowed values [original|current].\
+          \ default = current"
+        explode: true
+        in: query
+        name: form
+        required: false
+        schema:
+          default: current
+          type: string
+        style: form
+      - description: "Output format(json/xml) of the sbom. Changing the output format\
+          \ only applicable when downloading the current form of the SBOM. The original\
+          \ sbom will always return in the original form that it was ingested. When\
+          \ requesting `current` form and if this header value is not present the\
+          \ sbom will be returned in its original ingested format. Allowed values\
+          \ {'application/json'|'application/xml'}. default = null"
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json|application/xml: {}
+          description: Content of the sbom
+        "404":
+          description: Supplied sbom version not found
+      summary: Gets a sbom version
+      tags:
+      - sbom
   /api/v2/scan/applications/ideUser/overview:
     get:
       operationId: getIdeUsersOverview
@@ -3961,7 +4390,9 @@ paths:
       responses:
         default:
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiThirdPartyScanTicketDTO'
           description: default response
       tags:
       - Scan
@@ -4148,33 +4579,6 @@ paths:
           description: default response
       tags:
       - Security Overrides
-  /api/v2/sourceControl:
-    post:
-      operationId: addOrUpdateSourceControl
-      parameters:
-      - explode: true
-        in: query
-        name: publicId
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: repositoryUrl
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiSourceControlDTO'
-          description: default response
-      tags:
-      - Source Control
   /api/v2/sourceControl/{ownerType}/{internalOwnerId}:
     delete:
       operationId: deleteSourceControl
@@ -4188,6 +4592,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -4219,6 +4624,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -4252,6 +4658,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -4290,6 +4697,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -4329,6 +4737,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           pattern: application|organization
@@ -4756,6 +5165,7 @@ paths:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           type: string
@@ -6172,6 +6582,7 @@ components:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           type: string
@@ -6211,6 +6622,35 @@ components:
           type: string
         inheritedFromOrganizationName:
           type: string
+      type: object
+    ApiCallFlowAnalysisConfigDTO:
+      example:
+        threadCount: 0
+        id: id
+        ownerId: ownerId
+        enabled: true
+        algorithm: CLASS_HIERARCHY_ANALYSIS
+        namespaces:
+        - namespaces
+        - namespaces
+      properties:
+        algorithm:
+          enum:
+          - CLASS_HIERARCHY_ANALYSIS
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        namespaces:
+          items:
+            type: string
+          type: array
+        ownerId:
+          type: string
+        threadCount:
+          format: int32
+          type: integer
       type: object
     ApiComponentChangeActionDTO:
       example:
@@ -6376,6 +6816,11 @@ components:
             cvssVectorSource: cvssVectorSource
             source: source
             threatCategory: threatCategory
+            analysis:
+              response: response
+              detail: detail
+              justification: justification
+              state: state
             url: url
             status: status
           - cwe: cwe
@@ -6385,6 +6830,11 @@ components:
             cvssVectorSource: cvssVectorSource
             source: source
             threatCategory: threatCategory
+            analysis:
+              response: response
+              detail: detail
+              justification: justification
+              state: state
             url: url
             status: status
       properties:
@@ -6563,6 +7013,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
             - cwe: cwe
@@ -6572,6 +7027,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
         - hygieneRating: hygieneRating
@@ -6691,6 +7151,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
             - cwe: cwe
@@ -6700,6 +7165,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
       properties:
@@ -6862,6 +7332,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
             - cwe: cwe
@@ -6871,6 +7346,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
         - hygieneRating: hygieneRating
@@ -6990,6 +7470,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
             - cwe: cwe
@@ -6999,6 +7484,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
       properties:
@@ -10586,9 +11076,14 @@ components:
                 threatLevel: 0
             stageId: stageId
           repository:
+            auditEnabled: true
+            policyCompliantComponentSelectionEnabled: true
             format: format
             repositoryId: repositoryId
+            type: type
+            namespaceConfusionProtectionEnabled: true
             publicId: publicId
+            quarantineEnabled: true
         - stages:
           - componentPolicyViolations:
             - component:
@@ -11451,9 +11946,14 @@ components:
                 threatLevel: 0
             stageId: stageId
           repository:
+            auditEnabled: true
+            policyCompliantComponentSelectionEnabled: true
             format: format
             repositoryId: repositoryId
+            type: type
+            namespaceConfusionProtectionEnabled: true
             publicId: publicId
+            quarantineEnabled: true
       properties:
         applicationWaivers:
           items:
@@ -12011,9 +12511,14 @@ components:
               policyViolationId: policyViolationId
               threatLevel: 0
           repository:
+            auditEnabled: true
+            policyCompliantComponentSelectionEnabled: true
             format: format
             repositoryId: repositoryId
+            type: type
+            namespaceConfusionProtectionEnabled: true
             publicId: publicId
+            quarantineEnabled: true
         - components:
           - component:
               quarantineId: quarantineId
@@ -12558,9 +13063,14 @@ components:
               policyViolationId: policyViolationId
               threatLevel: 0
           repository:
+            auditEnabled: true
+            policyCompliantComponentSelectionEnabled: true
             format: format
             repositoryId: repositoryId
+            type: type
+            namespaceConfusionProtectionEnabled: true
             publicId: publicId
+            quarantineEnabled: true
       properties:
         componentsInQuarantine:
           items:
@@ -13022,6 +13532,15 @@ components:
         severe:
           format: int32
           type: integer
+      type: object
+    ApiFirewallMetricsResultDTO:
+      properties:
+        firewallMetricsValue:
+          format: int32
+          type: integer
+        latestUpdatedTime:
+          format: date-time
+          type: string
       type: object
     ApiFirewallQuarantineSummaryDTO:
       example:
@@ -14286,7 +14805,7 @@ components:
     ApiMatchStateSummaryDTOV2:
       example:
         totalComponentCount: 5
-        knownComponentCount: 1
+        knownComponentCount: 5
       properties:
         knownComponentCount:
           format: int32
@@ -15900,6 +16419,16 @@ components:
           - licenseName: licenseName
             licenseId: licenseId
           status: status
+        swid:
+          patch: true
+          tagVersion: 1
+          tagId: tagId
+          name: name
+          text:
+            encoding: encoding
+            contentType: contentType
+            content: content
+          version: version
         pathnames:
         - pathnames
         - pathnames
@@ -15913,6 +16442,11 @@ components:
             cvssVectorSource: cvssVectorSource
             source: source
             threatCategory: threatCategory
+            analysis:
+              response: response
+              detail: detail
+              justification: justification
+              state: state
             url: url
             status: status
           - cwe: cwe
@@ -15922,11 +16456,17 @@ components:
             cvssVectorSource: cvssVectorSource
             source: source
             threatCategory: threatCategory
+            analysis:
+              response: response
+              detail: detail
+              justification: justification
+              state: state
             url: url
             status: status
         thirdParty: true
         proprietary: true
         packageUrl: packageUrl
+        cpe: cpe
         dependencyData:
           parentComponentPurls:
           - parentComponentPurls
@@ -15948,6 +16488,8 @@ components:
       properties:
         componentIdentifier:
           $ref: '#/components/schemas/ApiComponentIdentifierDTOV2'
+        cpe:
+          type: string
         dependencyData:
           $ref: '#/components/schemas/ApiDependencyDataDTO'
         displayName:
@@ -15972,6 +16514,8 @@ components:
           $ref: '#/components/schemas/ApiSecurityDataDTO'
         sha256:
           type: string
+        swid:
+          $ref: '#/components/schemas/Swid'
         thirdParty:
           type: boolean
       type: object
@@ -15988,6 +16532,7 @@ components:
           policyId: policyId
           policyName: policyName
           policyThreatCategory: policyThreatCategory
+          legacyViolation: true
           policyViolationId: policyViolationId
           constraints:
           - constraintId: constraintId
@@ -16010,6 +16555,7 @@ components:
           policyId: policyId
           policyName: policyName
           policyThreatCategory: policyThreatCategory
+          legacyViolation: true
           policyViolationId: policyViolationId
           constraints:
           - constraintId: constraintId
@@ -16362,15 +16908,16 @@ components:
               - actionTypeId: actionTypeId
                 targetType: targetType
                 target: target
-            severePolicyViolationCount: 3
+            severePolicyViolationCount: 2
             affectedComponentCount: 0
             criticalPolicyViolationCount: 5
-            severeComponentCount: 9
+            severeComponentCount: 3
             criticalComponentCount: 1
-            moderateComponentCount: 2
-            totalComponentCount: 2
+            moderateComponentCount: 7
+            totalComponentCount: 4
             grandfatheredPolicyViolationCount: 5
-            moderatePolicyViolationCount: 7
+            legacyViolationCount: 2
+            moderatePolicyViolationCount: 9
           reportDataUrl: reportDataUrl
           scanId: scanId
           reportHtmlUrl: reportHtmlUrl
@@ -16380,6 +16927,7 @@ components:
           latestReportHtmlUrl: latestReportHtmlUrl
           evaluationDate: 2000-01-23T04:56:07.000+00:00
           stage: stage
+          scanTriggerType: scanTriggerType
           isReevaluation: true
           applicationId: applicationId
           embeddableReportHtmlUrl: embeddableReportHtmlUrl
@@ -16636,15 +17184,16 @@ components:
               - actionTypeId: actionTypeId
                 targetType: targetType
                 target: target
-            severePolicyViolationCount: 3
+            severePolicyViolationCount: 2
             affectedComponentCount: 0
             criticalPolicyViolationCount: 5
-            severeComponentCount: 9
+            severeComponentCount: 3
             criticalComponentCount: 1
-            moderateComponentCount: 2
-            totalComponentCount: 2
+            moderateComponentCount: 7
+            totalComponentCount: 4
             grandfatheredPolicyViolationCount: 5
-            moderatePolicyViolationCount: 7
+            legacyViolationCount: 2
+            moderatePolicyViolationCount: 9
           reportDataUrl: reportDataUrl
           scanId: scanId
           reportHtmlUrl: reportHtmlUrl
@@ -16654,6 +17203,7 @@ components:
           latestReportHtmlUrl: latestReportHtmlUrl
           evaluationDate: 2000-01-23T04:56:07.000+00:00
           stage: stage
+          scanTriggerType: scanTriggerType
           isReevaluation: true
           applicationId: applicationId
           embeddableReportHtmlUrl: embeddableReportHtmlUrl
@@ -16680,6 +17230,7 @@ components:
             policyId: policyId
             policyName: policyName
             policyThreatCategory: policyThreatCategory
+            legacyViolation: true
             policyViolationId: policyViolationId
             constraints:
             - constraintId: constraintId
@@ -16702,6 +17253,7 @@ components:
             policyId: policyId
             policyName: policyName
             policyThreatCategory: policyThreatCategory
+            legacyViolation: true
             policyViolationId: policyViolationId
             constraints:
             - constraintId: constraintId
@@ -16752,6 +17304,7 @@ components:
             policyId: policyId
             policyName: policyName
             policyThreatCategory: policyThreatCategory
+            legacyViolation: true
             policyViolationId: policyViolationId
             constraints:
             - constraintId: constraintId
@@ -16774,6 +17327,7 @@ components:
             policyId: policyId
             policyName: policyName
             policyThreatCategory: policyThreatCategory
+            legacyViolation: true
             policyViolationId: policyViolationId
             constraints:
             - constraintId: constraintId
@@ -16854,6 +17408,7 @@ components:
         policyId: policyId
         policyName: policyName
         policyThreatCategory: policyThreatCategory
+        legacyViolation: true
         policyViolationId: policyViolationId
         constraints:
         - constraintId: constraintId
@@ -16877,6 +17432,8 @@ components:
             $ref: '#/components/schemas/ApiReportConstraintViolationDTOV2'
           type: array
         grandfathered:
+          type: boolean
+        legacyViolation:
           type: boolean
         policyId:
           type: string
@@ -16927,6 +17484,16 @@ components:
             - licenseName: licenseName
               licenseId: licenseId
             status: status
+          swid:
+            patch: true
+            tagVersion: 1
+            tagId: tagId
+            name: name
+            text:
+              encoding: encoding
+              contentType: contentType
+              content: content
+            version: version
           pathnames:
           - pathnames
           - pathnames
@@ -16940,6 +17507,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
             - cwe: cwe
@@ -16949,11 +17521,17 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
           thirdParty: true
           proprietary: true
           packageUrl: packageUrl
+          cpe: cpe
           dependencyData:
             parentComponentPurls:
             - parentComponentPurls
@@ -17004,6 +17582,16 @@ components:
             - licenseName: licenseName
               licenseId: licenseId
             status: status
+          swid:
+            patch: true
+            tagVersion: 1
+            tagId: tagId
+            name: name
+            text:
+              encoding: encoding
+              contentType: contentType
+              content: content
+            version: version
           pathnames:
           - pathnames
           - pathnames
@@ -17017,6 +17605,11 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
             - cwe: cwe
@@ -17026,11 +17619,17 @@ components:
               cvssVectorSource: cvssVectorSource
               source: source
               threatCategory: threatCategory
+              analysis:
+                response: response
+                detail: detail
+                justification: justification
+                state: state
               url: url
               status: status
           thirdParty: true
           proprietary: true
           packageUrl: packageUrl
+          cpe: cpe
           dependencyData:
             parentComponentPurls:
             - parentComponentPurls
@@ -17051,7 +17650,7 @@ components:
           hash: hash
         matchSummary:
           totalComponentCount: 5
-          knownComponentCount: 1
+          knownComponentCount: 5
         globalInformation:
           dataVersionDate: dataVersionDate
       properties:
@@ -17319,15 +17918,16 @@ components:
             - actionTypeId: actionTypeId
               targetType: targetType
               target: target
-          severePolicyViolationCount: 3
+          severePolicyViolationCount: 2
           affectedComponentCount: 0
           criticalPolicyViolationCount: 5
-          severeComponentCount: 9
+          severeComponentCount: 3
           criticalComponentCount: 1
-          moderateComponentCount: 2
-          totalComponentCount: 2
+          moderateComponentCount: 7
+          totalComponentCount: 4
           grandfatheredPolicyViolationCount: 5
-          moderatePolicyViolationCount: 7
+          legacyViolationCount: 2
+          moderatePolicyViolationCount: 9
         reportDataUrl: reportDataUrl
         scanId: scanId
         reportHtmlUrl: reportHtmlUrl
@@ -17337,6 +17937,7 @@ components:
         latestReportHtmlUrl: latestReportHtmlUrl
         evaluationDate: 2000-01-23T04:56:07.000+00:00
         stage: stage
+        scanTriggerType: scanTriggerType
         isReevaluation: true
         applicationId: applicationId
         embeddableReportHtmlUrl: embeddableReportHtmlUrl
@@ -17367,6 +17968,8 @@ components:
         reportPdfUrl:
           type: string
         scanId:
+          type: string
+        scanTriggerType:
           type: string
         stage:
           type: string
@@ -17437,6 +18040,262 @@ components:
           type: string
         thirdParty:
           type: boolean
+      type: object
+    ApiRepositoryComponentEvaluationRequest:
+      example:
+        packageUrl: packageUrl
+        hash: hash
+        pathname: pathname
+      properties:
+        hash:
+          type: string
+        packageUrl:
+          type: string
+        pathname:
+          type: string
+      type: object
+    ApiRepositoryComponentEvaluationRequestList:
+      example:
+        components:
+        - packageUrl: packageUrl
+          hash: hash
+          pathname: pathname
+        - packageUrl: packageUrl
+          hash: hash
+          pathname: pathname
+        format: format
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/ApiRepositoryComponentEvaluationRequest'
+          type: array
+        format:
+          type: string
+      type: object
+    ApiRepositoryComponentEvaluationResult:
+      example:
+        component:
+          packageUrl: packageUrl
+          hash: hash
+          pathname: pathname
+        catalogDate: 2000-01-23T04:56:07.000+00:00
+        policyViolations:
+        - constraintViolations:
+          - constraintId: constraintId
+            reasons:
+            - reference:
+                type: SECURITY_VULNERABILITY_REFID
+                value: value
+              reason: reason
+            - reference:
+                type: SECURITY_VULNERABILITY_REFID
+                value: value
+              reason: reason
+            constraintName: constraintName
+          - constraintId: constraintId
+            reasons:
+            - reference:
+                type: SECURITY_VULNERABILITY_REFID
+                value: value
+              reason: reason
+            - reference:
+                type: SECURITY_VULNERABILITY_REFID
+                value: value
+              reason: reason
+            constraintName: constraintName
+          policyId: policyId
+          policyName: policyName
+          policyViolationId: policyViolationId
+          threatLevel: 0
+        - constraintViolations:
+          - constraintId: constraintId
+            reasons:
+            - reference:
+                type: SECURITY_VULNERABILITY_REFID
+                value: value
+              reason: reason
+            - reference:
+                type: SECURITY_VULNERABILITY_REFID
+                value: value
+              reason: reason
+            constraintName: constraintName
+          - constraintId: constraintId
+            reasons:
+            - reference:
+                type: SECURITY_VULNERABILITY_REFID
+                value: value
+              reason: reason
+            - reference:
+                type: SECURITY_VULNERABILITY_REFID
+                value: value
+              reason: reason
+            constraintName: constraintName
+          policyId: policyId
+          policyName: policyName
+          policyViolationId: policyViolationId
+          threatLevel: 0
+        quarantineDate: 2000-01-23T04:56:07.000+00:00
+        quarantined: true
+      properties:
+        catalogDate:
+          format: date-time
+          type: string
+        component:
+          $ref: '#/components/schemas/ApiRepositoryComponentEvaluationRequest'
+        policyViolations:
+          items:
+            $ref: '#/components/schemas/ApiPolicyViolationDTOV2'
+          type: array
+        quarantineDate:
+          format: date-time
+          type: string
+        quarantined:
+          type: boolean
+      type: object
+    ApiRepositoryComponentEvaluationResultList:
+      example:
+        repositoryPublicId: repositoryPublicId
+        repositoryId: repositoryId
+        repositoryType: repositoryType
+        results:
+        - component:
+            packageUrl: packageUrl
+            hash: hash
+            pathname: pathname
+          catalogDate: 2000-01-23T04:56:07.000+00:00
+          policyViolations:
+          - constraintViolations:
+            - constraintId: constraintId
+              reasons:
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              constraintName: constraintName
+            - constraintId: constraintId
+              reasons:
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              constraintName: constraintName
+            policyId: policyId
+            policyName: policyName
+            policyViolationId: policyViolationId
+            threatLevel: 0
+          - constraintViolations:
+            - constraintId: constraintId
+              reasons:
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              constraintName: constraintName
+            - constraintId: constraintId
+              reasons:
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              constraintName: constraintName
+            policyId: policyId
+            policyName: policyName
+            policyViolationId: policyViolationId
+            threatLevel: 0
+          quarantineDate: 2000-01-23T04:56:07.000+00:00
+          quarantined: true
+        - component:
+            packageUrl: packageUrl
+            hash: hash
+            pathname: pathname
+          catalogDate: 2000-01-23T04:56:07.000+00:00
+          policyViolations:
+          - constraintViolations:
+            - constraintId: constraintId
+              reasons:
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              constraintName: constraintName
+            - constraintId: constraintId
+              reasons:
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              constraintName: constraintName
+            policyId: policyId
+            policyName: policyName
+            policyViolationId: policyViolationId
+            threatLevel: 0
+          - constraintViolations:
+            - constraintId: constraintId
+              reasons:
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              constraintName: constraintName
+            - constraintId: constraintId
+              reasons:
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              - reference:
+                  type: SECURITY_VULNERABILITY_REFID
+                  value: value
+                reason: reason
+              constraintName: constraintName
+            policyId: policyId
+            policyName: policyName
+            policyViolationId: policyViolationId
+            threatLevel: 0
+          quarantineDate: 2000-01-23T04:56:07.000+00:00
+          quarantined: true
+        repositoryManagerId: repositoryManagerId
+      properties:
+        repositoryId:
+          type: string
+        repositoryManagerId:
+          type: string
+        repositoryPublicId:
+          type: string
+        repositoryType:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/ApiRepositoryComponentEvaluationResult'
+          type: array
       type: object
     ApiRepositoryComponentPath:
       example:
@@ -18279,9 +19138,14 @@ components:
             policyViolationId: policyViolationId
             threatLevel: 0
         repository:
+          auditEnabled: true
+          policyCompliantComponentSelectionEnabled: true
           format: format
           repositoryId: repositoryId
+          type: type
+          namespaceConfusionProtectionEnabled: true
           publicId: publicId
+          quarantineEnabled: true
       properties:
         components:
           items:
@@ -18290,18 +19154,106 @@ components:
         repository:
           $ref: '#/components/schemas/ApiRepositoryDTO'
       type: object
+    ApiRepositoryContainerDTO:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
     ApiRepositoryDTO:
       example:
+        auditEnabled: true
+        policyCompliantComponentSelectionEnabled: true
         format: format
         repositoryId: repositoryId
+        type: type
+        namespaceConfusionProtectionEnabled: true
         publicId: publicId
+        quarantineEnabled: true
       properties:
+        auditEnabled:
+          type: boolean
         format:
           type: string
+        namespaceConfusionProtectionEnabled:
+          type: boolean
+        policyCompliantComponentSelectionEnabled:
+          type: boolean
         publicId:
           type: string
+        quarantineEnabled:
+          type: boolean
         repositoryId:
           type: string
+        type:
+          type: string
+      type: object
+    ApiRepositoryListDTO:
+      example:
+        repositories:
+        - auditEnabled: true
+          policyCompliantComponentSelectionEnabled: true
+          format: format
+          repositoryId: repositoryId
+          type: type
+          namespaceConfusionProtectionEnabled: true
+          publicId: publicId
+          quarantineEnabled: true
+        - auditEnabled: true
+          policyCompliantComponentSelectionEnabled: true
+          format: format
+          repositoryId: repositoryId
+          type: type
+          namespaceConfusionProtectionEnabled: true
+          publicId: publicId
+          quarantineEnabled: true
+      properties:
+        repositories:
+          items:
+            $ref: '#/components/schemas/ApiRepositoryDTO'
+          type: array
+      type: object
+    ApiRepositoryManagerDTO:
+      example:
+        productVersion: productVersion
+        instanceId: instanceId
+        name: name
+        id: id
+        productName: productName
+      properties:
+        id:
+          type: string
+        instanceId:
+          type: string
+        name:
+          type: string
+        productName:
+          type: string
+        productVersion:
+          type: string
+      type: object
+    ApiRepositoryManagerListDTO:
+      example:
+        repositoryManagers:
+        - productVersion: productVersion
+          instanceId: instanceId
+          name: name
+          id: id
+          productName: productName
+        - productVersion: productVersion
+          instanceId: instanceId
+          name: name
+          id: id
+          productName: productName
+      properties:
+        repositoryManagers:
+          items:
+            $ref: '#/components/schemas/ApiRepositoryManagerDTO'
+          type: array
       type: object
     ApiRepositoryPathResponseDTO:
       example:
@@ -19205,9 +20157,14 @@ components:
               threatLevel: 0
           stageId: stageId
         repository:
+          auditEnabled: true
+          policyCompliantComponentSelectionEnabled: true
           format: format
           repositoryId: repositoryId
+          type: type
+          namespaceConfusionProtectionEnabled: true
           publicId: publicId
+          quarantineEnabled: true
       properties:
         repository:
           $ref: '#/components/schemas/ApiRepositoryDTO'
@@ -19520,6 +20477,11 @@ components:
           cvssVectorSource: cvssVectorSource
           source: source
           threatCategory: threatCategory
+          analysis:
+            response: response
+            detail: detail
+            justification: justification
+            state: state
           url: url
           status: status
         - cwe: cwe
@@ -19529,6 +20491,11 @@ components:
           cvssVectorSource: cvssVectorSource
           source: source
           threatCategory: threatCategory
+          analysis:
+            response: response
+            detail: detail
+            justification: justification
+            state: state
           url: url
           status: status
       properties:
@@ -19536,6 +20503,22 @@ components:
           items:
             $ref: '#/components/schemas/ApiSecurityIssueDTO'
           type: array
+      type: object
+    ApiSecurityIssueAnalysisDTO:
+      example:
+        response: response
+        detail: detail
+        justification: justification
+        state: state
+      properties:
+        detail:
+          type: string
+        justification:
+          type: string
+        response:
+          type: string
+        state:
+          type: string
       type: object
     ApiSecurityIssueDTO:
       example:
@@ -19546,9 +20529,16 @@ components:
         cvssVectorSource: cvssVectorSource
         source: source
         threatCategory: threatCategory
+        analysis:
+          response: response
+          detail: detail
+          justification: justification
+          state: state
         url: url
         status: status
       properties:
+        analysis:
+          $ref: '#/components/schemas/ApiSecurityIssueAnalysisDTO'
         cvssVector:
           type: string
         cvssVectorSource:
@@ -19887,18 +20877,28 @@ components:
           - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
             stageId: stageId
           repository:
+            auditEnabled: true
+            policyCompliantComponentSelectionEnabled: true
             format: format
             repositoryId: repositoryId
+            type: type
+            namespaceConfusionProtectionEnabled: true
             publicId: publicId
+            quarantineEnabled: true
         - stages:
           - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
             stageId: stageId
           - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
             stageId: stageId
           repository:
+            auditEnabled: true
+            policyCompliantComponentSelectionEnabled: true
             format: format
             repositoryId: repositoryId
+            type: type
+            namespaceConfusionProtectionEnabled: true
             publicId: publicId
+            quarantineEnabled: true
         applications:
         - application:
             contactUserName: contactUserName
@@ -19940,9 +20940,14 @@ components:
         - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
           stageId: stageId
         repository:
+          auditEnabled: true
+          policyCompliantComponentSelectionEnabled: true
           format: format
           repositoryId: repositoryId
+          type: type
+          namespaceConfusionProtectionEnabled: true
           publicId: publicId
+          quarantineEnabled: true
       properties:
         repository:
           $ref: '#/components/schemas/ApiRepositoryDTO'
@@ -19966,18 +20971,28 @@ components:
             - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
               stageId: stageId
             repository:
+              auditEnabled: true
+              policyCompliantComponentSelectionEnabled: true
               format: format
               repositoryId: repositoryId
+              type: type
+              namespaceConfusionProtectionEnabled: true
               publicId: publicId
+              quarantineEnabled: true
           - stages:
             - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
               stageId: stageId
             - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
               stageId: stageId
             repository:
+              auditEnabled: true
+              policyCompliantComponentSelectionEnabled: true
               format: format
               repositoryId: repositoryId
+              type: type
+              namespaceConfusionProtectionEnabled: true
               publicId: publicId
+              quarantineEnabled: true
           applications:
           - application:
               contactUserName: contactUserName
@@ -20066,18 +21081,28 @@ components:
               - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
                 stageId: stageId
               repository:
+                auditEnabled: true
+                policyCompliantComponentSelectionEnabled: true
                 format: format
                 repositoryId: repositoryId
+                type: type
+                namespaceConfusionProtectionEnabled: true
                 publicId: publicId
+                quarantineEnabled: true
             - stages:
               - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
                 stageId: stageId
               - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
                 stageId: stageId
               repository:
+                auditEnabled: true
+                policyCompliantComponentSelectionEnabled: true
                 format: format
                 repositoryId: repositoryId
+                type: type
+                namespaceConfusionProtectionEnabled: true
                 publicId: publicId
+                quarantineEnabled: true
             applications:
             - application:
                 contactUserName: contactUserName
@@ -20131,18 +21156,28 @@ components:
               - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
                 stageId: stageId
               repository:
+                auditEnabled: true
+                policyCompliantComponentSelectionEnabled: true
                 format: format
                 repositoryId: repositoryId
+                type: type
+                namespaceConfusionProtectionEnabled: true
                 publicId: publicId
+                quarantineEnabled: true
             - stages:
               - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
                 stageId: stageId
               - lastEvaluationDate: 2000-01-23T04:56:07.000+00:00
                 stageId: stageId
               repository:
+                auditEnabled: true
+                policyCompliantComponentSelectionEnabled: true
                 format: format
                 repositoryId: repositoryId
+                type: type
+                namespaceConfusionProtectionEnabled: true
                 publicId: publicId
+                quarantineEnabled: true
             applications:
             - application:
                 contactUserName: contactUserName
@@ -20253,6 +21288,7 @@ components:
         policyAction: policyAction
         isError: true
         reportDataUrl: reportDataUrl
+        legacyViolations: 5
         errorMessage: errorMessage
         openPolicyViolations:
           critical: 0
@@ -20276,6 +21312,9 @@ components:
           type: integer
         isError:
           type: boolean
+        legacyViolations:
+          format: int32
+          type: integer
         openPolicyViolations:
           $ref: '#/components/schemas/ApiEvaluationResultCounterDTO'
         policyAction:
@@ -20287,6 +21326,12 @@ components:
         reportPdfUrl:
           type: string
       type: object
+    ApiThirdPartyScanTicketDTO:
+      example:
+        statusUrl: statusUrl
+      properties:
+        statusUrl:
+          type: string
     ApiUserDTO:
       example:
         firstName: firstName
@@ -20543,6 +21588,7 @@ components:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           type: string
@@ -20664,6 +21710,7 @@ components:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           type: string
@@ -20696,6 +21743,19 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationTagsByOwnerDTO'
           type: array
+      type: object
+    AttachmentText:
+      example:
+        encoding: encoding
+        contentType: contentType
+        content: content
+      properties:
+        content:
+          type: string
+        contentType:
+          type: string
+        encoding:
+          type: string
       type: object
     AttributionReportTemplateDTO:
       example:
@@ -21755,6 +22815,8 @@ components:
           - policyName
           - policyThreatCategory
           - policyThreatLevel
+          - parentOrganizationName
+          - parentOrganizationId
           type: string
         searchResultItemDTOS:
           items:
@@ -21816,6 +22878,7 @@ components:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           type: string
@@ -22335,15 +23398,16 @@ components:
           - actionTypeId: actionTypeId
             targetType: targetType
             target: target
-        severePolicyViolationCount: 3
+        severePolicyViolationCount: 2
         affectedComponentCount: 0
         criticalPolicyViolationCount: 5
-        severeComponentCount: 9
+        severeComponentCount: 3
         criticalComponentCount: 1
-        moderateComponentCount: 2
-        totalComponentCount: 2
+        moderateComponentCount: 7
+        totalComponentCount: 4
         grandfatheredPolicyViolationCount: 5
-        moderatePolicyViolationCount: 7
+        legacyViolationCount: 2
+        moderatePolicyViolationCount: 9
       properties:
         affectedComponentCount:
           format: int32
@@ -22359,6 +23423,9 @@ components:
           format: int32
           type: integer
         grandfatheredPolicyViolationCount:
+          format: int32
+          type: integer
+        legacyViolationCount:
           format: int32
           type: integer
         moderateComponentCount:
@@ -22838,9 +23905,11 @@ components:
         componentRecommendationMarkdown: componentRecommendationMarkdown
         severityScores:
         - score: 6.0274563
+          sourceLabel: sourceLabel
           vector: vector
           source: source
         - score: 6.0274563
+          sourceLabel: sourceLabel
           vector: vector
           source: source
         researchType: FAST_TRACK
@@ -22886,6 +23955,7 @@ components:
         - vulnIds
         mainSeverity:
           score: 6.0274563
+          sourceLabel: sourceLabel
           vector: vector
           source: source
       properties:
@@ -22951,6 +24021,7 @@ components:
     SecurityVulnerabilitySeverity:
       example:
         score: 6.0274563
+        sourceLabel: sourceLabel
         vector: vector
         source: source
       properties:
@@ -22958,6 +24029,8 @@ components:
           format: float
           type: number
         source:
+          type: string
+        sourceLabel:
           type: string
         vector:
           type: string
@@ -22990,6 +24063,32 @@ components:
           format: date-time
           type: string
         mostRecentScanId:
+          type: string
+      type: object
+    Swid:
+      example:
+        patch: true
+        tagVersion: 1
+        tagId: tagId
+        name: name
+        text:
+          encoding: encoding
+          contentType: contentType
+          content: content
+        version: version
+      properties:
+        name:
+          type: string
+        patch:
+          type: boolean
+        tagId:
+          type: string
+        tagVersion:
+          format: int32
+          type: integer
+        text:
+          $ref: '#/components/schemas/AttachmentText'
+        version:
           type: string
       type: object
     SystemConfig:
@@ -23038,6 +24137,7 @@ components:
           - application
           - organization
           - repository_container
+          - repository_manager
           - repository
           - global
           type: string
