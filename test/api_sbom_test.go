@@ -36,6 +36,47 @@ func Test_sonatypeiq_SbomAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test SbomAPIService GetImportStatus", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var applicationId string
+		var importRequestId string
+
+		httpRes, err := apiClient.SbomAPI.GetImportStatus(context.Background(), applicationId, importRequestId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SbomAPIService GetListOfSbomsForApplicationId", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var applicationId string
+
+		httpRes, err := apiClient.SbomAPI.GetListOfSbomsForApplicationId(context.Background(), applicationId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SbomAPIService GetSbomComponents", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var applicationId string
+		var sbomVersion string
+
+		httpRes, err := apiClient.SbomAPI.GetSbomComponents(context.Background(), applicationId, sbomVersion).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SbomAPIService GetSbomVersion", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -44,6 +85,30 @@ func Test_sonatypeiq_SbomAPIService(t *testing.T) {
 		var sbomVersion string
 
 		httpRes, err := apiClient.SbomAPI.GetSbomVersion(context.Background(), applicationId, sbomVersion).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SbomAPIService GetSbomVersionListByApplication", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var applicationId string
+
+		httpRes, err := apiClient.SbomAPI.GetSbomVersionListByApplication(context.Background(), applicationId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SbomAPIService ImportSbom", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SbomAPI.ImportSbom(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

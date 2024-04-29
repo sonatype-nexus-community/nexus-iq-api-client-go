@@ -70,7 +70,7 @@ Other parameters are passed through a pointer to a apiCreateSearchIndexAsyncRequ
 
 ## GetExportResults
 
-> GetExportResults(ctx).Query(query).AllComponents(allComponents).Execute()
+> GetExportResults(ctx).Query(query).AllComponents(allComponents).Mode(mode).Execute()
 
 
 
@@ -89,10 +89,11 @@ import (
 func main() {
 	query := "query_example" // string |  (optional)
 	allComponents := true // bool |  (optional) (default to false)
+	mode := "mode_example" // string |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SearchAPI.GetExportResults(context.Background()).Query(query).AllComponents(allComponents).Execute()
+	r, err := apiClient.SearchAPI.GetExportResults(context.Background()).Query(query).AllComponents(allComponents).Mode(mode).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.GetExportResults``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -113,6 +114,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **string** |  | 
  **allComponents** | **bool** |  | [default to false]
+ **mode** | **string** |  | 
 
 ### Return type
 
@@ -204,7 +206,7 @@ Name | Type | Description  | Notes
 
 ## SearchIndex
 
-> SearchResultDTO SearchIndex(ctx).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Execute()
+> SearchResultDTO SearchIndex(ctx).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Mode(mode).Execute()
 
 
 
@@ -225,10 +227,11 @@ func main() {
 	pageSize := int32(56) // int32 |  (optional) (default to 10)
 	page := int32(56) // int32 |  (optional)
 	allComponents := true // bool |  (optional) (default to false)
+	mode := "mode_example" // string |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.SearchAPI.SearchIndex(context.Background()).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Execute()
+	resp, r, err := apiClient.SearchAPI.SearchIndex(context.Background()).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Mode(mode).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SearchAPI.SearchIndex``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -253,6 +256,7 @@ Name | Type | Description  | Notes
  **pageSize** | **int32** |  | [default to 10]
  **page** | **int32** |  | 
  **allComponents** | **bool** |  | [default to false]
+ **mode** | **string** |  | 
 
 ### Return type
 

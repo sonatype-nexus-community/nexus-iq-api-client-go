@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**EvaluateComponents1**](EvaluationAPI.md#EvaluateComponents1) | **Post** /api/v2/evaluation/applications/{applicationId} | 
+[**EvaluateComponents**](EvaluationAPI.md#EvaluateComponents) | **Post** /api/v2/evaluation/applications/{applicationId} | 
 [**EvaluateSourceControl**](EvaluationAPI.md#EvaluateSourceControl) | **Post** /api/v2/evaluation/applications/{applicationId}/sourceControlEvaluation | 
 [**GetApplicationEvaluationStatus**](EvaluationAPI.md#GetApplicationEvaluationStatus) | **Get** /api/v2/evaluation/applications/{applicationId}/status/{statusId} | 
 [**GetComponentEvaluation**](EvaluationAPI.md#GetComponentEvaluation) | **Get** /api/v2/evaluation/applications/{applicationId}/results/{resultId} | 
@@ -12,9 +12,9 @@ Method | HTTP request | Description
 
 
 
-## EvaluateComponents1
+## EvaluateComponents
 
-> ApiComponentEvaluationTicketDTOV2 EvaluateComponents1(ctx, applicationId).ApiComponentEvaluationRequestDTOV2(apiComponentEvaluationRequestDTOV2).Execute()
+> ApiComponentEvaluationTicketDTOV2 EvaluateComponents(ctx, applicationId).ApiComponentEvaluationRequestDTOV2(apiComponentEvaluationRequestDTOV2).Execute()
 
 
 
@@ -36,13 +36,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.EvaluationAPI.EvaluateComponents1(context.Background(), applicationId).ApiComponentEvaluationRequestDTOV2(apiComponentEvaluationRequestDTOV2).Execute()
+	resp, r, err := apiClient.EvaluationAPI.EvaluateComponents(context.Background(), applicationId).ApiComponentEvaluationRequestDTOV2(apiComponentEvaluationRequestDTOV2).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EvaluationAPI.EvaluateComponents1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `EvaluationAPI.EvaluateComponents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EvaluateComponents1`: ApiComponentEvaluationTicketDTOV2
-	fmt.Fprintf(os.Stdout, "Response from `EvaluationAPI.EvaluateComponents1`: %v\n", resp)
+	// response from `EvaluateComponents`: ApiComponentEvaluationTicketDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `EvaluationAPI.EvaluateComponents`: %v\n", resp)
 }
 ```
 
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiEvaluateComponents1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiEvaluateComponentsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

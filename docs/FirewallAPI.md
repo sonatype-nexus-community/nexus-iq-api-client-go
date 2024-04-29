@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**AddRepositoryManager**](FirewallAPI.md#AddRepositoryManager) | **Post** /api/v2/firewall/repositoryManagers | 
 [**ConfigureRepositories**](FirewallAPI.md#ConfigureRepositories) | **Post** /api/v2/firewall/repositories/configuration/{repositoryManagerId} | 
 [**DeleteRepositoryManager**](FirewallAPI.md#DeleteRepositoryManager) | **Delete** /api/v2/firewall/repositoryManagers/{repositoryManagerId} | 
-[**EvaluateComponents**](FirewallAPI.md#EvaluateComponents) | **Post** /api/v2/firewall/components/{repositoryManagerId}/{repositoryId}/evaluate | 
+[**EvaluateComponents1**](FirewallAPI.md#EvaluateComponents1) | **Post** /api/v2/firewall/components/{repositoryManagerId}/{repositoryId}/evaluate | 
 [**GetConfiguredRepositories**](FirewallAPI.md#GetConfiguredRepositories) | **Get** /api/v2/firewall/repositories/configuration/{repositoryManagerId} | 
 [**GetFirewallAutoUnquarantineConfig**](FirewallAPI.md#GetFirewallAutoUnquarantineConfig) | **Get** /api/v2/firewall/releaseQuarantine/configuration | 
 [**GetFirewallMetrics**](FirewallAPI.md#GetFirewallMetrics) | **Get** /api/v2/firewall/metrics/embedded | 
@@ -222,9 +222,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## EvaluateComponents
+## EvaluateComponents1
 
-> ApiRepositoryComponentEvaluationResultList EvaluateComponents(ctx, repositoryManagerId, repositoryId).ApiRepositoryComponentEvaluationRequestList(apiRepositoryComponentEvaluationRequestList).Execute()
+> ApiRepositoryComponentEvaluationResultList EvaluateComponents1(ctx, repositoryManagerId, repositoryId).ApiRepositoryComponentEvaluationRequestList(apiRepositoryComponentEvaluationRequestList).Execute()
 
 
 
@@ -247,13 +247,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirewallAPI.EvaluateComponents(context.Background(), repositoryManagerId, repositoryId).ApiRepositoryComponentEvaluationRequestList(apiRepositoryComponentEvaluationRequestList).Execute()
+	resp, r, err := apiClient.FirewallAPI.EvaluateComponents1(context.Background(), repositoryManagerId, repositoryId).ApiRepositoryComponentEvaluationRequestList(apiRepositoryComponentEvaluationRequestList).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.EvaluateComponents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.EvaluateComponents1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EvaluateComponents`: ApiRepositoryComponentEvaluationResultList
-	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.EvaluateComponents`: %v\n", resp)
+	// response from `EvaluateComponents1`: ApiRepositoryComponentEvaluationResultList
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.EvaluateComponents1`: %v\n", resp)
 }
 ```
 
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiEvaluateComponentsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiEvaluateComponents1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

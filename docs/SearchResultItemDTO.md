@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ApplicationId** | Pointer to **string** |  | [optional] 
 **ApplicationName** | Pointer to **string** |  | [optional] 
 **ApplicationPublicId** | Pointer to **string** |  | [optional] 
+**ApplicationVersion** | Pointer to **string** |  | [optional] 
 **ComponentHash** | Pointer to **string** |  | [optional] 
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
 **ComponentLabelColor** | Pointer to **string** |  | [optional] 
@@ -28,6 +29,7 @@ Name | Type | Description | Notes
 **PolicyThreatLevel** | Pointer to **int32** |  | [optional] 
 **ReportId** | Pointer to **string** |  | [optional] 
 **ResultIndex** | Pointer to **int32** |  | [optional] 
+**SbomSpecification** | Pointer to **string** |  | [optional] 
 **VulnerabilityDescription** | Pointer to **string** |  | [optional] 
 **VulnerabilityId** | Pointer to **string** |  | [optional] 
 **VulnerabilityStatus** | Pointer to **string** |  | [optional] 
@@ -225,6 +227,31 @@ SetApplicationPublicId sets ApplicationPublicId field to given value.
 `func (o *SearchResultItemDTO) HasApplicationPublicId() bool`
 
 HasApplicationPublicId returns a boolean if a field has been set.
+
+### GetApplicationVersion
+
+`func (o *SearchResultItemDTO) GetApplicationVersion() string`
+
+GetApplicationVersion returns the ApplicationVersion field if non-nil, zero value otherwise.
+
+### GetApplicationVersionOk
+
+`func (o *SearchResultItemDTO) GetApplicationVersionOk() (*string, bool)`
+
+GetApplicationVersionOk returns a tuple with the ApplicationVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationVersion
+
+`func (o *SearchResultItemDTO) SetApplicationVersion(v string)`
+
+SetApplicationVersion sets ApplicationVersion field to given value.
+
+### HasApplicationVersion
+
+`func (o *SearchResultItemDTO) HasApplicationVersion() bool`
+
+HasApplicationVersion returns a boolean if a field has been set.
 
 ### GetComponentHash
 
@@ -650,6 +677,31 @@ SetResultIndex sets ResultIndex field to given value.
 `func (o *SearchResultItemDTO) HasResultIndex() bool`
 
 HasResultIndex returns a boolean if a field has been set.
+
+### GetSbomSpecification
+
+`func (o *SearchResultItemDTO) GetSbomSpecification() string`
+
+GetSbomSpecification returns the SbomSpecification field if non-nil, zero value otherwise.
+
+### GetSbomSpecificationOk
+
+`func (o *SearchResultItemDTO) GetSbomSpecificationOk() (*string, bool)`
+
+GetSbomSpecificationOk returns a tuple with the SbomSpecification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSbomSpecification
+
+`func (o *SearchResultItemDTO) SetSbomSpecification(v string)`
+
+SetSbomSpecification sets SbomSpecification field to given value.
+
+### HasSbomSpecification
+
+`func (o *SearchResultItemDTO) HasSbomSpecification() bool`
+
+HasSbomSpecification returns a boolean if a field has been set.
 
 ### GetVulnerabilityDescription
 

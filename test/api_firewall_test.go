@@ -60,14 +60,14 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test FirewallAPIService EvaluateComponents", func(t *testing.T) {
+	t.Run("Test FirewallAPIService EvaluateComponents1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var repositoryManagerId string
 		var repositoryId string
 
-		resp, httpRes, err := apiClient.FirewallAPI.EvaluateComponents(context.Background(), repositoryManagerId, repositoryId).Execute()
+		resp, httpRes, err := apiClient.FirewallAPI.EvaluateComponents1(context.Background(), repositoryManagerId, repositoryId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

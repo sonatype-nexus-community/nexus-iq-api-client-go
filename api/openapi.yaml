@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.174.0-01
+  version: 1.175.0-01
 servers:
 - url: /
 security:
@@ -9,6 +9,7 @@ security:
 tags:
 - name: Application Categories
 - name: Applications
+- name: Audit Logs
 - name: Call Flow Analysis
 - name: Claim
 - name: Components
@@ -608,6 +609,31 @@ paths:
           description: default response
       tags:
       - Applications
+  /api/v2/auditLogs:
+    get:
+      operationId: getAuditLogs
+      parameters:
+      - explode: true
+        in: query
+        name: startUtcDate
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: endUtcDate
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          content:
+            text/plain: {}
+          description: default response
+      tags:
+      - Audit Logs
   /api/v2/callFlowAnalysis/configuration/{ownerType}/{ownerId}:
     delete:
       operationId: deleteCallFlowAnalysisConfig
@@ -705,6 +731,41 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiCallFlowAnalysisConfigDTO'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiCallFlowAnalysisConfigDTO'
+          description: default response
+      tags:
+      - Call Flow Analysis
+  /api/v2/callFlowAnalysis/configuration/{ownerType}/{ownerId}/publicId:
+    get:
+      operationId: getCallFlowAnalysisConfigByPublicId
+      parameters:
+      - explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         default:
           content:
@@ -1933,7 +1994,7 @@ paths:
       - Endpoints
   /api/v2/evaluation/applications/{applicationId}:
     post:
-      operationId: evaluateComponents_1
+      operationId: evaluateComponents
       parameters:
       - explode: false
         in: path
@@ -2181,7 +2242,7 @@ paths:
       - Firewall
   /api/v2/firewall/components/{repositoryManagerId}/{repositoryId}/evaluate:
     post:
-      operationId: evaluateComponents
+      operationId: evaluateComponents_1
       parameters:
       - explode: false
         in: path
@@ -4249,6 +4310,128 @@ paths:
           description: default response
       tags:
       - Roles
+  /api/v2/sbom/application/{applicationId}:
+    get:
+      description: Gets a paginated list of SBOMs for an application
+      operationId: getListOfSbomsForApplicationId
+      parameters:
+      - description: The internal id of the application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Sort results by import date. Allowed values [asc|desc]. default\
+          \ = asc"
+        explode: true
+        in: query
+        name: sortByDate
+        required: false
+        schema:
+          default: asc
+          type: string
+        style: form
+      - description: Number of items to return by page. default = 10
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - description: Current page number. default = 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: list of the sboms
+      summary: Gets a paginated list of SBOMs for an application
+      tags:
+      - sbom
+  /api/v2/sbom/import:
+    post:
+      description: Imports a new sbom version to an existing application
+      operationId: importSbom
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/importSbom_request'
+      responses:
+        "202":
+          content:
+            application/json: {}
+          description: Import successful. URL to check the status of the import returned
+        "400":
+          description: Invalid/Unsupported data provided for sbom import
+      summary: Import a new sbom version
+      tags:
+      - sbom
+  /api/v2/sbom/sbomVersions/{applicationId}:
+    get:
+      description: Gets a list of sbom versions by application id
+      operationId: getSbomVersionListByApplication
+      parameters:
+      - description: The internal id of the application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: list of the sbom versions by application id
+      summary: Gets a list of sbom versions by application id
+      tags:
+      - sbom
+  /api/v2/sbom/{applicationId}/status/{importRequestId}:
+    get:
+      description: Gets status of a sbom import.
+      operationId: getImportStatus
+      parameters:
+      - description: The internal id of the application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The id of the import request
+        explode: false
+        in: path
+        name: importRequestId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Sbom import completed successfully.
+        "404":
+          description: Sbom import still in progress.
+      summary: Get sbom import status
+      tags:
+      - sbom
   /api/v2/sbom/{applicationId}/version/{sbomVersion}:
     delete:
       description: Deletes a specific sbom version including it's original contents
@@ -4291,7 +4474,7 @@ paths:
         schema:
           type: string
         style: simple
-      - description: URL Encoded version value of the sbom to be deleted
+      - description: URL Encoded version value of the sbom
         explode: false
         in: path
         name: sbomVersion
@@ -4299,11 +4482,11 @@ paths:
         schema:
           type: string
         style: simple
-      - description: "The form of the sbom version. Allowed values [original|current].\
+      - description: "The state of the sbom version. Allowed values [original|current].\
           \ default = current"
         explode: true
         in: query
-        name: form
+        name: state
         required: false
         schema:
           default: current
@@ -4330,6 +4513,36 @@ paths:
         "404":
           description: Supplied sbom version not found
       summary: Gets a sbom version
+      tags:
+      - sbom
+  /api/v2/sbom/{applicationId}/version/{sbomVersion}/components:
+    get:
+      description: Lists the components in a specific sbom version with data about
+        vulnerabilities and licenses
+      operationId: getSbomComponents
+      parameters:
+      - description: The internal id of the application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: URL Encoded version value of the sbom to query its components
+        explode: false
+        in: path
+        name: sbomVersion
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: List of components in the sbom
+      summary: Gets the components found in a specific sbom version
       tags:
       - sbom
   /api/v2/scan/applications/ideUser/overview:
@@ -4459,6 +4672,13 @@ paths:
           default: false
           type: boolean
         style: form
+      - explode: true
+        in: query
+        name: mode
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         default:
           content:
@@ -4486,6 +4706,13 @@ paths:
         schema:
           default: false
           type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: mode
+        required: false
+        schema:
+          type: string
         style: form
       responses:
         default:
@@ -20334,6 +20561,19 @@ components:
         validateResponseSignature:
           type: boolean
       type: object
+    ApiSbomStatusDTO:
+      properties:
+        applicationId:
+          type: string
+        downloadUrl:
+          type: string
+        errorMessage:
+          type: string
+        isError:
+          type: boolean
+        version:
+          type: string
+      type: object
     ApiSearchCriteriaDTOV2:
       example:
         packageUrl: packageUrl
@@ -22728,11 +22968,13 @@ components:
           organizationId: organizationId
           vulnerabilityId: vulnerabilityId
           componentLabelDescription: componentLabelDescription
+          sbomSpecification: sbomSpecification
           componentLabelName: componentLabelName
           applicationCategoryId: applicationCategoryId
           componentHash: componentHash
           componentName: componentName
           applicationName: applicationName
+          applicationVersion: applicationVersion
           vulnerabilityStatus: vulnerabilityStatus
           organizationName: organizationName
           reportId: reportId
@@ -22758,11 +23000,13 @@ components:
           organizationId: organizationId
           vulnerabilityId: vulnerabilityId
           componentLabelDescription: componentLabelDescription
+          sbomSpecification: sbomSpecification
           componentLabelName: componentLabelName
           applicationCategoryId: applicationCategoryId
           componentHash: componentHash
           componentName: componentName
           applicationName: applicationName
+          applicationVersion: applicationVersion
           vulnerabilityStatus: vulnerabilityStatus
           organizationName: organizationName
           reportId: reportId
@@ -22794,6 +23038,7 @@ components:
           - applicationName
           - applicationPublicId
           - policyEvaluationStage
+          - applicationVersion
           - reportId
           - componentHash
           - componentFormat
@@ -22817,6 +23062,7 @@ components:
           - policyThreatLevel
           - parentOrganizationName
           - parentOrganizationId
+          - sbomSpecification
           type: string
         searchResultItemDTOS:
           items:
@@ -22900,6 +23146,13 @@ components:
           enum:
           - enabled
           - disabled
+          type: string
+      type: object
+    License:
+      properties:
+        licenseId:
+          type: string
+        licenseName:
           type: string
       type: object
     LicenseObligationDTO:
@@ -23631,6 +23884,37 @@ components:
         versionRange:
           type: string
       type: object
+    SbomComponentDTO:
+      properties:
+        componentIdentifier:
+          $ref: '#/components/schemas/ComponentIdentifier'
+        displayName:
+          type: string
+        hash:
+          type: string
+        licenses:
+          items:
+            $ref: '#/components/schemas/License'
+          type: array
+          uniqueItems: true
+        packageUrl:
+          type: string
+        vulnerabilitySeverityCriticalCount:
+          format: int32
+          type: integer
+        vulnerabilitySeverityHighCount:
+          format: int32
+          type: integer
+        vulnerabilitySeverityLowCount:
+          format: int32
+          type: integer
+        vulnerabilitySeverityMediumCount:
+          format: int32
+          type: integer
+        vulnerabilitySeverityNoneCount:
+          format: int32
+          type: integer
+      type: object
     SearchResultDTO:
       example:
         isExactTotalNumberOfHits: true
@@ -23651,11 +23935,13 @@ components:
             organizationId: organizationId
             vulnerabilityId: vulnerabilityId
             componentLabelDescription: componentLabelDescription
+            sbomSpecification: sbomSpecification
             componentLabelName: componentLabelName
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
             applicationName: applicationName
+            applicationVersion: applicationVersion
             vulnerabilityStatus: vulnerabilityStatus
             organizationName: organizationName
             reportId: reportId
@@ -23681,11 +23967,13 @@ components:
             organizationId: organizationId
             vulnerabilityId: vulnerabilityId
             componentLabelDescription: componentLabelDescription
+            sbomSpecification: sbomSpecification
             componentLabelName: componentLabelName
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
             applicationName: applicationName
+            applicationVersion: applicationVersion
             vulnerabilityStatus: vulnerabilityStatus
             organizationName: organizationName
             reportId: reportId
@@ -23715,11 +24003,13 @@ components:
             organizationId: organizationId
             vulnerabilityId: vulnerabilityId
             componentLabelDescription: componentLabelDescription
+            sbomSpecification: sbomSpecification
             componentLabelName: componentLabelName
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
             applicationName: applicationName
+            applicationVersion: applicationVersion
             vulnerabilityStatus: vulnerabilityStatus
             organizationName: organizationName
             reportId: reportId
@@ -23745,11 +24035,13 @@ components:
             organizationId: organizationId
             vulnerabilityId: vulnerabilityId
             componentLabelDescription: componentLabelDescription
+            sbomSpecification: sbomSpecification
             componentLabelName: componentLabelName
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
             applicationName: applicationName
+            applicationVersion: applicationVersion
             vulnerabilityStatus: vulnerabilityStatus
             organizationName: organizationName
             reportId: reportId
@@ -23796,11 +24088,13 @@ components:
         organizationId: organizationId
         vulnerabilityId: vulnerabilityId
         componentLabelDescription: componentLabelDescription
+        sbomSpecification: sbomSpecification
         componentLabelName: componentLabelName
         applicationCategoryId: applicationCategoryId
         componentHash: componentHash
         componentName: componentName
         applicationName: applicationName
+        applicationVersion: applicationVersion
         vulnerabilityStatus: vulnerabilityStatus
         organizationName: organizationName
         reportId: reportId
@@ -23832,6 +24126,8 @@ components:
         applicationName:
           type: string
         applicationPublicId:
+          type: string
+        applicationVersion:
           type: string
         componentHash:
           type: string
@@ -23869,6 +24165,8 @@ components:
         resultIndex:
           format: int32
           type: integer
+        sbomSpecification:
+          type: string
         vulnerabilityDescription:
           type: string
         vulnerabilityId:
@@ -24142,6 +24440,43 @@ components:
           - global
           type: string
       type: object
+    ThirdPartySbomMetadataSummaryDTO:
+      properties:
+        applicationVersion:
+          type: string
+        critical:
+          format: int32
+          type: integer
+        high:
+          format: int32
+          type: integer
+        importDate:
+          format: date-time
+          type: string
+        low:
+          format: int32
+          type: integer
+        medium:
+          format: int32
+          type: integer
+        none:
+          format: int32
+          type: integer
+        spec:
+          type: string
+        specVersion:
+          type: string
+      type: object
+    ThirdPartySbomMetadataSummaryListDTO:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/ThirdPartySbomMetadataSummaryDTO'
+          type: array
+        totalResultsCount:
+          format: int32
+          type: integer
+      type: object
     TriggerReference:
       example:
         type: SECURITY_VULNERABILITY_REFID
@@ -24173,6 +24508,16 @@ components:
           type: string
         shortName:
           type: string
+      type: object
+    importSbom_request:
+      properties:
+        applicationId:
+          description: The internal id of the application
+          type: string
+        file:
+          $ref: '#/components/schemas/FormDataContentDisposition'
+      required:
+      - applicationId
       type: object
     BodyPart_mediaType:
       example:

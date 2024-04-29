@@ -51,6 +51,21 @@ func Test_sonatypeiq_CallFlowAnalysisAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test CallFlowAnalysisAPIService GetCallFlowAnalysisConfigByPublicId", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var ownerId string
+
+		resp, httpRes, err := apiClient.CallFlowAnalysisAPI.GetCallFlowAnalysisConfigByPublicId(context.Background(), ownerType, ownerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CallFlowAnalysisAPIService UpsertCallFlowAnalysisConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
