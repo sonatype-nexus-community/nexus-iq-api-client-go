@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApplicationId** | **string** | The internal id of the application | 
-**File** | Pointer to [**FormDataContentDisposition**](FormDataContentDisposition.md) |  | [optional] 
+**File** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetApplicationId sets ApplicationId field to given value.
 
 ### GetFile
 
-`func (o *ImportSbomRequest) GetFile() FormDataContentDisposition`
+`func (o *ImportSbomRequest) GetFile() map[string]interface{}`
 
 GetFile returns the File field if non-nil, zero value otherwise.
 
 ### GetFileOk
 
-`func (o *ImportSbomRequest) GetFileOk() (*FormDataContentDisposition, bool)`
+`func (o *ImportSbomRequest) GetFileOk() (*map[string]interface{}, bool)`
 
 GetFileOk returns a tuple with the File field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFile
 
-`func (o *ImportSbomRequest) SetFile(v FormDataContentDisposition)`
+`func (o *ImportSbomRequest) SetFile(v map[string]interface{})`
 
 SetFile sets File field to given value.
 

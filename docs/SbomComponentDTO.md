@@ -8,7 +8,9 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
 **Licenses** | Pointer to [**[]License**](License.md) |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
 **PackageUrl** | Pointer to **string** |  | [optional] 
+**Version** | Pointer to **string** |  | [optional] 
 **VulnerabilitySeverityCriticalCount** | Pointer to **int32** |  | [optional] 
 **VulnerabilitySeverityHighCount** | Pointer to **int32** |  | [optional] 
 **VulnerabilitySeverityLowCount** | Pointer to **int32** |  | [optional] 
@@ -134,6 +136,31 @@ SetLicenses sets Licenses field to given value.
 
 HasLicenses returns a boolean if a field has been set.
 
+### GetName
+
+`func (o *SbomComponentDTO) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *SbomComponentDTO) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *SbomComponentDTO) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *SbomComponentDTO) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
 ### GetPackageUrl
 
 `func (o *SbomComponentDTO) GetPackageUrl() string`
@@ -158,6 +185,31 @@ SetPackageUrl sets PackageUrl field to given value.
 `func (o *SbomComponentDTO) HasPackageUrl() bool`
 
 HasPackageUrl returns a boolean if a field has been set.
+
+### GetVersion
+
+`func (o *SbomComponentDTO) GetVersion() string`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *SbomComponentDTO) GetVersionOk() (*string, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *SbomComponentDTO) SetVersion(v string)`
+
+SetVersion sets Version field to given value.
+
+### HasVersion
+
+`func (o *SbomComponentDTO) HasVersion() bool`
+
+HasVersion returns a boolean if a field has been set.
 
 ### GetVulnerabilitySeverityCriticalCount
 

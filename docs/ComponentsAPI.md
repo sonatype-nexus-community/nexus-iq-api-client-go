@@ -93,6 +93,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -106,7 +108,7 @@ import (
 )
 
 func main() {
-	apiComponentDetailsRequestDTOV2 := *sonatypeiq.NewApiComponentDetailsRequestDTOV2() // ApiComponentDetailsRequestDTOV2 |  (optional)
+	apiComponentDetailsRequestDTOV2 := *sonatypeiq.NewApiComponentDetailsRequestDTOV2() // ApiComponentDetailsRequestDTOV2 | You can retrieve component data in any one of the 3 ways via: 1. Component identifier 2. Package URL 3. Hash
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -131,7 +133,7 @@ Other parameters are passed through a pointer to a apiGetComponentDetailsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiComponentDetailsRequestDTOV2** | [**ApiComponentDetailsRequestDTOV2**](ApiComponentDetailsRequestDTOV2.md) |  | 
+ **apiComponentDetailsRequestDTOV2** | [**ApiComponentDetailsRequestDTOV2**](ApiComponentDetailsRequestDTOV2.md) | You can retrieve component data in any one of the 3 ways via: 1. Component identifier 2. Package URL 3. Hash | 
 
 ### Return type
 

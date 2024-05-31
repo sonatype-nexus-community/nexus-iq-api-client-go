@@ -1,7 +1,7 @@
 /*
 Sonatype Lifecycle Public REST API
 
-Testing EvaluationAPIService
+Testing PolicyEvaluationAPIService
 
 */
 
@@ -17,18 +17,18 @@ import (
 	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
-func Test_sonatypeiq_EvaluationAPIService(t *testing.T) {
+func Test_sonatypeiq_PolicyEvaluationAPIService(t *testing.T) {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test EvaluationAPIService EvaluateComponents", func(t *testing.T) {
+	t.Run("Test PolicyEvaluationAPIService EvaluateComponents", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 
-		resp, httpRes, err := apiClient.EvaluationAPI.EvaluateComponents(context.Background(), applicationId).Execute()
+		resp, httpRes, err := apiClient.PolicyEvaluationAPI.EvaluateComponents(context.Background(), applicationId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,13 +36,13 @@ func Test_sonatypeiq_EvaluationAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test EvaluationAPIService EvaluateSourceControl", func(t *testing.T) {
+	t.Run("Test PolicyEvaluationAPIService EvaluateSourceControl", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 
-		resp, httpRes, err := apiClient.EvaluationAPI.EvaluateSourceControl(context.Background(), applicationId).Execute()
+		resp, httpRes, err := apiClient.PolicyEvaluationAPI.EvaluateSourceControl(context.Background(), applicationId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -50,14 +50,14 @@ func Test_sonatypeiq_EvaluationAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test EvaluationAPIService GetApplicationEvaluationStatus", func(t *testing.T) {
+	t.Run("Test PolicyEvaluationAPIService GetApplicationEvaluationStatus", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var statusId string
 
-		resp, httpRes, err := apiClient.EvaluationAPI.GetApplicationEvaluationStatus(context.Background(), applicationId, statusId).Execute()
+		resp, httpRes, err := apiClient.PolicyEvaluationAPI.GetApplicationEvaluationStatus(context.Background(), applicationId, statusId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -65,14 +65,14 @@ func Test_sonatypeiq_EvaluationAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test EvaluationAPIService GetComponentEvaluation", func(t *testing.T) {
+	t.Run("Test PolicyEvaluationAPIService GetComponentEvaluation", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var resultId string
 
-		resp, httpRes, err := apiClient.EvaluationAPI.GetComponentEvaluation(context.Background(), applicationId, resultId).Execute()
+		resp, httpRes, err := apiClient.PolicyEvaluationAPI.GetComponentEvaluation(context.Background(), applicationId, resultId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -80,13 +80,13 @@ func Test_sonatypeiq_EvaluationAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test EvaluationAPIService PromoteScan", func(t *testing.T) {
+	t.Run("Test PolicyEvaluationAPIService PromoteScan", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 
-		resp, httpRes, err := apiClient.EvaluationAPI.PromoteScan(context.Background(), applicationId).Execute()
+		resp, httpRes, err := apiClient.PolicyEvaluationAPI.PromoteScan(context.Background(), applicationId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

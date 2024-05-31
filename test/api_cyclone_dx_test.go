@@ -1,7 +1,7 @@
 /*
 Sonatype Lifecycle Public REST API
 
-Testing CycloneDxAPIService
+Testing CycloneDXAPIService
 
 */
 
@@ -17,26 +17,12 @@ import (
 	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
-func Test_sonatypeiq_CycloneDxAPIService(t *testing.T) {
+func Test_sonatypeiq_CycloneDXAPIService(t *testing.T) {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test CycloneDxAPIService GetByReportId", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var applicationId string
-		var reportId string
-
-		httpRes, err := apiClient.CycloneDxAPI.GetByReportId(context.Background(), applicationId, reportId).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test CycloneDxAPIService GetByReportId1", func(t *testing.T) {
+	t.Run("Test CycloneDXAPIService GetByReportId", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -44,28 +30,14 @@ func Test_sonatypeiq_CycloneDxAPIService(t *testing.T) {
 		var reportId string
 		var cdxVersion string
 
-		httpRes, err := apiClient.CycloneDxAPI.GetByReportId1(context.Background(), applicationId, reportId, cdxVersion).Execute()
+		httpRes, err := apiClient.CycloneDXAPI.GetByReportId(context.Background(), applicationId, reportId, cdxVersion).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test CycloneDxAPIService GetLatest", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var applicationId string
-		var stageId string
-
-		httpRes, err := apiClient.CycloneDxAPI.GetLatest(context.Background(), applicationId, stageId).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test CycloneDxAPIService GetLatest1", func(t *testing.T) {
+	t.Run("Test CycloneDXAPIService GetLatest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -73,7 +45,7 @@ func Test_sonatypeiq_CycloneDxAPIService(t *testing.T) {
 		var stageId string
 		var cdxVersion string
 
-		httpRes, err := apiClient.CycloneDxAPI.GetLatest1(context.Background(), applicationId, stageId, cdxVersion).Execute()
+		httpRes, err := apiClient.CycloneDXAPI.GetLatest(context.Background(), applicationId, stageId, cdxVersion).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
