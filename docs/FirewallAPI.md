@@ -566,7 +566,7 @@ func main() {
 	policyId := []string{"Inner_example"} // []string |  (optional)
 	componentName := "componentName_example" // string |  (optional)
 	sortBy := "sortBy_example" // string |  (optional)
-	asc := true // bool |  (optional) (default to true)
+	asc := true // bool |  (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -594,7 +594,7 @@ Name | Type | Description  | Notes
  **policyId** | **[]string** |  | 
  **componentName** | **string** |  | 
  **sortBy** | **string** |  | 
- **asc** | **bool** |  | [default to true]
+ **asc** | **bool** |  | [default to false]
 
 ### Return type
 

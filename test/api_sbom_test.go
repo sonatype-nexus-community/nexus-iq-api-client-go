@@ -36,14 +36,15 @@ func Test_sonatypeiq_SbomAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SbomAPIService GetApplicationsHistoryMetric", func(t *testing.T) {
+	t.Run("Test SbomAPIService GetActiveSbomVersionListByApplication", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.SbomAPI.GetApplicationsHistoryMetric(context.Background()).Execute()
+		var applicationId string
+
+		httpRes, err := apiClient.SbomAPI.GetActiveSbomVersionListByApplication(context.Background(), applicationId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -103,24 +104,26 @@ func Test_sonatypeiq_SbomAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SbomAPIService GetSbomVersionListByApplication", func(t *testing.T) {
+	t.Run("Test SbomAPIService ImportSbom", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var applicationId string
-
-		httpRes, err := apiClient.SbomAPI.GetSbomVersionListByApplication(context.Background(), applicationId).Execute()
+		httpRes, err := apiClient.SbomAPI.ImportSbom(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService ImportSbom", func(t *testing.T) {
+	t.Run("Test SbomAPIService SaveVulnerabilityAnalysis", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.SbomAPI.ImportSbom(context.Background()).Execute()
+		var applicationId string
+		var version string
+		var refId string
+
+		httpRes, err := apiClient.SbomAPI.SaveVulnerabilityAnalysis(context.Background(), applicationId, version, refId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

@@ -22,11 +22,33 @@ func Test_sonatypeiq_SbomDashboardAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test SbomDashboardAPIService GetApplicationsHistoryMetric", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SbomDashboardAPI.GetApplicationsHistoryMetric(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SbomDashboardAPIService GetSbomsAnalyzedMetrics", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		httpRes, err := apiClient.SbomDashboardAPI.GetSbomsAnalyzedMetrics(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SbomDashboardAPIService GetVulnerabilitiesByThreatLevel", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SbomDashboardAPI.GetVulnerabilitiesByThreatLevel(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

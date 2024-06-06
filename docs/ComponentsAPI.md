@@ -18,6 +18,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -31,10 +33,10 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
-	componentHash := "componentHash_example" // string | 
-	labelName := "labelName_example" // string | 
+	ownerType := "ownerType_example" // string | Possible values: application or organization
+	internalOwnerId := "internalOwnerId_example" // string | Possible values : applicationId or organizationId
+	componentHash := "componentHash_example" // string | Enter the SHA1 hash of the component.
+	labelName := "labelName_example" // string | Enter the label name to un-assign from this component.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -52,10 +54,10 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
-**componentHash** | **string** |  | 
-**labelName** | **string** |  | 
+**ownerType** | **string** | Possible values: application or organization | 
+**internalOwnerId** | **string** | Possible values : applicationId or organizationId | 
+**componentHash** | **string** | Enter the SHA1 hash of the component. | 
+**labelName** | **string** | Enter the label name to un-assign from this component. | 
 
 ### Other Parameters
 
@@ -80,7 +82,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -159,6 +161,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -172,7 +176,7 @@ import (
 )
 
 func main() {
-	apiComponentOrPurlIdentifierDTOV2 := *sonatypeiq.NewApiComponentOrPurlIdentifierDTOV2() // ApiComponentOrPurlIdentifierDTOV2 |  (optional)
+	apiComponentOrPurlIdentifierDTOV2 := *sonatypeiq.NewApiComponentOrPurlIdentifierDTOV2() // ApiComponentOrPurlIdentifierDTOV2 | Possible values: Component identifier or packageURL (pURL) identifier in the correct format. Use a-name for JavaScript components. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -197,7 +201,7 @@ Other parameters are passed through a pointer to a apiGetComponentVersionsReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiComponentOrPurlIdentifierDTOV2** | [**ApiComponentOrPurlIdentifierDTOV2**](ApiComponentOrPurlIdentifierDTOV2.md) |  | 
+ **apiComponentOrPurlIdentifierDTOV2** | [**ApiComponentOrPurlIdentifierDTOV2**](ApiComponentOrPurlIdentifierDTOV2.md) | Possible values: Component identifier or packageURL (pURL) identifier in the correct format. Use a-name for JavaScript components. | 
 
 ### Return type
 
@@ -219,7 +223,9 @@ Name | Type | Description  | Notes
 
 ## GetSuggestedRemediationForComponent
 
-> ApiComponentRemediationDTO GetSuggestedRemediationForComponent(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+> GetSuggestedRemediationForComponent(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+
+
 
 
 
@@ -236,22 +242,20 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	ownerId := "ownerId_example" // string | 
-	stageId := "stageId_example" // string |  (optional)
-	identificationSource := "identificationSource_example" // string |  (optional)
-	scanId := "scanId_example" // string |  (optional)
+	ownerType := "ownerType_example" // string | Possible values: application, organization, repository. 
+	ownerId := "ownerId_example" // string | Possible values: applicationId, organizationId or repositoryId.
+	stageId := "stageId_example" // string | Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies remediation types in the response. Possible values are develop, build, stage-release, release and operate. (optional)
+	identificationSource := "identificationSource_example" // string | Enter the identification source if you want the remediation result based on third-party scan information (non-Sonatype). The identification source can be obtained from the Component Details Page in the UI. (optional)
+	scanId := "scanId_example" // string | Enter the scanId (reportId) if you want the remediation result based on third-party scan information (non-Sonatype). (optional)
 	apiComponentDTOV2 := *sonatypeiq.NewApiComponentDTOV2() // ApiComponentDTOV2 |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+	r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponent``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSuggestedRemediationForComponent`: ApiComponentRemediationDTO
-	fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetSuggestedRemediationForComponent`: %v\n", resp)
 }
 ```
 
@@ -261,8 +265,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**ownerId** | **string** |  | 
+**ownerType** | **string** | Possible values: application, organization, repository.  | 
+**ownerId** | **string** | Possible values: applicationId, organizationId or repositoryId. | 
 
 ### Other Parameters
 
@@ -273,14 +277,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **stageId** | **string** |  | 
- **identificationSource** | **string** |  | 
- **scanId** | **string** |  | 
+ **stageId** | **string** | Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies remediation types in the response. Possible values are develop, build, stage-release, release and operate. | 
+ **identificationSource** | **string** | Enter the identification source if you want the remediation result based on third-party scan information (non-Sonatype). The identification source can be obtained from the Component Details Page in the UI. | 
+ **scanId** | **string** | Enter the scanId (reportId) if you want the remediation result based on third-party scan information (non-Sonatype). | 
  **apiComponentDTOV2** | [**ApiComponentDTOV2**](ApiComponentDTOV2.md) |  | 
 
 ### Return type
 
-[**ApiComponentRemediationDTO**](ApiComponentRemediationDTO.md)
+ (empty response body)
 
 ### Authorization
 
@@ -289,7 +293,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -302,6 +306,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -315,10 +321,10 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
-	componentHash := "componentHash_example" // string | 
-	labelName := "labelName_example" // string | 
+	ownerType := "ownerType_example" // string | Possible values: application or organization
+	internalOwnerId := "internalOwnerId_example" // string | Possible values : applicationId or organizationId
+	componentHash := "componentHash_example" // string | Enter the SHA1 hash of the component.
+	labelName := "labelName_example" // string | Enter the label name to assign to this component.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -336,10 +342,10 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
-**componentHash** | **string** |  | 
-**labelName** | **string** |  | 
+**ownerType** | **string** | Possible values: application or organization | 
+**internalOwnerId** | **string** | Possible values : applicationId or organizationId | 
+**componentHash** | **string** | Enter the SHA1 hash of the component. | 
+**labelName** | **string** | Enter the label name to assign to this component. | 
 
 ### Other Parameters
 
@@ -364,7 +370,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

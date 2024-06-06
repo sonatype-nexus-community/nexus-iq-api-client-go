@@ -5,13 +5,13 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteSbomVersion**](SbomAPI.md#DeleteSbomVersion) | **Delete** /api/v2/sbom/applications/{applicationId}/versions/{version} | Delete sbom version
-[**GetApplicationsHistoryMetric**](SbomAPI.md#GetApplicationsHistoryMetric) | **Get** /api/v2/sbom/dashboard/sbomsHistoryMetrics | 
+[**GetActiveSbomVersionListByApplication**](SbomAPI.md#GetActiveSbomVersionListByApplication) | **Get** /api/v2/sbom/applications/{applicationId}/versions | Gets a list of active sbom versions by application id
 [**GetImportStatus**](SbomAPI.md#GetImportStatus) | **Get** /api/v2/sbom/applications/{applicationId}/status/{importRequestId} | Get sbom import status
 [**GetSbomComponents**](SbomAPI.md#GetSbomComponents) | **Get** /api/v2/sbom/applications/{applicationId}/versions/{version}/components | Gets the components found in a specific sbom version
 [**GetSbomMetadataSummaryForApplication**](SbomAPI.md#GetSbomMetadataSummaryForApplication) | **Get** /api/v2/sbom/applications/{applicationId} | Gets a paginated list of SBOMs for an application
 [**GetSbomVersion**](SbomAPI.md#GetSbomVersion) | **Get** /api/v2/sbom/applications/{applicationId}/versions/{version} | Gets a sbom version
-[**GetSbomVersionListByApplication**](SbomAPI.md#GetSbomVersionListByApplication) | **Get** /api/v2/sbom/applications/{applicationId}/versions | Gets a list of sbom versions by application id
 [**ImportSbom**](SbomAPI.md#ImportSbom) | **Post** /api/v2/sbom/import | Import a new sbom version
+[**SaveVulnerabilityAnalysis**](SbomAPI.md#SaveVulnerabilityAnalysis) | **Put** /api/v2/sbom/applications/{applicationId}/versions/{version}/vulnerability/{refId}/analysis | Updates a vulnerability analysis annotation for a specific SBOM vulnerability
 
 
 
@@ -86,9 +86,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetApplicationsHistoryMetric
+## GetActiveSbomVersionListByApplication
 
-> ApiSbomApplicationsHistoryMetricDTO GetApplicationsHistoryMetric(ctx).Execute()
+> GetActiveSbomVersionListByApplication(ctx, applicationId).Execute()
+
+Gets a list of active sbom versions by application id
 
 
 
@@ -105,31 +107,38 @@ import (
 )
 
 func main() {
+	applicationId := "applicationId_example" // string | The internal id of the application
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.SbomAPI.GetApplicationsHistoryMetric(context.Background()).Execute()
+	r, err := apiClient.SbomAPI.GetActiveSbomVersionListByApplication(context.Background(), applicationId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SbomAPI.GetApplicationsHistoryMetric``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SbomAPI.GetActiveSbomVersionListByApplication``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetApplicationsHistoryMetric`: ApiSbomApplicationsHistoryMetricDTO
-	fmt.Fprintf(os.Stdout, "Response from `SbomAPI.GetApplicationsHistoryMetric`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**applicationId** | **string** | The internal id of the application | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetApplicationsHistoryMetricRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetActiveSbomVersionListByApplicationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
 
-[**ApiSbomApplicationsHistoryMetricDTO**](ApiSbomApplicationsHistoryMetricDTO.md)
+ (empty response body)
 
 ### Authorization
 
@@ -218,7 +227,7 @@ Name | Type | Description  | Notes
 
 ## GetSbomComponents
 
-> GetSbomComponents(ctx, applicationId, version).Execute()
+> GetSbomComponents(ctx, applicationId, version).VulnerabilityThreatLevels(vulnerabilityThreatLevels).DependencyTypes(dependencyTypes).SortBy(sortBy).Asc(asc).Page(page).PageSize(pageSize).Execute()
 
 Gets the components found in a specific sbom version
 
@@ -239,10 +248,16 @@ import (
 func main() {
 	applicationId := "applicationId_example" // string | The internal id of the application
 	version := "version_example" // string | URL Encoded version value of the sbom to query its components
+	vulnerabilityThreatLevels := []string{"VulnerabilityThreatLevels_example"} // []string | If provided, filter components by the given threat level on their vulnerabilities (optional)
+	dependencyTypes := []string{"DependencyTypes_example"} // []string | If provided, filter components by the given dependency types (optional)
+	sortBy := "sortBy_example" // string | Criteria to sort the results. default = VULNERABILITIES (optional) (default to "VULNERABILITIES")
+	asc := true // bool | Order mode ASC=true or DESC=false. default = false (optional) (default to false)
+	page := int32(56) // int32 | Current page number. default = 1 (optional) (default to 1)
+	pageSize := int32(56) // int32 | Number of items to return by page. default = 50 (optional) (default to 50)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SbomAPI.GetSbomComponents(context.Background(), applicationId, version).Execute()
+	r, err := apiClient.SbomAPI.GetSbomComponents(context.Background(), applicationId, version).VulnerabilityThreatLevels(vulnerabilityThreatLevels).DependencyTypes(dependencyTypes).SortBy(sortBy).Asc(asc).Page(page).PageSize(pageSize).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SbomAPI.GetSbomComponents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -268,6 +283,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **vulnerabilityThreatLevels** | **[]string** | If provided, filter components by the given threat level on their vulnerabilities | 
+ **dependencyTypes** | **[]string** | If provided, filter components by the given dependency types | 
+ **sortBy** | **string** | Criteria to sort the results. default &#x3D; VULNERABILITIES | [default to &quot;VULNERABILITIES&quot;]
+ **asc** | **bool** | Order mode ASC&#x3D;true or DESC&#x3D;false. default &#x3D; false | [default to false]
+ **page** | **int32** | Current page number. default &#x3D; 1 | [default to 1]
+ **pageSize** | **int32** | Number of items to return by page. default &#x3D; 50 | [default to 50]
 
 ### Return type
 
@@ -363,7 +384,7 @@ Name | Type | Description  | Notes
 
 ## GetSbomVersion
 
-> GetSbomVersion(ctx, applicationId, version).State(state).Accept(accept).Execute()
+> GetSbomVersion(ctx, applicationId, version).State(state).Specification(specification).Accept(accept).Execute()
 
 Gets a sbom version
 
@@ -385,11 +406,12 @@ func main() {
 	applicationId := "applicationId_example" // string | The internal id of the application
 	version := "version_example" // string | URL Encoded version value of the sbom
 	state := "state_example" // string | The state of the sbom version. Allowed values [original|current]. default = current (optional) (default to "current")
+	specification := "specification_example" // string | Target specification of the sbom. Allowed values [cyclonedx1.5|spdx2.3]. default = cyclonedx1.5 (optional) (default to "cyclonedx1.5")
 	accept := "accept_example" // string | Output format(json/xml) of the sbom. Changing the output format only applicable when downloading the current form of the SBOM. The original sbom will always return in the original form that it was ingested. When requesting `current` form and if this header value is not present the sbom will be returned in its original ingested format. Allowed values {'application/json'|'application/xml'}. default = null (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SbomAPI.GetSbomVersion(context.Background(), applicationId, version).State(state).Accept(accept).Execute()
+	r, err := apiClient.SbomAPI.GetSbomVersion(context.Background(), applicationId, version).State(state).Specification(specification).Accept(accept).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SbomAPI.GetSbomVersion``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -416,6 +438,7 @@ Name | Type | Description  | Notes
 
 
  **state** | **string** | The state of the sbom version. Allowed values [original|current]. default &#x3D; current | [default to &quot;current&quot;]
+ **specification** | **string** | Target specification of the sbom. Allowed values [cyclonedx1.5|spdx2.3]. default &#x3D; cyclonedx1.5 | [default to &quot;cyclonedx1.5&quot;]
  **accept** | **string** | Output format(json/xml) of the sbom. Changing the output format only applicable when downloading the current form of the SBOM. The original sbom will always return in the original form that it was ingested. When requesting &#x60;current&#x60; form and if this header value is not present the sbom will be returned in its original ingested format. Allowed values {&#39;application/json&#39;|&#39;application/xml&#39;}. default &#x3D; null | 
 
 ### Return type
@@ -430,74 +453,6 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json|application/xml
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetSbomVersionListByApplication
-
-> GetSbomVersionListByApplication(ctx, applicationId).Execute()
-
-Gets a list of sbom versions by application id
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-	applicationId := "applicationId_example" // string | The internal id of the application
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SbomAPI.GetSbomVersionListByApplication(context.Background(), applicationId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SbomAPI.GetSbomVersionListByApplication``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** | The internal id of the application | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetSbomVersionListByApplicationRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -561,6 +516,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SaveVulnerabilityAnalysis
+
+> SaveVulnerabilityAnalysis(ctx, applicationId, version, refId).SBOMVulnerabilityAnalysisRequest(sBOMVulnerabilityAnalysisRequest).Execute()
+
+Updates a vulnerability analysis annotation for a specific SBOM vulnerability
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	applicationId := "applicationId_example" // string | The internal id of the application
+	version := "version_example" // string | The version for a specific SBOM where the vulnerability is present
+	refId := "refId_example" // string | The vulnerability id of a vulnerability
+	sBOMVulnerabilityAnalysisRequest := *sonatypeiq.NewSBOMVulnerabilityAnalysisRequest(*sonatypeiq.NewComponentLocator(), *sonatypeiq.NewVulnerabilityAnalysis("Detail_example", "Justification_example", "Response_example", "State_example")) // SBOMVulnerabilityAnalysisRequest | Vulnerability analysis details with component information
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SbomAPI.SaveVulnerabilityAnalysis(context.Background(), applicationId, version, refId).SBOMVulnerabilityAnalysisRequest(sBOMVulnerabilityAnalysisRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SbomAPI.SaveVulnerabilityAnalysis``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**applicationId** | **string** | The internal id of the application | 
+**version** | **string** | The version for a specific SBOM where the vulnerability is present | 
+**refId** | **string** | The vulnerability id of a vulnerability | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSaveVulnerabilityAnalysisRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **sBOMVulnerabilityAnalysisRequest** | [**SBOMVulnerabilityAnalysisRequest**](SBOMVulnerabilityAnalysisRequest.md) | Vulnerability analysis details with component information | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

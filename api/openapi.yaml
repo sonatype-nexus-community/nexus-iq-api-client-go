@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.176.0-01
+  version: 1.177.0-01
 servers:
 - url: /
 security:
@@ -17,6 +17,10 @@ tags:
     \ formats, containing coordinates and licenses for components found in a scan\
     \ report."
   name: CycloneDX
+- description: Set policies for automatic purging of obsolete application and Success
+    Metrics reports. <p>Note that IQ Server has a preset limit of purging 5000 reports
+    in one execution of its report purging job.
+  name: Data Retention Policies
 - description: "Use this REST API to perform an application policy evaluation. Policy\
     \ evaluations are executed asynchronously.<p>This is a 2-step process that involves:\
     \ \n1. Requesting a policy evaluation (POST) \n2. Checking the status and response\
@@ -37,7 +41,6 @@ tags:
 - name: Config Reverse Proxy Authentication
 - name: Config SAML
 - name: Config Source Control
-- name: Data Retention Policies
 - name: Endpoints
 - name: Firewall
 - name: Labels
@@ -52,7 +55,6 @@ tags:
 - name: Repositories
 - name: Role Memberships
 - name: Roles
-- name: Sbom
 - name: Scan
 - name: Search
 - name: Security Overrides
@@ -741,9 +743,13 @@ paths:
       - Components
   /api/v2/components/remediation/{ownerType}/{ownerId}:
     post:
+      description: Use this method to obtain remediation suggestions for policy violations
+        on a component basis. Remediations obtained from this method are same as those
+        appearing on the Component Details Page in the UI.
       operationId: getSuggestedRemediationForComponent
       parameters:
-      - explode: false
+      - description: "Possible values: application, organization, repository. "
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -758,28 +764,37 @@ paths:
           pattern: application|organization|repository
           type: string
         style: simple
-      - explode: false
+      - description: "Possible values: applicationId, organizationId or repositoryId."
+        explode: false
         in: path
         name: ownerId
         required: true
         schema:
           type: string
         style: simple
-      - explode: true
+      - description: "Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies\
+          \ remediation types in the response. Possible values are develop, build,\
+          \ stage-release, release and operate."
+        explode: true
         in: query
         name: stageId
         required: false
         schema:
           type: string
         style: form
-      - explode: true
+      - description: Enter the identification source if you want the remediation result
+          based on third-party scan information (non-Sonatype). The identification
+          source can be obtained from the Component Details Page in the UI.
+        explode: true
         in: query
         name: identificationSource
         required: false
         schema:
           type: string
         style: form
-      - explode: true
+      - description: Enter the scanId (reportId) if you want the remediation result
+          based on third-party scan information (non-Sonatype).
+        explode: true
         in: query
         name: scanId
         required: false
@@ -792,38 +807,52 @@ paths:
             schema:
               $ref: '#/components/schemas/ApiComponentDTOV2'
       responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiComponentRemediationDTO'
-          description: default response
+        "200":
+          description: "The response returns details for components that can be used\
+            \ for remediation. Details for the recommended component are grouped under\
+            \ type in the response.<ul><li>Type <i>next-no-violations</i> indicates\
+            \ that the component version has no violations.</li><li>Type <i>next-non-failing</i>\
+            \ indicates that the component version does not fail policy violations.\
+            \ The response will contain this type only if stageId is provided in the\
+            \ method call.</li><li>Type <i>next-no-violations-with-dependencies</i>\
+            \ indicates that the component, along-with its dependencies does not any\
+            \ violate any policies.</li><li>Type <i>next-non-failing-with-dependencies</i>\
+            \ indicates that the component and its dependencies will not fail a build\
+            \ for the stageId provided.</li></ul><p>Hash values returned here are\
+            \ truncated and are not intended to be used as checksums. They can be\
+            \ used as identifiers to pass to other REST API calls. "
       tags:
       - Components
   /api/v2/components/versions:
     post:
+      description: Use this method to retrieve all known versions of a component.
       operationId: getComponentVersions
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiComponentOrPurlIdentifierDTOV2'
+        description: "Possible values: Component identifier or packageURL (pURL) identifier\
+          \ in the correct format. Use a-name for JavaScript components."
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 items:
                   type: string
                 type: array
-          description: default response
+          description: Known versions of the component are returned in a string array
+            of ascending order.
       tags:
       - Components
   /api/v2/components/{componentHash}/labels/{labelName}/{ownerType}s/{internalOwnerId}:
     delete:
+      description: Use this method to un-assign a label from a component.
       operationId: deleteComponentLabel
       parameters:
-      - explode: false
+      - description: "Possible values: application or organization"
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -838,21 +867,24 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: "Possible values : applicationId or organizationId"
+        explode: false
         in: path
         name: internalOwnerId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Enter the SHA1 hash of the component.
+        explode: false
         in: path
         name: componentHash
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Enter the label name to un-assign from this component.
+        explode: false
         in: path
         name: labelName
         required: true
@@ -860,16 +892,16 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "204":
+          description: Label un-assigned from component successfully.
       tags:
       - Components
     post:
+      description: Use this method to assign an existing label to a component.
       operationId: setComponentLabel
       parameters:
-      - explode: false
+      - description: "Possible values: application or organization"
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -884,21 +916,24 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: "Possible values : applicationId or organizationId"
+        explode: false
         in: path
         name: internalOwnerId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Enter the SHA1 hash of the component.
+        explode: false
         in: path
         name: componentHash
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Enter the label name to assign to this component.
+        explode: false
         in: path
         name: labelName
         required: true
@@ -906,10 +941,8 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "204":
+          description: Component label assigned successfully.
       tags:
       - Components
   /api/v2/compositeSourceControl/{ownerType}/{internalOwnerId}:
@@ -1755,9 +1788,17 @@ paths:
       - CycloneDX
   /api/v2/dataRetentionPolicies/organizations/{organizationId}:
     get:
+      description: "Data retention policies help to limit the disk space consumption\
+        \ by removing obsolete data. Use this method to inspect the retention policies\
+        \ that are in effect for an organization. Application reports created by continuous\
+        \ monitoring are not affected by the stage retention policy. They appear separately\
+        \ under the key continuous-monitoring in the response JSON<p>Permissions required:\
+        \ View IQ Elements"
       operationId: getDataRetentionPolicies
       parameters:
-      - explode: false
+      - description: The organizationId assigned by IQ Server. Use the organization
+          REST API to retrieve the organizationId.
+        explode: false
         in: path
         name: organizationId
         required: true
@@ -1765,18 +1806,33 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiDataRetentionPoliciesDTO'
-          description: default response
+          description: "The response JSON contains the policy settings for both applicationReports\
+            \ and successMetrics. Policy settings for application reports are shown\
+            \ for each stage of development. <ul><li>inheritPolicy IS a boolean flag\
+            \ indicating whether the policy is inherited from a parent organization.</li><li>enablePurging\
+            \ IS a boolean flag indicating if automatic purging is enabled or disabled.</li><li>maxCount\
+            \ IS the maximum no. of reports to retain.</li><li>maxAge IS the maximum\
+            \ age that a report is allowed to reach before it is purged. Possible\
+            \ values are days, weeks, months, years.</li></ul>The latest application\
+            \ report is always retained, regardless of its age."
       tags:
       - Data Retention Policies
     put:
+      description: "Data retention policies help to limit the disk space consumption\
+        \ by removing obsolete data. Use this method to set the retention policies\
+        \ for an organization. Application reports created by continuous monitoring\
+        \ are not affected by the stage retention policy. They appear separately under\
+        \ the key continuous-monitoring.<p>Permissions required: Edit IQ Elements"
       operationId: setDataRetentionPolicies
       parameters:
-      - explode: false
+      - description: The organizationId for the organization you want to set the data
+          retention policy. Use the organization REST API to retrieve the organizationId.
+        explode: false
         in: path
         name: organizationId
         required: true
@@ -1788,18 +1844,38 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiDataRetentionPoliciesDTO'
+        description: "The request JSON should include the retention policy settings\
+          \ for both application reports and success metrics.\n\nPolicy settings for\
+          \ application reports can be specified for each stage of development represented\
+          \ in the example below by additionalProp1. \nExample values for additionalProp1\
+          \ are develop, build, stage-release, release, operate & continuous monitoring.\
+          \ For application reports created during continuous monitoring use the key\
+          \ continuous-monitoring instead of the stage name. <ul><li>inheritPolicy\
+          \ IS a boolean flag indicating whether the policy is inherited from a parent\
+          \ organization.</li><li>enablePurging IS a boolean flag indicating enabled\
+          \ or disabled status for automatic purging. </li><li>maxCount IS the maximum\
+          \ no. of reports to retain.</li><li>maxAge IS the maximum age that a report\
+          \ is allowed to reach before it is purged. Possible values are days, weeks,\
+          \ months, years.</li></ul>"
+        required: true
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "200":
+          description: The data retention policy has been set successfully.
       tags:
       - Data Retention Policies
   /api/v2/dataRetentionPolicies/organizations/{organizationId}/parent:
     get:
+      description: "Data retention policies help to limit the disk space consumption\
+        \ by removing obsolete data. Use this method to inspect the retention policies\
+        \ that are in effect for the parent organization of the given organization.\
+        \ Application reports created by continuous monitoring are not affected by\
+        \ the stage retention policy. They appear separately under the key continuous-monitoring.<p>Permissions\
+        \ required: View IQ Elements"
       operationId: getParentDataRetentionPolicies
       parameters:
-      - explode: false
+      - description: The organizationId assigned by IQ Server. Use the organization
+          REST API to retrieve the parent organizationId
+        explode: false
         in: path
         name: organizationId
         required: true
@@ -1807,12 +1883,20 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiDataRetentionPoliciesDTO'
-          description: default response
+          description: "The response JSON contains the policy settings for both applicationReports\
+            \ and successMetrics. Policy settings for application reports are shown\
+            \ for each stage of development. <ul><li>inheritPolicy IS a boolean flag\
+            \ indicating whether the policy is inherited from a parent organization.</li><li>enablePurging\
+            \ IS a boolean flag indicating if automatic purging is enabled or disabled.</li><li>maxCount\
+            \ IS the maximum no. of reports to retain.</li><li>maxAge IS the maximum\
+            \ age that a report is allowed to reach before it is purged. Possible\
+            \ values are days, weeks, months, years.</li></ul>The latest application\
+            \ report is always retained, regardless of its age."
       tags:
       - Data Retention Policies
   /api/v2/endpoints/{apiType}:
@@ -2141,7 +2225,7 @@ paths:
         name: asc
         required: false
         schema:
-          default: true
+          default: false
           type: boolean
         style: form
       responses:
@@ -4305,8 +4389,8 @@ paths:
       - sbom
   /api/v2/sbom/applications/{applicationId}/versions:
     get:
-      description: Gets a list of sbom versions by application id
-      operationId: getSbomVersionListByApplication
+      description: Gets a list of active sbom versions by application id
+      operationId: getActiveSbomVersionListByApplication
       parameters:
       - description: The internal id of the application
         explode: false
@@ -4320,8 +4404,8 @@ paths:
         "200":
           content:
             application/json: {}
-          description: list of the sbom versions by application id
-      summary: Gets a list of sbom versions by application id
+          description: list of the active sbom versions by application id
+      summary: Gets a list of active sbom versions by application id
       tags:
       - sbom
   /api/v2/sbom/applications/{applicationId}/versions/{version}:
@@ -4384,6 +4468,16 @@ paths:
           default: current
           type: string
         style: form
+      - description: "Target specification of the sbom. Allowed values [cyclonedx1.5|spdx2.3].\
+          \ default = cyclonedx1.5"
+        explode: true
+        in: query
+        name: specification
+        required: false
+        schema:
+          default: cyclonedx1.5
+          type: string
+        style: form
       - description: "Output format(json/xml) of the sbom. Changing the output format\
           \ only applicable when downloading the current form of the SBOM. The original\
           \ sbom will always return in the original form that it was ingested. When\
@@ -4429,12 +4523,134 @@ paths:
         schema:
           type: string
         style: simple
+      - description: "If provided, filter components by the given threat level on\
+          \ their vulnerabilities"
+        explode: true
+        in: query
+        name: vulnerabilityThreatLevels
+        required: false
+        schema:
+          items:
+            enum:
+            - NONE
+            - LOW
+            - MEDIUM
+            - HIGH
+            - CRITICAL
+            type: string
+          type: array
+          uniqueItems: true
+        style: form
+      - description: "If provided, filter components by the given dependency types"
+        explode: true
+        in: query
+        name: dependencyTypes
+        required: false
+        schema:
+          items:
+            enum:
+            - DIRECT
+            - TRANSITIVE
+            - UNSPECIFIED
+            type: string
+          type: array
+          uniqueItems: true
+        style: form
+      - description: Criteria to sort the results. default = VULNERABILITIES
+        explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          default: VULNERABILITIES
+          enum:
+          - TYPE
+          - PERCENTAGE_ANNOTATED
+          - VULNERABILITIES
+          type: string
+        style: form
+      - description: Order mode ASC=true or DESC=false. default = false
+        explode: true
+        in: query
+        name: asc
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: Current page number. default = 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          format: int32
+          type: integer
+        style: form
+      - description: Number of items to return by page. default = 50
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
       responses:
         "200":
           content:
             application/json: {}
           description: List of components in the sbom
       summary: Gets the components found in a specific sbom version
+      tags:
+      - sbom
+  /api/v2/sbom/applications/{applicationId}/versions/{version}/vulnerability/{refId}/analysis:
+    put:
+      description: Updates a vulnerability analysis annotation for a specific SBOM
+        vulnerability
+      operationId: saveVulnerabilityAnalysis
+      parameters:
+      - description: The internal id of the application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The version for a specific SBOM where the vulnerability is present
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The vulnerability id of a vulnerability
+        explode: false
+        in: path
+        name: refId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SBOMVulnerabilityAnalysisRequest'
+        description: Vulnerability analysis details with component information
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Vulnerability analysis annotation updated successfully
+        "404":
+          description: Target vulnerability not found
+      summary: Updates a vulnerability analysis annotation for a specific SBOM vulnerability
       tags:
       - sbom
   /api/v2/sbom/dashboard/sbomsAnalyzed:
@@ -4452,16 +4668,29 @@ paths:
       - sbom dashboard
   /api/v2/sbom/dashboard/sbomsHistoryMetrics:
     get:
+      description: Queries how many SBOMs applications have been analyzed
       operationId: getApplicationsHistoryMetric
       responses:
-        default:
+        "200":
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiSbomApplicationsHistoryMetricDTO'
-          description: default response
+            application/json: {}
+          description: Total of SBOMs applications analyzed
+      summary: Gets application history metrics
       tags:
-      - Sbom
+      - sbom dashboard
+  /api/v2/sbom/dashboard/vulnerabilitiesByThreatLevel:
+    get:
+      description: Queries how many vulnerabilities and annotations have been found
+        by each threat level
+      operationId: getVulnerabilitiesByThreatLevel
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Counters of vulnerabilities and annotations by threat level
+      summary: Gets counters of vulnerabilities and annotations by threat level
+      tags:
+      - sbom dashboard
   /api/v2/sbom/import:
     post:
       description: Imports a new sbom version to an existing application
@@ -6824,18 +7053,6 @@ components:
           type: string
       type: object
     ApiComponentChangeActionDTO:
-      example:
-        component:
-          thirdParty: true
-          proprietary: true
-          sha256: sha256
-          displayName: displayName
-          packageUrl: packageUrl
-          componentIdentifier:
-            coordinates:
-              key: coordinates
-            format: format
-          hash: hash
       properties:
         component:
           $ref: '#/components/schemas/ApiComponentDTOV2'
@@ -8526,68 +8743,11 @@ components:
           $ref: '#/components/schemas/ApiRepositoryComponentPolicyViolationDTO'
       type: object
     ApiComponentRemediationDTO:
-      example:
-        remediation:
-          versionChanges:
-          - data:
-              component:
-                thirdParty: true
-                proprietary: true
-                sha256: sha256
-                displayName: displayName
-                packageUrl: packageUrl
-                componentIdentifier:
-                  coordinates:
-                    key: coordinates
-                  format: format
-                hash: hash
-            type: next-no-violations
-          - data:
-              component:
-                thirdParty: true
-                proprietary: true
-                sha256: sha256
-                displayName: displayName
-                packageUrl: packageUrl
-                componentIdentifier:
-                  coordinates:
-                    key: coordinates
-                  format: format
-                hash: hash
-            type: next-no-violations
       properties:
         remediation:
           $ref: '#/components/schemas/ApiComponentRemediationValueDTO'
       type: object
     ApiComponentRemediationValueDTO:
-      example:
-        versionChanges:
-        - data:
-            component:
-              thirdParty: true
-              proprietary: true
-              sha256: sha256
-              displayName: displayName
-              packageUrl: packageUrl
-              componentIdentifier:
-                coordinates:
-                  key: coordinates
-                format: format
-              hash: hash
-          type: next-no-violations
-        - data:
-            component:
-              thirdParty: true
-              proprietary: true
-              sha256: sha256
-              displayName: displayName
-              packageUrl: packageUrl
-              componentIdentifier:
-                coordinates:
-                  key: coordinates
-                format: format
-              hash: hash
-          type: next-no-violations
       properties:
         versionChanges:
           items:
@@ -20506,11 +20666,6 @@ components:
           type: boolean
       type: object
     ApiSbomApplicationsHistoryMetricDTO:
-      example:
-        totalScannedApplications: 5
-        applicationsUpdatedLastYear: 1
-        applicationsUpdatedLastWeek: 6
-        applicationsUpdatedLastMonth: 0
       properties:
         applicationsUpdatedLastMonth:
           format: int64
@@ -21603,20 +21758,6 @@ components:
           type: boolean
       type: object
     ApiVersionChangeOptionDTO:
-      example:
-        data:
-          component:
-            thirdParty: true
-            proprietary: true
-            sha256: sha256
-            displayName: displayName
-            packageUrl: packageUrl
-            componentIdentifier:
-              coordinates:
-                key: coordinates
-              format: format
-            hash: hash
-        type: next-no-violations
       properties:
         data:
           $ref: '#/components/schemas/ApiComponentChangeActionDTO'
@@ -23848,10 +23989,34 @@ components:
         versionRange:
           type: string
       type: object
+    SBOMVulnerabilityAnalysisRequest:
+      example:
+        vulnerabilityAnalysis:
+          lastUpdatedBy: lastUpdatedBy
+          response: can_not_fix
+          lastUpdatedOn: 2000-01-23T04:56:07.000+00:00
+          detail: detail
+          justification: code_not_present
+          state: resolved
+          createdOn: 2000-01-23T04:56:07.000+00:00
+        componentLocator:
+          packageUrl: packageUrl
+          hash: hash
+      properties:
+        componentLocator:
+          $ref: '#/components/schemas/componentLocator'
+        vulnerabilityAnalysis:
+          $ref: '#/components/schemas/vulnerabilityAnalysis'
+      required:
+      - componentLocator
+      - vulnerabilityAnalysis
+      type: object
     SbomComponentDTO:
       properties:
         componentIdentifier:
           $ref: '#/components/schemas/ComponentIdentifier'
+        dependencyType:
+          type: string
         displayName:
           type: string
         hash:
@@ -23865,6 +24030,9 @@ components:
           type: string
         packageUrl:
           type: string
+        percentageAnnotated:
+          format: double
+          type: number
         version:
           type: string
         vulnerabilitySeverityCriticalCount:
@@ -23880,6 +24048,16 @@ components:
           format: int32
           type: integer
         vulnerabilitySeverityNoneCount:
+          format: int32
+          type: integer
+      type: object
+    SbomComponentListDTO:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/SbomComponentDTO'
+          type: array
+        totalResultsCount:
           format: int32
           type: integer
       type: object
@@ -24476,6 +24654,54 @@ components:
         valid:
           type: boolean
       type: object
+    VulnerabilitiesThreadLevelMetricDTO:
+      properties:
+        critical:
+          format: int64
+          type: integer
+        criticalAnnotated:
+          format: int64
+          type: integer
+        criticalUnannotated:
+          format: int64
+          type: integer
+        high:
+          format: int64
+          type: integer
+        highAnnotated:
+          format: int64
+          type: integer
+        highUnannotated:
+          format: int64
+          type: integer
+        low:
+          format: int64
+          type: integer
+        lowAnnotated:
+          format: int64
+          type: integer
+        lowUnannotated:
+          format: int64
+          type: integer
+        medium:
+          format: int64
+          type: integer
+        mediumAnnotated:
+          format: int64
+          type: integer
+        mediumUnannotated:
+          format: int64
+          type: integer
+        totalVulnerabilities:
+          format: int64
+          type: integer
+        totalVulnerabilitiesAnnotated:
+          format: int64
+          type: integer
+        totalVulnerabilitiesUnannotated:
+          format: int64
+          type: integer
+      type: object
     VulnerabilitySource:
       example:
         shortName: shortName
@@ -24485,6 +24711,85 @@ components:
           type: string
         shortName:
           type: string
+      type: object
+    componentLocator:
+      description: Component details about the vulnerable component. Either hash or
+        package URL must be provided
+      example:
+        packageUrl: packageUrl
+        hash: hash
+      properties:
+        hash:
+          description: Component hash
+          type: string
+        packageUrl:
+          description: Component package URL
+          type: string
+      type: object
+    vulnerabilityAnalysis:
+      description: Vulnerability analysis details.
+      example:
+        lastUpdatedBy: lastUpdatedBy
+        response: can_not_fix
+        lastUpdatedOn: 2000-01-23T04:56:07.000+00:00
+        detail: detail
+        justification: code_not_present
+        state: resolved
+        createdOn: 2000-01-23T04:56:07.000+00:00
+      properties:
+        createdOn:
+          format: date-time
+          readOnly: true
+          type: string
+        detail:
+          description: Detailed description of the impact including methods used during
+            assessment
+          type: string
+        justification:
+          description: The rationale of why the impact analysis state was asserted
+          enum:
+          - code_not_present
+          - code_not_reachable
+          - requires_configuration
+          - requires_dependency
+          - requires_environment
+          - protected_by_compiler
+          - protected_at_runtime
+          - protected_at_perimeter
+          - protected_by_mitigating_control
+          type: string
+        lastUpdatedBy:
+          readOnly: true
+          type: string
+        lastUpdatedOn:
+          format: date-time
+          readOnly: true
+          type: string
+        response:
+          description: "Vulnerability analysis response by an author, supplier or\
+            \ manufacturer for the affected component."
+          enum:
+          - can_not_fix
+          - will_not_fix
+          - update
+          - rollback
+          - workaround_available
+          type: string
+        state:
+          description: Vulnerability analysis state.
+          enum:
+          - resolved
+          - resolved_with_pedigree
+          - exploitable
+          - in_triage
+          - false_positive
+          - not_affected
+          type: string
+      required:
+      - detail
+      - justification
+      - response
+      - state
       type: object
     importSbom_request:
       properties:

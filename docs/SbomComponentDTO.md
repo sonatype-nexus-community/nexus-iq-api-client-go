@@ -5,11 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComponentIdentifier** | Pointer to [**ComponentIdentifier**](ComponentIdentifier.md) |  | [optional] 
+**DependencyType** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
 **Licenses** | Pointer to [**[]License**](License.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **PackageUrl** | Pointer to **string** |  | [optional] 
+**PercentageAnnotated** | Pointer to **float64** |  | [optional] 
 **Version** | Pointer to **string** |  | [optional] 
 **VulnerabilitySeverityCriticalCount** | Pointer to **int32** |  | [optional] 
 **VulnerabilitySeverityHighCount** | Pointer to **int32** |  | [optional] 
@@ -60,6 +62,31 @@ SetComponentIdentifier sets ComponentIdentifier field to given value.
 `func (o *SbomComponentDTO) HasComponentIdentifier() bool`
 
 HasComponentIdentifier returns a boolean if a field has been set.
+
+### GetDependencyType
+
+`func (o *SbomComponentDTO) GetDependencyType() string`
+
+GetDependencyType returns the DependencyType field if non-nil, zero value otherwise.
+
+### GetDependencyTypeOk
+
+`func (o *SbomComponentDTO) GetDependencyTypeOk() (*string, bool)`
+
+GetDependencyTypeOk returns a tuple with the DependencyType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDependencyType
+
+`func (o *SbomComponentDTO) SetDependencyType(v string)`
+
+SetDependencyType sets DependencyType field to given value.
+
+### HasDependencyType
+
+`func (o *SbomComponentDTO) HasDependencyType() bool`
+
+HasDependencyType returns a boolean if a field has been set.
 
 ### GetDisplayName
 
@@ -185,6 +212,31 @@ SetPackageUrl sets PackageUrl field to given value.
 `func (o *SbomComponentDTO) HasPackageUrl() bool`
 
 HasPackageUrl returns a boolean if a field has been set.
+
+### GetPercentageAnnotated
+
+`func (o *SbomComponentDTO) GetPercentageAnnotated() float64`
+
+GetPercentageAnnotated returns the PercentageAnnotated field if non-nil, zero value otherwise.
+
+### GetPercentageAnnotatedOk
+
+`func (o *SbomComponentDTO) GetPercentageAnnotatedOk() (*float64, bool)`
+
+GetPercentageAnnotatedOk returns a tuple with the PercentageAnnotated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPercentageAnnotated
+
+`func (o *SbomComponentDTO) SetPercentageAnnotated(v float64)`
+
+SetPercentageAnnotated sets PercentageAnnotated field to given value.
+
+### HasPercentageAnnotated
+
+`func (o *SbomComponentDTO) HasPercentageAnnotated() bool`
+
+HasPercentageAnnotated returns a boolean if a field has been set.
 
 ### GetVersion
 
