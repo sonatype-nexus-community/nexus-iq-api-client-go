@@ -20,6 +20,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -79,6 +81,8 @@ Other parameters are passed through a pointer to a apiGetAll1Request struct via 
 
 
 
+
+
 ### Example
 
 ```go
@@ -92,7 +96,7 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the internal application Id. You can use the Applications REST API to get the internal application Id. 
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -112,7 +116,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
+**applicationId** | **string** | Enter the internal application Id. You can use the Applications REST API to get the internal application Id.  | 
 
 ### Other Parameters
 
@@ -144,6 +148,8 @@ Name | Type | Description  | Notes
 ## GetComponentsInQuarantine
 
 > ApiComponentsInQuarantineDTO GetComponentsInQuarantine(ctx).Execute()
+
+
 
 
 
@@ -206,6 +212,8 @@ Other parameters are passed through a pointer to a apiGetComponentsInQuarantineR
 
 
 
+
+
 ### Example
 
 ```go
@@ -219,7 +227,7 @@ import (
 )
 
 func main() {
-	format := "format_example" // string |  (optional)
+	format := "format_example" // string | Enter the format/ecosystem of the component (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -244,7 +252,7 @@ Other parameters are passed through a pointer to a apiGetComponentsWithWaiversRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **format** | **string** |  | 
+ **format** | **string** | Enter the format/ecosystem of the component | 
 
 ### Return type
 
@@ -267,6 +275,8 @@ Name | Type | Description  | Notes
 ## GetMetrics
 
 > GetMetrics(ctx).ApiMetricsReportingQueryDTOV2(apiMetricsReportingQueryDTOV2).Execute()
+
+
 
 
 
@@ -319,7 +329,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: application/json, text/csv
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -329,6 +339,8 @@ Name | Type | Description  | Notes
 ## GetReportHistoryForApplication
 
 > ApiReportHistoryDTO GetReportHistoryForApplication(ctx, applicationId).Stage(stage).Limit(limit).Execute()
+
+
 
 
 
@@ -345,9 +357,9 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
-	stage := "stage_example" // string |  (optional)
-	limit := int32(56) // int32 |  (optional)
+	applicationId := "applicationId_example" // string | Enter the internal application Id. You can use the Applications REST API to get the internal application Id. 
+	stage := "stage_example" // string | Enter the specific stage, for which you want retrieve the scan history, e.g. 'build'  (optional)
+	limit := int32(56) // int32 | Enter the exact no. of most recent reports to retrieve. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -367,7 +379,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
+**applicationId** | **string** | Enter the internal application Id. You can use the Applications REST API to get the internal application Id.  | 
 
 ### Other Parameters
 
@@ -377,8 +389,8 @@ Other parameters are passed through a pointer to a apiGetReportHistoryForApplica
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **stage** | **string** |  | 
- **limit** | **int32** |  | 
+ **stage** | **string** | Enter the specific stage, for which you want retrieve the scan history, e.g. &#39;build&#39;  | 
+ **limit** | **int32** | Enter the exact no. of most recent reports to retrieve. | 
 
 ### Return type
 
@@ -401,6 +413,8 @@ Name | Type | Description  | Notes
 ## GetStaleWaivers
 
 > ApiStaleWaiversResponseDTO GetStaleWaivers(ctx).Execute()
+
+
 
 
 

@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## GetSuggestedRemediationForComponent
 
-> GetSuggestedRemediationForComponent(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+> GetSuggestedRemediationForComponent(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiComponentDTOV2(apiComponentDTOV2).Execute()
 
 
 
@@ -247,11 +247,12 @@ func main() {
 	stageId := "stageId_example" // string | Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies remediation types in the response. Possible values are develop, build, stage-release, release and operate. (optional)
 	identificationSource := "identificationSource_example" // string | Enter the identification source if you want the remediation result based on third-party scan information (non-Sonatype). The identification source can be obtained from the Component Details Page in the UI. (optional)
 	scanId := "scanId_example" // string | Enter the scanId (reportId) if you want the remediation result based on third-party scan information (non-Sonatype). (optional)
+	includeParentRemediation := true // bool | Enter true if you want to include parent remediation for transitive dependency in the response based on your application policy scan. (optional) (default to false)
 	apiComponentDTOV2 := *sonatypeiq.NewApiComponentDTOV2() // ApiComponentDTOV2 |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+	r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiComponentDTOV2(apiComponentDTOV2).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponent``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -280,6 +281,7 @@ Name | Type | Description  | Notes
  **stageId** | **string** | Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies remediation types in the response. Possible values are develop, build, stage-release, release and operate. | 
  **identificationSource** | **string** | Enter the identification source if you want the remediation result based on third-party scan information (non-Sonatype). The identification source can be obtained from the Component Details Page in the UI. | 
  **scanId** | **string** | Enter the scanId (reportId) if you want the remediation result based on third-party scan information (non-Sonatype). | 
+ **includeParentRemediation** | **bool** | Enter true if you want to include parent remediation for transitive dependency in the response based on your application policy scan. | [default to false]
  **apiComponentDTOV2** | [**ApiComponentDTOV2**](ApiComponentDTOV2.md) |  | 
 
 ### Return type

@@ -1,7 +1,7 @@
 /*
 Sonatype Lifecycle Public REST API
 
-Testing PolicyWaiverAPIService
+Testing PolicyWaiverReasonsAPIService
 
 */
 
@@ -17,21 +17,19 @@ import (
 	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
-func Test_sonatypeiq_PolicyWaiverAPIService(t *testing.T) {
+func Test_sonatypeiq_PolicyWaiverReasonsAPIService(t *testing.T) {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test PolicyWaiverAPIService AddPolicyWaiver", func(t *testing.T) {
+	t.Run("Test PolicyWaiverReasonsAPIService GetPolicyWaiverReasons", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var policyViolationId string
-		var ownerType string
-
-		httpRes, err := apiClient.PolicyWaiverAPI.AddPolicyWaiver(context.Background(), policyViolationId, ownerType).Execute()
+		resp, httpRes, err := apiClient.PolicyWaiverReasonsAPI.GetPolicyWaiverReasons(context.Background()).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

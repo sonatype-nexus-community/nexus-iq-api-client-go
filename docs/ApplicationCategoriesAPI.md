@@ -23,6 +23,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -36,8 +38,8 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
-	apiApplicationCategoryDTO := *sonatypeiq.NewApiApplicationCategoryDTO() // ApiApplicationCategoryDTO |  (optional)
+	organizationId := "organizationId_example" // string | The organizationId assigned by IQ Server, for which you want to create the application category.
+	apiApplicationCategoryDTO := *sonatypeiq.NewApiApplicationCategoryDTO() // ApiApplicationCategoryDTO | Specify the the name, description and color for the new application category to be  created. The application category id is not required to create a new application category  and should not be included.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -57,7 +59,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | The organizationId assigned by IQ Server, for which you want to create the application category. | 
 
 ### Other Parameters
 
@@ -67,7 +69,7 @@ Other parameters are passed through a pointer to a apiAddTagRequest struct via t
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **apiApplicationCategoryDTO** | [**ApiApplicationCategoryDTO**](ApiApplicationCategoryDTO.md) |  | 
+ **apiApplicationCategoryDTO** | [**ApiApplicationCategoryDTO**](ApiApplicationCategoryDTO.md) | Specify the the name, description and color for the new application category to be  created. The application category id is not required to create a new application category  and should not be included. | 
 
 ### Return type
 
@@ -93,6 +95,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -106,8 +110,8 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
-	tagId := "tagId_example" // string | 
+	organizationId := "organizationId_example" // string | The organizationId assigned by IQ Server, corresponding to the application category tag you want to delete.
+	tagId := "tagId_example" // string | The application category ID assigned by IQ Server, to be deleted.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -125,8 +129,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
-**tagId** | **string** |  | 
+**organizationId** | **string** | The organizationId assigned by IQ Server, corresponding to the application category tag you want to delete. | 
+**tagId** | **string** | The application category ID assigned by IQ Server, to be deleted. | 
 
 ### Other Parameters
 
@@ -149,7 +153,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -159,6 +163,8 @@ Name | Type | Description  | Notes
 ## GetApplicableTags
 
 > ApplicableTagsDTO GetApplicableTags(ctx, organizationId).Execute()
+
+
 
 
 
@@ -175,7 +181,7 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | The organizationId assigned by IQ Server, for which you want to retrieve the applicable tags or application categories.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -195,7 +201,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | The organizationId assigned by IQ Server, for which you want to retrieve the applicable tags or application categories. | 
 
 ### Other Parameters
 
@@ -230,6 +236,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -243,7 +251,7 @@ import (
 )
 
 func main() {
-	applicationPublicId := "applicationPublicId_example" // string | 
+	applicationPublicId := "applicationPublicId_example" // string | Provide the application public ID assigned by IQ Server.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -263,7 +271,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationPublicId** | **string** |  | 
+**applicationPublicId** | **string** | Provide the application public ID assigned by IQ Server. | 
 
 ### Other Parameters
 
@@ -298,6 +306,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -311,7 +321,7 @@ import (
 )
 
 func main() {
-	applicationPublicId := "applicationPublicId_example" // string | 
+	applicationPublicId := "applicationPublicId_example" // string | The application public ID 
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -331,7 +341,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationPublicId** | **string** |  | 
+**applicationPublicId** | **string** | The application public ID  | 
 
 ### Other Parameters
 
@@ -366,6 +376,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -379,7 +391,7 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | The organizationId assigned by IQ Server.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -399,7 +411,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | The organizationId assigned by IQ Server. | 
 
 ### Other Parameters
 
@@ -434,6 +446,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -447,7 +461,7 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | The organizationId assigned by IQ Server.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -467,7 +481,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | The organizationId assigned by IQ Server. | 
 
 ### Other Parameters
 
@@ -502,6 +516,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -515,7 +531,7 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | The organizationId assigned by IQ Server.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -535,7 +551,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | The organizationId assigned by IQ Server. | 
 
 ### Other Parameters
 
@@ -567,6 +583,8 @@ Name | Type | Description  | Notes
 ## GetTagsUsedByApplications
 
 > []ApiApplicationCategoryDTO GetTagsUsedByApplications(ctx).Execute()
+
+
 
 
 
@@ -629,6 +647,8 @@ Other parameters are passed through a pointer to a apiGetTagsUsedByApplicationsR
 
 
 
+
+
 ### Example
 
 ```go
@@ -642,8 +662,8 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
-	apiApplicationCategoryDTO := *sonatypeiq.NewApiApplicationCategoryDTO() // ApiApplicationCategoryDTO |  (optional)
+	organizationId := "organizationId_example" // string | The organizationId assigned by IQ Server.
+	apiApplicationCategoryDTO := *sonatypeiq.NewApiApplicationCategoryDTO() // ApiApplicationCategoryDTO | Specify the id (application category id) and id of the organization that owns this  application category, to update the name, description and color.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -663,7 +683,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | The organizationId assigned by IQ Server. | 
 
 ### Other Parameters
 
@@ -673,7 +693,7 @@ Other parameters are passed through a pointer to a apiUpdateTagRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **apiApplicationCategoryDTO** | [**ApiApplicationCategoryDTO**](ApiApplicationCategoryDTO.md) |  | 
+ **apiApplicationCategoryDTO** | [**ApiApplicationCategoryDTO**](ApiApplicationCategoryDTO.md) | Specify the id (application category id) and id of the organization that owns this  application category, to update the name, description and color. | 
 
 ### Return type
 

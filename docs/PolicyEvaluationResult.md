@@ -8,13 +8,18 @@ Name | Type | Description | Notes
 **Alerts** | Pointer to [**[]PolicyAlert**](PolicyAlert.md) |  | [optional] 
 **CriticalComponentCount** | Pointer to **int32** |  | [optional] 
 **CriticalPolicyViolationCount** | Pointer to **int32** |  | [optional] 
+**CriticalSastPolicyViolationCount** | Pointer to **int32** |  | [optional] 
 **GrandfatheredPolicyViolationCount** | Pointer to **int32** |  | [optional] 
 **LegacyViolationCount** | Pointer to **int32** |  | [optional] 
 **ModerateComponentCount** | Pointer to **int32** |  | [optional] 
 **ModeratePolicyViolationCount** | Pointer to **int32** |  | [optional] 
+**ModerateSastPolicyViolationCount** | Pointer to **int32** |  | [optional] 
+**SastAlerts** | Pointer to [**[]PolicyAlert**](PolicyAlert.md) |  | [optional] 
 **SevereComponentCount** | Pointer to **int32** |  | [optional] 
 **SeverePolicyViolationCount** | Pointer to **int32** |  | [optional] 
+**SevereSastPolicyViolationCount** | Pointer to **int32** |  | [optional] 
 **TotalComponentCount** | Pointer to **int32** |  | [optional] 
+**TotalSastFindingCount** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -135,6 +140,31 @@ SetCriticalPolicyViolationCount sets CriticalPolicyViolationCount field to given
 
 HasCriticalPolicyViolationCount returns a boolean if a field has been set.
 
+### GetCriticalSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) GetCriticalSastPolicyViolationCount() int32`
+
+GetCriticalSastPolicyViolationCount returns the CriticalSastPolicyViolationCount field if non-nil, zero value otherwise.
+
+### GetCriticalSastPolicyViolationCountOk
+
+`func (o *PolicyEvaluationResult) GetCriticalSastPolicyViolationCountOk() (*int32, bool)`
+
+GetCriticalSastPolicyViolationCountOk returns a tuple with the CriticalSastPolicyViolationCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCriticalSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) SetCriticalSastPolicyViolationCount(v int32)`
+
+SetCriticalSastPolicyViolationCount sets CriticalSastPolicyViolationCount field to given value.
+
+### HasCriticalSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) HasCriticalSastPolicyViolationCount() bool`
+
+HasCriticalSastPolicyViolationCount returns a boolean if a field has been set.
+
 ### GetGrandfatheredPolicyViolationCount
 
 `func (o *PolicyEvaluationResult) GetGrandfatheredPolicyViolationCount() int32`
@@ -235,6 +265,56 @@ SetModeratePolicyViolationCount sets ModeratePolicyViolationCount field to given
 
 HasModeratePolicyViolationCount returns a boolean if a field has been set.
 
+### GetModerateSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) GetModerateSastPolicyViolationCount() int32`
+
+GetModerateSastPolicyViolationCount returns the ModerateSastPolicyViolationCount field if non-nil, zero value otherwise.
+
+### GetModerateSastPolicyViolationCountOk
+
+`func (o *PolicyEvaluationResult) GetModerateSastPolicyViolationCountOk() (*int32, bool)`
+
+GetModerateSastPolicyViolationCountOk returns a tuple with the ModerateSastPolicyViolationCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModerateSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) SetModerateSastPolicyViolationCount(v int32)`
+
+SetModerateSastPolicyViolationCount sets ModerateSastPolicyViolationCount field to given value.
+
+### HasModerateSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) HasModerateSastPolicyViolationCount() bool`
+
+HasModerateSastPolicyViolationCount returns a boolean if a field has been set.
+
+### GetSastAlerts
+
+`func (o *PolicyEvaluationResult) GetSastAlerts() []PolicyAlert`
+
+GetSastAlerts returns the SastAlerts field if non-nil, zero value otherwise.
+
+### GetSastAlertsOk
+
+`func (o *PolicyEvaluationResult) GetSastAlertsOk() (*[]PolicyAlert, bool)`
+
+GetSastAlertsOk returns a tuple with the SastAlerts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSastAlerts
+
+`func (o *PolicyEvaluationResult) SetSastAlerts(v []PolicyAlert)`
+
+SetSastAlerts sets SastAlerts field to given value.
+
+### HasSastAlerts
+
+`func (o *PolicyEvaluationResult) HasSastAlerts() bool`
+
+HasSastAlerts returns a boolean if a field has been set.
+
 ### GetSevereComponentCount
 
 `func (o *PolicyEvaluationResult) GetSevereComponentCount() int32`
@@ -285,6 +365,31 @@ SetSeverePolicyViolationCount sets SeverePolicyViolationCount field to given val
 
 HasSeverePolicyViolationCount returns a boolean if a field has been set.
 
+### GetSevereSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) GetSevereSastPolicyViolationCount() int32`
+
+GetSevereSastPolicyViolationCount returns the SevereSastPolicyViolationCount field if non-nil, zero value otherwise.
+
+### GetSevereSastPolicyViolationCountOk
+
+`func (o *PolicyEvaluationResult) GetSevereSastPolicyViolationCountOk() (*int32, bool)`
+
+GetSevereSastPolicyViolationCountOk returns a tuple with the SevereSastPolicyViolationCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSevereSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) SetSevereSastPolicyViolationCount(v int32)`
+
+SetSevereSastPolicyViolationCount sets SevereSastPolicyViolationCount field to given value.
+
+### HasSevereSastPolicyViolationCount
+
+`func (o *PolicyEvaluationResult) HasSevereSastPolicyViolationCount() bool`
+
+HasSevereSastPolicyViolationCount returns a boolean if a field has been set.
+
 ### GetTotalComponentCount
 
 `func (o *PolicyEvaluationResult) GetTotalComponentCount() int32`
@@ -309,6 +414,31 @@ SetTotalComponentCount sets TotalComponentCount field to given value.
 `func (o *PolicyEvaluationResult) HasTotalComponentCount() bool`
 
 HasTotalComponentCount returns a boolean if a field has been set.
+
+### GetTotalSastFindingCount
+
+`func (o *PolicyEvaluationResult) GetTotalSastFindingCount() int32`
+
+GetTotalSastFindingCount returns the TotalSastFindingCount field if non-nil, zero value otherwise.
+
+### GetTotalSastFindingCountOk
+
+`func (o *PolicyEvaluationResult) GetTotalSastFindingCountOk() (*int32, bool)`
+
+GetTotalSastFindingCountOk returns a tuple with the TotalSastFindingCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalSastFindingCount
+
+`func (o *PolicyEvaluationResult) SetTotalSastFindingCount(v int32)`
+
+SetTotalSastFindingCount sets TotalSastFindingCount field to given value.
+
+### HasTotalSastFindingCount
+
+`func (o *PolicyEvaluationResult) HasTotalSastFindingCount() bool`
+
+HasTotalSastFindingCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

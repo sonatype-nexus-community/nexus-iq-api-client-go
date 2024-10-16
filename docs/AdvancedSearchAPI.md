@@ -71,7 +71,7 @@ Other parameters are passed through a pointer to a apiCreateSearchIndexAsyncRequ
 
 ## GetExportResults
 
-> GetExportResults(ctx).Query(query).AllComponents(allComponents).Mode(mode).Execute()
+> GetExportResults(ctx).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Mode(mode).Execute()
 
 
 
@@ -91,12 +91,14 @@ import (
 
 func main() {
 	query := "query_example" // string | A well-formed search query.
+	pageSize := int32(56) // int32 | Enter the no. of results that should be visible per page, unset gives all results (optional)
+	page := int32(56) // int32 | Enter the page no. for the page containing results (optional)
 	allComponents := true // bool | Set to `true` to retrieve results that include components with no violations. (optional) (default to false)
 	mode := "mode_example" // string |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.AdvancedSearchAPI.GetExportResults(context.Background()).Query(query).AllComponents(allComponents).Mode(mode).Execute()
+	r, err := apiClient.AdvancedSearchAPI.GetExportResults(context.Background()).Query(query).PageSize(pageSize).Page(page).AllComponents(allComponents).Mode(mode).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AdvancedSearchAPI.GetExportResults``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -116,6 +118,8 @@ Other parameters are passed through a pointer to a apiGetExportResultsRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **string** | A well-formed search query. | 
+ **pageSize** | **int32** | Enter the no. of results that should be visible per page, unset gives all results | 
+ **page** | **int32** | Enter the page no. for the page containing results | 
  **allComponents** | **bool** | Set to &#x60;true&#x60; to retrieve results that include components with no violations. | [default to false]
  **mode** | **string** |  | 
 

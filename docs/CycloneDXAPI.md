@@ -32,7 +32,7 @@ import (
 func main() {
 	applicationId := "applicationId_example" // string | Enter the internal applicationId for the application you want to generate the SBOM. You can also retrieve the applicationId using the Application REST API.
 	reportId := "reportId_example" // string | Enter the reportId to generate the SBOM for the application for a specific scan report.
-	cdxVersion := "cdxVersion_example" // string | Possible values are 1.1|1.2|1.3|1.4|1.5.
+	cdxVersion := "cdxVersion_example" // string | Possible values are 1.1|1.2|1.3|1.4|1.5|1.6.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **applicationId** | **string** | Enter the internal applicationId for the application you want to generate the SBOM. You can also retrieve the applicationId using the Application REST API. | 
 **reportId** | **string** | Enter the reportId to generate the SBOM for the application for a specific scan report. | 
-**cdxVersion** | **string** | Possible values are 1.1|1.2|1.3|1.4|1.5. | 
+**cdxVersion** | **string** | Possible values are 1.1|1.2|1.3|1.4|1.5|1.6. | 
 
 ### Other Parameters
 
@@ -106,7 +106,7 @@ import (
 func main() {
 	applicationId := "applicationId_example" // string | Enter the internal applicationId for the application you want to generate the SBOM. You can also retrieve the applicationId using the Application REST API.
 	stageId := "stageId_example" // string | Enter the stageId to generate the SBOM based on the latest application policy evaluation at that stage. Allowed values for stageId are 'develop', 'source', 'build', 'stage-release', 'release', and, 'operate'.
-	cdxVersion := "cdxVersion_example" // string | Possible values are 1.1|1.2|1.3|1.4|1.5.
+	cdxVersion := "cdxVersion_example" // string | Possible values are 1.1|1.2|1.3|1.4|1.5|1.6.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **applicationId** | **string** | Enter the internal applicationId for the application you want to generate the SBOM. You can also retrieve the applicationId using the Application REST API. | 
 **stageId** | **string** | Enter the stageId to generate the SBOM based on the latest application policy evaluation at that stage. Allowed values for stageId are &#39;develop&#39;, &#39;source&#39;, &#39;build&#39;, &#39;stage-release&#39;, &#39;release&#39;, and, &#39;operate&#39;. | 
-**cdxVersion** | **string** | Possible values are 1.1|1.2|1.3|1.4|1.5. | 
+**cdxVersion** | **string** | Possible values are 1.1|1.2|1.3|1.4|1.5|1.6. | 
 
 ### Other Parameters
 

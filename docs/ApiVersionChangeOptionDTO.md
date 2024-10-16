@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | Pointer to [**ApiComponentChangeActionDTO**](ApiComponentChangeActionDTO.md) |  | [optional] 
+**DirectDependency** | Pointer to **bool** |  | [optional] 
+**DirectDependencyData** | Pointer to [**[]ApiComponentChangeActionDTO**](ApiComponentChangeActionDTO.md) |  | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -50,6 +52,56 @@ SetData sets Data field to given value.
 `func (o *ApiVersionChangeOptionDTO) HasData() bool`
 
 HasData returns a boolean if a field has been set.
+
+### GetDirectDependency
+
+`func (o *ApiVersionChangeOptionDTO) GetDirectDependency() bool`
+
+GetDirectDependency returns the DirectDependency field if non-nil, zero value otherwise.
+
+### GetDirectDependencyOk
+
+`func (o *ApiVersionChangeOptionDTO) GetDirectDependencyOk() (*bool, bool)`
+
+GetDirectDependencyOk returns a tuple with the DirectDependency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDirectDependency
+
+`func (o *ApiVersionChangeOptionDTO) SetDirectDependency(v bool)`
+
+SetDirectDependency sets DirectDependency field to given value.
+
+### HasDirectDependency
+
+`func (o *ApiVersionChangeOptionDTO) HasDirectDependency() bool`
+
+HasDirectDependency returns a boolean if a field has been set.
+
+### GetDirectDependencyData
+
+`func (o *ApiVersionChangeOptionDTO) GetDirectDependencyData() []ApiComponentChangeActionDTO`
+
+GetDirectDependencyData returns the DirectDependencyData field if non-nil, zero value otherwise.
+
+### GetDirectDependencyDataOk
+
+`func (o *ApiVersionChangeOptionDTO) GetDirectDependencyDataOk() (*[]ApiComponentChangeActionDTO, bool)`
+
+GetDirectDependencyDataOk returns a tuple with the DirectDependencyData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDirectDependencyData
+
+`func (o *ApiVersionChangeOptionDTO) SetDirectDependencyData(v []ApiComponentChangeActionDTO)`
+
+SetDirectDependencyData sets DirectDependencyData field to given value.
+
+### HasDirectDependencyData
+
+`func (o *ApiVersionChangeOptionDTO) HasDirectDependencyData() bool`
+
+HasDirectDependencyData returns a boolean if a field has been set.
 
 ### GetType
 

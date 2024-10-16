@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **PolicyName** | Pointer to **string** |  | [optional] 
 **PolicyViolationId** | Pointer to **string** |  | [optional] 
 **PolicyWaiverId** | Pointer to **string** |  | [optional] 
+**ReasonText** | Pointer to **string** |  | [optional] 
 **ScopeOwnerId** | Pointer to **string** |  | [optional] 
 **ScopeOwnerName** | Pointer to **string** |  | [optional] 
 **ScopeOwnerType** | Pointer to **string** |  | [optional] 
@@ -522,6 +523,31 @@ SetPolicyWaiverId sets PolicyWaiverId field to given value.
 `func (o *ApiPolicyWaiverDTO) HasPolicyWaiverId() bool`
 
 HasPolicyWaiverId returns a boolean if a field has been set.
+
+### GetReasonText
+
+`func (o *ApiPolicyWaiverDTO) GetReasonText() string`
+
+GetReasonText returns the ReasonText field if non-nil, zero value otherwise.
+
+### GetReasonTextOk
+
+`func (o *ApiPolicyWaiverDTO) GetReasonTextOk() (*string, bool)`
+
+GetReasonTextOk returns a tuple with the ReasonText field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasonText
+
+`func (o *ApiPolicyWaiverDTO) SetReasonText(v string)`
+
+SetReasonText sets ReasonText field to given value.
+
+### HasReasonText
+
+`func (o *ApiPolicyWaiverDTO) HasReasonText() bool`
+
+HasReasonText returns a boolean if a field has been set.
 
 ### GetScopeOwnerId
 

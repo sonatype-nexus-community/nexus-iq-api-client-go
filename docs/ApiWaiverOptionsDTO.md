@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Comment** | Pointer to **string** |  | [optional] 
 **ExpiryTime** | Pointer to **time.Time** |  | [optional] 
 **MatcherStrategy** | Pointer to **string** |  | [optional] 
+**WaiverReasonId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetMatcherStrategy sets MatcherStrategy field to given value.
 `func (o *ApiWaiverOptionsDTO) HasMatcherStrategy() bool`
 
 HasMatcherStrategy returns a boolean if a field has been set.
+
+### GetWaiverReasonId
+
+`func (o *ApiWaiverOptionsDTO) GetWaiverReasonId() string`
+
+GetWaiverReasonId returns the WaiverReasonId field if non-nil, zero value otherwise.
+
+### GetWaiverReasonIdOk
+
+`func (o *ApiWaiverOptionsDTO) GetWaiverReasonIdOk() (*string, bool)`
+
+GetWaiverReasonIdOk returns a tuple with the WaiverReasonId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWaiverReasonId
+
+`func (o *ApiWaiverOptionsDTO) SetWaiverReasonId(v string)`
+
+SetWaiverReasonId sets WaiverReasonId field to given value.
+
+### HasWaiverReasonId
+
+`func (o *ApiWaiverOptionsDTO) HasWaiverReasonId() bool`
+
+HasWaiverReasonId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
