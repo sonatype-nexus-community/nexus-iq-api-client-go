@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**GetApplicableAutoWaiver**](PolicyViolationDetailsAPI.md#GetApplicableAutoWaiver) | **Get** /api/v2/policyViolations/{violationId}/applicableAutoWaiver | 
 [**GetApplicableWaivers**](PolicyViolationDetailsAPI.md#GetApplicableWaivers) | **Get** /api/v2/policyViolations/{violationId}/applicableWaivers | 
 [**GetCrossStagePolicyViolationByConstituentId**](PolicyViolationDetailsAPI.md#GetCrossStagePolicyViolationByConstituentId) | **Get** /api/v2/policyViolations/crossStage | 
 [**GetCrossStagePolicyViolationById**](PolicyViolationDetailsAPI.md#GetCrossStagePolicyViolationById) | **Get** /api/v2/policyViolations/crossStage/{violationId} | 
@@ -12,6 +13,76 @@ Method | HTTP request | Description
 [**GetTransitivePolicyViolationsByAppScanComponent**](PolicyViolationDetailsAPI.md#GetTransitivePolicyViolationsByAppScanComponent) | **Get** /api/v2/policyViolations/transitive/{ownerType}/{ownerId}/{scanId} | 
 [**GetTransitivePolicyViolationsByOwnerStageComponent**](PolicyViolationDetailsAPI.md#GetTransitivePolicyViolationsByOwnerStageComponent) | **Get** /api/v2/policyViolations/transitive/{ownerType}/{ownerId}/stages/{stageId} | 
 
+
+
+## GetApplicableAutoWaiver
+
+> ApiAutoPolicyWaiverDTO GetApplicableAutoWaiver(ctx, violationId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	violationId := "violationId_example" // string | Enter the policy violationId for which you want to obtain the applicable auto policy waiver 
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.PolicyViolationDetailsAPI.GetApplicableAutoWaiver(context.Background(), violationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationDetailsAPI.GetApplicableAutoWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetApplicableAutoWaiver`: ApiAutoPolicyWaiverDTO
+	fmt.Fprintf(os.Stdout, "Response from `PolicyViolationDetailsAPI.GetApplicableAutoWaiver`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**violationId** | **string** | Enter the policy violationId for which you want to obtain the applicable auto policy waiver  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetApplicableAutoWaiverRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetApplicableWaivers

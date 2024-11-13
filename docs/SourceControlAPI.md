@@ -18,6 +18,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -31,9 +33,9 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
-	apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
+	ownerType := "ownerType_example" // string | Enter the value for ownerType.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the value for internal ownerId. Use ROOT_ORGANIZATION_ID for root organization.
+	apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO | Specify the SCM settings for the ownerId specified above in the request JSON.<ul><li><code>id</code> is the internal owner ID.</li><li><code>repositoryUrl</code> is the http(s) and ssh urls for the application specified in the ownerId.</li><li><code>username</code> is optional, can be provided for Bitbucket Server and Cloud.</li><li><code>token</code> is optional,if inherited. If provided, this value will override the value inherited from the root organization, organization or application level.<li><code>provider</code> is the name of of the SCM system. Allowed values are <code>azure</code>, <code>github</code>, <code>gitlab</code>, and <code>bitbucket</code>.</li><li><code>baseBranch</code> is required for the root organization. Organizations and applications inherit from the root unless overridden.</li><li><code>enablePullRequests</code> has been deprecated in version 124.</li><li><code>remediationPullRequestsEnabled</code> is optional. Set it to `true` to enable the Automated Pull Requests.</li><li><code>enableStatusChecks</code> has been deprecated in version 124.</li><li><code>statusChecksEnabled</code> is an internal field.</li><li><code>pullRequestCommentingEnabled</code> is optional. Set it to `true` to enable the  Pull Request Commenting feature.</li><li><code>sourceControlEvaluationsEnabled</code> is set to `true` to enable source control evaluations for the continuous risk profile feature.</li><li><code>sourceControlScanTarget</code> is the path inside the repository.</li><li><code>sshEnabled</code> is set to `true` to enable ssh.</li><li><code>commitStatusEnabled</code> is set to `true` if interaction with the commit statuses on the SCM is enabled.</li></ul> (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -53,8 +55,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
+**ownerType** | **string** | Enter the value for ownerType. | 
+**internalOwnerId** | **string** | Enter the value for internal ownerId. Use ROOT_ORGANIZATION_ID for root organization. | 
 
 ### Other Parameters
 
@@ -65,7 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **apiSourceControlDTO** | [**ApiSourceControlDTO**](ApiSourceControlDTO.md) |  | 
+ **apiSourceControlDTO** | [**ApiSourceControlDTO**](ApiSourceControlDTO.md) | Specify the SCM settings for the ownerId specified above in the request JSON.&lt;ul&gt;&lt;li&gt;&lt;code&gt;id&lt;/code&gt; is the internal owner ID.&lt;/li&gt;&lt;li&gt;&lt;code&gt;repositoryUrl&lt;/code&gt; is the http(s) and ssh urls for the application specified in the ownerId.&lt;/li&gt;&lt;li&gt;&lt;code&gt;username&lt;/code&gt; is optional, can be provided for Bitbucket Server and Cloud.&lt;/li&gt;&lt;li&gt;&lt;code&gt;token&lt;/code&gt; is optional,if inherited. If provided, this value will override the value inherited from the root organization, organization or application level.&lt;li&gt;&lt;code&gt;provider&lt;/code&gt; is the name of of the SCM system. Allowed values are &lt;code&gt;azure&lt;/code&gt;, &lt;code&gt;github&lt;/code&gt;, &lt;code&gt;gitlab&lt;/code&gt;, and &lt;code&gt;bitbucket&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;&lt;code&gt;baseBranch&lt;/code&gt; is required for the root organization. Organizations and applications inherit from the root unless overridden.&lt;/li&gt;&lt;li&gt;&lt;code&gt;enablePullRequests&lt;/code&gt; has been deprecated in version 124.&lt;/li&gt;&lt;li&gt;&lt;code&gt;remediationPullRequestsEnabled&lt;/code&gt; is optional. Set it to &#x60;true&#x60; to enable the Automated Pull Requests.&lt;/li&gt;&lt;li&gt;&lt;code&gt;enableStatusChecks&lt;/code&gt; has been deprecated in version 124.&lt;/li&gt;&lt;li&gt;&lt;code&gt;statusChecksEnabled&lt;/code&gt; is an internal field.&lt;/li&gt;&lt;li&gt;&lt;code&gt;pullRequestCommentingEnabled&lt;/code&gt; is optional. Set it to &#x60;true&#x60; to enable the  Pull Request Commenting feature.&lt;/li&gt;&lt;li&gt;&lt;code&gt;sourceControlEvaluationsEnabled&lt;/code&gt; is set to &#x60;true&#x60; to enable source control evaluations for the continuous risk profile feature.&lt;/li&gt;&lt;li&gt;&lt;code&gt;sourceControlScanTarget&lt;/code&gt; is the path inside the repository.&lt;/li&gt;&lt;li&gt;&lt;code&gt;sshEnabled&lt;/code&gt; is set to &#x60;true&#x60; to enable ssh.&lt;/li&gt;&lt;li&gt;&lt;code&gt;commitStatusEnabled&lt;/code&gt; is set to &#x60;true&#x60; if interaction with the commit statuses on the SCM is enabled.&lt;/li&gt;&lt;/ul&gt; | 
 
 ### Return type
 
@@ -91,6 +93,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -104,7 +108,7 @@ import (
 )
 
 func main() {
-	publicId := "publicId_example" // string | 
+	publicId := "publicId_example" // string | Enter the public applicationId for automatic role assignment.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -124,7 +128,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**publicId** | **string** |  | 
+**publicId** | **string** | Enter the public applicationId for automatic role assignment. | 
 
 ### Other Parameters
 
@@ -159,6 +163,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -172,8 +178,8 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
+	ownerType := "ownerType_example" // string | Enter the value for ownerType.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the value for internal ownerId.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -191,8 +197,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
+**ownerType** | **string** | Enter the value for ownerType. | 
+**internalOwnerId** | **string** | Enter the value for internal ownerId. | 
 
 ### Other Parameters
 
@@ -215,7 +221,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -225,6 +231,8 @@ Name | Type | Description  | Notes
 ## GetSourceControl1
 
 > ApiSourceControlDTO GetSourceControl1(ctx, ownerType, internalOwnerId).Execute()
+
+
 
 
 
@@ -241,8 +249,8 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
+	ownerType := "ownerType_example" // string | Enter the value for ownerType.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the value for internal ownerId. Use ROOT_ORGANIZATION_ID for the root organization
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -262,8 +270,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
+**ownerType** | **string** | Enter the value for ownerType. | 
+**internalOwnerId** | **string** | Enter the value for internal ownerId. Use ROOT_ORGANIZATION_ID for the root organization | 
 
 ### Other Parameters
 
@@ -299,6 +307,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -312,9 +322,9 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
-	apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO |  (optional)
+	ownerType := "ownerType_example" // string | Enter the value for ownerType.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the internal ownerId. Use ROOT_ORGANIZATION_ID for the root organization.
+	apiSourceControlDTO := *sonatypeiq.NewApiSourceControlDTO() // ApiSourceControlDTO | Specify the SCM settings for the ownerId specified above in the request JSON.<ul><li><code>id</code> is the internal owner ID.</li><li><code>repositoryUrl</code> is the http(s) and ssh urls for the application specified in the ownerId.</li><li><code>username</code> is optional, can be provided for Bitbucket Server and Cloud.</li><li><code>token</code> is optional if inherited. If provided, this value will override the value inherited from the root organization, organization or application level.<li><code>provider</code> is the name of of the SCM system. Allowed values are <code>azure</code>, <code>github</code>, <code>gitlab</code>, and <code>bitbucket</code>.</li><li><code>baseBranch</code> is required for the root organization. Organizations and applications inherit from the root unless overridden.</li><li><code>enablePullRequests</code> has been deprecated in version 124.</li><li><code>remediationPullRequestsEnabled</code> is optional. Set it to `true` to enable the Automated Pull Requests.</li><li><code>enableStatusChecks</code> has been deprecated in version 124.</li><li><code>statusChecksEnabled</code> is an internal field.</li><li><code>pullRequestCommentingEnabled</code> is optional. Set it to `true` to enable the  Pull Request Commenting feature.</li><li><code>sourceControlEvaluationsEnabled</code> is set to `true` to enable source control evaluations for the continuous risk profile feature.</li><li><code>sourceControlScanTarget</code> is the path inside the repository.</li><li><code>sshEnabled</code> is set to `true` to enable ssh.</li><li><code>commitStatusEnabled</code> is set to `true` if interaction with the commit statuses on the SCM is enabled.</li></ul> (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -334,8 +344,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
+**ownerType** | **string** | Enter the value for ownerType. | 
+**internalOwnerId** | **string** | Enter the internal ownerId. Use ROOT_ORGANIZATION_ID for the root organization. | 
 
 ### Other Parameters
 
@@ -346,7 +356,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **apiSourceControlDTO** | [**ApiSourceControlDTO**](ApiSourceControlDTO.md) |  | 
+ **apiSourceControlDTO** | [**ApiSourceControlDTO**](ApiSourceControlDTO.md) | Specify the SCM settings for the ownerId specified above in the request JSON.&lt;ul&gt;&lt;li&gt;&lt;code&gt;id&lt;/code&gt; is the internal owner ID.&lt;/li&gt;&lt;li&gt;&lt;code&gt;repositoryUrl&lt;/code&gt; is the http(s) and ssh urls for the application specified in the ownerId.&lt;/li&gt;&lt;li&gt;&lt;code&gt;username&lt;/code&gt; is optional, can be provided for Bitbucket Server and Cloud.&lt;/li&gt;&lt;li&gt;&lt;code&gt;token&lt;/code&gt; is optional if inherited. If provided, this value will override the value inherited from the root organization, organization or application level.&lt;li&gt;&lt;code&gt;provider&lt;/code&gt; is the name of of the SCM system. Allowed values are &lt;code&gt;azure&lt;/code&gt;, &lt;code&gt;github&lt;/code&gt;, &lt;code&gt;gitlab&lt;/code&gt;, and &lt;code&gt;bitbucket&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;&lt;code&gt;baseBranch&lt;/code&gt; is required for the root organization. Organizations and applications inherit from the root unless overridden.&lt;/li&gt;&lt;li&gt;&lt;code&gt;enablePullRequests&lt;/code&gt; has been deprecated in version 124.&lt;/li&gt;&lt;li&gt;&lt;code&gt;remediationPullRequestsEnabled&lt;/code&gt; is optional. Set it to &#x60;true&#x60; to enable the Automated Pull Requests.&lt;/li&gt;&lt;li&gt;&lt;code&gt;enableStatusChecks&lt;/code&gt; has been deprecated in version 124.&lt;/li&gt;&lt;li&gt;&lt;code&gt;statusChecksEnabled&lt;/code&gt; is an internal field.&lt;/li&gt;&lt;li&gt;&lt;code&gt;pullRequestCommentingEnabled&lt;/code&gt; is optional. Set it to &#x60;true&#x60; to enable the  Pull Request Commenting feature.&lt;/li&gt;&lt;li&gt;&lt;code&gt;sourceControlEvaluationsEnabled&lt;/code&gt; is set to &#x60;true&#x60; to enable source control evaluations for the continuous risk profile feature.&lt;/li&gt;&lt;li&gt;&lt;code&gt;sourceControlScanTarget&lt;/code&gt; is the path inside the repository.&lt;/li&gt;&lt;li&gt;&lt;code&gt;sshEnabled&lt;/code&gt; is set to &#x60;true&#x60; to enable ssh.&lt;/li&gt;&lt;li&gt;&lt;code&gt;commitStatusEnabled&lt;/code&gt; is set to &#x60;true&#x60; if interaction with the commit statuses on the SCM is enabled.&lt;/li&gt;&lt;/ul&gt; | 
 
 ### Return type
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Cpe** | Pointer to **string** |  | [optional] 
 **DependencyData** | Pointer to [**ApiDependencyDataDTO**](ApiDependencyDataDTO.md) |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
+**Filenames** | Pointer to **[]string** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
 **IdentificationSource** | Pointer to **string** |  | [optional] 
 **LicenseData** | Pointer to [**ApiLicenseDataDTOV2**](ApiLicenseDataDTOV2.md) |  | [optional] 
@@ -138,6 +139,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *ApiReportComponentDTOV2) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetFilenames
+
+`func (o *ApiReportComponentDTOV2) GetFilenames() []string`
+
+GetFilenames returns the Filenames field if non-nil, zero value otherwise.
+
+### GetFilenamesOk
+
+`func (o *ApiReportComponentDTOV2) GetFilenamesOk() (*[]string, bool)`
+
+GetFilenamesOk returns a tuple with the Filenames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilenames
+
+`func (o *ApiReportComponentDTOV2) SetFilenames(v []string)`
+
+SetFilenames sets Filenames field to given value.
+
+### HasFilenames
+
+`func (o *ApiReportComponentDTOV2) HasFilenames() bool`
+
+HasFilenames returns a boolean if a field has been set.
 
 ### GetHash
 

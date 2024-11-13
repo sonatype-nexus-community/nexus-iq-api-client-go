@@ -19,6 +19,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -32,8 +34,8 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
+	ownerType := "ownerType_example" // string | Enter the ownerType for which you want to retrieve users and their role Ids.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the corresponding id for the ownerType specified above.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -53,8 +55,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
+**ownerType** | **string** | Enter the ownerType for which you want to retrieve users and their role Ids. | 
+**internalOwnerId** | **string** | Enter the corresponding id for the ownerType specified above. | 
 
 ### Other Parameters
 
@@ -90,6 +92,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -103,7 +107,7 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
+	ownerType := "ownerType_example" // string | Enter the value for ownerType. Using `global` will return the users and groups who have been assigned the administrator role.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -123,7 +127,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
+**ownerType** | **string** | Enter the value for ownerType. Using &#x60;global&#x60; will return the users and groups who have been assigned the administrator role. | 
 
 ### Other Parameters
 
@@ -158,6 +162,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -171,11 +177,11 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
-	roleId := "roleId_example" // string | 
-	memberType := "memberType_example" // string | 
-	memberName := "memberName_example" // string | 
+	ownerType := "ownerType_example" // string | Enter the value for the ownerType for which you want to grant the role.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the value for the internalId associated with the ownerType specified above.
+	roleId := "roleId_example" // string | Enter the roleId for the role to be granted.  Use the Roles REST API for roleIds and descriptions.
+	memberType := "memberType_example" // string | Enter the value for memberType, to specify a user or a user group.
+	memberName := "memberName_example" // string | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -193,11 +199,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
-**roleId** | **string** |  | 
-**memberType** | **string** |  | 
-**memberName** | **string** |  | 
+**ownerType** | **string** | Enter the value for the ownerType for which you want to grant the role. | 
+**internalOwnerId** | **string** | Enter the value for the internalId associated with the ownerType specified above. | 
+**roleId** | **string** | Enter the roleId for the role to be granted.  Use the Roles REST API for roleIds and descriptions. | 
+**memberType** | **string** | Enter the value for memberType, to specify a user or a user group. | 
+**memberName** | **string** | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above. | 
 
 ### Other Parameters
 
@@ -223,7 +229,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -233,6 +239,8 @@ Name | Type | Description  | Notes
 ## GrantRoleMembershipGlobalOrRepositoryContainer
 
 > GrantRoleMembershipGlobalOrRepositoryContainer(ctx, ownerType, roleId, memberType, memberName).Execute()
+
+
 
 
 
@@ -249,10 +257,10 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	roleId := "roleId_example" // string | 
-	memberType := "memberType_example" // string | 
-	memberName := "memberName_example" // string | 
+	ownerType := "ownerType_example" // string | Enter the value for the ownerType for which you want to grant the role.
+	roleId := "roleId_example" // string | Enter the roleId for the role to be granted.  Use the Roles REST API for roleIds and descriptions.
+	memberType := "memberType_example" // string | Enter the value for memberType, to specify a user or a user group.
+	memberName := "memberName_example" // string | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -270,10 +278,10 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**roleId** | **string** |  | 
-**memberType** | **string** |  | 
-**memberName** | **string** |  | 
+**ownerType** | **string** | Enter the value for the ownerType for which you want to grant the role. | 
+**roleId** | **string** | Enter the roleId for the role to be granted.  Use the Roles REST API for roleIds and descriptions. | 
+**memberType** | **string** | Enter the value for memberType, to specify a user or a user group. | 
+**memberName** | **string** | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above. | 
 
 ### Other Parameters
 
@@ -298,7 +306,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -308,6 +316,8 @@ Name | Type | Description  | Notes
 ## RevokeRoleMembershipApplicationOrOrganization
 
 > RevokeRoleMembershipApplicationOrOrganization(ctx, ownerType, internalOwnerId, roleId, memberType, memberName).Execute()
+
+
 
 
 
@@ -324,11 +334,11 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
-	roleId := "roleId_example" // string | 
-	memberType := "memberType_example" // string | 
-	memberName := "memberName_example" // string | 
+	ownerType := "ownerType_example" // string | Enter the value for the ownerType for which you want to revoke the role. Using `global` will revoke the administrator role.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the internalId associated with the ownerType specified above.
+	roleId := "roleId_example" // string | Enter the roleId for the role to be revoked.
+	memberType := "memberType_example" // string | Enter the value for memberType, to specify a user or a user group.
+	memberName := "memberName_example" // string | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -346,11 +356,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
-**roleId** | **string** |  | 
-**memberType** | **string** |  | 
-**memberName** | **string** |  | 
+**ownerType** | **string** | Enter the value for the ownerType for which you want to revoke the role. Using &#x60;global&#x60; will revoke the administrator role. | 
+**internalOwnerId** | **string** | Enter the internalId associated with the ownerType specified above. | 
+**roleId** | **string** | Enter the roleId for the role to be revoked. | 
+**memberType** | **string** | Enter the value for memberType, to specify a user or a user group. | 
+**memberName** | **string** | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above. | 
 
 ### Other Parameters
 
@@ -376,7 +386,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -386,6 +396,8 @@ Name | Type | Description  | Notes
 ## RevokeRoleMembershipGlobalOrRepositoryContainer
 
 > RevokeRoleMembershipGlobalOrRepositoryContainer(ctx, ownerType, roleId, memberType, memberName).Execute()
+
+
 
 
 
@@ -402,10 +414,10 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	roleId := "roleId_example" // string | 
-	memberType := "memberType_example" // string | 
-	memberName := "memberName_example" // string | 
+	ownerType := "ownerType_example" // string | Enter the value for ownerType. Using `global` will revoke the administrator role.
+	roleId := "roleId_example" // string | Enter the roleId for the role to be revoked.
+	memberType := "memberType_example" // string | Enter the value for memberType, to specify a user or a user group.
+	memberName := "memberName_example" // string | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -423,10 +435,10 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**roleId** | **string** |  | 
-**memberType** | **string** |  | 
-**memberName** | **string** |  | 
+**ownerType** | **string** | Enter the value for ownerType. Using &#x60;global&#x60; will revoke the administrator role. | 
+**roleId** | **string** | Enter the roleId for the role to be revoked. | 
+**memberType** | **string** | Enter the value for memberType, to specify a user or a user group. | 
+**memberName** | **string** | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above. | 
 
 ### Other Parameters
 
@@ -451,7 +463,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

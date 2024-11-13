@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ConfigurationComplete** | Pointer to [**ValidationResult**](ValidationResult.md) |  | [optional] 
 **RepoPrivate** | Pointer to [**ValidationResult**](ValidationResult.md) |  | [optional] 
+**RepoPublic** | Pointer to [**ValidationResult**](ValidationResult.md) |  | [optional] 
 **SshConfiguration** | Pointer to [**ValidationResult**](ValidationResult.md) |  | [optional] 
 **TokenPermissions** | Pointer to [**ValidationResult**](ValidationResult.md) |  | [optional] 
 
@@ -77,6 +78,31 @@ SetRepoPrivate sets RepoPrivate field to given value.
 `func (o *ConfigurationValidationResult) HasRepoPrivate() bool`
 
 HasRepoPrivate returns a boolean if a field has been set.
+
+### GetRepoPublic
+
+`func (o *ConfigurationValidationResult) GetRepoPublic() ValidationResult`
+
+GetRepoPublic returns the RepoPublic field if non-nil, zero value otherwise.
+
+### GetRepoPublicOk
+
+`func (o *ConfigurationValidationResult) GetRepoPublicOk() (*ValidationResult, bool)`
+
+GetRepoPublicOk returns a tuple with the RepoPublic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRepoPublic
+
+`func (o *ConfigurationValidationResult) SetRepoPublic(v ValidationResult)`
+
+SetRepoPublic sets RepoPublic field to given value.
+
+### HasRepoPublic
+
+`func (o *ConfigurationValidationResult) HasRepoPublic() bool`
+
+HasRepoPublic returns a boolean if a field has been set.
 
 ### GetSshConfiguration
 

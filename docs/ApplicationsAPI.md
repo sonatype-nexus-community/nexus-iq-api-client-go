@@ -21,6 +21,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -34,7 +36,7 @@ import (
 )
 
 func main() {
-	apiApplicationDTO := *sonatypeiq.NewApiApplicationDTO() // ApiApplicationDTO |  (optional)
+	apiApplicationDTO := *sonatypeiq.NewApiApplicationDTO() // ApiApplicationDTO | Specify the applicationId, application name and the organizationId under which the application should be created. `contactUserName` corresponds to the 'contact' field in the UI and represents the user name. If LDAP is used for authentication, you can use LDAP usernames.`tagId` is the internal identifier for the Application Category that you want to apply to the application. Use the Application Categories REST API for the available categories and the corresponding tagIds. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -59,7 +61,7 @@ Other parameters are passed through a pointer to a apiAddApplicationRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiApplicationDTO** | [**ApiApplicationDTO**](ApiApplicationDTO.md) |  | 
+ **apiApplicationDTO** | [**ApiApplicationDTO**](ApiApplicationDTO.md) | Specify the applicationId, application name and the organizationId under which the application should be created. &#x60;contactUserName&#x60; corresponds to the &#39;contact&#39; field in the UI and represents the user name. If LDAP is used for authentication, you can use LDAP usernames.&#x60;tagId&#x60; is the internal identifier for the Application Category that you want to apply to the application. Use the Application Categories REST API for the available categories and the corresponding tagIds. | 
 
 ### Return type
 
@@ -85,6 +87,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -98,9 +102,9 @@ import (
 )
 
 func main() {
-	sourceApplicationId := "sourceApplicationId_example" // string | 
-	clonedApplicationName := "clonedApplicationName_example" // string |  (optional)
-	clonedApplicationPublicId := "clonedApplicationPublicId_example" // string |  (optional)
+	sourceApplicationId := "sourceApplicationId_example" // string | Enter the applicationId for the application to be cloned.
+	clonedApplicationName := "clonedApplicationName_example" // string | Enter the application name for the new cloned application. (optional)
+	clonedApplicationPublicId := "clonedApplicationPublicId_example" // string | Enter the applicationPublicId for the cloned application. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -120,7 +124,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceApplicationId** | **string** |  | 
+**sourceApplicationId** | **string** | Enter the applicationId for the application to be cloned. | 
 
 ### Other Parameters
 
@@ -130,8 +134,8 @@ Other parameters are passed through a pointer to a apiCloneApplicationRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **clonedApplicationName** | **string** |  | 
- **clonedApplicationPublicId** | **string** |  | 
+ **clonedApplicationName** | **string** | Enter the application name for the new cloned application. | 
+ **clonedApplicationPublicId** | **string** | Enter the applicationPublicId for the cloned application. | 
 
 ### Return type
 
@@ -157,6 +161,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -170,7 +176,7 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the applicationId to be deleted.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -188,7 +194,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
+**applicationId** | **string** | Enter the applicationId to be deleted. | 
 
 ### Other Parameters
 
@@ -210,7 +216,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -220,6 +226,8 @@ Name | Type | Description  | Notes
 ## GetApplication
 
 > ApiApplicationDTO GetApplication(ctx, applicationId).Execute()
+
+
 
 
 
@@ -236,7 +244,7 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the applicationId.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -256,7 +264,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
+**applicationId** | **string** | Enter the applicationId. | 
 
 ### Other Parameters
 
@@ -291,6 +299,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -304,8 +314,8 @@ import (
 )
 
 func main() {
-	publicId := []string{"Inner_example"} // []string |  (optional)
-	includeCategories := true // bool |  (optional) (default to false)
+	publicId := []string{"Inner_example"} // []string | Enter the applicationId. (optional)
+	includeCategories := true // bool | Set this parameter to `true` to obtain the application tags (application categories) in the response. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -330,8 +340,8 @@ Other parameters are passed through a pointer to a apiGetApplicationsRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **publicId** | **[]string** |  | 
- **includeCategories** | **bool** |  | [default to false]
+ **publicId** | **[]string** | Enter the applicationId. | 
+ **includeCategories** | **bool** | Set this parameter to &#x60;true&#x60; to obtain the application tags (application categories) in the response. | [default to false]
 
 ### Return type
 
@@ -357,6 +367,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -370,7 +382,7 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | Enter the organizationId.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -390,7 +402,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | Enter the organizationId. | 
 
 ### Other Parameters
 
@@ -425,6 +437,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -438,8 +452,8 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
-	organizationId := "organizationId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the applicationId of the application to be moved.
+	organizationId := "organizationId_example" // string | Enter the organizationId of the destination organization.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -459,8 +473,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
-**organizationId** | **string** |  | 
+**applicationId** | **string** | Enter the applicationId of the application to be moved. | 
+**organizationId** | **string** | Enter the organizationId of the destination organization. | 
 
 ### Other Parameters
 
@@ -496,6 +510,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -510,7 +526,7 @@ import (
 
 func main() {
 	applicationId := "applicationId_example" // string | 
-	apiApplicationDTO := *sonatypeiq.NewApiApplicationDTO() // ApiApplicationDTO |  (optional)
+	apiApplicationDTO := *sonatypeiq.NewApiApplicationDTO() // ApiApplicationDTO | Specify the applicationId, application name and the organizationId under which  the application exists. `contactUserName` corresponds to the 'contact' field in the UI and represents the user name. If LDAP is used for authentication, you can use LDAP usernames.`tagId` is the internal identifier for the Application Category that you want to apply to the application. . Use the Application Categories REST API for the available categories and the corresponding tagIds. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -540,7 +556,7 @@ Other parameters are passed through a pointer to a apiUpdateApplicationRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **apiApplicationDTO** | [**ApiApplicationDTO**](ApiApplicationDTO.md) |  | 
+ **apiApplicationDTO** | [**ApiApplicationDTO**](ApiApplicationDTO.md) | Specify the applicationId, application name and the organizationId under which  the application exists. &#x60;contactUserName&#x60; corresponds to the &#39;contact&#39; field in the UI and represents the user name. If LDAP is used for authentication, you can use LDAP usernames.&#x60;tagId&#x60; is the internal identifier for the Application Category that you want to apply to the application. . Use the Application Categories REST API for the available categories and the corresponding tagIds. | 
 
 ### Return type
 

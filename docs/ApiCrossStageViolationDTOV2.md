@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **PolicyOwner** | Pointer to [**PolicyOwner**](PolicyOwner.md) |  | [optional] 
 **PolicyThreatCategory** | Pointer to **string** |  | [optional] 
 **PolicyViolationId** | Pointer to **string** |  | [optional] 
+**ReachabilityStatus** | Pointer to **string** |  | [optional] 
 **StageData** | Pointer to [**map[string]StageData**](StageData.md) |  | [optional] 
 **ThreatLevel** | Pointer to **int32** |  | [optional] 
 
@@ -415,6 +416,31 @@ SetPolicyViolationId sets PolicyViolationId field to given value.
 `func (o *ApiCrossStageViolationDTOV2) HasPolicyViolationId() bool`
 
 HasPolicyViolationId returns a boolean if a field has been set.
+
+### GetReachabilityStatus
+
+`func (o *ApiCrossStageViolationDTOV2) GetReachabilityStatus() string`
+
+GetReachabilityStatus returns the ReachabilityStatus field if non-nil, zero value otherwise.
+
+### GetReachabilityStatusOk
+
+`func (o *ApiCrossStageViolationDTOV2) GetReachabilityStatusOk() (*string, bool)`
+
+GetReachabilityStatusOk returns a tuple with the ReachabilityStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReachabilityStatus
+
+`func (o *ApiCrossStageViolationDTOV2) SetReachabilityStatus(v string)`
+
+SetReachabilityStatus sets ReachabilityStatus field to given value.
+
+### HasReachabilityStatus
+
+`func (o *ApiCrossStageViolationDTOV2) HasReachabilityStatus() bool`
+
+HasReachabilityStatus returns a boolean if a field has been set.
 
 ### GetStageData
 

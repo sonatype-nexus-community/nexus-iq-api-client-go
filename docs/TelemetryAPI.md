@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## PostExternalTelemetry
 
-> PostExternalTelemetry(ctx).UserAgent(userAgent).RequestBody(requestBody).Execute()
+> PostExternalTelemetry(ctx).RequestBody(requestBody).Execute()
 
 
 
@@ -27,12 +27,11 @@ import (
 )
 
 func main() {
-	userAgent := "userAgent_example" // string |  (optional)
 	requestBody := map[string]map[string]interface{}{"key": map[string]interface{}(123)} // map[string]map[string]interface{} |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.TelemetryAPI.PostExternalTelemetry(context.Background()).UserAgent(userAgent).RequestBody(requestBody).Execute()
+	r, err := apiClient.TelemetryAPI.PostExternalTelemetry(context.Background()).RequestBody(requestBody).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TelemetryAPI.PostExternalTelemetry``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -51,7 +50,6 @@ Other parameters are passed through a pointer to a apiPostExternalTelemetryReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userAgent** | **string** |  | 
  **requestBody** | **map[string]map[string]interface{}** |  | 
 
 ### Return type

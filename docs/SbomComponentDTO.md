@@ -7,11 +7,15 @@ Name | Type | Description | Notes
 **ComponentIdentifier** | Pointer to [**ComponentIdentifier**](ComponentIdentifier.md) |  | [optional] 
 **DependencyType** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
+**FileCoordinateId** | Pointer to **string** |  | [optional] 
+**Filenames** | Pointer to **[]string** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
 **Licenses** | Pointer to [**[]License**](License.md) |  | [optional] 
+**MatchStateId** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **PackageUrl** | Pointer to **string** |  | [optional] 
 **PercentageAnnotated** | Pointer to **float64** |  | [optional] 
+**PolicyViolationCount** | Pointer to **int32** |  | [optional] 
 **Version** | Pointer to **string** |  | [optional] 
 **VulnerabilitySeverityCriticalCount** | Pointer to **int32** |  | [optional] 
 **VulnerabilitySeverityHighCount** | Pointer to **int32** |  | [optional] 
@@ -113,6 +117,56 @@ SetDisplayName sets DisplayName field to given value.
 
 HasDisplayName returns a boolean if a field has been set.
 
+### GetFileCoordinateId
+
+`func (o *SbomComponentDTO) GetFileCoordinateId() string`
+
+GetFileCoordinateId returns the FileCoordinateId field if non-nil, zero value otherwise.
+
+### GetFileCoordinateIdOk
+
+`func (o *SbomComponentDTO) GetFileCoordinateIdOk() (*string, bool)`
+
+GetFileCoordinateIdOk returns a tuple with the FileCoordinateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileCoordinateId
+
+`func (o *SbomComponentDTO) SetFileCoordinateId(v string)`
+
+SetFileCoordinateId sets FileCoordinateId field to given value.
+
+### HasFileCoordinateId
+
+`func (o *SbomComponentDTO) HasFileCoordinateId() bool`
+
+HasFileCoordinateId returns a boolean if a field has been set.
+
+### GetFilenames
+
+`func (o *SbomComponentDTO) GetFilenames() []string`
+
+GetFilenames returns the Filenames field if non-nil, zero value otherwise.
+
+### GetFilenamesOk
+
+`func (o *SbomComponentDTO) GetFilenamesOk() (*[]string, bool)`
+
+GetFilenamesOk returns a tuple with the Filenames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilenames
+
+`func (o *SbomComponentDTO) SetFilenames(v []string)`
+
+SetFilenames sets Filenames field to given value.
+
+### HasFilenames
+
+`func (o *SbomComponentDTO) HasFilenames() bool`
+
+HasFilenames returns a boolean if a field has been set.
+
 ### GetHash
 
 `func (o *SbomComponentDTO) GetHash() string`
@@ -162,6 +216,31 @@ SetLicenses sets Licenses field to given value.
 `func (o *SbomComponentDTO) HasLicenses() bool`
 
 HasLicenses returns a boolean if a field has been set.
+
+### GetMatchStateId
+
+`func (o *SbomComponentDTO) GetMatchStateId() string`
+
+GetMatchStateId returns the MatchStateId field if non-nil, zero value otherwise.
+
+### GetMatchStateIdOk
+
+`func (o *SbomComponentDTO) GetMatchStateIdOk() (*string, bool)`
+
+GetMatchStateIdOk returns a tuple with the MatchStateId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMatchStateId
+
+`func (o *SbomComponentDTO) SetMatchStateId(v string)`
+
+SetMatchStateId sets MatchStateId field to given value.
+
+### HasMatchStateId
+
+`func (o *SbomComponentDTO) HasMatchStateId() bool`
+
+HasMatchStateId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -237,6 +316,31 @@ SetPercentageAnnotated sets PercentageAnnotated field to given value.
 `func (o *SbomComponentDTO) HasPercentageAnnotated() bool`
 
 HasPercentageAnnotated returns a boolean if a field has been set.
+
+### GetPolicyViolationCount
+
+`func (o *SbomComponentDTO) GetPolicyViolationCount() int32`
+
+GetPolicyViolationCount returns the PolicyViolationCount field if non-nil, zero value otherwise.
+
+### GetPolicyViolationCountOk
+
+`func (o *SbomComponentDTO) GetPolicyViolationCountOk() (*int32, bool)`
+
+GetPolicyViolationCountOk returns a tuple with the PolicyViolationCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolationCount
+
+`func (o *SbomComponentDTO) SetPolicyViolationCount(v int32)`
+
+SetPolicyViolationCount sets PolicyViolationCount field to given value.
+
+### HasPolicyViolationCount
+
+`func (o *SbomComponentDTO) HasPolicyViolationCount() bool`
+
+HasPolicyViolationCount returns a boolean if a field has been set.
 
 ### GetVersion
 

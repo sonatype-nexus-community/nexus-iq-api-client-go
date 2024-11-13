@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -27,8 +29,8 @@ import (
 )
 
 func main() {
-	startUtcDate := "startUtcDate_example" // string |  (optional)
-	endUtcDate := "endUtcDate_example" // string |  (optional)
+	startUtcDate := "startUtcDate_example" // string | Enter the start UTC date in the format (yyyy-mm-dd). (optional)
+	endUtcDate := "endUtcDate_example" // string | Enter the end UTC date in the format (yyyy-mm-dd). (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -51,8 +53,8 @@ Other parameters are passed through a pointer to a apiGetAuditLogsRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **startUtcDate** | **string** |  | 
- **endUtcDate** | **string** |  | 
+ **startUtcDate** | **string** | Enter the start UTC date in the format (yyyy-mm-dd). | 
+ **endUtcDate** | **string** | Enter the end UTC date in the format (yyyy-mm-dd). | 
 
 ### Return type
 

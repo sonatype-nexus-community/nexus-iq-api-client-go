@@ -540,7 +540,7 @@ Name | Type | Description  | Notes
 
 ## ImportSbom
 
-> ImportSbom(ctx).ImportSbomRequest(importSbomRequest).Execute()
+> ImportSbom(ctx).EnableBinaryImport(enableBinaryImport).ImportSbomRequest(importSbomRequest).Execute()
 
 Import a new sbom version
 
@@ -559,11 +559,12 @@ import (
 )
 
 func main() {
+	enableBinaryImport := true // bool | Enable importing as a binary file. default = false (optional) (default to false)
 	importSbomRequest := *sonatypeiq.NewImportSbomRequest("ApplicationId_example") // ImportSbomRequest |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SbomAPI.ImportSbom(context.Background()).ImportSbomRequest(importSbomRequest).Execute()
+	r, err := apiClient.SbomAPI.ImportSbom(context.Background()).EnableBinaryImport(enableBinaryImport).ImportSbomRequest(importSbomRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SbomAPI.ImportSbom``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -582,6 +583,7 @@ Other parameters are passed through a pointer to a apiImportSbomRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **enableBinaryImport** | **bool** | Enable importing as a binary file. default &#x3D; false | [default to false]
  **importSbomRequest** | [**ImportSbomRequest**](ImportSbomRequest.md) |  | 
 
 ### Return type

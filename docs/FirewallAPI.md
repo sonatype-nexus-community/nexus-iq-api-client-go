@@ -544,7 +544,7 @@ Other parameters are passed through a pointer to a apiGetFirewallUnquarantineSum
 
 ## GetQuarantineList
 
-> GetQuarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).SortBy(sortBy).Asc(asc).Execute()
+> GetQuarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).SortBy(sortBy).Asc(asc).Execute()
 
 
 
@@ -565,12 +565,13 @@ func main() {
 	pageSize := int32(56) // int32 |  (optional) (default to 10)
 	policyId := []string{"Inner_example"} // []string |  (optional)
 	componentName := "componentName_example" // string |  (optional)
+	repositoryPublicId := "repositoryPublicId_example" // string |  (optional)
 	sortBy := "sortBy_example" // string |  (optional)
 	asc := true // bool |  (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.FirewallAPI.GetQuarantineList(context.Background()).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).SortBy(sortBy).Asc(asc).Execute()
+	r, err := apiClient.FirewallAPI.GetQuarantineList(context.Background()).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).SortBy(sortBy).Asc(asc).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetQuarantineList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -593,6 +594,7 @@ Name | Type | Description  | Notes
  **pageSize** | **int32** |  | [default to 10]
  **policyId** | **[]string** |  | 
  **componentName** | **string** |  | 
+ **repositoryPublicId** | **string** |  | 
  **sortBy** | **string** |  | 
  **asc** | **bool** |  | [default to false]
 

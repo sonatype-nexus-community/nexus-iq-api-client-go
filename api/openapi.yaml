@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.182.0-01
+  version: 1.184.0-01
 servers:
 - url: /
 security:
@@ -13,9 +13,37 @@ tags:
 - description: 'Use the Application Categories REST API to manage the application
     categories or tags assigned to the applications in an organization. '
   name: Application Categories
+- description: |-
+    Use this REST API to manage applications.
+
+    In addition to the primary functions of create, update and delete, you can also move applications from one organization to other.
+  name: Applications
+- description: Use this REST API to access the IQ Server audit logs.
+  name: Audit Logs
+- description: "Use this REST API to create, modify and retrieve auto policy waivers."
+  name: Auto Policy Waivers
+- description: Use this REST API to create and delete auto policy waiver revocations.
+  name: Auto Policy Waiver Revocations
 - description: "Use this REST API to retrieve a component's security vulnerability\
     \ data, license data, age and popularity."
   name: Components
+- description: |-
+    Use this REST API to validate the composite source control management (SCM) configuration.
+
+    Composite source control configuration is defined as the configuration that is inherited from the parent or is directly assigned.
+  name: Composite Source Control Validator
+- description: |-
+    Use this REST API to access the composite source control management configuration (SCM) for an application or organization.
+
+    Composite source control configuration is defined as the configuration that is inherited from the parent organization or is directly assigned.
+  name: Composite Source Control
+- description: Use this REST API to enable/disable the IQ Server features.
+  name: Feature Configuration
+- description: |-
+    Use this REST API to configure the IQ Server system properties.
+
+    We strongly recommend using this REST API instead of config.yml for versions 142 and higher.
+  name: Configuration
 - description: "Use the CycloneDX REST API to generate CycloneDX SBOMs in XML or JSON\
     \ formats, containing coordinates and licenses for components found in a scan\
     \ report."
@@ -24,11 +52,22 @@ tags:
     Metrics reports. <p>Note that IQ Server has a preset limit of purging 5000 reports
     in one execution of its report purging job.
   name: Data Retention Policies
+- description: "Use this REST API to export Sonatype Developer component priorities\
+    \ data, including security reachability data."
+  name: Developer Priorities
 - description: "Use this REST API to perform an application policy evaluation. Policy\
     \ evaluations are executed asynchronously.<p>This is a 2-step process that involves:\
     \ \n1. Requesting a policy evaluation (POST) \n2. Checking the status and response\
     \ of the evaluation request (GET)"
   name: Policy Evaluation
+- description: |-
+    Use this REST API to manage components that are developed in-house and are not open-source.
+
+    Claiming the component stores the identity information for the component hash and avoids triggering the Component-Unknown policy.
+
+    Components will have a match state as `Exact` and Identification Source as `Manual`,
+    for subsequent scans or evaluations.
+  name: Claim Components
 - description: |-
     Use this REST API to obtain the violation details, violation details across stages (cross stage), violations occurring due to transitive dependencies and all waivers applicable to a violation.
 
@@ -45,12 +84,23 @@ tags:
     \ of stale waivers, view existing policy waivers on components, view quarantined\
     \ components and retrieve additional metrics data. "
   name: Reports
-- name: Applications
-- name: Audit Logs
-- name: Claim
-- name: Composite Source Control
-- name: Composite Source Control Config Validator
-- name: Config
+- description: |-
+    Use this REST API to manage authorizations for users or user groups.
+
+    You can view existing role assignments and grant or revoke user authorization on organizations, applications and repositories.
+  name: Role Memberships
+- description: |-
+    Roles provide sets of permissions that grant access to the functionality in the user interface,through integrations, and when using REST APIs.
+
+    Permissions are granted by assigning users or groups to the system roles or at the various levels in the organizational hierarchy: root organization, repository managers, and applications and organizations.
+
+    Use this REST API to retrieve role IDs, role names and descriptions.
+  name: Roles
+- description: "Use this REST API to:<ul><li>Create, update and delete source control\
+    \ management (SCM) configuration for the root organization, sub-organizations\
+    \ and applications.</li><li>Automatically assign the developer role to all contributors\
+    \ of the associated repository, who are registered IQ users.</li></ul>"
+  name: Source Control
 - name: Config Artifactory Connection
 - name: Config Crowd
 - name: Config JIRA
@@ -63,17 +113,15 @@ tags:
 - name: Firewall
 - name: Labels
 - name: License Legal Metadata
+- name: Malware
 - name: Organizations
 - name: Policies
 - name: Product
 - name: Repositories
-- name: Role Memberships
-- name: Roles
 - name: Scan
 - name: Search
 - name: Security Overrides
 - name: Solutions
-- name: Source Control
 - name: Source Control Metrics
 - name: Spdx
 - name: Telemetry
@@ -370,9 +418,14 @@ paths:
       - Application Categories
   /api/v2/applications:
     get:
+      description: |-
+        Use this method to retrieve the application details for the applicationId(s) provided.
+
+        Permissions required: View IQ Elements
       operationId: getApplications
       parameters:
-      - explode: true
+      - description: Enter the applicationId.
+        explode: true
         in: query
         name: publicId
         required: false
@@ -382,7 +435,9 @@ paths:
           type: array
           uniqueItems: true
         style: form
-      - explode: true
+      - description: Set this parameter to `true` to obtain the application tags (application
+          categories) in the response.
+        explode: true
         in: query
         name: includeCategories
         required: false
@@ -400,26 +455,43 @@ paths:
       tags:
       - Applications
     post:
+      description: |-
+        Use this method to create an application under an organization. Use the Organization REST API to obtain organizationId.
+
+        Permissions required: Add Application (on parent organization)
       operationId: addApplication
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiApplicationDTO'
+        description: "Specify the applicationId, application name and the organizationId\
+          \ under which the application should be created. `contactUserName` corresponds\
+          \ to the 'contact' field in the UI and represents the user name. If LDAP\
+          \ is used for authentication, you can use LDAP usernames.`tagId` is the\
+          \ internal identifier for the Application Category that you want to apply\
+          \ to the application. Use the Application Categories REST API for the available\
+          \ categories and the corresponding tagIds."
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiApplicationDTO'
-          description: default response
+          description: The response contains application details for the application
+            created using this method.
       tags:
       - Applications
   /api/v2/applications/organization/{organizationId}:
     get:
+      description: |-
+        Use this method to retrieve application details for all applications under the organizationId provided.
+
+        Permissions required: View IQ Elements
       operationId: getApplicationsByOrganizationId
       parameters:
-      - explode: false
+      - description: Enter the organizationId.
+        explode: false
         in: path
         name: organizationId
         required: true
@@ -427,19 +499,25 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiApplicationListDTO'
-          description: default response
+          description: The response contains the details of all applications found
+            under the organizationId provided.
       tags:
       - Applications
   /api/v2/applications/{applicationId}:
     delete:
+      description: |-
+        Use this method to permanently delete an existing application and all data associated with it. This action cannot be un-done. Before deleting, confirm that the application being deleted does not impact any integrations that could depend on it.
+
+        Permissions required: Edit IQ Elements
       operationId: deleteApplication
       parameters:
-      - explode: false
+      - description: Enter the applicationId to be deleted.
+        explode: false
         in: path
         name: applicationId
         required: true
@@ -447,16 +525,19 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "200":
+          description: Application deleted successfully
       tags:
       - Applications
     get:
+      description: |-
+        Use this method to retrieve the application details, by providing the applicationId.
+
+        Permissions required: View IQ Elements
       operationId: getApplication
       parameters:
-      - explode: false
+      - description: Enter the applicationId.
+        explode: false
         in: path
         name: applicationId
         required: true
@@ -464,15 +545,20 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiApplicationDTO'
-          description: default response
+          description: The response contains the details of the application corresponding
+            to the applicationId.
       tags:
       - Applications
     put:
+      description: "Use this method to update the application name, application tags\
+        \ or the contact user name for an existing application by providing the applicationId.\
+        \ \n\nNOTE: This method cannot be used to change the organizationId of an\
+        \ application.\n\nPermissions required: Edit IQ Elements"
       operationId: updateApplication
       parameters:
       - explode: false
@@ -487,27 +573,41 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiApplicationDTO'
+        description: "Specify the applicationId, application name and the organizationId\
+          \ under which  the application exists. `contactUserName` corresponds to\
+          \ the 'contact' field in the UI and represents the user name. If LDAP is\
+          \ used for authentication, you can use LDAP usernames.`tagId` is the internal\
+          \ identifier for the Application Category that you want to apply to the\
+          \ application. . Use the Application Categories REST API for the available\
+          \ categories and the corresponding tagIds."
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiApplicationDTO'
-          description: default response
+          description: "The response contains the updated application name, contact\
+            \ user name and application tags,  for the applicationId provided"
       tags:
       - Applications
   /api/v2/applications/{applicationId}/move/organization/{organizationId}:
     post:
+      description: |-
+        Use this method to move an application from one organization to another.
+
+        Permissions required: Edit IQ Elements
       operationId: moveApplication
       parameters:
-      - explode: false
+      - description: Enter the applicationId of the application to be moved.
+        explode: false
         in: path
         name: applicationId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Enter the organizationId of the destination organization.
+        explode: false
         in: path
         name: organizationId
         required: true
@@ -515,12 +615,24 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiMoveApplicationResponseDTOV2'
-          description: default response
+          description: "Application moved successfully, with/without warnings. Warnings,\
+            \ if any, will appear in the response body."
+        "404":
+          description: Moving the application failed because either an application
+            with the provided applicationId or the organizationId for the organization
+            where it is to be moved is not found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMoveApplicationResponseDTOV2'
+          description: Moving the application failed due to conflicts between the
+            organizations.
       tags:
       - Applications
   /api/v2/applications/{applicationPublicId}/reports/policyViolations/diff:
@@ -747,23 +859,30 @@ paths:
       - Application Report Data
   /api/v2/applications/{sourceApplicationId}/clone:
     post:
+      description: |-
+        Use this method to clone an existing application.
+
+        Permissions required: Add Application (on the parent organization)
       operationId: cloneApplication
       parameters:
-      - explode: false
+      - description: Enter the applicationId for the application to be cloned.
+        explode: false
         in: path
         name: sourceApplicationId
         required: true
         schema:
           type: string
         style: simple
-      - explode: true
+      - description: Enter the application name for the new cloned application.
+        explode: true
         in: query
         name: clonedApplicationName
         required: false
         schema:
           type: string
         style: form
-      - explode: true
+      - description: Enter the applicationPublicId for the cloned application.
+        explode: true
         in: query
         name: clonedApplicationPublicId
         required: false
@@ -771,26 +890,32 @@ paths:
           type: string
         style: form
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiApplicationDTO'
-          description: default response
+          description: The response contains application details of the cloned application.
       tags:
       - Applications
   /api/v2/auditLogs:
     get:
+      description: |-
+        Use this method to retrieve the audit events for the specified time period.
+
+        Permissions required: Access Audit Log
       operationId: getAuditLogs
       parameters:
-      - explode: true
+      - description: Enter the start UTC date in the format (yyyy-mm-dd).
+        explode: true
         in: query
         name: startUtcDate
         required: false
         schema:
           type: string
         style: form
-      - explode: true
+      - description: Enter the end UTC date in the format (yyyy-mm-dd).
+        explode: true
         in: query
         name: endUtcDate
         required: false
@@ -798,45 +923,453 @@ paths:
           type: string
         style: form
       responses:
-        default:
+        "200":
           content:
             text/plain: {}
-          description: default response
+          description: The response text contains lines of audit events in chronologically
+            ascending order.
       tags:
       - Audit Logs
+  /api/v2/autoPolicyWaiverRevocations/{ownerType}/{ownerId}:
+    post:
+      description: |-
+        Use this method to create an auto policy waiver revocation for a specified auto policy waiver.
+
+        Permissions required: Waive Policy Violations
+      operationId: addAutoPolicyWaiverRevocation
+      parameters:
+      - description: Enter the ownerType to specify the scope.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiAutoPolicyWaiverRevocationDTO'
+        description: The request JSON can include the fields<ol><li>autoPolicyWaiverId</li><li>hash</li><li>scanId</li></ol>
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAutoPolicyWaiverRevocationDTO'
+          description: Auto policy waiver revocation has been created successfully.
+      tags:
+      - Auto Policy Waiver Revocations
+  /api/v2/autoPolicyWaiverRevocations/{ownerType}/{ownerId}/{autoPolicyWaiverRevocationId}:
+    delete:
+      description: |-
+        Use this method to delete an auto policy waiver revocation, specified by the autoPolicyWaiverRevocationId.
+
+        Permissions required: Waive Policy Violations
+      operationId: deleteAutoPolicyWaiverRevocation
+      parameters:
+      - description: Enter the ownerType to specify the scope. A waiver revocation
+          corresponding to the autoPolicyWaiverRevocationId provided and within the
+          scope specified will be deleted.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the autoPolicyWaiverId to be deleted
+        explode: false
+        in: path
+        name: autoPolicyWaiverRevocationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Auto policy waiver revocation has been deleted successfully.
+      tags:
+      - Auto Policy Waiver Revocations
+  /api/v2/autoPolicyWaivers/{ownerType}/{ownerId}:
+    get:
+      description: |-
+        Use this method to retrieve waiver details for all auto policy waivers for the scope specified. You can specify the scope by using the parameters ownerType and ownerId.
+
+        Permissions required: View IQ Elements
+      operationId: getAutoPolicyWaivers
+      parameters:
+      - description: Enter the ownerType to specify the scope. The response will contain
+          waivers that are within the scope specified.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiAutoPolicyWaiverDTO'
+                type: array
+          description: "The response contains waiver details for the specified ownerType\
+            \ and the corresponding ownerId, grouped by the autoPolicyWaiverId."
+      tags:
+      - Auto Policy Waivers
+    post:
+      description: |-
+        Use this method to create an auto policy waiver configuration. Only one configuration can exist at a time for a given application or organization.
+
+        Permissions required: Waive Policy Violations
+      operationId: addAutoPolicyWaiver
+      parameters:
+      - description: Enter the ownerType to specify the scope. The response will contain
+          the details for waivers within the scope.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiAutoPolicyWaiverDTO'
+        description: The request JSON can include the fields<ol><li>threatLevel</li><li>pathForward</li><li>reachable</li><li>durationInDays</li></ol>
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAutoPolicyWaiverDTO'
+          description: Auto waiver has been created successfully.
+      tags:
+      - Auto Policy Waivers
+  /api/v2/autoPolicyWaivers/{ownerType}/{ownerId}/status:
+    get:
+      description: |-
+        Use this method to retrieve status details for any auto policy waiver enabled for the scope specified. You can specify the scope by using the parameters ownerType and ownerId.
+
+        Permissions required: View IQ Elements
+      operationId: getAutoPolicyWaiverStatus
+      parameters:
+      - description: "Enter the ownerType to specify the scope. The response will\
+          \ contain status details for the active auto policy waiver, if any, that\
+          \ is within the scope specified."
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAutoPolicyWaiverStatusDTO'
+          description: The response contains auto policy waiver status details for
+            the specified ownerType and the corresponding ownerId.
+      tags:
+      - Auto Policy Waivers
+  /api/v2/autoPolicyWaivers/{ownerType}/{ownerId}/{autoPolicyWaiverId}:
+    delete:
+      description: |-
+        Use this method to delete an auto policy waiver, specified by the autoPolicyWaiverId.
+
+        Permissions required: Waive Policy Violations
+      operationId: deleteAutoPolicyWaiver
+      parameters:
+      - description: Enter the ownerType to specify the scope. A waiver corresponding
+          to the autoPolicyWaiverId provided and within the scope specified will be
+          deleted.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the autoPolicyWaiverId to be deleted
+        explode: false
+        in: path
+        name: autoPolicyWaiverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Auto Policy Waiver has been deleted successfully.
+      tags:
+      - Auto Policy Waivers
+    get:
+      description: |-
+        Use this method to retrieve auto policy waiver details for the autoPolicyWaiverId specified.
+
+        Permissions required: View IQ Elements
+      operationId: getAutoPolicyWaiver
+      parameters:
+      - description: Enter the ownerType to specify the scope. The response will contain
+          the details for waivers within the scope.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the autoPolicyWaiverId for which you want to retrieve the
+          auto policy waiver details.
+        explode: false
+        in: path
+        name: autoPolicyWaiverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAutoPolicyWaiverDTO'
+          description: The response contains waiver details corresponding to the auto
+            policy waiver id specified.
+      tags:
+      - Auto Policy Waivers
+    put:
+      description: |-
+        Use this method to update an auto policy waiver, specified by the autoPolicyWaiverId.
+
+        Permissions required: Write IQ Elements
+      operationId: updateAutoPolicyWaiver
+      parameters:
+      - description: Enter the ownerType to specify the scope. The response will contain
+          the details for waivers within the scope.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          - global
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the autoPolicyWaiverId to be updated.
+        explode: false
+        in: path
+        name: autoPolicyWaiverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiAutoPolicyWaiverDTO'
+        description: The request JSON can include the fields<ol><li>autoPolicyWaiverId</li><li>threatLevel</li><li>pathForward</li><li>reachable</li><li>durationInDays</li></ol>
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAutoPolicyWaiverDTO'
+          description: Auto Policy Waiver has been updated successfully.
+      tags:
+      - Auto Policy Waivers
   /api/v2/claim/components:
     get:
+      description: |-
+        Use this method to retrieve details of all claimed components.
+
+        Permissions required: Claim components
       operationId: getAll
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiHashComponentIdentifiersDTO'
-          description: default response
+          description: "The response contains the truncated SHA1 hash of each component,\
+            \ the datetime when the component was published (not the time it was claimed),\
+            \ the format and coordinates of the claimed component (componentIdentifier)\
+            \ and the package URL of the claimed component."
       tags:
-      - Claim
+      - Claim Components
     post:
+      description: |-
+        Use this method to claim a component, or update the component details for a previously claimed component.
+
+        Permissions required: Claim components
       operationId: set
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiHashComponentIdentifierDTO'
+        description: "Specify the hash (required), comment (optional), createTime\
+          \ (optional), and the component identifier/package URL (required) with non-null/non-empty\
+          \ format and coordinates,  for the component to be claimed."
+        required: true
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiHashComponentIdentifierDTO'
-          description: default response
+          description: The response shows the new/updated details for the claimed
+            component.
       tags:
-      - Claim
+      - Claim Components
   /api/v2/claim/components/{hash}:
     delete:
+      description: |-
+        Use this method to delete a claim on a previously claimed component by providing its hash.
+
+        Permissions required: Claim components
       operationId: delete
       parameters:
-      - explode: false
+      - description: Enter the SHA1 hash for the component.
+        explode: false
         in: path
         name: hash
         required: true
@@ -844,16 +1377,19 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "404":
+          description: Component Claim for this hash does not exist.
       tags:
-      - Claim
+      - Claim Components
     get:
+      description: |-
+        Use this method to retrieve details of a claimed component by specifying its hash.
+
+        Permissions required: Claim components
       operationId: get
       parameters:
-      - explode: false
+      - description: The hash of the claimed component.
+        explode: false
         in: path
         name: hash
         required: true
@@ -861,14 +1397,19 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiHashComponentIdentifierDTO'
-          description: default response
+          description: "The response contains the truncated SHA1 hash of the component,\
+            \ the datetime when the component was published (not the time it was claimed),\
+            \ the format and coordinates of the claimed component (componentIdentifier)\
+            \ and the package URL of the claimed component."
+        "404":
+          description: Component Claim for this hash does not exist.
       tags:
-      - Claim
+      - Claim Components
   /api/v2/components/details:
     post:
       description: Use this method to retrieve data related to a component.
@@ -1112,9 +1653,16 @@ paths:
       - Components
   /api/v2/compositeSourceControl/{ownerType}/{internalOwnerId}:
     get:
+      description: |-
+        Use this method to retrieve the composite source control management (SCM) configuration settings.
+
+        Permissions required: View IQ Elements
       operationId: getCompositeSourceControlByOwner
       parameters:
-      - explode: false
+      - description: Select the ownerType of the entity (organization or application)
+          for which you want to retrieve the composite source control configuration
+          settings.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -1129,7 +1677,9 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: Enter the id of the application or organization for which you
+          want to retrieve the composite source control configuration settings
+        explode: false
         in: path
         name: internalOwnerId
         required: true
@@ -1137,19 +1687,43 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiCompositeSourceControlDTO'
-          description: default response
+          description: "The response contains values for the SCM configuration. For\
+            \ each value, the corresponding parent value will be shown, if applicable.<ul><li><code>id</code>\
+            \ is the internal identifier for the SCM configuration.</li><li><code>ownerId</code>\
+            \ is the identifier for the ownerType specified.</li><li><code>repositoryUrl</code>\
+            \ indicates the URL of application/organization. Will indicate 'null'\
+            \ for organizations.</li><li><code>provider</code> is the name of the\
+            \ source code host for the parent. Values can be Azure, GitHub, GitLab\
+            \ and Bitbucket.</li><li><code>username</code> is returned if found for\
+            \ the specific provider. Currently, the values are available for Bitbucket\
+            \ Server and Bitbucket Cloud.</li><li><code>token</code> is obfuscated\
+            \ and indicates the composite configuration for the source control host.<li><code>baseBranch</code>\
+            \ shows the base branch name.<li><code>remediationPullRequestsEnabled</code>\
+            \ indicates if the Automated Pull Request feature is enabled.</li><li><code>statusChecksEnabled</code>\
+            \ indicates if the status checks for the source code are enabled.</li><li><code>pullRequestCommentingEnabled</code>\
+            \ indicates if PR commenting is enabled for this application/organization.</li><li><code>sourceControlEvaluationsEnabled</code>\
+            \ indicates if the evaluations triggered by the IQ Server are enabled,\
+            \ for the Continuous Risk Profile feature.</li><li><code>sshEnabled</code>\
+            \ indicates if ssh settings are enabled.</li><li><code>commitStatusEnabled</code>\
+            \ indicates if commit status check is enabled.</li>"
       tags:
       - Composite Source Control
   /api/v2/compositeSourceControlConfigValidator/application/{applicationId}:
     get:
+      description: |-
+        Use this method to validate the composite source control configuration.
+
+        Permissions required: View IQ Elements
       operationId: validateSourceControlConfig
       parameters:
-      - explode: false
+      - description: Enter the applicationId for which you want to validate the composite
+          source control configuration.
+        explode: false
         in: path
         name: applicationId
         required: true
@@ -1157,19 +1731,26 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConfigurationValidationResult'
-          description: default response
+          description: The response shows if the composite source control configuration
+            for the application is valid.
       tags:
-      - Composite Source Control Config Validator
+      - Composite Source Control Validator
   /api/v2/config:
     delete:
+      description: |-
+        Use this method to disable one or more IQ Server system properties. The property names are case-sensitive.
+
+        Permissions required: Edit System Configuration and Users
       operationId: deleteConfiguration
       parameters:
-      - explode: true
+      - description: Enter the names of the system properties. Values provided for
+          name are case-sensitive.
+        explode: true
         in: query
         name: property
         required: false
@@ -1184,11 +1765,17 @@ paths:
           content: {}
           description: System Configuration removed
       tags:
-      - Config
+      - Configuration
     get:
+      description: |-
+        Use this method to retrieve the configured value for an IQ Server system property.
+
+        Permissions required: Edit System Configuration and Users or system property dependent
       operationId: getConfiguration
       parameters:
-      - explode: true
+      - description: Enter the names of the system properties. Values provided for
+          name are case-sensitive.
+        explode: true
         in: query
         name: property
         required: false
@@ -1206,8 +1793,12 @@ paths:
                 $ref: '#/components/schemas/SystemConfig'
           description: System Configuration retrieved
       tags:
-      - Config
+      - Configuration
     put:
+      description: |-
+        Use this method to configure one or more IQ Server system properties. The property names are case-sensitive.
+
+        Permissions required: Edit System Configuration and Users
       operationId: setConfiguration
       requestBody:
         content:
@@ -1219,7 +1810,7 @@ paths:
           content: {}
           description: System Configuration updated
       tags:
-      - Config
+      - Configuration
   /api/v2/config/artifactoryConnection/{ownerType}/{internalOwnerId}:
     get:
       operationId: getOwnerArtifactoryConnection
@@ -1602,9 +2193,14 @@ paths:
       - Config Crowd
   /api/v2/config/features/{feature}:
     delete:
+      description: |-
+        Use this method to disable an IQ Server feature.
+
+        Permissions required: Edit System Configuration and Users
       operationId: disableFeature
       parameters:
-      - explode: false
+      - description: Enter the name of the IQ Server feature to be disabled.
+        explode: false
         in: path
         name: feature
         required: true
@@ -1612,16 +2208,21 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "204":
+          description: The IQ Server feature has been successfully disabled.
+        "400":
+          description: "Bad request, check for invalid feature name."
       tags:
-      - Config
+      - Feature Configuration
     post:
+      description: |-
+        Use this method to enable an IQ Server feature.
+
+        Permissions required: Edit System Configuration and Users
       operationId: enabledFeature
       parameters:
-      - explode: false
+      - description: Enter the name of the feature to be enabled.
+        explode: false
         in: path
         name: feature
         required: true
@@ -1629,12 +2230,12 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "204":
+          description: The specified feature has been enabled successfully.
+        "400":
+          description: "Bad request, check for invalid feature name."
       tags:
-      - Config
+      - Feature Configuration
   /api/v2/config/httpProxyServer:
     delete:
       operationId: deleteConfiguration_3
@@ -2064,6 +2665,102 @@ paths:
             \ report is always retained, regardless of its age."
       tags:
       - Data Retention Policies
+  /api/v2/developer/priorities/{applicationId}/{scanId}:
+    get:
+      description: "Use this method to retrieve the priorities for the specified application\
+        \ Id and scan Id\n\nPermissions required: View IQ Elements "
+      operationId: getPriorities
+      parameters:
+      - explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: scanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: includeRemediation
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: optionalComponentNameFilter
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevelopmentPrioritizationResults'
+          description: "The response field `topPriorities` returns the first 3 prioritized\
+            \ components and the `additionalPriorities` field returns the remaining\
+            \ prioritized components for the specified application Id and scan Id.\
+            \ Each result has all relevant component information, reachabilityinformation,\
+            \ policy information, and the priority assigned to it.It has pagination\
+            \ support, and the default page size is 10.The parameter `includeRemediation`\
+            \ is required for the paginated result to have remediation information."
+      tags:
+      - Developer Priorities
+  /api/v2/developer/priorities/{applicationId}/{scanId}/export:
+    get:
+      description: "Use this method to retrieve the priorities for the specified application\
+        \ Id and scan Id\n\nPermissions required: View IQ Elements "
+      operationId: getPrioritiesExport
+      parameters:
+      - explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: scanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: "The response is a CSV that contains all the prioritized components\
+            \ for the specified application Id and scan Id. Each line has all relevant\
+            \ component information, reachability information, policy information,\
+            \ and the priority assigned to it."
+      tags:
+      - Developer Priorities
   /api/v2/endpoints/{apiType}:
     get:
       operationId: getOpenAPI
@@ -2374,6 +3071,13 @@ paths:
       - explode: true
         in: query
         name: componentName
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: repositoryPublicId
         required: false
         schema:
           type: string
@@ -2990,11 +3694,6 @@ paths:
         schema:
           type: string
         style: simple
-      requestBody:
-        content:
-          '*/*':
-            schema:
-              $ref: '#/components/schemas/FormDataMultiPart'
       responses:
         default:
           content:
@@ -3227,6 +3926,45 @@ paths:
           description: default response
       tags:
       - License Legal Metadata
+  /api/v2/malware/defense/evaluate:
+    post:
+      description: Evaluate malware for a list of components.<p>Use this endpoint
+        to evaluate malware for a list of components up to a maximum of 100 components
+        in a single request.A hash or packageUrl (or both) can be supplied for each
+        component that are of the same format type.
+      operationId: evaluateMalware
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiMalwareComponentEvaluationRequestList'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MalwareDefenseResponseList'
+          description: Malware evaluation results for the components
+      tags:
+      - Malware
+  /api/v2/malware/defense/metrics:
+    get:
+      description: The response contains malware defense API metrics.<p>Use this endpoint
+        to get the count of malicious components evaluated via malware defense API
+        grouped by format.
+      operationId: getMalwareDefenseMetrics
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  format: int64
+                  type: integer
+                type: object
+          description: Malware defense metrics grouped by format.
+      tags:
+      - Malware
   /api/v2/organizations:
     get:
       operationId: getOrganizations
@@ -3616,6 +4354,33 @@ paths:
           description: The response contains violation details for all transitive
             violations occurring in the scan specified. The response also indicates
             if the violation is due to an 'InnerSource' component.
+      tags:
+      - Policy Violation Details
+  /api/v2/policyViolations/{violationId}/applicableAutoWaiver:
+    get:
+      description: |-
+        Use this method to obtain the existing auto waiver applicable to a policy violationviolation.
+
+        Permissions required: View IQ Elements
+      operationId: getApplicableAutoWaiver
+      parameters:
+      - description: 'Enter the policy violationId for which you want to obtain the
+          applicable auto policy waiver '
+        explode: false
+        in: path
+        name: violationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAutoPolicyWaiverDTO'
+          description: 'The response contains details for applicable auto waiver for
+            the `violationId` specified. '
       tags:
       - Policy Violation Details
   /api/v2/policyViolations/{violationId}/applicableWaivers:
@@ -4476,9 +5241,15 @@ paths:
       - Repositories
   /api/v2/roleMemberships/{ownerType}:
     get:
+      description: |-
+        Use this method to retrieve all users and roles globally or for all repositories.
+
+        Permissions required: Edit system configuration and users for a global context or view IQ elements for a non-global context
       operationId: getRoleMembershipsGlobalOrRepositoryContainer
       parameters:
-      - explode: false
+      - description: Enter the value for ownerType. Using `global` will return the
+          users and groups who have been assigned the administrator role.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -4494,19 +5265,27 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiRoleMemberMappingListDTO'
-          description: default response
+          description: "The response contains all role Ids and the corresponding users/user\
+            \ groups assigned to them, for the ownerType specified. It also includes\
+            \ members who inherit a role based on the organization hierarchy."
       tags:
       - Role Memberships
   /api/v2/roleMemberships/{ownerType}/role/{roleId}/{memberType}/{memberName}:
     delete:
+      description: |-
+        Use this method to revoke roles globally or on all repositories.
+
+        Permissions required: Edit system configuration and users for a global context or view IQ elements for a non-global context
       operationId: revokeRoleMembershipGlobalOrRepositoryContainer
       parameters:
-      - explode: false
+      - description: Enter the value for ownerType. Using `global` will revoke the
+          administrator role.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -4521,14 +5300,17 @@ paths:
           pattern: global|repository_container
           type: string
         style: simple
-      - explode: false
+      - description: Enter the roleId for the role to be revoked.
+        explode: false
         in: path
         name: roleId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: "Enter the value for memberType, to specify a user or a user\
+          \ group."
+        explode: false
         in: path
         name: memberType
         required: true
@@ -4539,7 +5321,9 @@ paths:
           pattern: user|group
           type: string
         style: simple
-      - explode: false
+      - description: Enter the value for memberName. This can be a username or group
+          name depending upon the value of memberType above.
+        explode: false
         in: path
         name: memberName
         required: true
@@ -4547,16 +5331,20 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "204":
+          description: The specified role has been revoked from the user or user group.
       tags:
       - Role Memberships
     put:
+      description: |-
+        Use this method to grant a role to a user or user group globally or on all repositories.
+
+        Permissions required: Edit system configuration and users for a global context or edit access control for a non-global context
       operationId: grantRoleMembershipGlobalOrRepositoryContainer
       parameters:
-      - explode: false
+      - description: Enter the value for the ownerType for which you want to grant
+          the role.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -4571,14 +5359,20 @@ paths:
           pattern: global|repository_container
           type: string
         style: simple
-      - explode: false
+      - description: |-
+          Enter the roleId for the role to be granted.
+
+          Use the Roles REST API for roleIds and descriptions.
+        explode: false
         in: path
         name: roleId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: "Enter the value for memberType, to specify a user or a user\
+          \ group."
+        explode: false
         in: path
         name: memberType
         required: true
@@ -4589,7 +5383,9 @@ paths:
           pattern: user|group
           type: string
         style: simple
-      - explode: false
+      - description: Enter the value for memberName. This can be a username or group
+          name depending upon the value of memberType above.
+        explode: false
         in: path
         name: memberName
         required: true
@@ -4597,17 +5393,22 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "200":
+          description: The specified role has been granted to the users or user groups
+            on the given context.
       tags:
       - Role Memberships
   /api/v2/roleMemberships/{ownerType}/{internalOwnerId}:
     get:
+      description: |-
+        Use this method to retrieve the users, user groups and the corresponding role Ids.
+
+        Permissions required: Edit system configuration and users for a global context or view IQ elements for a non-global context
       operationId: getRoleMembershipsApplicationOrOrganization
       parameters:
-      - explode: false
+      - description: Enter the ownerType for which you want to retrieve users and
+          their role Ids.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -4622,7 +5423,8 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: Enter the corresponding id for the ownerType specified above.
+        explode: false
         in: path
         name: internalOwnerId
         required: true
@@ -4630,19 +5432,27 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiRoleMemberMappingListDTO'
-          description: default response
+          description: "The response contains the assigned role Ids, users and user\
+            \ groups for the application or organization requested. It also includes\
+            \ members who inherit a role based on the organization hierarchy."
       tags:
       - Role Memberships
   /api/v2/roleMemberships/{ownerType}/{internalOwnerId}/role/{roleId}/{memberType}/{memberName}:
     delete:
+      description: |-
+        Use this method to revoke a role from a user or user group, on a specific application or organization.
+
+        Permissions required: Edit access control
       operationId: revokeRoleMembershipApplicationOrOrganization
       parameters:
-      - explode: false
+      - description: Enter the value for the ownerType for which you want to revoke
+          the role. Using `global` will revoke the administrator role.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -4657,21 +5467,26 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: Enter the internalId associated with the ownerType specified
+          above.
+        explode: false
         in: path
         name: internalOwnerId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Enter the roleId for the role to be revoked.
+        explode: false
         in: path
         name: roleId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: "Enter the value for memberType, to specify a user or a user\
+          \ group."
+        explode: false
         in: path
         name: memberType
         required: true
@@ -4682,7 +5497,9 @@ paths:
           pattern: user|group
           type: string
         style: simple
-      - explode: false
+      - description: Enter the value for memberName. This can be a username or group
+          name depending upon the value of memberType above.
+        explode: false
         in: path
         name: memberName
         required: true
@@ -4690,16 +5507,20 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "204":
+          description: The specified role has been revoked from the user or user group
       tags:
       - Role Memberships
     put:
+      description: |-
+        Use this method to grant a role to a user or user group for the specified application or organization.
+
+        Permissions required: Edit access control
       operationId: grantRoleMembershipApplicationOrOrganization
       parameters:
-      - explode: false
+      - description: Enter the value for the ownerType for which you want to grant
+          the role.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -4714,21 +5535,29 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: Enter the value for the internalId associated with the ownerType
+          specified above.
+        explode: false
         in: path
         name: internalOwnerId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: |-
+          Enter the roleId for the role to be granted.
+
+          Use the Roles REST API for roleIds and descriptions.
+        explode: false
         in: path
         name: roleId
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: "Enter the value for memberType, to specify a user or a user\
+          \ group."
+        explode: false
         in: path
         name: memberType
         required: true
@@ -4739,7 +5568,9 @@ paths:
           pattern: user|group
           type: string
         style: simple
-      - explode: false
+      - description: Enter the value for memberName. This can be a username or group
+          name depending upon the value of memberType above.
+        explode: false
         in: path
         name: memberName
         required: true
@@ -4747,22 +5578,25 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "200":
+          description: The specified roleId has been has been granted to the user
+            or user group for the requested context.
       tags:
       - Role Memberships
   /api/v2/roles:
     get:
+      description: |-
+        Use this method to view the role IDs, role names and descriptions.
+
+        Permissions required: View All Roles
       operationId: getRoles
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiRoleListDTO'
-          description: default response
+          description: "The response contains the role IDs, role names and descriptions."
       tags:
       - Roles
   /api/v2/sbom/applications/{applicationId}:
@@ -5168,6 +6002,16 @@ paths:
     post:
       description: Imports a new sbom version to an existing application
       operationId: importSbom
+      parameters:
+      - description: Enable importing as a binary file. default = false
+        explode: true
+        in: query
+        name: enableBinaryImport
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
       requestBody:
         content:
           '*/*':
@@ -5525,9 +6369,16 @@ paths:
       - Solutions
   /api/v2/sourceControl/automaticRoleAssignment/{publicId}:
     post:
+      description: |-
+        Use this method to automatically grant the 'developer' role to all contributors of a repository on a given application.
+
+        Prerequisites for automatic role assignment are:<ol><li>SCM configuration for the application and authentication token should exist.</li><li>The contributors to the repository should have a matching username in IQ.</li></ol>
+
+        Permissions required: Edit access control on the application.
       operationId: automaticRoleAssignment
       parameters:
-      - explode: false
+      - description: Enter the public applicationId for automatic role assignment.
+        explode: false
         in: path
         name: publicId
         required: true
@@ -5535,7 +6386,7 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "204":
           content:
             application/json:
               schema:
@@ -5543,14 +6394,22 @@ paths:
                   type: string
                 type: array
                 uniqueItems: true
-          description: default response
+          description: |-
+            The 'developer' role has automatically been assigned to all contributors of the repository, who have a matching username configured in IQ Server.
+
+            The response contains all usernames that were successfully granted the 'developer' role on the given application.
       tags:
       - Source Control
   /api/v2/sourceControl/{ownerType}/{internalOwnerId}:
     delete:
+      description: |-
+        Use this method to delete a SCM setting for the specified ownerType/ownerId.
+
+        Permissions required: Edit IQ Elements
       operationId: deleteSourceControl
       parameters:
-      - explode: false
+      - description: Enter the value for ownerType.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -5565,7 +6424,8 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: Enter the value for internal ownerId.
+        explode: false
         in: path
         name: internalOwnerId
         required: true
@@ -5573,16 +6433,20 @@ paths:
           type: string
         style: simple
       responses:
-        default:
-          content:
-            '*/*': {}
-          description: default response
+        "204":
+          description: The SCM setting for the specified ownerType/ownerId has been
+            successfully deleted.
       tags:
       - Source Control
     get:
+      description: |-
+        Use this method to retrieve the source control configuration settings for an organization or an application.
+
+        Permissions required: View IQ Elements
       operationId: getSourceControl_1
       parameters:
-      - explode: false
+      - description: Enter the value for ownerType.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -5597,7 +6461,9 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: Enter the value for internal ownerId. Use ROOT_ORGANIZATION_ID
+          for the root organization
+        explode: false
         in: path
         name: internalOwnerId
         required: true
@@ -5605,18 +6471,26 @@ paths:
           type: string
         style: simple
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiSourceControlDTO'
-          description: default response
+          description: |-
+            The response contains source control configuration settings for the specified ownerId.
+
+            <ul><li><code>id</code> is the owner internal ID.</li><li><code>repositoryUrl</code> indicates the http(s) and ssh urls for the application specified in the ownerId.</li><li><code>username</code> is retrieved if available on the SCM system, e.g. for Bitbucket Server and Cloud.</li><li><code>provider</code> indicates the name of the SCM system.</li><li><code>baseBranch</code> indicates the name of the last selected branch.</li><li><code>enablePullRequests</code> has been deprecated in version 124.</li><li><code>remediationPullRequestsEnabled</code> indicates if the Automated Pull Requests feature is enabled.</li><li><code>enableStatusChecks</code> has been deprecated in version 124.</li><li><code>statusChecksEnabled</code> is an internal field.</li><li><code>pullRequestCommentingEnabled</code> indicates if the Pull Request Commenting feature is enabled.</li><li><code>sourceControlEvaluationsEnabled</code> indicates if the source control evaluations are enabled for the continuous risk profile feature.</li><li><code>sourceControlScanTarget</code> indicates the path inside the repository.</li><li><code>sshEnabled</code> indicates if ssh is enabled.</li><li><code>commitStatusEnabled</code> indicates if interaction with the commit statuses on the SCM system is enabled.</li></ul>
       tags:
       - Source Control
     post:
+      description: |-
+        Use this method to create a source control configuration setting.
+
+        Permissions required: Edit IQ Elements
       operationId: addSourceControl
       parameters:
-      - explode: false
+      - description: Enter the value for ownerType.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -5631,7 +6505,9 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: Enter the value for internal ownerId. Use ROOT_ORGANIZATION_ID
+          for root organization.
+        explode: false
         in: path
         name: internalOwnerId
         required: true
@@ -5643,19 +6519,45 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiSourceControlDTO'
+        description: "Specify the SCM settings for the ownerId specified above in\
+          \ the request JSON.<ul><li><code>id</code> is the internal owner ID.</li><li><code>repositoryUrl</code>\
+          \ is the http(s) and ssh urls for the application specified in the ownerId.</li><li><code>username</code>\
+          \ is optional, can be provided for Bitbucket Server and Cloud.</li><li><code>token</code>\
+          \ is optional,if inherited. If provided, this value will override the value\
+          \ inherited from the root organization, organization or application level.<li><code>provider</code>\
+          \ is the name of of the SCM system. Allowed values are <code>azure</code>,\
+          \ <code>github</code>, <code>gitlab</code>, and <code>bitbucket</code>.</li><li><code>baseBranch</code>\
+          \ is required for the root organization. Organizations and applications\
+          \ inherit from the root unless overridden.</li><li><code>enablePullRequests</code>\
+          \ has been deprecated in version 124.</li><li><code>remediationPullRequestsEnabled</code>\
+          \ is optional. Set it to `true` to enable the Automated Pull Requests.</li><li><code>enableStatusChecks</code>\
+          \ has been deprecated in version 124.</li><li><code>statusChecksEnabled</code>\
+          \ is an internal field.</li><li><code>pullRequestCommentingEnabled</code>\
+          \ is optional. Set it to `true` to enable the  Pull Request Commenting feature.</li><li><code>sourceControlEvaluationsEnabled</code>\
+          \ is set to `true` to enable source control evaluations for the continuous\
+          \ risk profile feature.</li><li><code>sourceControlScanTarget</code> is\
+          \ the path inside the repository.</li><li><code>sshEnabled</code> is set\
+          \ to `true` to enable ssh.</li><li><code>commitStatusEnabled</code> is set\
+          \ to `true` if interaction with the commit statuses on the SCM is enabled.</li></ul>"
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiSourceControlDTO'
-          description: default response
+          description: The Source Control Management (SCM) settings have been created
+            successfully.
       tags:
       - Source Control
     put:
+      description: |-
+        Use this method to update an existing SCM setting.
+
+        Permissions required: Edit IQ Elements
       operationId: updateSourceControl
       parameters:
-      - explode: false
+      - description: Enter the value for ownerType.
+        explode: false
         in: path
         name: ownerType
         required: true
@@ -5670,7 +6572,9 @@ paths:
           pattern: application|organization
           type: string
         style: simple
-      - explode: false
+      - description: Enter the internal ownerId. Use ROOT_ORGANIZATION_ID for the
+          root organization.
+        explode: false
         in: path
         name: internalOwnerId
         required: true
@@ -5682,13 +6586,34 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiSourceControlDTO'
+        description: "Specify the SCM settings for the ownerId specified above in\
+          \ the request JSON.<ul><li><code>id</code> is the internal owner ID.</li><li><code>repositoryUrl</code>\
+          \ is the http(s) and ssh urls for the application specified in the ownerId.</li><li><code>username</code>\
+          \ is optional, can be provided for Bitbucket Server and Cloud.</li><li><code>token</code>\
+          \ is optional if inherited. If provided, this value will override the value\
+          \ inherited from the root organization, organization or application level.<li><code>provider</code>\
+          \ is the name of of the SCM system. Allowed values are <code>azure</code>,\
+          \ <code>github</code>, <code>gitlab</code>, and <code>bitbucket</code>.</li><li><code>baseBranch</code>\
+          \ is required for the root organization. Organizations and applications\
+          \ inherit from the root unless overridden.</li><li><code>enablePullRequests</code>\
+          \ has been deprecated in version 124.</li><li><code>remediationPullRequestsEnabled</code>\
+          \ is optional. Set it to `true` to enable the Automated Pull Requests.</li><li><code>enableStatusChecks</code>\
+          \ has been deprecated in version 124.</li><li><code>statusChecksEnabled</code>\
+          \ is an internal field.</li><li><code>pullRequestCommentingEnabled</code>\
+          \ is optional. Set it to `true` to enable the  Pull Request Commenting feature.</li><li><code>sourceControlEvaluationsEnabled</code>\
+          \ is set to `true` to enable source control evaluations for the continuous\
+          \ risk profile feature.</li><li><code>sourceControlScanTarget</code> is\
+          \ the path inside the repository.</li><li><code>sshEnabled</code> is set\
+          \ to `true` to enable ssh.</li><li><code>commitStatusEnabled</code> is set\
+          \ to `true` if interaction with the commit statuses on the SCM is enabled.</li></ul>"
       responses:
-        default:
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiSourceControlDTO'
-          description: default response
+          description: The SCM settings have been updated successfully. The JSON returned
+            shows the updated values.
       tags:
       - Source Control
   /api/v2/sourceControlMetrics/{ownerType}/{internalOwnerId}:
@@ -5831,14 +6756,6 @@ paths:
   /api/v2/telemetry:
     post:
       operationId: postExternalTelemetry
-      parameters:
-      - explode: false
-        in: header
-        name: user-agent
-        required: false
-        schema:
-          type: string
-        style: simple
       requestBody:
         content:
           application/json:
@@ -7597,6 +8514,87 @@ components:
           type: string
         inheritedFromOrganizationName:
           type: string
+      type: object
+    ApiAutoPolicyWaiverDTO:
+      example:
+        createTime: 2000-01-23T04:56:07.000+00:00
+        creatorId: creatorId
+        creatorName: creatorName
+        pathForward: true
+        ownerId: ownerId
+        reachable: true
+        threatLevel: 0
+        autoPolicyWaiverId: autoPolicyWaiverId
+      properties:
+        autoPolicyWaiverId:
+          type: string
+        createTime:
+          format: date-time
+          type: string
+        creatorId:
+          type: string
+        creatorName:
+          type: string
+        ownerId:
+          type: string
+        pathForward:
+          type: boolean
+        reachable:
+          type: boolean
+        threatLevel:
+          format: int32
+          type: integer
+      type: object
+    ApiAutoPolicyWaiverRevocationDTO:
+      example:
+        createTime: 2000-01-23T04:56:07.000+00:00
+        associatedPackageUrl: associatedPackageUrl
+        scanId: scanId
+        autoPolicyWaiverRevocationId: autoPolicyWaiverRevocationId
+        creatorId: creatorId
+        creatorName: creatorName
+        ownerId: ownerId
+        hash: hash
+        autoPolicyWaiverId: autoPolicyWaiverId
+      properties:
+        associatedPackageUrl:
+          type: string
+        autoPolicyWaiverId:
+          type: string
+        autoPolicyWaiverRevocationId:
+          type: string
+        createTime:
+          format: date-time
+          type: string
+        creatorId:
+          type: string
+        creatorName:
+          type: string
+        hash:
+          type: string
+        ownerId:
+          type: string
+        scanId:
+          type: string
+      type: object
+    ApiAutoPolicyWaiverStatusDTO:
+      example:
+        autoPolicyWaiverOwnerId: autoPolicyWaiverOwnerId
+        autoPolicyWaiverOwnerName: autoPolicyWaiverOwnerName
+        isInherited: true
+        isAutoWaiverEnabled: true
+        autoPolicyWaiverId: autoPolicyWaiverId
+      properties:
+        autoPolicyWaiverId:
+          type: string
+        autoPolicyWaiverOwnerId:
+          type: string
+        autoPolicyWaiverOwnerName:
+          type: string
+        isAutoWaiverEnabled:
+          type: boolean
+        isInherited:
+          type: boolean
       type: object
     ApiComponentChangeActionDTO:
       properties:
@@ -14180,6 +15178,7 @@ components:
         policyThreatCategory: policyThreatCategory
         fixTime: 2000-01-23T04:56:07.000+00:00
         policyViolationId: policyViolationId
+        reachabilityStatus: REACHABLE
         constraintViolations:
         - constraintId: constraintId
           reasons:
@@ -14258,6 +15257,11 @@ components:
         policyThreatCategory:
           type: string
         policyViolationId:
+          type: string
+        reachabilityStatus:
+          enum:
+          - REACHABLE
+          - NON_REACHABLE
           type: string
         stageData:
           additionalProperties:
@@ -15737,6 +16741,32 @@ components:
         username:
           type: string
       type: object
+    ApiMalwareComponentEvaluationRequest:
+      example:
+        packageUrl: packageUrl
+        hash: hash
+      properties:
+        hash:
+          type: string
+        packageUrl:
+          type: string
+      type: object
+    ApiMalwareComponentEvaluationRequestList:
+      example:
+        components:
+        - packageUrl: packageUrl
+          hash: hash
+        - packageUrl: packageUrl
+          hash: hash
+        format: format
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/ApiMalwareComponentEvaluationRequest'
+          type: array
+        format:
+          type: string
+      type: object
     ApiMatchStateSummaryDTOV2:
       example:
         totalComponentCount: 5
@@ -15923,6 +16953,65 @@ components:
         ownerType:
           type: string
       type: object
+    ApiPageResultPrioritizedComponent:
+      example:
+        pageCount: 6
+        total: 7
+        pageSize: 1
+        page: 0
+        results:
+        - remediationVersion: remediationVersion
+          displayName: displayName
+          highestReachableThreat: 5
+          highestThreatPolicyName: highestThreatPolicyName
+          priority: 2
+          highestThreat: 5
+          remediationType: next-no-violations
+          dependencyType: dependencyType
+          hasFailActionOnComponent: true
+          securityReachable: true
+          action: action
+          componentHash: componentHash
+          highestThreatPolicyConstraintName: highestThreatPolicyConstraintName
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+        - remediationVersion: remediationVersion
+          displayName: displayName
+          highestReachableThreat: 5
+          highestThreatPolicyName: highestThreatPolicyName
+          priority: 2
+          highestThreat: 5
+          remediationType: next-no-violations
+          dependencyType: dependencyType
+          hasFailActionOnComponent: true
+          securityReachable: true
+          action: action
+          componentHash: componentHash
+          highestThreatPolicyConstraintName: highestThreatPolicyConstraintName
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+      properties:
+        page:
+          format: int32
+          type: integer
+        pageCount:
+          format: int64
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        results:
+          items:
+            $ref: '#/components/schemas/PrioritizedComponent'
+          type: array
+        total:
+          format: int64
+          type: integer
+      type: object
     ApiPolicyDTO:
       example:
         ownerType: APPLICATION
@@ -15942,6 +17031,9 @@ components:
           enum:
           - APPLICATION
           - ORGANIZATION
+          - REPOSITORY_CONTAINER
+          - REPOSITORY_MANAGER
+          - REPOSITORY
           type: string
         policyType:
           type: string
@@ -17426,6 +18518,9 @@ components:
         proprietary: true
         packageUrl: packageUrl
         cpe: cpe
+        filenames:
+        - filenames
+        - filenames
         dependencyData:
           parentComponentPurls:
           - parentComponentPurls
@@ -17453,6 +18548,10 @@ components:
           $ref: '#/components/schemas/ApiDependencyDataDTO'
         displayName:
           type: string
+        filenames:
+          items:
+            type: string
+          type: array
         hash:
           type: string
         identificationSource:
@@ -19001,6 +20100,9 @@ components:
           proprietary: true
           packageUrl: packageUrl
           cpe: cpe
+          filenames:
+          - filenames
+          - filenames
           dependencyData:
             parentComponentPurls:
             - parentComponentPurls
@@ -19099,6 +20201,9 @@ components:
           proprietary: true
           packageUrl: packageUrl
           cpe: cpe
+          filenames:
+          - filenames
+          - filenames
           dependencyData:
             parentComponentPurls:
             - parentComponentPurls
@@ -23566,101 +24671,6 @@ components:
         templateName:
           type: string
       type: object
-    BodyPart:
-      example:
-        headers:
-          key:
-          - headers
-          - headers
-        parameterizedHeaders:
-          key:
-          - parameters:
-              key: parameters
-            value: value
-          - parameters:
-              key: parameters
-            value: value
-        parent:
-          headers:
-            key:
-            - headers
-            - headers
-          parameterizedHeaders:
-            key:
-            - parameters:
-                key: parameters
-              value: value
-            - parameters:
-                key: parameters
-              value: value
-          parent: null
-          messageBodyWorkers: "{}"
-          contentDisposition:
-            fileName: fileName
-            modificationDate: 2000-01-23T04:56:07.000+00:00
-            size: 0
-            readDate: 2000-01-23T04:56:07.000+00:00
-            creationDate: 2000-01-23T04:56:07.000+00:00
-            type: type
-            parameters:
-              key: parameters
-          mediaType:
-            subtype: subtype
-            type: type
-            parameters:
-              key: parameters
-            wildcardSubtype: true
-            wildcardType: true
-          bodyParts:
-          - null
-          - null
-          entity: "{}"
-          providers: "{}"
-        messageBodyWorkers: "{}"
-        contentDisposition:
-          fileName: fileName
-          modificationDate: 2000-01-23T04:56:07.000+00:00
-          size: 0
-          readDate: 2000-01-23T04:56:07.000+00:00
-          creationDate: 2000-01-23T04:56:07.000+00:00
-          type: type
-          parameters:
-            key: parameters
-        mediaType:
-          subtype: subtype
-          type: type
-          parameters:
-            key: parameters
-          wildcardSubtype: true
-          wildcardType: true
-        entity: "{}"
-        providers: "{}"
-      properties:
-        contentDisposition:
-          $ref: '#/components/schemas/ContentDisposition'
-        entity:
-          type: object
-        headers:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          type: object
-        mediaType:
-          $ref: '#/components/schemas/BodyPart_mediaType'
-        messageBodyWorkers:
-          type: object
-        parameterizedHeaders:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/ParameterizedHeader'
-            type: array
-          type: object
-        parent:
-          $ref: '#/components/schemas/MultiPart'
-        providers:
-          type: object
-      type: object
     ComponentDisplayName:
       example:
         name: name
@@ -23833,6 +24843,9 @@ components:
       type: object
     ConfigurationValidationResult:
       example:
+        repoPublic:
+          valid: true
+          message: message
         tokenPermissions:
           valid: true
           message: message
@@ -23849,6 +24862,8 @@ components:
         configurationComplete:
           $ref: '#/components/schemas/ValidationResult'
         repoPrivate:
+          $ref: '#/components/schemas/ValidationResult'
+        repoPublic:
           $ref: '#/components/schemas/ValidationResult'
         sshConfiguration:
           $ref: '#/components/schemas/ValidationResult'
@@ -23889,38 +24904,6 @@ components:
         operatorName:
           type: string
       type: object
-    ContentDisposition:
-      example:
-        fileName: fileName
-        modificationDate: 2000-01-23T04:56:07.000+00:00
-        size: 0
-        readDate: 2000-01-23T04:56:07.000+00:00
-        creationDate: 2000-01-23T04:56:07.000+00:00
-        type: type
-        parameters:
-          key: parameters
-      properties:
-        creationDate:
-          format: date-time
-          type: string
-        fileName:
-          type: string
-        modificationDate:
-          format: date-time
-          type: string
-        parameters:
-          additionalProperties:
-            type: string
-          type: object
-        readDate:
-          format: date-time
-          type: string
-        size:
-          format: int64
-          type: integer
-        type:
-          type: string
-      type: object
     CweId:
       example:
         id: id
@@ -23932,133 +24915,92 @@ components:
           format: uri
           type: string
       type: object
-    FormDataBodyPart:
+    DevelopmentPrioritizationResults:
       example:
-        headers:
-          key:
-          - headers
-          - headers
-        parameterizedHeaders:
-          key:
-          - parameters:
-              key: parameters
-            value: value
-          - parameters:
-              key: parameters
-            value: value
-        parent:
-          headers:
-            key:
-            - headers
-            - headers
-          parameterizedHeaders:
-            key:
-            - parameters:
-                key: parameters
-              value: value
-            - parameters:
-                key: parameters
-              value: value
-          parent: null
-          messageBodyWorkers: "{}"
-          contentDisposition:
-            fileName: fileName
-            modificationDate: 2000-01-23T04:56:07.000+00:00
-            size: 0
-            readDate: 2000-01-23T04:56:07.000+00:00
-            creationDate: 2000-01-23T04:56:07.000+00:00
-            type: type
-            parameters:
-              key: parameters
-          mediaType:
-            subtype: subtype
-            type: type
-            parameters:
-              key: parameters
-            wildcardSubtype: true
-            wildcardType: true
-          bodyParts:
-          - null
-          - null
-          entity: "{}"
-          providers: "{}"
-        messageBodyWorkers: "{}"
-        contentDisposition:
-          fileName: fileName
-          modificationDate: 2000-01-23T04:56:07.000+00:00
-          size: 0
-          readDate: 2000-01-23T04:56:07.000+00:00
-          creationDate: 2000-01-23T04:56:07.000+00:00
-          type: type
-          parameters:
-            key: parameters
-        name: name
-        mediaType:
-          subtype: subtype
-          type: type
-          parameters:
-            key: parameters
-          wildcardSubtype: true
-          wildcardType: true
-        simple: true
-        formDataContentDisposition:
-          fileName: fileName
-          modificationDate: 2000-01-23T04:56:07.000+00:00
-          size: 6
-          readDate: 2000-01-23T04:56:07.000+00:00
-          name: name
-          creationDate: 2000-01-23T04:56:07.000+00:00
-          type: type
-          parameters:
-            key: parameters
-        value: value
-        entity: "{}"
-        providers: "{}"
+        topPriorities:
+        - remediationVersion: remediationVersion
+          displayName: displayName
+          highestReachableThreat: 5
+          highestThreatPolicyName: highestThreatPolicyName
+          priority: 2
+          highestThreat: 5
+          remediationType: next-no-violations
+          dependencyType: dependencyType
+          hasFailActionOnComponent: true
+          securityReachable: true
+          action: action
+          componentHash: componentHash
+          highestThreatPolicyConstraintName: highestThreatPolicyConstraintName
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+        - remediationVersion: remediationVersion
+          displayName: displayName
+          highestReachableThreat: 5
+          highestThreatPolicyName: highestThreatPolicyName
+          priority: 2
+          highestThreat: 5
+          remediationType: next-no-violations
+          dependencyType: dependencyType
+          hasFailActionOnComponent: true
+          securityReachable: true
+          action: action
+          componentHash: componentHash
+          highestThreatPolicyConstraintName: highestThreatPolicyConstraintName
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+        additionalPriorities:
+          pageCount: 6
+          total: 7
+          pageSize: 1
+          page: 0
+          results:
+          - remediationVersion: remediationVersion
+            displayName: displayName
+            highestReachableThreat: 5
+            highestThreatPolicyName: highestThreatPolicyName
+            priority: 2
+            highestThreat: 5
+            remediationType: next-no-violations
+            dependencyType: dependencyType
+            hasFailActionOnComponent: true
+            securityReachable: true
+            action: action
+            componentHash: componentHash
+            highestThreatPolicyConstraintName: highestThreatPolicyConstraintName
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+          - remediationVersion: remediationVersion
+            displayName: displayName
+            highestReachableThreat: 5
+            highestThreatPolicyName: highestThreatPolicyName
+            priority: 2
+            highestThreat: 5
+            remediationType: next-no-violations
+            dependencyType: dependencyType
+            hasFailActionOnComponent: true
+            securityReachable: true
+            action: action
+            componentHash: componentHash
+            highestThreatPolicyConstraintName: highestThreatPolicyConstraintName
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
       properties:
-        contentDisposition:
-          $ref: '#/components/schemas/ContentDisposition'
-        entity:
-          type: object
-        formDataContentDisposition:
-          $ref: '#/components/schemas/FormDataContentDisposition'
-        headers:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          type: object
-        mediaType:
-          $ref: '#/components/schemas/BodyPart_mediaType'
-        messageBodyWorkers:
-          type: object
-        name:
-          type: string
-        parameterizedHeaders:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/ParameterizedHeader'
-            type: array
-          type: object
-        parent:
-          $ref: '#/components/schemas/MultiPart'
-        providers:
-          type: object
-        simple:
-          type: boolean
-        value:
-          type: string
+        additionalPriorities:
+          $ref: '#/components/schemas/ApiPageResultPrioritizedComponent'
+        topPriorities:
+          items:
+            $ref: '#/components/schemas/PrioritizedComponent'
+          type: array
       type: object
     FormDataContentDisposition:
-      example:
-        fileName: fileName
-        modificationDate: 2000-01-23T04:56:07.000+00:00
-        size: 6
-        readDate: 2000-01-23T04:56:07.000+00:00
-        name: name
-        creationDate: 2000-01-23T04:56:07.000+00:00
-        type: type
-        parameters:
-          key: parameters
       properties:
         creationDate:
           format: date-time
@@ -24082,408 +25024,6 @@ components:
           type: integer
         type:
           type: string
-      type: object
-    FormDataMultiPart:
-      example:
-        headers:
-          key:
-          - headers
-          - headers
-        parameterizedHeaders:
-          key:
-          - parameters:
-              key: parameters
-            value: value
-          - parameters:
-              key: parameters
-            value: value
-        parent:
-          headers:
-            key:
-            - headers
-            - headers
-          parameterizedHeaders:
-            key:
-            - parameters:
-                key: parameters
-              value: value
-            - parameters:
-                key: parameters
-              value: value
-          parent: null
-          messageBodyWorkers: "{}"
-          contentDisposition:
-            fileName: fileName
-            modificationDate: 2000-01-23T04:56:07.000+00:00
-            size: 0
-            readDate: 2000-01-23T04:56:07.000+00:00
-            creationDate: 2000-01-23T04:56:07.000+00:00
-            type: type
-            parameters:
-              key: parameters
-          mediaType:
-            subtype: subtype
-            type: type
-            parameters:
-              key: parameters
-            wildcardSubtype: true
-            wildcardType: true
-          bodyParts:
-          - null
-          - null
-          entity: "{}"
-          providers: "{}"
-        messageBodyWorkers: "{}"
-        contentDisposition:
-          fileName: fileName
-          modificationDate: 2000-01-23T04:56:07.000+00:00
-          size: 0
-          readDate: 2000-01-23T04:56:07.000+00:00
-          creationDate: 2000-01-23T04:56:07.000+00:00
-          type: type
-          parameters:
-            key: parameters
-        mediaType:
-          subtype: subtype
-          type: type
-          parameters:
-            key: parameters
-          wildcardSubtype: true
-          wildcardType: true
-        fields:
-          key:
-          - headers:
-              key:
-              - headers
-              - headers
-            parameterizedHeaders:
-              key:
-              - parameters:
-                  key: parameters
-                value: value
-              - parameters:
-                  key: parameters
-                value: value
-            parent:
-              headers:
-                key:
-                - headers
-                - headers
-              parameterizedHeaders:
-                key:
-                - parameters:
-                    key: parameters
-                  value: value
-                - parameters:
-                    key: parameters
-                  value: value
-              parent: null
-              messageBodyWorkers: "{}"
-              contentDisposition:
-                fileName: fileName
-                modificationDate: 2000-01-23T04:56:07.000+00:00
-                size: 0
-                readDate: 2000-01-23T04:56:07.000+00:00
-                creationDate: 2000-01-23T04:56:07.000+00:00
-                type: type
-                parameters:
-                  key: parameters
-              mediaType:
-                subtype: subtype
-                type: type
-                parameters:
-                  key: parameters
-                wildcardSubtype: true
-                wildcardType: true
-              bodyParts:
-              - null
-              - null
-              entity: "{}"
-              providers: "{}"
-            messageBodyWorkers: "{}"
-            contentDisposition:
-              fileName: fileName
-              modificationDate: 2000-01-23T04:56:07.000+00:00
-              size: 0
-              readDate: 2000-01-23T04:56:07.000+00:00
-              creationDate: 2000-01-23T04:56:07.000+00:00
-              type: type
-              parameters:
-                key: parameters
-            name: name
-            mediaType:
-              subtype: subtype
-              type: type
-              parameters:
-                key: parameters
-              wildcardSubtype: true
-              wildcardType: true
-            simple: true
-            formDataContentDisposition:
-              fileName: fileName
-              modificationDate: 2000-01-23T04:56:07.000+00:00
-              size: 6
-              readDate: 2000-01-23T04:56:07.000+00:00
-              name: name
-              creationDate: 2000-01-23T04:56:07.000+00:00
-              type: type
-              parameters:
-                key: parameters
-            value: value
-            entity: "{}"
-            providers: "{}"
-          - headers:
-              key:
-              - headers
-              - headers
-            parameterizedHeaders:
-              key:
-              - parameters:
-                  key: parameters
-                value: value
-              - parameters:
-                  key: parameters
-                value: value
-            parent:
-              headers:
-                key:
-                - headers
-                - headers
-              parameterizedHeaders:
-                key:
-                - parameters:
-                    key: parameters
-                  value: value
-                - parameters:
-                    key: parameters
-                  value: value
-              parent: null
-              messageBodyWorkers: "{}"
-              contentDisposition:
-                fileName: fileName
-                modificationDate: 2000-01-23T04:56:07.000+00:00
-                size: 0
-                readDate: 2000-01-23T04:56:07.000+00:00
-                creationDate: 2000-01-23T04:56:07.000+00:00
-                type: type
-                parameters:
-                  key: parameters
-              mediaType:
-                subtype: subtype
-                type: type
-                parameters:
-                  key: parameters
-                wildcardSubtype: true
-                wildcardType: true
-              bodyParts:
-              - null
-              - null
-              entity: "{}"
-              providers: "{}"
-            messageBodyWorkers: "{}"
-            contentDisposition:
-              fileName: fileName
-              modificationDate: 2000-01-23T04:56:07.000+00:00
-              size: 0
-              readDate: 2000-01-23T04:56:07.000+00:00
-              creationDate: 2000-01-23T04:56:07.000+00:00
-              type: type
-              parameters:
-                key: parameters
-            name: name
-            mediaType:
-              subtype: subtype
-              type: type
-              parameters:
-                key: parameters
-              wildcardSubtype: true
-              wildcardType: true
-            simple: true
-            formDataContentDisposition:
-              fileName: fileName
-              modificationDate: 2000-01-23T04:56:07.000+00:00
-              size: 6
-              readDate: 2000-01-23T04:56:07.000+00:00
-              name: name
-              creationDate: 2000-01-23T04:56:07.000+00:00
-              type: type
-              parameters:
-                key: parameters
-            value: value
-            entity: "{}"
-            providers: "{}"
-        bodyParts:
-        - headers:
-            key:
-            - headers
-            - headers
-          parameterizedHeaders:
-            key:
-            - parameters:
-                key: parameters
-              value: value
-            - parameters:
-                key: parameters
-              value: value
-          parent:
-            headers:
-              key:
-              - headers
-              - headers
-            parameterizedHeaders:
-              key:
-              - parameters:
-                  key: parameters
-                value: value
-              - parameters:
-                  key: parameters
-                value: value
-            parent: null
-            messageBodyWorkers: "{}"
-            contentDisposition:
-              fileName: fileName
-              modificationDate: 2000-01-23T04:56:07.000+00:00
-              size: 0
-              readDate: 2000-01-23T04:56:07.000+00:00
-              creationDate: 2000-01-23T04:56:07.000+00:00
-              type: type
-              parameters:
-                key: parameters
-            mediaType:
-              subtype: subtype
-              type: type
-              parameters:
-                key: parameters
-              wildcardSubtype: true
-              wildcardType: true
-            bodyParts:
-            - null
-            - null
-            entity: "{}"
-            providers: "{}"
-          messageBodyWorkers: "{}"
-          contentDisposition:
-            fileName: fileName
-            modificationDate: 2000-01-23T04:56:07.000+00:00
-            size: 0
-            readDate: 2000-01-23T04:56:07.000+00:00
-            creationDate: 2000-01-23T04:56:07.000+00:00
-            type: type
-            parameters:
-              key: parameters
-          mediaType:
-            subtype: subtype
-            type: type
-            parameters:
-              key: parameters
-            wildcardSubtype: true
-            wildcardType: true
-          entity: "{}"
-          providers: "{}"
-        - headers:
-            key:
-            - headers
-            - headers
-          parameterizedHeaders:
-            key:
-            - parameters:
-                key: parameters
-              value: value
-            - parameters:
-                key: parameters
-              value: value
-          parent:
-            headers:
-              key:
-              - headers
-              - headers
-            parameterizedHeaders:
-              key:
-              - parameters:
-                  key: parameters
-                value: value
-              - parameters:
-                  key: parameters
-                value: value
-            parent: null
-            messageBodyWorkers: "{}"
-            contentDisposition:
-              fileName: fileName
-              modificationDate: 2000-01-23T04:56:07.000+00:00
-              size: 0
-              readDate: 2000-01-23T04:56:07.000+00:00
-              creationDate: 2000-01-23T04:56:07.000+00:00
-              type: type
-              parameters:
-                key: parameters
-            mediaType:
-              subtype: subtype
-              type: type
-              parameters:
-                key: parameters
-              wildcardSubtype: true
-              wildcardType: true
-            bodyParts:
-            - null
-            - null
-            entity: "{}"
-            providers: "{}"
-          messageBodyWorkers: "{}"
-          contentDisposition:
-            fileName: fileName
-            modificationDate: 2000-01-23T04:56:07.000+00:00
-            size: 0
-            readDate: 2000-01-23T04:56:07.000+00:00
-            creationDate: 2000-01-23T04:56:07.000+00:00
-            type: type
-            parameters:
-              key: parameters
-          mediaType:
-            subtype: subtype
-            type: type
-            parameters:
-              key: parameters
-            wildcardSubtype: true
-            wildcardType: true
-          entity: "{}"
-          providers: "{}"
-        entity: "{}"
-        providers: "{}"
-      properties:
-        bodyParts:
-          items:
-            $ref: '#/components/schemas/BodyPart'
-          type: array
-        contentDisposition:
-          $ref: '#/components/schemas/ContentDisposition'
-        entity:
-          type: object
-        fields:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/FormDataBodyPart'
-            type: array
-          type: object
-        headers:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          type: object
-        mediaType:
-          $ref: '#/components/schemas/BodyPart_mediaType'
-        messageBodyWorkers:
-          type: object
-        parameterizedHeaders:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/ParameterizedHeader'
-            type: array
-          type: object
-        parent:
-          $ref: '#/components/schemas/MultiPart'
-        providers:
-          type: object
       type: object
     GroupingByDTO:
       example:
@@ -24712,87 +25252,38 @@ components:
           format: int32
           type: integer
       type: object
-    MessageBodyWorkers:
-      type: object
-    MultiPart:
+    MalwareDefenseData:
       example:
-        headers:
-          key:
-          - headers
-          - headers
-        parameterizedHeaders:
-          key:
-          - parameters:
-              key: parameters
-            value: value
-          - parameters:
-              key: parameters
-            value: value
-        parent: null
-        messageBodyWorkers: "{}"
-        contentDisposition:
-          fileName: fileName
-          modificationDate: 2000-01-23T04:56:07.000+00:00
-          size: 0
-          readDate: 2000-01-23T04:56:07.000+00:00
-          creationDate: 2000-01-23T04:56:07.000+00:00
-          type: type
-          parameters:
-            key: parameters
-        mediaType:
-          subtype: subtype
-          type: type
-          parameters:
-            key: parameters
-          wildcardSubtype: true
-          wildcardType: true
-        bodyParts:
-        - null
-        - null
-        entity: "{}"
-        providers: "{}"
+        packageUrl: packageUrl
+        isMalicious: true
+        matchState: matchState
+        hash: hash
       properties:
-        bodyParts:
-          items:
-            $ref: '#/components/schemas/BodyPart'
-          type: array
-        contentDisposition:
-          $ref: '#/components/schemas/ContentDisposition'
-        entity:
-          type: object
-        headers:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          type: object
-        mediaType:
-          $ref: '#/components/schemas/BodyPart_mediaType'
-        messageBodyWorkers:
-          type: object
-        parameterizedHeaders:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/ParameterizedHeader'
-            type: array
-          type: object
-        parent:
-          $ref: '#/components/schemas/MultiPart'
-        providers:
-          type: object
-      type: object
-    ParameterizedHeader:
-      example:
-        parameters:
-          key: parameters
-        value: value
-      properties:
-        parameters:
-          additionalProperties:
-            type: string
-          type: object
-        value:
+        hash:
           type: string
+        isMalicious:
+          type: boolean
+        matchState:
+          type: string
+        packageUrl:
+          type: string
+      type: object
+    MalwareDefenseResponseList:
+      example:
+        componentList:
+        - packageUrl: packageUrl
+          isMalicious: true
+          matchState: matchState
+          hash: hash
+        - packageUrl: packageUrl
+          isMalicious: true
+          matchState: matchState
+          hash: hash
+      properties:
+        componentList:
+          items:
+            $ref: '#/components/schemas/MalwareDefenseData'
+          type: array
       type: object
     PolicyAlert:
       example:
@@ -25662,6 +26153,65 @@ components:
         tagId:
           type: string
       type: object
+    PrioritizedComponent:
+      example:
+        remediationVersion: remediationVersion
+        displayName: displayName
+        highestReachableThreat: 5
+        highestThreatPolicyName: highestThreatPolicyName
+        priority: 2
+        highestThreat: 5
+        remediationType: next-no-violations
+        dependencyType: dependencyType
+        hasFailActionOnComponent: true
+        securityReachable: true
+        action: action
+        componentHash: componentHash
+        highestThreatPolicyConstraintName: highestThreatPolicyConstraintName
+        componentIdentifier:
+          coordinates:
+            key: coordinates
+          format: format
+      properties:
+        action:
+          type: string
+        componentHash:
+          type: string
+        componentIdentifier:
+          $ref: '#/components/schemas/ComponentIdentifier'
+        dependencyType:
+          type: string
+        displayName:
+          type: string
+        hasFailActionOnComponent:
+          type: boolean
+        highestReachableThreat:
+          format: int32
+          type: integer
+        highestThreat:
+          format: int32
+          type: integer
+        highestThreatPolicyConstraintName:
+          type: string
+        highestThreatPolicyName:
+          type: string
+        priority:
+          format: int32
+          type: integer
+        remediationType:
+          enum:
+          - next-no-violations
+          - next-non-failing
+          - next-no-violations-with-dependencies
+          - next-non-failing-with-dependencies
+          - recommended-non-breaking
+          - recommended-non-breaking-with-dependencies
+          type: string
+        remediationVersion:
+          type: string
+        securityReachable:
+          type: boolean
+      type: object
     ReferenceLink:
       example:
         referenceType: referenceType
@@ -25716,6 +26266,12 @@ components:
           type: string
         displayName:
           type: string
+        fileCoordinateId:
+          type: string
+        filenames:
+          items:
+            type: string
+          type: array
         hash:
           type: string
         licenses:
@@ -25723,6 +26279,8 @@ components:
             $ref: '#/components/schemas/License'
           type: array
           uniqueItems: true
+        matchStateId:
+          type: string
         name:
           type: string
         packageUrl:
@@ -25730,6 +26288,9 @@ components:
         percentageAnnotated:
           format: double
           type: number
+        policyViolationCount:
+          format: int32
+          type: integer
         version:
           type: string
         vulnerabilitySeverityCriticalCount:
@@ -26440,32 +27001,12 @@ components:
         applicationId:
           description: The internal id of the application
           type: string
+        applicationVersion:
+          type: string
         file:
-          type: object
+          $ref: '#/components/schemas/FormDataContentDisposition'
       required:
       - applicationId
-      type: object
-    BodyPart_mediaType:
-      example:
-        subtype: subtype
-        type: type
-        parameters:
-          key: parameters
-        wildcardSubtype: true
-        wildcardType: true
-      properties:
-        parameters:
-          additionalProperties:
-            type: string
-          type: object
-        subtype:
-          type: string
-        type:
-          type: string
-        wildcardSubtype:
-          type: boolean
-        wildcardType:
-          type: boolean
       type: object
   securitySchemes:
     BasicAuth:

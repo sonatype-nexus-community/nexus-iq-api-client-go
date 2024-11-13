@@ -506,7 +506,7 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLegalCustomApplicationHTMLReport
 
-> string GetLicenseLegalCustomApplicationHTMLReport(ctx, applicationId, stageId).FormDataMultiPart(formDataMultiPart).Execute()
+> string GetLicenseLegalCustomApplicationHTMLReport(ctx, applicationId, stageId).Execute()
 
 
 
@@ -525,11 +525,10 @@ import (
 func main() {
 	applicationId := "applicationId_example" // string | 
 	stageId := "stageId_example" // string | 
-	formDataMultiPart := *sonatypeiq.NewFormDataMultiPart() // FormDataMultiPart |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport(context.Background(), applicationId, stageId).FormDataMultiPart(formDataMultiPart).Execute()
+	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -557,7 +556,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **formDataMultiPart** | [**FormDataMultiPart**](FormDataMultiPart.md) |  | 
 
 ### Return type
 
