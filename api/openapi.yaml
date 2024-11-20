@@ -1524,19 +1524,13 @@ paths:
               $ref: '#/components/schemas/ApiComponentDTOV2'
       responses:
         "200":
-          description: "The response returns details for components that can be used\
-            \ for remediation. Details for the recommended component are grouped under\
-            \ type in the response.<ul><li>Type <i>next-no-violations</i> indicates\
-            \ that the component version has no violations.</li><li>Type <i>next-non-failing</i>\
-            \ indicates that the component version does not fail policy violations.\
-            \ The response will contain this type only if stageId is provided in the\
-            \ method call.</li><li>Type <i>next-no-violations-with-dependencies</i>\
-            \ indicates that the component, along-with its dependencies does not any\
-            \ violate any policies.</li><li>Type <i>next-non-failing-with-dependencies</i>\
-            \ indicates that the component and its dependencies will not fail a build\
-            \ for the stageId provided.</li></ul><p>Hash values returned here are\
-            \ truncated and are not intended to be used as checksums. They can be\
-            \ used as identifiers to pass to other REST API calls. "
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiComponentRemediationValueDTO'
+          description: Use this method to obtain remediation suggestions for policy
+            violations on a component basis. Remediations obtained from this method
+            are same as those appearing on the Component Details Page in the UI.
       tags:
       - Components
   /api/v2/components/versions:
@@ -9167,6 +9161,18 @@ components:
           type: boolean
       type: object
     ApiComponentChangeActionDTO:
+      example:
+        component:
+          thirdParty: true
+          proprietary: true
+          sha256: sha256
+          displayName: displayName
+          packageUrl: packageUrl
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+          hash: hash
       properties:
         component:
           $ref: '#/components/schemas/ApiComponentDTOV2'
@@ -10868,6 +10874,121 @@ components:
           $ref: '#/components/schemas/ApiComponentRemediationValueDTO'
       type: object
     ApiComponentRemediationValueDTO:
+      example:
+        suggestedVersionChange:
+          directDependencyData:
+          - component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          - component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          data:
+            component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          directDependency: true
+          type: next-no-violations
+          isGolden: true
+        versionChanges:
+        - directDependencyData:
+          - component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          - component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          data:
+            component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          directDependency: true
+          type: next-no-violations
+        - directDependencyData:
+          - component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          - component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          data:
+            component:
+              thirdParty: true
+              proprietary: true
+              sha256: sha256
+              displayName: displayName
+              packageUrl: packageUrl
+              componentIdentifier:
+                coordinates:
+                  key: coordinates
+                format: format
+              hash: hash
+          directDependency: true
+          type: next-no-violations
       properties:
         suggestedVersionChange:
           $ref: '#/components/schemas/ApiSuggestedVersionChangeOptionDTO'
@@ -24675,6 +24796,45 @@ components:
           type: string
       type: object
     ApiSuggestedVersionChangeOptionDTO:
+      example:
+        directDependencyData:
+        - component:
+            thirdParty: true
+            proprietary: true
+            sha256: sha256
+            displayName: displayName
+            packageUrl: packageUrl
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+            hash: hash
+        - component:
+            thirdParty: true
+            proprietary: true
+            sha256: sha256
+            displayName: displayName
+            packageUrl: packageUrl
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+            hash: hash
+        data:
+          component:
+            thirdParty: true
+            proprietary: true
+            sha256: sha256
+            displayName: displayName
+            packageUrl: packageUrl
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+            hash: hash
+        directDependency: true
+        type: next-no-violations
+        isGolden: true
       properties:
         data:
           $ref: '#/components/schemas/ApiComponentChangeActionDTO'
@@ -24847,6 +25007,44 @@ components:
           type: boolean
       type: object
     ApiVersionChangeOptionDTO:
+      example:
+        directDependencyData:
+        - component:
+            thirdParty: true
+            proprietary: true
+            sha256: sha256
+            displayName: displayName
+            packageUrl: packageUrl
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+            hash: hash
+        - component:
+            thirdParty: true
+            proprietary: true
+            sha256: sha256
+            displayName: displayName
+            packageUrl: packageUrl
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+            hash: hash
+        data:
+          component:
+            thirdParty: true
+            proprietary: true
+            sha256: sha256
+            displayName: displayName
+            packageUrl: packageUrl
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+            hash: hash
+        directDependency: true
+        type: next-no-violations
       properties:
         data:
           $ref: '#/components/schemas/ApiComponentChangeActionDTO'

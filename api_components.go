@@ -387,7 +387,7 @@ func (r ApiGetSuggestedRemediationForComponentRequest) ApiComponentDTOV2(apiComp
 	return r
 }
 
-func (r ApiGetSuggestedRemediationForComponentRequest) Execute() (*http.Response, error) {
+func (r ApiGetSuggestedRemediationForComponentRequest) Execute() (*ApiComponentRemediationValueDTO, *http.Response, error) {
 	return r.ApiService.GetSuggestedRemediationForComponentExecute(r)
 }
 
@@ -411,16 +411,18 @@ func (a *ComponentsAPIService) GetSuggestedRemediationForComponent(ctx context.C
 }
 
 // Execute executes the request
-func (a *ComponentsAPIService) GetSuggestedRemediationForComponentExecute(r ApiGetSuggestedRemediationForComponentRequest) (*http.Response, error) {
+//  @return ApiComponentRemediationValueDTO
+func (a *ComponentsAPIService) GetSuggestedRemediationForComponentExecute(r ApiGetSuggestedRemediationForComponentRequest) (*ApiComponentRemediationValueDTO, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *ApiComponentRemediationValueDTO
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentsAPIService.GetSuggestedRemediationForComponent")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v2/components/remediation/{ownerType}/{ownerId}"
@@ -456,7 +458,7 @@ func (a *ComponentsAPIService) GetSuggestedRemediationForComponentExecute(r ApiG
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -467,19 +469,19 @@ func (a *ComponentsAPIService) GetSuggestedRemediationForComponentExecute(r ApiG
 	localVarPostBody = r.apiComponentDTOV2
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -487,10 +489,19 @@ func (a *ComponentsAPIService) GetSuggestedRemediationForComponentExecute(r ApiG
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiSetComponentLabelRequest struct {
