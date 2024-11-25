@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
-**Hash** | Pointer to **string** |  | [optional] 
+**Hash** | Pointer to **NullableString** |  | [optional] 
 **PackageUrl** | Pointer to **string** |  | [optional] 
 **Proprietary** | Pointer to **bool** |  | [optional] 
 **Sha256** | Pointer to **string** |  | [optional] 
@@ -106,6 +106,16 @@ SetHash sets Hash field to given value.
 
 HasHash returns a boolean if a field has been set.
 
+### SetHashNil
+
+`func (o *ApiComponentDTOV2) SetHashNil(b bool)`
+
+ SetHashNil sets the value for Hash to be an explicit nil
+
+### UnsetHash
+`func (o *ApiComponentDTOV2) UnsetHash()`
+
+UnsetHash ensures that no value is present for Hash, not even an explicit nil
 ### GetPackageUrl
 
 `func (o *ApiComponentDTOV2) GetPackageUrl() string`

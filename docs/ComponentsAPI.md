@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## GetSuggestedRemediationForComponent
 
-> ApiComponentRemediationValueDTO GetSuggestedRemediationForComponent(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+> GetSuggestedRemediationForComponent200Response GetSuggestedRemediationForComponent(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiComponentDTOV2(apiComponentDTOV2).Execute()
 
 
 
@@ -257,7 +257,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponent``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetSuggestedRemediationForComponent`: ApiComponentRemediationValueDTO
+	// response from `GetSuggestedRemediationForComponent`: GetSuggestedRemediationForComponent200Response
 	fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetSuggestedRemediationForComponent`: %v\n", resp)
 }
 ```
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApiComponentRemediationValueDTO**](ApiComponentRemediationValueDTO.md)
+[**GetSuggestedRemediationForComponent200Response**](GetSuggestedRemediationForComponent200Response.md)
 
 ### Authorization
 

@@ -1527,7 +1527,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiComponentRemediationValueDTO'
+                $ref: '#/components/schemas/getSuggestedRemediationForComponent_200_response'
           description: Use this method to obtain remediation suggestions for policy
             violations on a component basis. Remediations obtained from this method
             are same as those appearing on the Component Details Page in the UI.
@@ -9195,6 +9195,7 @@ components:
         displayName:
           type: string
         hash:
+          nullable: true
           type: string
         packageUrl:
           type: string
@@ -27763,6 +27764,129 @@ components:
       - justification
       - response
       - state
+      type: object
+    getSuggestedRemediationForComponent_200_response:
+      example:
+        remediation:
+          suggestedVersionChange:
+            directDependencyData:
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            data:
+              component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            directDependency: true
+            type: next-no-violations
+            isGolden: true
+          versionChanges:
+          - directDependencyData:
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            data:
+              component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            directDependency: true
+            type: next-no-violations
+          - directDependencyData:
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            data:
+              component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                hash: hash
+            directDependency: true
+            type: next-no-violations
+      properties:
+        remediation:
+          $ref: '#/components/schemas/ApiComponentRemediationValueDTO'
+      required:
+      - remediation
       type: object
     importSbom_request:
       properties:

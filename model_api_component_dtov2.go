@@ -21,7 +21,7 @@ var _ MappedNullable = &ApiComponentDTOV2{}
 type ApiComponentDTOV2 struct {
 	ComponentIdentifier *ApiComponentIdentifierDTOV2 `json:"componentIdentifier,omitempty"`
 	DisplayName *string `json:"displayName,omitempty"`
-	Hash *string `json:"hash,omitempty"`
+	Hash NullableString `json:"hash,omitempty"`
 	PackageUrl *string `json:"packageUrl,omitempty"`
 	Proprietary *bool `json:"proprietary,omitempty"`
 	Sha256 *string `json:"sha256,omitempty"`
@@ -109,36 +109,46 @@ func (o *ApiComponentDTOV2) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-// GetHash returns the Hash field value if set, zero value otherwise.
+// GetHash returns the Hash field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApiComponentDTOV2) GetHash() string {
-	if o == nil || IsNil(o.Hash) {
+	if o == nil || IsNil(o.Hash.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Hash
+	return *o.Hash.Get()
 }
 
 // GetHashOk returns a tuple with the Hash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ApiComponentDTOV2) GetHashOk() (*string, bool) {
-	if o == nil || IsNil(o.Hash) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Hash, true
+	return o.Hash.Get(), o.Hash.IsSet()
 }
 
 // HasHash returns a boolean if a field has been set.
 func (o *ApiComponentDTOV2) HasHash() bool {
-	if o != nil && !IsNil(o.Hash) {
+	if o != nil && o.Hash.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHash gets a reference to the given string and assigns it to the Hash field.
+// SetHash gets a reference to the given NullableString and assigns it to the Hash field.
 func (o *ApiComponentDTOV2) SetHash(v string) {
-	o.Hash = &v
+	o.Hash.Set(&v)
+}
+// SetHashNil sets the value for Hash to be an explicit nil
+func (o *ApiComponentDTOV2) SetHashNil() {
+	o.Hash.Set(nil)
+}
+
+// UnsetHash ensures that no value is present for Hash, not even an explicit nil
+func (o *ApiComponentDTOV2) UnsetHash() {
+	o.Hash.Unset()
 }
 
 // GetPackageUrl returns the PackageUrl field value if set, zero value otherwise.
@@ -285,8 +295,8 @@ func (o ApiComponentDTOV2) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if !IsNil(o.Hash) {
-		toSerialize["hash"] = o.Hash
+	if o.Hash.IsSet() {
+		toSerialize["hash"] = o.Hash.Get()
 	}
 	if !IsNil(o.PackageUrl) {
 		toSerialize["packageUrl"] = o.PackageUrl

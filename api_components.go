@@ -387,7 +387,7 @@ func (r ApiGetSuggestedRemediationForComponentRequest) ApiComponentDTOV2(apiComp
 	return r
 }
 
-func (r ApiGetSuggestedRemediationForComponentRequest) Execute() (*ApiComponentRemediationValueDTO, *http.Response, error) {
+func (r ApiGetSuggestedRemediationForComponentRequest) Execute() (*GetSuggestedRemediationForComponent200Response, *http.Response, error) {
 	return r.ApiService.GetSuggestedRemediationForComponentExecute(r)
 }
 
@@ -411,13 +411,13 @@ func (a *ComponentsAPIService) GetSuggestedRemediationForComponent(ctx context.C
 }
 
 // Execute executes the request
-//  @return ApiComponentRemediationValueDTO
-func (a *ComponentsAPIService) GetSuggestedRemediationForComponentExecute(r ApiGetSuggestedRemediationForComponentRequest) (*ApiComponentRemediationValueDTO, *http.Response, error) {
+//  @return GetSuggestedRemediationForComponent200Response
+func (a *ComponentsAPIService) GetSuggestedRemediationForComponentExecute(r ApiGetSuggestedRemediationForComponentRequest) (*GetSuggestedRemediationForComponent200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ApiComponentRemediationValueDTO
+		localVarReturnValue  *GetSuggestedRemediationForComponent200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentsAPIService.GetSuggestedRemediationForComponent")
