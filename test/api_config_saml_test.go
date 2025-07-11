@@ -37,9 +37,10 @@ func Test_sonatypeiq_ConfigSAMLAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigSAMLAPI.GetMetadata(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigSAMLAPI.GetMetadata(context.Background()).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

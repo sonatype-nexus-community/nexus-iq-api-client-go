@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## AddOrganization
 
-> AddOrganization(ctx).ApiOrganizationDTO(apiOrganizationDTO).Execute()
+> ApiOrganizationDTO AddOrganization(ctx).ApiOrganizationDTO(apiOrganizationDTO).Execute()
 
 
 
@@ -37,11 +37,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.OrganizationsAPI.AddOrganization(context.Background()).ApiOrganizationDTO(apiOrganizationDTO).Execute()
+	resp, r, err := apiClient.OrganizationsAPI.AddOrganization(context.Background()).ApiOrganizationDTO(apiOrganizationDTO).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.AddOrganization``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `AddOrganization`: ApiOrganizationDTO
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.AddOrganization`: %v\n", resp)
 }
 ```
 
@@ -60,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApiOrganizationDTO**](ApiOrganizationDTO.md)
 
 ### Authorization
 
@@ -69,7 +71,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

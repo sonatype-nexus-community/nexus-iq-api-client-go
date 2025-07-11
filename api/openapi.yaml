@@ -2844,6 +2844,10 @@ paths:
       operationId: getMetadata
       responses:
         "200":
+          content:
+            application/xml:
+              schema:
+                type: string
           description: The IQ Server's metadata service provider descriptor in XML
             format.
         "404":
@@ -5303,6 +5307,10 @@ paths:
           \ a selected policy."
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiOrganizationDTO'
           description: The response contains the assigned organization id and all
             other organization details specified.
       tags:

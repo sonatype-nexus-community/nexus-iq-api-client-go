@@ -36,7 +36,7 @@ func (r ApiAddOrganizationRequest) ApiOrganizationDTO(apiOrganizationDTO ApiOrga
 	return r
 }
 
-func (r ApiAddOrganizationRequest) Execute() (*http.Response, error) {
+func (r ApiAddOrganizationRequest) Execute() (*ApiOrganizationDTO, *http.Response, error) {
 	return r.ApiService.AddOrganizationExecute(r)
 }
 
@@ -58,16 +58,18 @@ func (a *OrganizationsAPIService) AddOrganization(ctx context.Context) ApiAddOrg
 }
 
 // Execute executes the request
-func (a *OrganizationsAPIService) AddOrganizationExecute(r ApiAddOrganizationRequest) (*http.Response, error) {
+//  @return ApiOrganizationDTO
+func (a *OrganizationsAPIService) AddOrganizationExecute(r ApiAddOrganizationRequest) (*ApiOrganizationDTO, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *ApiOrganizationDTO
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsAPIService.AddOrganization")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v2/organizations"
@@ -86,7 +88,7 @@ func (a *OrganizationsAPIService) AddOrganizationExecute(r ApiAddOrganizationReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -97,19 +99,19 @@ func (a *OrganizationsAPIService) AddOrganizationExecute(r ApiAddOrganizationReq
 	localVarPostBody = r.apiOrganizationDTO
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -117,10 +119,19 @@ func (a *OrganizationsAPIService) AddOrganizationExecute(r ApiAddOrganizationReq
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteOrganizationRequest struct {
