@@ -16,6 +16,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -60,7 +62,7 @@ Other parameters are passed through a pointer to a apiDeleteSamlConfigurationReq
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -69,7 +71,9 @@ Other parameters are passed through a pointer to a apiDeleteSamlConfigurationReq
 
 ## GetMetadata
 
-> string GetMetadata(ctx).Execute()
+> GetMetadata(ctx).Execute()
+
+
 
 
 
@@ -89,13 +93,11 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigSAMLAPI.GetMetadata(context.Background()).Execute()
+	r, err := apiClient.ConfigSAMLAPI.GetMetadata(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConfigSAMLAPI.GetMetadata``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetMetadata`: string
-	fmt.Fprintf(os.Stdout, "Response from `ConfigSAMLAPI.GetMetadata`: %v\n", resp)
 }
 ```
 
@@ -110,7 +112,7 @@ Other parameters are passed through a pointer to a apiGetMetadataRequest struct 
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
@@ -119,7 +121,7 @@ Other parameters are passed through a pointer to a apiGetMetadataRequest struct 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/xml
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -129,6 +131,8 @@ Other parameters are passed through a pointer to a apiGetMetadataRequest struct 
 ## GetSamlConfiguration
 
 > ApiSamlConfigurationResponseDTO GetSamlConfiguration(ctx).Execute()
+
+
 
 
 

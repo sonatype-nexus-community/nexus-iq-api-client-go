@@ -16,6 +16,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -60,7 +62,7 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration4Reques
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -70,6 +72,8 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration4Reques
 ## GetConfiguration4
 
 > ApiReverseProxyAuthenticationConfigurationDTO GetConfiguration4(ctx).Execute()
+
+
 
 
 
@@ -132,6 +136,8 @@ Other parameters are passed through a pointer to a apiGetConfiguration4Request s
 
 
 
+
+
 ### Example
 
 ```go
@@ -145,7 +151,7 @@ import (
 )
 
 func main() {
-	apiReverseProxyAuthenticationConfigurationDTO := *sonatypeiq.NewApiReverseProxyAuthenticationConfigurationDTO() // ApiReverseProxyAuthenticationConfigurationDTO |  (optional)
+	apiReverseProxyAuthenticationConfigurationDTO := *sonatypeiq.NewApiReverseProxyAuthenticationConfigurationDTO() // ApiReverseProxyAuthenticationConfigurationDTO | The request JSON could include: <ul><li>`enabled` indicates if the configuration is enabled.</li><li>`usernameHeader` is the name of the HTTP request header field that contains the username. The default value is `REMOTE_USER`.</li><li>`csrfProtectionDisabled` indicates if Cross-Site Request Forgery (CSRF) protection is disabled. Used for backward compatibility with old client plugins.</li><li>`logoutUrl` is the redirect URL when a user logs out. If set to `null` the user will not be redirected.</li></ul> (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -168,7 +174,7 @@ Other parameters are passed through a pointer to a apiSetConfiguration4Request s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiReverseProxyAuthenticationConfigurationDTO** | [**ApiReverseProxyAuthenticationConfigurationDTO**](ApiReverseProxyAuthenticationConfigurationDTO.md) |  | 
+ **apiReverseProxyAuthenticationConfigurationDTO** | [**ApiReverseProxyAuthenticationConfigurationDTO**](ApiReverseProxyAuthenticationConfigurationDTO.md) | The request JSON could include: &lt;ul&gt;&lt;li&gt;&#x60;enabled&#x60; indicates if the configuration is enabled.&lt;/li&gt;&lt;li&gt;&#x60;usernameHeader&#x60; is the name of the HTTP request header field that contains the username. The default value is &#x60;REMOTE_USER&#x60;.&lt;/li&gt;&lt;li&gt;&#x60;csrfProtectionDisabled&#x60; indicates if Cross-Site Request Forgery (CSRF) protection is disabled. Used for backward compatibility with old client plugins.&lt;/li&gt;&lt;li&gt;&#x60;logoutUrl&#x60; is the redirect URL when a user logs out. If set to &#x60;null&#x60; the user will not be redirected.&lt;/li&gt;&lt;/ul&gt; | 
 
 ### Return type
 
@@ -181,7 +187,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **CreatorId** | Pointer to **string** |  | [optional] 
 **CreatorName** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to [**ComponentDisplayName**](ComponentDisplayName.md) |  | [optional] 
+**ExpireWhenRemediationAvailable** | Pointer to **bool** |  | [optional] 
 **ExpiryTime** | Pointer to **time.Time** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
 **IsObsolete** | Pointer to **bool** |  | [optional] 
@@ -23,6 +24,7 @@ Name | Type | Description | Notes
 **PolicyName** | Pointer to **string** |  | [optional] 
 **PolicyViolationId** | Pointer to **string** |  | [optional] 
 **PolicyWaiverId** | Pointer to **string** |  | [optional] 
+**PolicyWaiverReasonId** | Pointer to **string** |  | [optional] 
 **ReasonText** | Pointer to **string** |  | [optional] 
 **ScopeOwnerId** | Pointer to **string** |  | [optional] 
 **ScopeOwnerName** | Pointer to **string** |  | [optional] 
@@ -324,6 +326,31 @@ SetDisplayName sets DisplayName field to given value.
 
 HasDisplayName returns a boolean if a field has been set.
 
+### GetExpireWhenRemediationAvailable
+
+`func (o *ApiPolicyWaiverDTO) GetExpireWhenRemediationAvailable() bool`
+
+GetExpireWhenRemediationAvailable returns the ExpireWhenRemediationAvailable field if non-nil, zero value otherwise.
+
+### GetExpireWhenRemediationAvailableOk
+
+`func (o *ApiPolicyWaiverDTO) GetExpireWhenRemediationAvailableOk() (*bool, bool)`
+
+GetExpireWhenRemediationAvailableOk returns a tuple with the ExpireWhenRemediationAvailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpireWhenRemediationAvailable
+
+`func (o *ApiPolicyWaiverDTO) SetExpireWhenRemediationAvailable(v bool)`
+
+SetExpireWhenRemediationAvailable sets ExpireWhenRemediationAvailable field to given value.
+
+### HasExpireWhenRemediationAvailable
+
+`func (o *ApiPolicyWaiverDTO) HasExpireWhenRemediationAvailable() bool`
+
+HasExpireWhenRemediationAvailable returns a boolean if a field has been set.
+
 ### GetExpiryTime
 
 `func (o *ApiPolicyWaiverDTO) GetExpiryTime() time.Time`
@@ -523,6 +550,31 @@ SetPolicyWaiverId sets PolicyWaiverId field to given value.
 `func (o *ApiPolicyWaiverDTO) HasPolicyWaiverId() bool`
 
 HasPolicyWaiverId returns a boolean if a field has been set.
+
+### GetPolicyWaiverReasonId
+
+`func (o *ApiPolicyWaiverDTO) GetPolicyWaiverReasonId() string`
+
+GetPolicyWaiverReasonId returns the PolicyWaiverReasonId field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverReasonIdOk
+
+`func (o *ApiPolicyWaiverDTO) GetPolicyWaiverReasonIdOk() (*string, bool)`
+
+GetPolicyWaiverReasonIdOk returns a tuple with the PolicyWaiverReasonId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverReasonId
+
+`func (o *ApiPolicyWaiverDTO) SetPolicyWaiverReasonId(v string)`
+
+SetPolicyWaiverReasonId sets PolicyWaiverReasonId field to given value.
+
+### HasPolicyWaiverReasonId
+
+`func (o *ApiPolicyWaiverDTO) HasPolicyWaiverReasonId() bool`
+
+HasPolicyWaiverReasonId returns a boolean if a field has been set.
 
 ### GetReasonText
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApplyToAllComponents** | Pointer to **bool** |  | [optional] 
 **Comment** | Pointer to **string** |  | [optional] 
+**ExpireWhenRemediationAvailable** | Pointer to **bool** |  | [optional] 
 **ExpiryTime** | Pointer to **time.Time** |  | [optional] 
 **MatcherStrategy** | Pointer to **string** |  | [optional] 
 **WaiverReasonId** | Pointer to **string** |  | [optional] 
@@ -78,6 +79,31 @@ SetComment sets Comment field to given value.
 `func (o *ApiWaiverOptionsDTO) HasComment() bool`
 
 HasComment returns a boolean if a field has been set.
+
+### GetExpireWhenRemediationAvailable
+
+`func (o *ApiWaiverOptionsDTO) GetExpireWhenRemediationAvailable() bool`
+
+GetExpireWhenRemediationAvailable returns the ExpireWhenRemediationAvailable field if non-nil, zero value otherwise.
+
+### GetExpireWhenRemediationAvailableOk
+
+`func (o *ApiWaiverOptionsDTO) GetExpireWhenRemediationAvailableOk() (*bool, bool)`
+
+GetExpireWhenRemediationAvailableOk returns a tuple with the ExpireWhenRemediationAvailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpireWhenRemediationAvailable
+
+`func (o *ApiWaiverOptionsDTO) SetExpireWhenRemediationAvailable(v bool)`
+
+SetExpireWhenRemediationAvailable sets ExpireWhenRemediationAvailable field to given value.
+
+### HasExpireWhenRemediationAvailable
+
+`func (o *ApiWaiverOptionsDTO) HasExpireWhenRemediationAvailable() bool`
+
+HasExpireWhenRemediationAvailable returns a boolean if a field has been set.
 
 ### GetExpiryTime
 

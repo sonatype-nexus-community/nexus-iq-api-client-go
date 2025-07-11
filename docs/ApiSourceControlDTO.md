@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **EnablePullRequests** | Pointer to **bool** |  | [optional] 
 **EnableStatusChecks** | Pointer to **bool** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
+**ManualPullRequestsEnabled** | Pointer to **bool** |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
 **PullRequestCommentingEnabled** | Pointer to **bool** |  | [optional] 
@@ -164,6 +165,31 @@ SetId sets Id field to given value.
 `func (o *ApiSourceControlDTO) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetManualPullRequestsEnabled
+
+`func (o *ApiSourceControlDTO) GetManualPullRequestsEnabled() bool`
+
+GetManualPullRequestsEnabled returns the ManualPullRequestsEnabled field if non-nil, zero value otherwise.
+
+### GetManualPullRequestsEnabledOk
+
+`func (o *ApiSourceControlDTO) GetManualPullRequestsEnabledOk() (*bool, bool)`
+
+GetManualPullRequestsEnabledOk returns a tuple with the ManualPullRequestsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManualPullRequestsEnabled
+
+`func (o *ApiSourceControlDTO) SetManualPullRequestsEnabled(v bool)`
+
+SetManualPullRequestsEnabled sets ManualPullRequestsEnabled field to given value.
+
+### HasManualPullRequestsEnabled
+
+`func (o *ApiSourceControlDTO) HasManualPullRequestsEnabled() bool`
+
+HasManualPullRequestsEnabled returns a boolean if a field has been set.
 
 ### GetOwnerId
 

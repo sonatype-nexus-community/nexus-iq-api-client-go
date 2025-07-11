@@ -1,7 +1,7 @@
 /*
 Sonatype Lifecycle Public REST API
 
-Testing SbomAPIService
+Testing SBOMAPIService
 
 */
 
@@ -17,26 +17,26 @@ import (
 	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
-func Test_sonatypeiq_SbomAPIService(t *testing.T) {
+func Test_sonatypeiq_SBOMAPIService(t *testing.T) {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test SbomAPIService DeleteSbomVersion", func(t *testing.T) {
+	t.Run("Test SBOMAPIService DeleteSbomVersion", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var version string
 
-		httpRes, err := apiClient.SbomAPI.DeleteSbomVersion(context.Background(), applicationId, version).Execute()
+		httpRes, err := apiClient.SBOMAPI.DeleteSbomVersion(context.Background(), applicationId, version).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService DeleteVulnerabilityAnalysis", func(t *testing.T) {
+	t.Run("Test SBOMAPIService DeleteVulnerabilityAnalysis", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -44,93 +44,93 @@ func Test_sonatypeiq_SbomAPIService(t *testing.T) {
 		var version string
 		var refId string
 
-		httpRes, err := apiClient.SbomAPI.DeleteVulnerabilityAnalysis(context.Background(), applicationId, version, refId).Execute()
+		httpRes, err := apiClient.SBOMAPI.DeleteVulnerabilityAnalysis(context.Background(), applicationId, version, refId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService GetActiveSbomVersionListByApplication", func(t *testing.T) {
+	t.Run("Test SBOMAPIService GetActiveSbomVersionListByApplication", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 
-		httpRes, err := apiClient.SbomAPI.GetActiveSbomVersionListByApplication(context.Background(), applicationId).Execute()
+		httpRes, err := apiClient.SBOMAPI.GetActiveSbomVersionListByApplication(context.Background(), applicationId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService GetImportStatus", func(t *testing.T) {
+	t.Run("Test SBOMAPIService GetImportStatus", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var importRequestId string
 
-		httpRes, err := apiClient.SbomAPI.GetImportStatus(context.Background(), applicationId, importRequestId).Execute()
+		httpRes, err := apiClient.SBOMAPI.GetImportStatus(context.Background(), applicationId, importRequestId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService GetSbomComponents", func(t *testing.T) {
+	t.Run("Test SBOMAPIService GetSbomComponents", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var version string
 
-		httpRes, err := apiClient.SbomAPI.GetSbomComponents(context.Background(), applicationId, version).Execute()
+		httpRes, err := apiClient.SBOMAPI.GetSbomComponents(context.Background(), applicationId, version).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService GetSbomMetadataSummaryForApplication", func(t *testing.T) {
+	t.Run("Test SBOMAPIService GetSbomMetadataSummaryForApplication", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 
-		httpRes, err := apiClient.SbomAPI.GetSbomMetadataSummaryForApplication(context.Background(), applicationId).Execute()
+		httpRes, err := apiClient.SBOMAPI.GetSbomMetadataSummaryForApplication(context.Background(), applicationId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService GetSbomVersion", func(t *testing.T) {
+	t.Run("Test SBOMAPIService GetSbomVersion", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var version string
 
-		httpRes, err := apiClient.SbomAPI.GetSbomVersion(context.Background(), applicationId, version).Execute()
+		httpRes, err := apiClient.SBOMAPI.GetSbomVersion(context.Background(), applicationId, version).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService ImportSbom", func(t *testing.T) {
+	t.Run("Test SBOMAPIService ImportSbom", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.SbomAPI.ImportSbom(context.Background()).Execute()
+		httpRes, err := apiClient.SBOMAPI.ImportSbom(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SbomAPIService SaveVulnerabilityAnalysis", func(t *testing.T) {
+	t.Run("Test SBOMAPIService SaveVulnerabilityAnalysis", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -138,7 +138,7 @@ func Test_sonatypeiq_SbomAPIService(t *testing.T) {
 		var version string
 		var refId string
 
-		httpRes, err := apiClient.SbomAPI.SaveVulnerabilityAnalysis(context.Background(), applicationId, version, refId).Execute()
+		httpRes, err := apiClient.SBOMAPI.SaveVulnerabilityAnalysis(context.Background(), applicationId, version, refId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

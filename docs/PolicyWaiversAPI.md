@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**GetPolicyWaivers**](PolicyWaiversAPI.md#GetPolicyWaivers) | **Get** /api/v2/policyWaivers/{ownerType}/{ownerId} | 
 [**GetTransitivePolicyWaiversByAppScanComponent**](PolicyWaiversAPI.md#GetTransitivePolicyWaiversByAppScanComponent) | **Get** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/{scanId} | 
 [**RequestPolicyWaiver**](PolicyWaiversAPI.md#RequestPolicyWaiver) | **Post** /api/v2/policyWaivers/waiverRequests/{policyViolationId} | 
+[**UpdatePolicyWaiver**](PolicyWaiversAPI.md#UpdatePolicyWaiver) | **Put** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
 
 
 
@@ -36,7 +37,7 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | Indicates the scope of the waiver. Possible values are application, organization, repository, repository_manager, repository_container, global.
+	ownerType := "ownerType_example" // string | Indicates the scope of the waiver. Possible values are application, organization, repository, repository_manager, repository_container.
 	ownerId := "ownerId_example" // string | Enter the id for the ownerType provided above. E.g. applicationId if the ownerType is application.
 	policyViolationId := "policyViolationId_example" // string | Enter the policyViolationId for the policy on which you want to create a waiver. Use the Policy Violation REST API or Reports REST API to obtain the policyViolationId.
 	apiWaiverOptionsDTO := *sonatypeiq.NewApiWaiverOptionsDTO() // ApiWaiverOptionsDTO | The request JSON can include the fields<ol><li>comment (optional, to indicate the reason of the waiver) default value is null</li><li>applyToAllComponents (boolean, default 'false'),deprecated in favor of matcherStrategy. If matcherStrategy is not set, 'true' means this will apply the waiver to all components, 'false' means this will apply to a specific component.</li><li>matcherStrategy (enumeration, required) can have values DEFAULT, EXACT_COMPONENT, ALL_COMPONENTS, ALL_VERSIONS. DEFAULT will match all components if no hash is provided.</li><li>expiryTime (default null) to set the datetime when the waiver expires.</li></ol>
@@ -57,7 +58,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** | Indicates the scope of the waiver. Possible values are application, organization, repository, repository_manager, repository_container, global. | 
+**ownerType** | **string** | Indicates the scope of the waiver. Possible values are application, organization, repository, repository_manager, repository_container. | 
 **ownerId** | **string** | Enter the id for the ownerType provided above. E.g. applicationId if the ownerType is application. | 
 **policyViolationId** | **string** | Enter the policyViolationId for the policy on which you want to create a waiver. Use the Policy Violation REST API or Reports REST API to obtain the policyViolationId. | 
 
@@ -611,6 +612,82 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **apiRequestPolicyWaiverDTO** | [**ApiRequestPolicyWaiverDTO**](ApiRequestPolicyWaiverDTO.md) | The request JSON should contain&lt;ol&gt;&lt;li&gt;comment (optional, default null) to indicate the waiver request reason&lt;/li&gt;&lt;li&gt;policyViolationLink (link to the policy violation page in the Lifecycle UI)&lt;/li&gt;&lt;li&gt;addWaiverLink (link to the Add Waiver page in the Lifecycle UI)&lt;/li&gt;&lt;/ol&gt; | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdatePolicyWaiver
+
+> UpdatePolicyWaiver(ctx, ownerType, ownerId, policyWaiverId).ApiWaiverOptionsDTO(apiWaiverOptionsDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | Indicates the scope of the policy waiver. Possible values are application, organization, repository, repository_manager, and repository_container.
+	ownerId := "ownerId_example" // string | Enter the id for the `ownerType` provided above. E.g. `applicationId` if the `ownerType` is application.
+	policyWaiverId := "policyWaiverId_example" // string | Enter the id for the policy waiver.
+	apiWaiverOptionsDTO := *sonatypeiq.NewApiWaiverOptionsDTO() // ApiWaiverOptionsDTO | Enter the policy waiver details to update. Note that updating `matcherStrategy` is currently unsupported.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiversAPI.UpdatePolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).ApiWaiverOptionsDTO(apiWaiverOptionsDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.UpdatePolicyWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Indicates the scope of the policy waiver. Possible values are application, organization, repository, repository_manager, and repository_container. | 
+**ownerId** | **string** | Enter the id for the &#x60;ownerType&#x60; provided above. E.g. &#x60;applicationId&#x60; if the &#x60;ownerType&#x60; is application. | 
+**policyWaiverId** | **string** | Enter the id for the policy waiver. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdatePolicyWaiverRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **apiWaiverOptionsDTO** | [**ApiWaiverOptionsDTO**](ApiWaiverOptionsDTO.md) | Enter the policy waiver details to update. Note that updating &#x60;matcherStrategy&#x60; is currently unsupported. | 
 
 ### Return type
 

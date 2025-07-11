@@ -7,8 +7,14 @@ Name | Type | Description | Notes
 **AutoPolicyWaiverId** | Pointer to **string** |  | [optional] 
 **AutoPolicyWaiverOwnerId** | Pointer to **string** |  | [optional] 
 **AutoPolicyWaiverOwnerName** | Pointer to **string** |  | [optional] 
+**AutoPolicyWaiverOwnerType** | Pointer to **string** |  | [optional] 
+**CreateTime** | Pointer to **time.Time** |  | [optional] 
+**HasNoPathForward** | Pointer to **bool** |  | [optional] 
+**HasNotReachable** | Pointer to **bool** |  | [optional] 
 **IsAutoWaiverEnabled** | Pointer to **bool** |  | [optional] 
 **IsInherited** | Pointer to **bool** |  | [optional] 
+**ScopesOperatorAny** | Pointer to **bool** |  | [optional] 
+**ThreatLevel** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -104,6 +110,106 @@ SetAutoPolicyWaiverOwnerName sets AutoPolicyWaiverOwnerName field to given value
 
 HasAutoPolicyWaiverOwnerName returns a boolean if a field has been set.
 
+### GetAutoPolicyWaiverOwnerType
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetAutoPolicyWaiverOwnerType() string`
+
+GetAutoPolicyWaiverOwnerType returns the AutoPolicyWaiverOwnerType field if non-nil, zero value otherwise.
+
+### GetAutoPolicyWaiverOwnerTypeOk
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetAutoPolicyWaiverOwnerTypeOk() (*string, bool)`
+
+GetAutoPolicyWaiverOwnerTypeOk returns a tuple with the AutoPolicyWaiverOwnerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoPolicyWaiverOwnerType
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) SetAutoPolicyWaiverOwnerType(v string)`
+
+SetAutoPolicyWaiverOwnerType sets AutoPolicyWaiverOwnerType field to given value.
+
+### HasAutoPolicyWaiverOwnerType
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) HasAutoPolicyWaiverOwnerType() bool`
+
+HasAutoPolicyWaiverOwnerType returns a boolean if a field has been set.
+
+### GetCreateTime
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetCreateTime() time.Time`
+
+GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
+
+### GetCreateTimeOk
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetCreateTimeOk() (*time.Time, bool)`
+
+GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreateTime
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) SetCreateTime(v time.Time)`
+
+SetCreateTime sets CreateTime field to given value.
+
+### HasCreateTime
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) HasCreateTime() bool`
+
+HasCreateTime returns a boolean if a field has been set.
+
+### GetHasNoPathForward
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetHasNoPathForward() bool`
+
+GetHasNoPathForward returns the HasNoPathForward field if non-nil, zero value otherwise.
+
+### GetHasNoPathForwardOk
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetHasNoPathForwardOk() (*bool, bool)`
+
+GetHasNoPathForwardOk returns a tuple with the HasNoPathForward field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasNoPathForward
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) SetHasNoPathForward(v bool)`
+
+SetHasNoPathForward sets HasNoPathForward field to given value.
+
+### HasHasNoPathForward
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) HasHasNoPathForward() bool`
+
+HasHasNoPathForward returns a boolean if a field has been set.
+
+### GetHasNotReachable
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetHasNotReachable() bool`
+
+GetHasNotReachable returns the HasNotReachable field if non-nil, zero value otherwise.
+
+### GetHasNotReachableOk
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetHasNotReachableOk() (*bool, bool)`
+
+GetHasNotReachableOk returns a tuple with the HasNotReachable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasNotReachable
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) SetHasNotReachable(v bool)`
+
+SetHasNotReachable sets HasNotReachable field to given value.
+
+### HasHasNotReachable
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) HasHasNotReachable() bool`
+
+HasHasNotReachable returns a boolean if a field has been set.
+
 ### GetIsAutoWaiverEnabled
 
 `func (o *ApiAutoPolicyWaiverStatusDTO) GetIsAutoWaiverEnabled() bool`
@@ -153,6 +259,56 @@ SetIsInherited sets IsInherited field to given value.
 `func (o *ApiAutoPolicyWaiverStatusDTO) HasIsInherited() bool`
 
 HasIsInherited returns a boolean if a field has been set.
+
+### GetScopesOperatorAny
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetScopesOperatorAny() bool`
+
+GetScopesOperatorAny returns the ScopesOperatorAny field if non-nil, zero value otherwise.
+
+### GetScopesOperatorAnyOk
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetScopesOperatorAnyOk() (*bool, bool)`
+
+GetScopesOperatorAnyOk returns a tuple with the ScopesOperatorAny field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScopesOperatorAny
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) SetScopesOperatorAny(v bool)`
+
+SetScopesOperatorAny sets ScopesOperatorAny field to given value.
+
+### HasScopesOperatorAny
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) HasScopesOperatorAny() bool`
+
+HasScopesOperatorAny returns a boolean if a field has been set.
+
+### GetThreatLevel
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetThreatLevel() int32`
+
+GetThreatLevel returns the ThreatLevel field if non-nil, zero value otherwise.
+
+### GetThreatLevelOk
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) GetThreatLevelOk() (*int32, bool)`
+
+GetThreatLevelOk returns a tuple with the ThreatLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThreatLevel
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) SetThreatLevel(v int32)`
+
+SetThreatLevel sets ThreatLevel field to given value.
+
+### HasThreatLevel
+
+`func (o *ApiAutoPolicyWaiverStatusDTO) HasThreatLevel() bool`
+
+HasThreatLevel returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

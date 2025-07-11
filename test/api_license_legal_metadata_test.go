@@ -22,45 +22,6 @@ func Test_sonatypeiq_LicenseLegalMetadataAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test LicenseLegalMetadataAPIService DeleteAttributionReportTemplate", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		httpRes, err := apiClient.LicenseLegalMetadataAPI.DeleteAttributionReportTemplate(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test LicenseLegalMetadataAPIService GetAllAttributionReportTemplates", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.GetAllAttributionReportTemplates(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test LicenseLegalMetadataAPIService GetAttributionReportTemplateById", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.GetAttributionReportTemplateById(context.Background(), id).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test LicenseLegalMetadataAPIService GetLicenseLegalApplicationHTMLReport", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -68,10 +29,9 @@ func Test_sonatypeiq_LicenseLegalMetadataAPIService(t *testing.T) {
 		var applicationId string
 		var stageId string
 
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
+		httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -127,10 +87,9 @@ func Test_sonatypeiq_LicenseLegalMetadataAPIService(t *testing.T) {
 		var applicationId string
 		var stageId string
 
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
+		httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -143,10 +102,9 @@ func Test_sonatypeiq_LicenseLegalMetadataAPIService(t *testing.T) {
 		var stageId string
 		var templateId string
 
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1(context.Background(), applicationId, stageId, templateId).Execute()
+		httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1(context.Background(), applicationId, stageId, templateId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -157,10 +115,9 @@ func Test_sonatypeiq_LicenseLegalMetadataAPIService(t *testing.T) {
 
 		var templateId string
 
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1(context.Background(), templateId).Execute()
+		httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1(context.Background(), templateId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -169,10 +126,9 @@ func Test_sonatypeiq_LicenseLegalMetadataAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport(context.Background()).Execute()
+		httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport(context.Background()).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -183,22 +139,9 @@ func Test_sonatypeiq_LicenseLegalMetadataAPIService(t *testing.T) {
 
 		var templateId string
 
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter(context.Background(), templateId).Execute()
+		httpRes, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter(context.Background(), templateId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test LicenseLegalMetadataAPIService SaveAttributionReportTemplate", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.LicenseLegalMetadataAPI.SaveAttributionReportTemplate(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

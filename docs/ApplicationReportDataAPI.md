@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ## GetPolicyViolationDiff
 
-> ApiPolicyViolationDiffDTO GetPolicyViolationDiff(ctx, applicationPublicId).FromCommit(fromCommit).ToCommit(toCommit).FromPolicyEvaluationId(fromPolicyEvaluationId).ToPolicyEvaluationId(toPolicyEvaluationId).Execute()
+> ApiPolicyViolationDiffDTO GetPolicyViolationDiff(ctx, applicationPublicId).FromCommit(fromCommit).ToCommit(toCommit).FromPolicyEvaluationId(fromPolicyEvaluationId).ToPolicyEvaluationId(toPolicyEvaluationId).IncludeViolationTimes(includeViolationTimes).Execute()
 
 
 
@@ -182,10 +182,11 @@ func main() {
 	toCommit := "toCommit_example" // string | Enter the commit hash linked to the other (later) policy evaluation to compare.
 	fromPolicyEvaluationId := "fromPolicyEvaluationId_example" // string | Enter the policy evaluation Id linked to the earlier policy evaluation to compare (optional)
 	toPolicyEvaluationId := "toPolicyEvaluationId_example" // string | Enter the policy evaluation Id linked to the other (later) policy evaluation to compare (optional)
+	includeViolationTimes := true // bool | Set to true to include policy violation times (open, legacy, waived, fixed) in the response if set. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ApplicationReportDataAPI.GetPolicyViolationDiff(context.Background(), applicationPublicId).FromCommit(fromCommit).ToCommit(toCommit).FromPolicyEvaluationId(fromPolicyEvaluationId).ToPolicyEvaluationId(toPolicyEvaluationId).Execute()
+	resp, r, err := apiClient.ApplicationReportDataAPI.GetPolicyViolationDiff(context.Background(), applicationPublicId).FromCommit(fromCommit).ToCommit(toCommit).FromPolicyEvaluationId(fromPolicyEvaluationId).ToPolicyEvaluationId(toPolicyEvaluationId).IncludeViolationTimes(includeViolationTimes).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetPolicyViolationDiff``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -215,6 +216,7 @@ Name | Type | Description  | Notes
  **toCommit** | **string** | Enter the commit hash linked to the other (later) policy evaluation to compare. | 
  **fromPolicyEvaluationId** | **string** | Enter the policy evaluation Id linked to the earlier policy evaluation to compare | 
  **toPolicyEvaluationId** | **string** | Enter the policy evaluation Id linked to the other (later) policy evaluation to compare | 
+ **includeViolationTimes** | **bool** | Set to true to include policy violation times (open, legacy, waived, fixed) in the response if set. | [default to false]
 
 ### Return type
 
@@ -236,7 +238,7 @@ Name | Type | Description  | Notes
 
 ## GetPolicyViolations1
 
-> ApiReportPolicyDataDTOV2 GetPolicyViolations1(ctx, applicationPublicId, scanId).Execute()
+> ApiReportPolicyDataDTOV2 GetPolicyViolations1(ctx, applicationPublicId, scanId).IncludeViolationTimes(includeViolationTimes).Execute()
 
 
 
@@ -257,10 +259,11 @@ import (
 func main() {
 	applicationPublicId := "applicationPublicId_example" // string | Enter the applicationPublicId created at the time of creating the application.
 	scanId := "scanId_example" // string | Enter the reportId (scanId) created at the time of evaluating the application.
+	includeViolationTimes := true // bool | Set to true to include policy violation times (open, legacy, waived, fixed) in the response if set. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ApplicationReportDataAPI.GetPolicyViolations1(context.Background(), applicationPublicId, scanId).Execute()
+	resp, r, err := apiClient.ApplicationReportDataAPI.GetPolicyViolations1(context.Background(), applicationPublicId, scanId).IncludeViolationTimes(includeViolationTimes).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetPolicyViolations1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -288,6 +291,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **includeViolationTimes** | **bool** | Set to true to include policy violation times (open, legacy, waived, fixed) in the response if set. | [default to false]
 
 ### Return type
 

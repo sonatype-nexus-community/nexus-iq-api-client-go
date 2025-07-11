@@ -9,8 +9,12 @@ Name | Type | Description | Notes
 **CreatorId** | Pointer to **string** |  | [optional] 
 **CreatorName** | Pointer to **string** |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
+**OwnerName** | Pointer to **string** |  | [optional] 
+**OwnerType** | Pointer to **string** |  | [optional] 
 **PathForward** | Pointer to **bool** |  | [optional] 
-**Reachable** | Pointer to **bool** |  | [optional] 
+**PublicId** | Pointer to **string** |  | [optional] 
+**Reachability** | Pointer to **bool** |  | [optional] 
+**ScopesOperatorAny** | Pointer to **bool** |  | [optional] 
 **ThreatLevel** | Pointer to **int32** |  | [optional] 
 
 ## Methods
@@ -157,6 +161,56 @@ SetOwnerId sets OwnerId field to given value.
 
 HasOwnerId returns a boolean if a field has been set.
 
+### GetOwnerName
+
+`func (o *ApiAutoPolicyWaiverDTO) GetOwnerName() string`
+
+GetOwnerName returns the OwnerName field if non-nil, zero value otherwise.
+
+### GetOwnerNameOk
+
+`func (o *ApiAutoPolicyWaiverDTO) GetOwnerNameOk() (*string, bool)`
+
+GetOwnerNameOk returns a tuple with the OwnerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwnerName
+
+`func (o *ApiAutoPolicyWaiverDTO) SetOwnerName(v string)`
+
+SetOwnerName sets OwnerName field to given value.
+
+### HasOwnerName
+
+`func (o *ApiAutoPolicyWaiverDTO) HasOwnerName() bool`
+
+HasOwnerName returns a boolean if a field has been set.
+
+### GetOwnerType
+
+`func (o *ApiAutoPolicyWaiverDTO) GetOwnerType() string`
+
+GetOwnerType returns the OwnerType field if non-nil, zero value otherwise.
+
+### GetOwnerTypeOk
+
+`func (o *ApiAutoPolicyWaiverDTO) GetOwnerTypeOk() (*string, bool)`
+
+GetOwnerTypeOk returns a tuple with the OwnerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwnerType
+
+`func (o *ApiAutoPolicyWaiverDTO) SetOwnerType(v string)`
+
+SetOwnerType sets OwnerType field to given value.
+
+### HasOwnerType
+
+`func (o *ApiAutoPolicyWaiverDTO) HasOwnerType() bool`
+
+HasOwnerType returns a boolean if a field has been set.
+
 ### GetPathForward
 
 `func (o *ApiAutoPolicyWaiverDTO) GetPathForward() bool`
@@ -182,30 +236,80 @@ SetPathForward sets PathForward field to given value.
 
 HasPathForward returns a boolean if a field has been set.
 
-### GetReachable
+### GetPublicId
 
-`func (o *ApiAutoPolicyWaiverDTO) GetReachable() bool`
+`func (o *ApiAutoPolicyWaiverDTO) GetPublicId() string`
 
-GetReachable returns the Reachable field if non-nil, zero value otherwise.
+GetPublicId returns the PublicId field if non-nil, zero value otherwise.
 
-### GetReachableOk
+### GetPublicIdOk
 
-`func (o *ApiAutoPolicyWaiverDTO) GetReachableOk() (*bool, bool)`
+`func (o *ApiAutoPolicyWaiverDTO) GetPublicIdOk() (*string, bool)`
 
-GetReachableOk returns a tuple with the Reachable field if it's non-nil, zero value otherwise
+GetPublicIdOk returns a tuple with the PublicId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetReachable
+### SetPublicId
 
-`func (o *ApiAutoPolicyWaiverDTO) SetReachable(v bool)`
+`func (o *ApiAutoPolicyWaiverDTO) SetPublicId(v string)`
 
-SetReachable sets Reachable field to given value.
+SetPublicId sets PublicId field to given value.
 
-### HasReachable
+### HasPublicId
 
-`func (o *ApiAutoPolicyWaiverDTO) HasReachable() bool`
+`func (o *ApiAutoPolicyWaiverDTO) HasPublicId() bool`
 
-HasReachable returns a boolean if a field has been set.
+HasPublicId returns a boolean if a field has been set.
+
+### GetReachability
+
+`func (o *ApiAutoPolicyWaiverDTO) GetReachability() bool`
+
+GetReachability returns the Reachability field if non-nil, zero value otherwise.
+
+### GetReachabilityOk
+
+`func (o *ApiAutoPolicyWaiverDTO) GetReachabilityOk() (*bool, bool)`
+
+GetReachabilityOk returns a tuple with the Reachability field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReachability
+
+`func (o *ApiAutoPolicyWaiverDTO) SetReachability(v bool)`
+
+SetReachability sets Reachability field to given value.
+
+### HasReachability
+
+`func (o *ApiAutoPolicyWaiverDTO) HasReachability() bool`
+
+HasReachability returns a boolean if a field has been set.
+
+### GetScopesOperatorAny
+
+`func (o *ApiAutoPolicyWaiverDTO) GetScopesOperatorAny() bool`
+
+GetScopesOperatorAny returns the ScopesOperatorAny field if non-nil, zero value otherwise.
+
+### GetScopesOperatorAnyOk
+
+`func (o *ApiAutoPolicyWaiverDTO) GetScopesOperatorAnyOk() (*bool, bool)`
+
+GetScopesOperatorAnyOk returns a tuple with the ScopesOperatorAny field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScopesOperatorAny
+
+`func (o *ApiAutoPolicyWaiverDTO) SetScopesOperatorAny(v bool)`
+
+SetScopesOperatorAny sets ScopesOperatorAny field to given value.
+
+### HasScopesOperatorAny
+
+`func (o *ApiAutoPolicyWaiverDTO) HasScopesOperatorAny() bool`
+
+HasScopesOperatorAny returns a boolean if a field has been set.
 
 ### GetThreatLevel
 

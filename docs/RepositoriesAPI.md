@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -28,9 +30,9 @@ import (
 )
 
 func main() {
-	repositoryManagerInstanceId := "repositoryManagerInstanceId_example" // string | 
-	repositoryPublicId := "repositoryPublicId_example" // string | 
-	requestBody := []string{"Property_example"} // []string |  (optional)
+	repositoryManagerInstanceId := "repositoryManagerInstanceId_example" // string | Enter the repository manager instance ID.
+	repositoryPublicId := "repositoryPublicId_example" // string | Enter the repository public ID.
+	requestBody := []string{"Property_example"} // []string | Specify the pathnames.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -50,8 +52,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**repositoryManagerInstanceId** | **string** |  | 
-**repositoryPublicId** | **string** |  | 
+**repositoryManagerInstanceId** | **string** | Enter the repository manager instance ID. | 
+**repositoryPublicId** | **string** | Enter the repository public ID. | 
 
 ### Other Parameters
 
@@ -62,7 +64,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **requestBody** | **[]string** |  | 
+ **requestBody** | **[]string** | Specify the pathnames. | 
 
 ### Return type
 
@@ -88,6 +90,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -101,8 +105,8 @@ import (
 )
 
 func main() {
-	quarantineId := "quarantineId_example" // string | 
-	body := "body_example" // string |  (optional)
+	quarantineId := "quarantineId_example" // string | Enter the component `quarantineId`.
+	body := "body_example" // string | Enter a waiver comment for releasing the component from quarantine.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -122,7 +126,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**quarantineId** | **string** |  | 
+**quarantineId** | **string** | Enter the component &#x60;quarantineId&#x60;. | 
 
 ### Other Parameters
 
@@ -132,7 +136,7 @@ Other parameters are passed through a pointer to a apiReleaseQuarantineWithoutRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | **string** |  | 
+ **body** | **string** | Enter a waiver comment for releasing the component from quarantine. | 
 
 ### Return type
 

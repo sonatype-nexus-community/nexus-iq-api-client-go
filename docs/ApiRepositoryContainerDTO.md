@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
+**RelatedOrganizationId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetName sets Name field to given value.
 `func (o *ApiRepositoryContainerDTO) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetRelatedOrganizationId
+
+`func (o *ApiRepositoryContainerDTO) GetRelatedOrganizationId() string`
+
+GetRelatedOrganizationId returns the RelatedOrganizationId field if non-nil, zero value otherwise.
+
+### GetRelatedOrganizationIdOk
+
+`func (o *ApiRepositoryContainerDTO) GetRelatedOrganizationIdOk() (*string, bool)`
+
+GetRelatedOrganizationIdOk returns a tuple with the RelatedOrganizationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRelatedOrganizationId
+
+`func (o *ApiRepositoryContainerDTO) SetRelatedOrganizationId(v string)`
+
+SetRelatedOrganizationId sets RelatedOrganizationId field to given value.
+
+### HasRelatedOrganizationId
+
+`func (o *ApiRepositoryContainerDTO) HasRelatedOrganizationId() bool`
+
+HasRelatedOrganizationId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

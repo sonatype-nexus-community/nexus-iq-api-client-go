@@ -37,6 +37,21 @@ func Test_sonatypeiq_AutoPolicyWaiversAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AutoPolicyWaiversAPIService AddAutoPolicyWaivers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var ownerId string
+
+		resp, httpRes, err := apiClient.AutoPolicyWaiversAPI.AddAutoPolicyWaivers(context.Background(), ownerType, ownerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AutoPolicyWaiversAPIService DeleteAutoPolicyWaiver", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -48,6 +63,21 @@ func Test_sonatypeiq_AutoPolicyWaiversAPIService(t *testing.T) {
 		httpRes, err := apiClient.AutoPolicyWaiversAPI.DeleteAutoPolicyWaiver(context.Background(), ownerType, ownerId, autoPolicyWaiverId).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AutoPolicyWaiversAPIService GetApplicableAutoWaivers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var ownerId string
+
+		resp, httpRes, err := apiClient.AutoPolicyWaiversAPI.GetApplicableAutoWaivers(context.Background(), ownerType, ownerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

@@ -22,6 +22,19 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test FirewallAPIService AddProprietaryComponentNames", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var format string
+
+		httpRes, err := apiClient.FirewallAPI.AddProprietaryComponentNames(context.Background(), format).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService AddRepositoryManager", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -75,6 +88,18 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirewallAPIService EvaluateMalware", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.FirewallAPI.EvaluateMalware(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService GetConfiguredRepositories", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -105,10 +130,9 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.FirewallAPI.GetFirewallMetrics(context.Background()).Execute()
+		httpRes, err := apiClient.FirewallAPI.GetFirewallMetrics(context.Background()).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -118,6 +142,18 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.FirewallAPI.GetFirewallUnquarantineSummary(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirewallAPIService GetMalwareDefenseMetrics", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.FirewallAPI.GetMalwareDefenseMetrics(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -197,11 +233,38 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirewallAPIService GetRoiFirewallMetrics", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var currencyType string
+
+		resp, httpRes, err := apiClient.FirewallAPI.GetRoiFirewallMetrics(context.Background(), currencyType).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService GetUnquarantineList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		httpRes, err := apiClient.FirewallAPI.GetUnquarantineList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirewallAPIService RemoveProprietaryComponentNames", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var format string
+
+		httpRes, err := apiClient.FirewallAPI.RemoveProprietaryComponentNames(context.Background(), format).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

@@ -142,4 +142,19 @@ func Test_sonatypeiq_PolicyWaiversAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PolicyWaiversAPIService UpdatePolicyWaiver", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var ownerId string
+		var policyWaiverId string
+
+		httpRes, err := apiClient.PolicyWaiversAPI.UpdatePolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }

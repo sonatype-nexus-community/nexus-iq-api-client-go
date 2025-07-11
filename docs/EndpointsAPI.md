@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -27,7 +29,7 @@ import (
 )
 
 func main() {
-	apiType := "apiType_example" // string | 
+	apiType := "apiType_example" // string | Select the type of the API.<ul><li> `public` APIs are Generally Available and fully supported by Sonatype.</li><li> `experimental` APIs are not production ready, may change, and are not intended to be used in critical workloads.</li></ul>
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -47,7 +49,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiType** | **string** |  | 
+**apiType** | **string** | Select the type of the API.&lt;ul&gt;&lt;li&gt; &#x60;public&#x60; APIs are Generally Available and fully supported by Sonatype.&lt;/li&gt;&lt;li&gt; &#x60;experimental&#x60; APIs are not production ready, may change, and are not intended to be used in critical workloads.&lt;/li&gt;&lt;/ul&gt; | 
 
 ### Other Parameters
 

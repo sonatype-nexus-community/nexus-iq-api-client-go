@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AdditionalPriorities** | Pointer to [**ApiPageResultPrioritizedComponent**](ApiPageResultPrioritizedComponent.md) |  | [optional] 
-**TopPriorities** | Pointer to [**[]PrioritizedComponent**](PrioritizedComponent.md) |  | [optional] 
+**Priorities** | Pointer to [**ApiPageResultPrioritizedComponent**](ApiPageResultPrioritizedComponent.md) |  | [optional] 
+**ScanIdFromLatestBuildStageEvaluation** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -26,55 +26,55 @@ NewDevelopmentPrioritizationResultsWithDefaults instantiates a new DevelopmentPr
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAdditionalPriorities
+### GetPriorities
 
-`func (o *DevelopmentPrioritizationResults) GetAdditionalPriorities() ApiPageResultPrioritizedComponent`
+`func (o *DevelopmentPrioritizationResults) GetPriorities() ApiPageResultPrioritizedComponent`
 
-GetAdditionalPriorities returns the AdditionalPriorities field if non-nil, zero value otherwise.
+GetPriorities returns the Priorities field if non-nil, zero value otherwise.
 
-### GetAdditionalPrioritiesOk
+### GetPrioritiesOk
 
-`func (o *DevelopmentPrioritizationResults) GetAdditionalPrioritiesOk() (*ApiPageResultPrioritizedComponent, bool)`
+`func (o *DevelopmentPrioritizationResults) GetPrioritiesOk() (*ApiPageResultPrioritizedComponent, bool)`
 
-GetAdditionalPrioritiesOk returns a tuple with the AdditionalPriorities field if it's non-nil, zero value otherwise
+GetPrioritiesOk returns a tuple with the Priorities field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAdditionalPriorities
+### SetPriorities
 
-`func (o *DevelopmentPrioritizationResults) SetAdditionalPriorities(v ApiPageResultPrioritizedComponent)`
+`func (o *DevelopmentPrioritizationResults) SetPriorities(v ApiPageResultPrioritizedComponent)`
 
-SetAdditionalPriorities sets AdditionalPriorities field to given value.
+SetPriorities sets Priorities field to given value.
 
-### HasAdditionalPriorities
+### HasPriorities
 
-`func (o *DevelopmentPrioritizationResults) HasAdditionalPriorities() bool`
+`func (o *DevelopmentPrioritizationResults) HasPriorities() bool`
 
-HasAdditionalPriorities returns a boolean if a field has been set.
+HasPriorities returns a boolean if a field has been set.
 
-### GetTopPriorities
+### GetScanIdFromLatestBuildStageEvaluation
 
-`func (o *DevelopmentPrioritizationResults) GetTopPriorities() []PrioritizedComponent`
+`func (o *DevelopmentPrioritizationResults) GetScanIdFromLatestBuildStageEvaluation() string`
 
-GetTopPriorities returns the TopPriorities field if non-nil, zero value otherwise.
+GetScanIdFromLatestBuildStageEvaluation returns the ScanIdFromLatestBuildStageEvaluation field if non-nil, zero value otherwise.
 
-### GetTopPrioritiesOk
+### GetScanIdFromLatestBuildStageEvaluationOk
 
-`func (o *DevelopmentPrioritizationResults) GetTopPrioritiesOk() (*[]PrioritizedComponent, bool)`
+`func (o *DevelopmentPrioritizationResults) GetScanIdFromLatestBuildStageEvaluationOk() (*string, bool)`
 
-GetTopPrioritiesOk returns a tuple with the TopPriorities field if it's non-nil, zero value otherwise
+GetScanIdFromLatestBuildStageEvaluationOk returns a tuple with the ScanIdFromLatestBuildStageEvaluation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTopPriorities
+### SetScanIdFromLatestBuildStageEvaluation
 
-`func (o *DevelopmentPrioritizationResults) SetTopPriorities(v []PrioritizedComponent)`
+`func (o *DevelopmentPrioritizationResults) SetScanIdFromLatestBuildStageEvaluation(v string)`
 
-SetTopPriorities sets TopPriorities field to given value.
+SetScanIdFromLatestBuildStageEvaluation sets ScanIdFromLatestBuildStageEvaluation field to given value.
 
-### HasTopPriorities
+### HasScanIdFromLatestBuildStageEvaluation
 
-`func (o *DevelopmentPrioritizationResults) HasTopPriorities() bool`
+`func (o *DevelopmentPrioritizationResults) HasScanIdFromLatestBuildStageEvaluation() bool`
 
-HasTopPriorities returns a boolean if a field has been set.
+HasScanIdFromLatestBuildStageEvaluation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

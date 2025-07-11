@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -27,8 +29,8 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	internalOwnerId := "internalOwnerId_example" // string | 
+	ownerType := "ownerType_example" // string | Select the ownerType for the pull requests.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the ownerId corresponding to the ownerType.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -48,8 +50,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**internalOwnerId** | **string** |  | 
+**ownerType** | **string** | Select the ownerType for the pull requests. | 
+**internalOwnerId** | **string** | Enter the ownerId corresponding to the ownerType. | 
 
 ### Other Parameters
 

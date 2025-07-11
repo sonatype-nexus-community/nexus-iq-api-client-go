@@ -37,6 +37,19 @@ func Test_sonatypeiq_SourceControlAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test SourceControlAPIService AddUserMappings", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organizationId string
+
+		httpRes, err := apiClient.SourceControlAPI.AddUserMappings(context.Background(), organizationId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SourceControlAPIService AutomaticRoleAssignment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -65,6 +78,19 @@ func Test_sonatypeiq_SourceControlAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test SourceControlAPIService DeleteUserMappings", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organizationId string
+
+		httpRes, err := apiClient.SourceControlAPI.DeleteUserMappings(context.Background(), organizationId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SourceControlAPIService GetSourceControl1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -73,6 +99,21 @@ func Test_sonatypeiq_SourceControlAPIService(t *testing.T) {
 		var internalOwnerId string
 
 		resp, httpRes, err := apiClient.SourceControlAPI.GetSourceControl1(context.Background(), ownerType, internalOwnerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SourceControlAPIService GetUserMappingsByOwner", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var internalOwnerId string
+
+		resp, httpRes, err := apiClient.SourceControlAPI.GetUserMappingsByOwner(context.Background(), ownerType, internalOwnerId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Filename** | Pointer to **string** |  | [optional] 
 **FixTime** | Pointer to **time.Time** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
+**LegacyViolationTime** | Pointer to **time.Time** |  | [optional] 
 **OpenTime** | Pointer to **time.Time** |  | [optional] 
 **OrganizationName** | Pointer to **string** |  | [optional] 
 **PolicyId** | Pointer to **string** |  | [optional] 
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 **ReachabilityStatus** | Pointer to **string** |  | [optional] 
 **StageData** | Pointer to [**map[string]StageData**](StageData.md) |  | [optional] 
 **ThreatLevel** | Pointer to **int32** |  | [optional] 
+**WaiveTime** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
@@ -241,6 +243,31 @@ SetHash sets Hash field to given value.
 `func (o *ApiCrossStageViolationDTOV2) HasHash() bool`
 
 HasHash returns a boolean if a field has been set.
+
+### GetLegacyViolationTime
+
+`func (o *ApiCrossStageViolationDTOV2) GetLegacyViolationTime() time.Time`
+
+GetLegacyViolationTime returns the LegacyViolationTime field if non-nil, zero value otherwise.
+
+### GetLegacyViolationTimeOk
+
+`func (o *ApiCrossStageViolationDTOV2) GetLegacyViolationTimeOk() (*time.Time, bool)`
+
+GetLegacyViolationTimeOk returns a tuple with the LegacyViolationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegacyViolationTime
+
+`func (o *ApiCrossStageViolationDTOV2) SetLegacyViolationTime(v time.Time)`
+
+SetLegacyViolationTime sets LegacyViolationTime field to given value.
+
+### HasLegacyViolationTime
+
+`func (o *ApiCrossStageViolationDTOV2) HasLegacyViolationTime() bool`
+
+HasLegacyViolationTime returns a boolean if a field has been set.
 
 ### GetOpenTime
 
@@ -491,6 +518,31 @@ SetThreatLevel sets ThreatLevel field to given value.
 `func (o *ApiCrossStageViolationDTOV2) HasThreatLevel() bool`
 
 HasThreatLevel returns a boolean if a field has been set.
+
+### GetWaiveTime
+
+`func (o *ApiCrossStageViolationDTOV2) GetWaiveTime() time.Time`
+
+GetWaiveTime returns the WaiveTime field if non-nil, zero value otherwise.
+
+### GetWaiveTimeOk
+
+`func (o *ApiCrossStageViolationDTOV2) GetWaiveTimeOk() (*time.Time, bool)`
+
+GetWaiveTimeOk returns a tuple with the WaiveTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWaiveTime
+
+`func (o *ApiCrossStageViolationDTOV2) SetWaiveTime(v time.Time)`
+
+SetWaiveTime sets WaiveTime field to given value.
+
+### HasWaiveTime
+
+`func (o *ApiCrossStageViolationDTOV2) HasWaiveTime() bool`
+
+HasWaiveTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -6,10 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Component** | Pointer to [**ApiComponentDTOV2**](ApiComponentDTOV2.md) |  | [optional] 
 **ConstraintViolations** | Pointer to [**[]ApiConstraintViolationDTO**](ApiConstraintViolationDTO.md) |  | [optional] 
+**FixTime** | Pointer to **time.Time** |  | [optional] 
+**LegacyViolationTime** | Pointer to **time.Time** |  | [optional] 
+**OpenTime** | Pointer to **time.Time** |  | [optional] 
 **PolicyId** | Pointer to **string** |  | [optional] 
 **PolicyName** | Pointer to **string** |  | [optional] 
 **PolicyViolationId** | Pointer to **string** |  | [optional] 
 **ThreatLevel** | Pointer to **int32** |  | [optional] 
+**WaiveTime** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
@@ -79,6 +83,81 @@ SetConstraintViolations sets ConstraintViolations field to given value.
 `func (o *ApiPolicyViolationForDiffDTO) HasConstraintViolations() bool`
 
 HasConstraintViolations returns a boolean if a field has been set.
+
+### GetFixTime
+
+`func (o *ApiPolicyViolationForDiffDTO) GetFixTime() time.Time`
+
+GetFixTime returns the FixTime field if non-nil, zero value otherwise.
+
+### GetFixTimeOk
+
+`func (o *ApiPolicyViolationForDiffDTO) GetFixTimeOk() (*time.Time, bool)`
+
+GetFixTimeOk returns a tuple with the FixTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFixTime
+
+`func (o *ApiPolicyViolationForDiffDTO) SetFixTime(v time.Time)`
+
+SetFixTime sets FixTime field to given value.
+
+### HasFixTime
+
+`func (o *ApiPolicyViolationForDiffDTO) HasFixTime() bool`
+
+HasFixTime returns a boolean if a field has been set.
+
+### GetLegacyViolationTime
+
+`func (o *ApiPolicyViolationForDiffDTO) GetLegacyViolationTime() time.Time`
+
+GetLegacyViolationTime returns the LegacyViolationTime field if non-nil, zero value otherwise.
+
+### GetLegacyViolationTimeOk
+
+`func (o *ApiPolicyViolationForDiffDTO) GetLegacyViolationTimeOk() (*time.Time, bool)`
+
+GetLegacyViolationTimeOk returns a tuple with the LegacyViolationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegacyViolationTime
+
+`func (o *ApiPolicyViolationForDiffDTO) SetLegacyViolationTime(v time.Time)`
+
+SetLegacyViolationTime sets LegacyViolationTime field to given value.
+
+### HasLegacyViolationTime
+
+`func (o *ApiPolicyViolationForDiffDTO) HasLegacyViolationTime() bool`
+
+HasLegacyViolationTime returns a boolean if a field has been set.
+
+### GetOpenTime
+
+`func (o *ApiPolicyViolationForDiffDTO) GetOpenTime() time.Time`
+
+GetOpenTime returns the OpenTime field if non-nil, zero value otherwise.
+
+### GetOpenTimeOk
+
+`func (o *ApiPolicyViolationForDiffDTO) GetOpenTimeOk() (*time.Time, bool)`
+
+GetOpenTimeOk returns a tuple with the OpenTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenTime
+
+`func (o *ApiPolicyViolationForDiffDTO) SetOpenTime(v time.Time)`
+
+SetOpenTime sets OpenTime field to given value.
+
+### HasOpenTime
+
+`func (o *ApiPolicyViolationForDiffDTO) HasOpenTime() bool`
+
+HasOpenTime returns a boolean if a field has been set.
 
 ### GetPolicyId
 
@@ -179,6 +258,31 @@ SetThreatLevel sets ThreatLevel field to given value.
 `func (o *ApiPolicyViolationForDiffDTO) HasThreatLevel() bool`
 
 HasThreatLevel returns a boolean if a field has been set.
+
+### GetWaiveTime
+
+`func (o *ApiPolicyViolationForDiffDTO) GetWaiveTime() time.Time`
+
+GetWaiveTime returns the WaiveTime field if non-nil, zero value otherwise.
+
+### GetWaiveTimeOk
+
+`func (o *ApiPolicyViolationForDiffDTO) GetWaiveTimeOk() (*time.Time, bool)`
+
+GetWaiveTimeOk returns a tuple with the WaiveTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWaiveTime
+
+`func (o *ApiPolicyViolationForDiffDTO) SetWaiveTime(v time.Time)`
+
+SetWaiveTime sets WaiveTime field to given value.
+
+### HasWaiveTime
+
+`func (o *ApiPolicyViolationForDiffDTO) HasWaiveTime() bool`
+
+HasWaiveTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

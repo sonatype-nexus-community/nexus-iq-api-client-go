@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AddWaiverLink** | Pointer to **string** |  | [optional] 
 **Comment** | Pointer to **string** |  | [optional] 
 **PolicyViolationLink** | Pointer to **string** |  | [optional] 
+**ReasonId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetPolicyViolationLink sets PolicyViolationLink field to given value.
 `func (o *ApiRequestPolicyWaiverDTO) HasPolicyViolationLink() bool`
 
 HasPolicyViolationLink returns a boolean if a field has been set.
+
+### GetReasonId
+
+`func (o *ApiRequestPolicyWaiverDTO) GetReasonId() string`
+
+GetReasonId returns the ReasonId field if non-nil, zero value otherwise.
+
+### GetReasonIdOk
+
+`func (o *ApiRequestPolicyWaiverDTO) GetReasonIdOk() (*string, bool)`
+
+GetReasonIdOk returns a tuple with the ReasonId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasonId
+
+`func (o *ApiRequestPolicyWaiverDTO) SetReasonId(v string)`
+
+SetReasonId sets ReasonId field to given value.
+
+### HasReasonId
+
+`func (o *ApiRequestPolicyWaiverDTO) HasReasonId() bool`
+
+HasReasonId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

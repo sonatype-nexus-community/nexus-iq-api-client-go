@@ -5,17 +5,20 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComponentIdentifier** | Pointer to [**ComponentIdentifier**](ComponentIdentifier.md) |  | [optional] 
+**ComponentRef** | Pointer to **string** |  | [optional] 
 **DependencyType** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
 **FileCoordinateId** | Pointer to **string** |  | [optional] 
 **Filenames** | Pointer to **[]string** |  | [optional] 
+**Format** | Pointer to **string** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
-**Licenses** | Pointer to [**[]License**](License.md) |  | [optional] 
+**Licenses** | Pointer to [**[]ResolvedLicenseDTO**](ResolvedLicenseDTO.md) |  | [optional] 
 **MatchStateId** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **PackageUrl** | Pointer to **string** |  | [optional] 
 **PercentageAnnotated** | Pointer to **float64** |  | [optional] 
 **PolicyViolationCount** | Pointer to **int32** |  | [optional] 
+**ReleaseStatusPercentage** | Pointer to **float64** |  | [optional] 
 **Version** | Pointer to **string** |  | [optional] 
 **VulnerabilitySeverityCriticalCount** | Pointer to **int32** |  | [optional] 
 **VulnerabilitySeverityHighCount** | Pointer to **int32** |  | [optional] 
@@ -66,6 +69,31 @@ SetComponentIdentifier sets ComponentIdentifier field to given value.
 `func (o *SbomComponentDTO) HasComponentIdentifier() bool`
 
 HasComponentIdentifier returns a boolean if a field has been set.
+
+### GetComponentRef
+
+`func (o *SbomComponentDTO) GetComponentRef() string`
+
+GetComponentRef returns the ComponentRef field if non-nil, zero value otherwise.
+
+### GetComponentRefOk
+
+`func (o *SbomComponentDTO) GetComponentRefOk() (*string, bool)`
+
+GetComponentRefOk returns a tuple with the ComponentRef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComponentRef
+
+`func (o *SbomComponentDTO) SetComponentRef(v string)`
+
+SetComponentRef sets ComponentRef field to given value.
+
+### HasComponentRef
+
+`func (o *SbomComponentDTO) HasComponentRef() bool`
+
+HasComponentRef returns a boolean if a field has been set.
 
 ### GetDependencyType
 
@@ -167,6 +195,31 @@ SetFilenames sets Filenames field to given value.
 
 HasFilenames returns a boolean if a field has been set.
 
+### GetFormat
+
+`func (o *SbomComponentDTO) GetFormat() string`
+
+GetFormat returns the Format field if non-nil, zero value otherwise.
+
+### GetFormatOk
+
+`func (o *SbomComponentDTO) GetFormatOk() (*string, bool)`
+
+GetFormatOk returns a tuple with the Format field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFormat
+
+`func (o *SbomComponentDTO) SetFormat(v string)`
+
+SetFormat sets Format field to given value.
+
+### HasFormat
+
+`func (o *SbomComponentDTO) HasFormat() bool`
+
+HasFormat returns a boolean if a field has been set.
+
 ### GetHash
 
 `func (o *SbomComponentDTO) GetHash() string`
@@ -194,20 +247,20 @@ HasHash returns a boolean if a field has been set.
 
 ### GetLicenses
 
-`func (o *SbomComponentDTO) GetLicenses() []License`
+`func (o *SbomComponentDTO) GetLicenses() []ResolvedLicenseDTO`
 
 GetLicenses returns the Licenses field if non-nil, zero value otherwise.
 
 ### GetLicensesOk
 
-`func (o *SbomComponentDTO) GetLicensesOk() (*[]License, bool)`
+`func (o *SbomComponentDTO) GetLicensesOk() (*[]ResolvedLicenseDTO, bool)`
 
 GetLicensesOk returns a tuple with the Licenses field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLicenses
 
-`func (o *SbomComponentDTO) SetLicenses(v []License)`
+`func (o *SbomComponentDTO) SetLicenses(v []ResolvedLicenseDTO)`
 
 SetLicenses sets Licenses field to given value.
 
@@ -341,6 +394,31 @@ SetPolicyViolationCount sets PolicyViolationCount field to given value.
 `func (o *SbomComponentDTO) HasPolicyViolationCount() bool`
 
 HasPolicyViolationCount returns a boolean if a field has been set.
+
+### GetReleaseStatusPercentage
+
+`func (o *SbomComponentDTO) GetReleaseStatusPercentage() float64`
+
+GetReleaseStatusPercentage returns the ReleaseStatusPercentage field if non-nil, zero value otherwise.
+
+### GetReleaseStatusPercentageOk
+
+`func (o *SbomComponentDTO) GetReleaseStatusPercentageOk() (*float64, bool)`
+
+GetReleaseStatusPercentageOk returns a tuple with the ReleaseStatusPercentage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseStatusPercentage
+
+`func (o *SbomComponentDTO) SetReleaseStatusPercentage(v float64)`
+
+SetReleaseStatusPercentage sets ReleaseStatusPercentage field to given value.
+
+### HasReleaseStatusPercentage
+
+`func (o *SbomComponentDTO) HasReleaseStatusPercentage() bool`
+
+HasReleaseStatusPercentage returns a boolean if a field has been set.
 
 ### GetVersion
 

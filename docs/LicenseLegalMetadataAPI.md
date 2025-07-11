@@ -4,9 +4,6 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteAttributionReportTemplate**](LicenseLegalMetadataAPI.md#DeleteAttributionReportTemplate) | **Delete** /api/v2/licenseLegalMetadata/report-template/{id} | 
-[**GetAllAttributionReportTemplates**](LicenseLegalMetadataAPI.md#GetAllAttributionReportTemplates) | **Get** /api/v2/licenseLegalMetadata/report-template | 
-[**GetAttributionReportTemplateById**](LicenseLegalMetadataAPI.md#GetAttributionReportTemplateById) | **Get** /api/v2/licenseLegalMetadata/report-template/{id} | 
 [**GetLicenseLegalApplicationHTMLReport**](LicenseLegalMetadataAPI.md#GetLicenseLegalApplicationHTMLReport) | **Get** /api/v2/licenseLegalMetadata/application/{applicationId}/stage/{stageId}/report | 
 [**GetLicenseLegalApplicationReport**](LicenseLegalMetadataAPI.md#GetLicenseLegalApplicationReport) | **Get** /api/v2/licenseLegalMetadata/application/{applicationId} | 
 [**GetLicenseLegalApplicationReport1**](LicenseLegalMetadataAPI.md#GetLicenseLegalApplicationReport1) | **Get** /api/v2/licenseLegalMetadata/application/{applicationId}/stage/{stageId} | 
@@ -16,206 +13,14 @@ Method | HTTP request | Description
 [**GetLicenseLegalCustomMultiApplicationHTMLReport1**](LicenseLegalMetadataAPI.md#GetLicenseLegalCustomMultiApplicationHTMLReport1) | **Post** /api/v2/licenseLegalMetadata/multiApplication/report/templateId/{templateId} | 
 [**GetLicenseLegalMultiApplicationHTMLReport**](LicenseLegalMetadataAPI.md#GetLicenseLegalMultiApplicationHTMLReport) | **Post** /api/v2/licenseLegalMetadata/multiApplication/report | 
 [**GetLicenseLegalMultiApplicationReportFromActiveUserFilter**](LicenseLegalMetadataAPI.md#GetLicenseLegalMultiApplicationReportFromActiveUserFilter) | **Post** /api/v2/licenseLegalMetadata/multiApplication/activeUserFilter/report/templateId/{templateId} | 
-[**SaveAttributionReportTemplate**](LicenseLegalMetadataAPI.md#SaveAttributionReportTemplate) | **Post** /api/v2/licenseLegalMetadata/report-template | 
 
-
-
-## DeleteAttributionReportTemplate
-
-> DeleteAttributionReportTemplate(ctx, id).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-	id := "id_example" // string | 
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.LicenseLegalMetadataAPI.DeleteAttributionReportTemplate(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.DeleteAttributionReportTemplate``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteAttributionReportTemplateRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetAllAttributionReportTemplates
-
-> []AttributionReportTemplateDTO GetAllAttributionReportTemplates(ctx).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetAllAttributionReportTemplates(context.Background()).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetAllAttributionReportTemplates``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetAllAttributionReportTemplates`: []AttributionReportTemplateDTO
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetAllAttributionReportTemplates`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetAllAttributionReportTemplatesRequest struct via the builder pattern
-
-
-### Return type
-
-[**[]AttributionReportTemplateDTO**](AttributionReportTemplateDTO.md)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetAttributionReportTemplateById
-
-> AttributionReportTemplateDTO GetAttributionReportTemplateById(ctx, id).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-	id := "id_example" // string | 
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetAttributionReportTemplateById(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetAttributionReportTemplateById``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetAttributionReportTemplateById`: AttributionReportTemplateDTO
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetAttributionReportTemplateById`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetAttributionReportTemplateByIdRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**AttributionReportTemplateDTO**](AttributionReportTemplateDTO.md)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## GetLicenseLegalApplicationHTMLReport
 
-> string GetLicenseLegalApplicationHTMLReport(ctx, applicationId, stageId).Execute()
+> GetLicenseLegalApplicationHTMLReport(ctx, applicationId, stageId).Execute()
+
+
 
 
 
@@ -232,18 +37,16 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
-	stageId := "stageId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the application id or public id.
+	stageId := "stageId_example" // string | Enter the stageId.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
+	r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLicenseLegalApplicationHTMLReport`: string
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalApplicationHTMLReport`: %v\n", resp)
 }
 ```
 
@@ -253,8 +56,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
-**stageId** | **string** |  | 
+**applicationId** | **string** | Enter the application id or public id. | 
+**stageId** | **string** | Enter the stageId. | 
 
 ### Other Parameters
 
@@ -268,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
@@ -277,7 +80,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: text/html
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -287,6 +90,8 @@ Name | Type | Description  | Notes
 ## GetLicenseLegalApplicationReport
 
 > ApiLicenseLegalApplicationReportDTO GetLicenseLegalApplicationReport(ctx, applicationId).Execute()
+
+
 
 
 
@@ -303,7 +108,7 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the application id or public id.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -323,7 +128,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
+**applicationId** | **string** | Enter the application id or public id. | 
 
 ### Other Parameters
 
@@ -358,6 +163,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -371,8 +178,8 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
-	stageId := "stageId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the application id or public id.
+	stageId := "stageId_example" // string | Enter the stageId.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -392,8 +199,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
-**stageId** | **string** |  | 
+**applicationId** | **string** | Enter the application id or public id. | 
+**stageId** | **string** | Enter the stageId. | 
 
 ### Other Parameters
 
@@ -429,6 +236,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -442,13 +251,13 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	ownerId := "ownerId_example" // string | 
-	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier |  (optional)
-	packageUrl := "packageUrl_example" // string |  (optional)
-	hash := "hash_example" // string |  (optional)
-	identificationSource := "identificationSource_example" // string |  (optional)
-	scanId := "scanId_example" // string |  (optional)
+	ownerType := "ownerType_example" // string | Enter the ownerType
+	ownerId := "ownerId_example" // string | Enter the ownerId corresponding to the ownerType.
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier | Enter the componentIdentifier consisting of format and coordinates. (optional)
+	packageUrl := "packageUrl_example" // string | Enter the package URL. (optional)
+	hash := "hash_example" // string | Enter the component hash. (optional)
+	identificationSource := "identificationSource_example" // string | Enter the identification source if a third party scan is used. (optional)
+	scanId := "scanId_example" // string | Enter the scanId for the report where the component was identified (required if identified by third party scan). (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -468,8 +277,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**ownerId** | **string** |  | 
+**ownerType** | **string** | Enter the ownerType | 
+**ownerId** | **string** | Enter the ownerId corresponding to the ownerType. | 
 
 ### Other Parameters
 
@@ -480,11 +289,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **componentIdentifier** | [**ComponentIdentifier**](ComponentIdentifier.md) |  | 
- **packageUrl** | **string** |  | 
- **hash** | **string** |  | 
- **identificationSource** | **string** |  | 
- **scanId** | **string** |  | 
+ **componentIdentifier** | [**ComponentIdentifier**](ComponentIdentifier.md) | Enter the componentIdentifier consisting of format and coordinates. | 
+ **packageUrl** | **string** | Enter the package URL. | 
+ **hash** | **string** | Enter the component hash. | 
+ **identificationSource** | **string** | Enter the identification source if a third party scan is used. | 
+ **scanId** | **string** | Enter the scanId for the report where the component was identified (required if identified by third party scan). | 
 
 ### Return type
 
@@ -506,7 +315,9 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLegalCustomApplicationHTMLReport
 
-> string GetLicenseLegalCustomApplicationHTMLReport(ctx, applicationId, stageId).Execute()
+> GetLicenseLegalCustomApplicationHTMLReport(ctx, applicationId, stageId).Execute()
+
+
 
 
 
@@ -523,18 +334,16 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
-	stageId := "stageId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the application id or public id.
+	stageId := "stageId_example" // string | Enter the stageId.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
+	r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport(context.Background(), applicationId, stageId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLicenseLegalCustomApplicationHTMLReport`: string
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport`: %v\n", resp)
 }
 ```
 
@@ -544,8 +353,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
-**stageId** | **string** |  | 
+**applicationId** | **string** | Enter the application id or public id. | 
+**stageId** | **string** | Enter the stageId. | 
 
 ### Other Parameters
 
@@ -559,7 +368,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
@@ -568,7 +377,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: text/html
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -577,7 +386,9 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLegalCustomApplicationHTMLReport1
 
-> string GetLicenseLegalCustomApplicationHTMLReport1(ctx, applicationId, stageId, templateId).Execute()
+> GetLicenseLegalCustomApplicationHTMLReport1(ctx, applicationId, stageId, templateId).Execute()
+
+
 
 
 
@@ -594,19 +405,17 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
-	stageId := "stageId_example" // string | 
-	templateId := "templateId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the application id or public id.
+	stageId := "stageId_example" // string | Enter the stageId.
+	templateId := "templateId_example" // string | Enter the templateId for the HTML report format.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1(context.Background(), applicationId, stageId, templateId).Execute()
+	r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1(context.Background(), applicationId, stageId, templateId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLicenseLegalCustomApplicationHTMLReport1`: string
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomApplicationHTMLReport1`: %v\n", resp)
 }
 ```
 
@@ -616,9 +425,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
-**stageId** | **string** |  | 
-**templateId** | **string** |  | 
+**applicationId** | **string** | Enter the application id or public id. | 
+**stageId** | **string** | Enter the stageId. | 
+**templateId** | **string** | Enter the templateId for the HTML report format. | 
 
 ### Other Parameters
 
@@ -633,7 +442,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
@@ -642,7 +451,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: text/html
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -651,7 +460,9 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLegalCustomMultiApplicationHTMLReport1
 
-> string GetLicenseLegalCustomMultiApplicationHTMLReport1(ctx, templateId).Execute()
+> GetLicenseLegalCustomMultiApplicationHTMLReport1(ctx, templateId).Execute()
+
+
 
 
 
@@ -668,17 +479,15 @@ import (
 )
 
 func main() {
-	templateId := "templateId_example" // string | 
+	templateId := "templateId_example" // string | Enter the `templateId` for the HTML report.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1(context.Background(), templateId).Execute()
+	r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1(context.Background(), templateId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLicenseLegalCustomMultiApplicationHTMLReport1`: string
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalCustomMultiApplicationHTMLReport1`: %v\n", resp)
 }
 ```
 
@@ -688,7 +497,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**templateId** | **string** |  | 
+**templateId** | **string** | Enter the &#x60;templateId&#x60; for the HTML report. | 
 
 ### Other Parameters
 
@@ -701,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
@@ -710,7 +519,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: text/html
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -719,7 +528,9 @@ Name | Type | Description  | Notes
 
 ## GetLicenseLegalMultiApplicationHTMLReport
 
-> string GetLicenseLegalMultiApplicationHTMLReport(ctx).Execute()
+> GetLicenseLegalMultiApplicationHTMLReport(ctx).Execute()
+
+
 
 
 
@@ -739,13 +550,11 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport(context.Background()).Execute()
+	r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLicenseLegalMultiApplicationHTMLReport`: string
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationHTMLReport`: %v\n", resp)
 }
 ```
 
@@ -760,7 +569,7 @@ Other parameters are passed through a pointer to a apiGetLicenseLegalMultiApplic
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
@@ -769,7 +578,7 @@ Other parameters are passed through a pointer to a apiGetLicenseLegalMultiApplic
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: text/html
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -778,7 +587,9 @@ Other parameters are passed through a pointer to a apiGetLicenseLegalMultiApplic
 
 ## GetLicenseLegalMultiApplicationReportFromActiveUserFilter
 
-> string GetLicenseLegalMultiApplicationReportFromActiveUserFilter(ctx, templateId).Execute()
+> GetLicenseLegalMultiApplicationReportFromActiveUserFilter(ctx, templateId).Execute()
+
+
 
 
 
@@ -795,17 +606,15 @@ import (
 )
 
 func main() {
-	templateId := "templateId_example" // string | 
+	templateId := "templateId_example" // string | Enter the templateId for the license legal data.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter(context.Background(), templateId).Execute()
+	r, err := apiClient.LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter(context.Background(), templateId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLicenseLegalMultiApplicationReportFromActiveUserFilter`: string
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.GetLicenseLegalMultiApplicationReportFromActiveUserFilter`: %v\n", resp)
 }
 ```
 
@@ -815,7 +624,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**templateId** | **string** |  | 
+**templateId** | **string** | Enter the templateId for the license legal data. | 
 
 ### Other Parameters
 
@@ -828,7 +637,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+ (empty response body)
 
 ### Authorization
 
@@ -837,71 +646,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SaveAttributionReportTemplate
-
-> AttributionReportTemplateDTO SaveAttributionReportTemplate(ctx).AttributionReportTemplateDTO(attributionReportTemplateDTO).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-	attributionReportTemplateDTO := *sonatypeiq.NewAttributionReportTemplateDTO() // AttributionReportTemplateDTO |  (optional)
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.LicenseLegalMetadataAPI.SaveAttributionReportTemplate(context.Background()).AttributionReportTemplateDTO(attributionReportTemplateDTO).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `LicenseLegalMetadataAPI.SaveAttributionReportTemplate``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `SaveAttributionReportTemplate`: AttributionReportTemplateDTO
-	fmt.Fprintf(os.Stdout, "Response from `LicenseLegalMetadataAPI.SaveAttributionReportTemplate`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSaveAttributionReportTemplateRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **attributionReportTemplateDTO** | [**AttributionReportTemplateDTO**](AttributionReportTemplateDTO.md) |  | 
-
-### Return type
-
-[**AttributionReportTemplateDTO**](AttributionReportTemplateDTO.md)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

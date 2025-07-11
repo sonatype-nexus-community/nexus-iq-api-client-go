@@ -5,9 +5,12 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddSourceControl**](SourceControlAPI.md#AddSourceControl) | **Post** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
+[**AddUserMappings**](SourceControlAPI.md#AddUserMappings) | **Post** /api/v2/sourceControl/automaticRoleAssignment/userMappings/{organizationId} | 
 [**AutomaticRoleAssignment**](SourceControlAPI.md#AutomaticRoleAssignment) | **Post** /api/v2/sourceControl/automaticRoleAssignment/{publicId} | 
 [**DeleteSourceControl**](SourceControlAPI.md#DeleteSourceControl) | **Delete** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
+[**DeleteUserMappings**](SourceControlAPI.md#DeleteUserMappings) | **Delete** /api/v2/sourceControl/automaticRoleAssignment/userMappings/{organizationId} | 
 [**GetSourceControl1**](SourceControlAPI.md#GetSourceControl1) | **Get** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
+[**GetUserMappingsByOwner**](SourceControlAPI.md#GetUserMappingsByOwner) | **Get** /api/v2/sourceControl/automaticRoleAssignment/userMappings/{ownerType}/{internalOwnerId} | 
 [**UpdateSourceControl**](SourceControlAPI.md#UpdateSourceControl) | **Put** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
 
 
@@ -87,9 +90,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## AddUserMappings
+
+> AddUserMappings(ctx, organizationId).SCMUserMappingsDTO(sCMUserMappingsDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	organizationId := "organizationId_example" // string | Enter the organizationId. Use `ROOT_ORGANIZATION_ID` for the root organization
+	sCMUserMappingsDTO := *sonatypeiq.NewSCMUserMappingsDTO() // SCMUserMappingsDTO | <ul><li>Specify the `role` in lowercase, without whitespaces.</li><li>`mappings` is an array of objects consisting of `from` and `to` fields.</li><li>Allowed values for the `from` field are `SCM_USERNAME`, `SCM_EMAIL`, `SCM_FULLNAME`, `GITLOG_EMAIL`, `GITLOG_FULLNAME`.</li><li>Allowed values for `to` field are `IQ_USERNAME`, `IQ_EMAIL`, `IQ_FULLNAME`.</li><li>Any combination of `from` and `to` fields can be used.</li></ul> (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SourceControlAPI.AddUserMappings(context.Background(), organizationId).SCMUserMappingsDTO(sCMUserMappingsDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.AddUserMappings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | Enter the organizationId. Use &#x60;ROOT_ORGANIZATION_ID&#x60; for the root organization | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddUserMappingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **sCMUserMappingsDTO** | [**SCMUserMappingsDTO**](SCMUserMappingsDTO.md) | &lt;ul&gt;&lt;li&gt;Specify the &#x60;role&#x60; in lowercase, without whitespaces.&lt;/li&gt;&lt;li&gt;&#x60;mappings&#x60; is an array of objects consisting of &#x60;from&#x60; and &#x60;to&#x60; fields.&lt;/li&gt;&lt;li&gt;Allowed values for the &#x60;from&#x60; field are &#x60;SCM_USERNAME&#x60;, &#x60;SCM_EMAIL&#x60;, &#x60;SCM_FULLNAME&#x60;, &#x60;GITLOG_EMAIL&#x60;, &#x60;GITLOG_FULLNAME&#x60;.&lt;/li&gt;&lt;li&gt;Allowed values for &#x60;to&#x60; field are &#x60;IQ_USERNAME&#x60;, &#x60;IQ_EMAIL&#x60;, &#x60;IQ_FULLNAME&#x60;.&lt;/li&gt;&lt;li&gt;Any combination of &#x60;from&#x60; and &#x60;to&#x60; fields can be used.&lt;/li&gt;&lt;/ul&gt; | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## AutomaticRoleAssignment
 
-> []string AutomaticRoleAssignment(ctx, publicId).Execute()
+> SCMUserMatchingResultDTO AutomaticRoleAssignment(ctx, publicId).SCMUserMappingsDTO(sCMUserMappingsDTO).Execute()
 
 
 
@@ -109,15 +182,16 @@ import (
 
 func main() {
 	publicId := "publicId_example" // string | Enter the public applicationId for automatic role assignment.
+	sCMUserMappingsDTO := *sonatypeiq.NewSCMUserMappingsDTO() // SCMUserMappingsDTO |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.SourceControlAPI.AutomaticRoleAssignment(context.Background(), publicId).Execute()
+	resp, r, err := apiClient.SourceControlAPI.AutomaticRoleAssignment(context.Background(), publicId).SCMUserMappingsDTO(sCMUserMappingsDTO).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.AutomaticRoleAssignment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AutomaticRoleAssignment`: []string
+	// response from `AutomaticRoleAssignment`: SCMUserMatchingResultDTO
 	fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.AutomaticRoleAssignment`: %v\n", resp)
 }
 ```
@@ -138,10 +212,11 @@ Other parameters are passed through a pointer to a apiAutomaticRoleAssignmentReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **sCMUserMappingsDTO** | [**SCMUserMappingsDTO**](SCMUserMappingsDTO.md) |  | 
 
 ### Return type
 
-**[]string**
+[**SCMUserMatchingResultDTO**](SCMUserMatchingResultDTO.md)
 
 ### Authorization
 
@@ -228,6 +303,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteUserMappings
+
+> DeleteUserMappings(ctx, organizationId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	organizationId := "organizationId_example" // string | Enter the organizationId.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SourceControlAPI.DeleteUserMappings(context.Background(), organizationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.DeleteUserMappings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | Enter the organizationId. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteUserMappingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetSourceControl1
 
 > ApiSourceControlDTO GetSourceControl1(ctx, ownerType, internalOwnerId).Execute()
@@ -286,6 +429,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApiSourceControlDTO**](ApiSourceControlDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserMappingsByOwner
+
+> SCMUserMappingsResponseDTO GetUserMappingsByOwner(ctx, ownerType, internalOwnerId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | Enter the value for ownerType.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the value for internal ownerId.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SourceControlAPI.GetUserMappingsByOwner(context.Background(), ownerType, internalOwnerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.GetUserMappingsByOwner``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUserMappingsByOwner`: SCMUserMappingsResponseDTO
+	fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.GetUserMappingsByOwner`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Enter the value for ownerType. | 
+**internalOwnerId** | **string** | Enter the value for internal ownerId. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUserMappingsByOwnerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**SCMUserMappingsResponseDTO**](SCMUserMappingsResponseDTO.md)
 
 ### Authorization
 

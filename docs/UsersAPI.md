@@ -18,6 +18,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -31,7 +33,7 @@ import (
 )
 
 func main() {
-	apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO |  (optional)
+	apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO | Specify the user details for the new user to be created. All fields except `realm` are required. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -54,7 +56,7 @@ Other parameters are passed through a pointer to a apiAddRequest struct via the 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiUserDTO** | [**ApiUserDTO**](ApiUserDTO.md) |  | 
+ **apiUserDTO** | [**ApiUserDTO**](ApiUserDTO.md) | Specify the user details for the new user to be created. All fields except &#x60;realm&#x60; are required. | 
 
 ### Return type
 
@@ -67,7 +69,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -77,6 +79,8 @@ Name | Type | Description  | Notes
 ## Delete1
 
 > Delete1(ctx, username).Realm(realm).Execute()
+
+
 
 
 
@@ -93,8 +97,8 @@ import (
 )
 
 func main() {
-	username := "username_example" // string | 
-	realm := "realm_example" // string |  (optional) (default to "Internal")
+	username := "username_example" // string | Enter the username to be deleted.
+	realm := "realm_example" // string | Enter the `realm`. Allowed values are `Internal`,`OAUTH2`, and `SAML`. (optional) (default to "Internal")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -112,7 +116,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**username** | **string** |  | 
+**username** | **string** | Enter the username to be deleted. | 
 
 ### Other Parameters
 
@@ -122,7 +126,7 @@ Other parameters are passed through a pointer to a apiDelete1Request struct via 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **realm** | **string** |  | [default to &quot;Internal&quot;]
+ **realm** | **string** | Enter the &#x60;realm&#x60;. Allowed values are &#x60;Internal&#x60;,&#x60;OAUTH2&#x60;, and &#x60;SAML&#x60;. | [default to &quot;Internal&quot;]
 
 ### Return type
 
@@ -135,7 +139,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -145,6 +149,8 @@ Name | Type | Description  | Notes
 ## Get1
 
 > ApiUserDTO Get1(ctx, username).Realm(realm).Execute()
+
+
 
 
 
@@ -161,8 +167,8 @@ import (
 )
 
 func main() {
-	username := "username_example" // string | 
-	realm := "realm_example" // string |  (optional) (default to "Internal")
+	username := "username_example" // string | Enter the username.
+	realm := "realm_example" // string | Enter the `realm`. Allowed values are `Internal`,`OAUTH2`, and `SAML`. (optional) (default to "Internal")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -182,7 +188,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**username** | **string** |  | 
+**username** | **string** | Enter the username. | 
 
 ### Other Parameters
 
@@ -192,7 +198,7 @@ Other parameters are passed through a pointer to a apiGet1Request struct via the
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **realm** | **string** |  | [default to &quot;Internal&quot;]
+ **realm** | **string** | Enter the &#x60;realm&#x60;. Allowed values are &#x60;Internal&#x60;,&#x60;OAUTH2&#x60;, and &#x60;SAML&#x60;. | [default to &quot;Internal&quot;]
 
 ### Return type
 
@@ -218,6 +224,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -231,7 +239,7 @@ import (
 )
 
 func main() {
-	realm := "realm_example" // string |  (optional) (default to "Internal")
+	realm := "realm_example" // string | Enter the `realm`. Allowed values are `Internal`,`OAUTH2`, and `SAML`. (optional) (default to "Internal")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -256,7 +264,7 @@ Other parameters are passed through a pointer to a apiGetAll2Request struct via 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **realm** | **string** |  | [default to &quot;Internal&quot;]
+ **realm** | **string** | Enter the &#x60;realm&#x60;. Allowed values are &#x60;Internal&#x60;,&#x60;OAUTH2&#x60;, and &#x60;SAML&#x60;. | [default to &quot;Internal&quot;]
 
 ### Return type
 
@@ -282,6 +290,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -295,8 +305,8 @@ import (
 )
 
 func main() {
-	username := "username_example" // string | 
-	apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO |  (optional)
+	username := "username_example" // string | Enter the username.
+	apiUserDTO := *sonatypeiq.NewApiUserDTO() // ApiUserDTO | Specify the user details to be updated. Any unspecified field will remain unchanged. Username, password, and realm cannot be updated. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -316,7 +326,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**username** | **string** |  | 
+**username** | **string** | Enter the username. | 
 
 ### Other Parameters
 
@@ -326,7 +336,7 @@ Other parameters are passed through a pointer to a apiUpdateRequest struct via t
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **apiUserDTO** | [**ApiUserDTO**](ApiUserDTO.md) |  | 
+ **apiUserDTO** | [**ApiUserDTO**](ApiUserDTO.md) | Specify the user details to be updated. Any unspecified field will remain unchanged. Username, password, and realm cannot be updated. | 
 
 ### Return type
 

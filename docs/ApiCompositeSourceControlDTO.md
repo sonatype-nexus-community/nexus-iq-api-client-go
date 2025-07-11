@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **BaseBranch** | Pointer to [**ApiCompositeValueDTOString**](ApiCompositeValueDTOString.md) |  | [optional] 
 **CommitStatusEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
+**ManualPullRequestsEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to [**ApiCompositeValueDTOString**](ApiCompositeValueDTOString.md) |  | [optional] 
 **PullRequestCommentingEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
@@ -112,6 +113,31 @@ SetId sets Id field to given value.
 `func (o *ApiCompositeSourceControlDTO) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetManualPullRequestsEnabled
+
+`func (o *ApiCompositeSourceControlDTO) GetManualPullRequestsEnabled() ApiCompositeValueDTOBoolean`
+
+GetManualPullRequestsEnabled returns the ManualPullRequestsEnabled field if non-nil, zero value otherwise.
+
+### GetManualPullRequestsEnabledOk
+
+`func (o *ApiCompositeSourceControlDTO) GetManualPullRequestsEnabledOk() (*ApiCompositeValueDTOBoolean, bool)`
+
+GetManualPullRequestsEnabledOk returns a tuple with the ManualPullRequestsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManualPullRequestsEnabled
+
+`func (o *ApiCompositeSourceControlDTO) SetManualPullRequestsEnabled(v ApiCompositeValueDTOBoolean)`
+
+SetManualPullRequestsEnabled sets ManualPullRequestsEnabled field to given value.
+
+### HasManualPullRequestsEnabled
+
+`func (o *ApiCompositeSourceControlDTO) HasManualPullRequestsEnabled() bool`
+
+HasManualPullRequestsEnabled returns a boolean if a field has been set.
 
 ### GetOwnerId
 

@@ -5,7 +5,9 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddAutoPolicyWaiver**](AutoPolicyWaiversAPI.md#AddAutoPolicyWaiver) | **Post** /api/v2/autoPolicyWaivers/{ownerType}/{ownerId} | 
+[**AddAutoPolicyWaivers**](AutoPolicyWaiversAPI.md#AddAutoPolicyWaivers) | **Post** /api/v2/autoPolicyWaivers/v2/{ownerType}/{ownerId} | 
 [**DeleteAutoPolicyWaiver**](AutoPolicyWaiversAPI.md#DeleteAutoPolicyWaiver) | **Delete** /api/v2/autoPolicyWaivers/{ownerType}/{ownerId}/{autoPolicyWaiverId} | 
+[**GetApplicableAutoWaivers**](AutoPolicyWaiversAPI.md#GetApplicableAutoWaivers) | **Get** /api/v2/autoPolicyWaivers/v2/{ownerType}/{ownerId}/applicableAutoWaivers | 
 [**GetAutoPolicyWaiver**](AutoPolicyWaiversAPI.md#GetAutoPolicyWaiver) | **Get** /api/v2/autoPolicyWaivers/{ownerType}/{ownerId}/{autoPolicyWaiverId} | 
 [**GetAutoPolicyWaiverStatus**](AutoPolicyWaiversAPI.md#GetAutoPolicyWaiverStatus) | **Get** /api/v2/autoPolicyWaivers/{ownerType}/{ownerId}/status | 
 [**GetAutoPolicyWaivers**](AutoPolicyWaiversAPI.md#GetAutoPolicyWaivers) | **Get** /api/v2/autoPolicyWaivers/{ownerType}/{ownerId} | 
@@ -36,7 +38,7 @@ import (
 func main() {
 	ownerType := "ownerType_example" // string | Enter the ownerType to specify the scope. The response will contain the details for waivers within the scope.
 	ownerId := "ownerId_example" // string | Enter the corresponding id for the ownerType specified above.
-	apiAutoPolicyWaiverDTO := *sonatypeiq.NewApiAutoPolicyWaiverDTO() // ApiAutoPolicyWaiverDTO | The request JSON can include the fields<ol><li>threatLevel</li><li>pathForward</li><li>reachable</li><li>durationInDays</li></ol>
+	apiAutoPolicyWaiverDTO := *sonatypeiq.NewApiAutoPolicyWaiverDTO() // ApiAutoPolicyWaiverDTO | The request JSON can include the fields<ol><li>threatLevel</li><li>pathForward</li><li>reachable</li></ol>
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -68,11 +70,86 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **apiAutoPolicyWaiverDTO** | [**ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md) | The request JSON can include the fields&lt;ol&gt;&lt;li&gt;threatLevel&lt;/li&gt;&lt;li&gt;pathForward&lt;/li&gt;&lt;li&gt;reachable&lt;/li&gt;&lt;li&gt;durationInDays&lt;/li&gt;&lt;/ol&gt; | 
+ **apiAutoPolicyWaiverDTO** | [**ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md) | The request JSON can include the fields&lt;ol&gt;&lt;li&gt;threatLevel&lt;/li&gt;&lt;li&gt;pathForward&lt;/li&gt;&lt;li&gt;reachable&lt;/li&gt;&lt;/ol&gt; | 
 
 ### Return type
 
 [**ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AddAutoPolicyWaivers
+
+> []ApiAutoPolicyWaiverDTO AddAutoPolicyWaivers(ctx, ownerType, ownerId).ApiAutoPolicyWaiverDTO(apiAutoPolicyWaiverDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | Enter the ownerType to specify the scope. The response will contain the details for waivers within the scope.
+	ownerId := "ownerId_example" // string | Enter the corresponding id for the ownerType specified above.
+	apiAutoPolicyWaiverDTO := []sonatypeiq.ApiAutoPolicyWaiverDTO{*sonatypeiq.NewApiAutoPolicyWaiverDTO()} // []ApiAutoPolicyWaiverDTO | The request JSON can be an array that include the fields<ol><li>threatLevel</li><li>pathForward</li><li>reachable</li></ol>
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.AutoPolicyWaiversAPI.AddAutoPolicyWaivers(context.Background(), ownerType, ownerId).ApiAutoPolicyWaiverDTO(apiAutoPolicyWaiverDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AutoPolicyWaiversAPI.AddAutoPolicyWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddAutoPolicyWaivers`: []ApiAutoPolicyWaiverDTO
+	fmt.Fprintf(os.Stdout, "Response from `AutoPolicyWaiversAPI.AddAutoPolicyWaivers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Enter the ownerType to specify the scope. The response will contain the details for waivers within the scope. | 
+**ownerId** | **string** | Enter the corresponding id for the ownerType specified above. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddAutoPolicyWaiversRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **apiAutoPolicyWaiverDTO** | [**[]ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md) | The request JSON can be an array that include the fields&lt;ol&gt;&lt;li&gt;threatLevel&lt;/li&gt;&lt;li&gt;pathForward&lt;/li&gt;&lt;li&gt;reachable&lt;/li&gt;&lt;/ol&gt; | 
+
+### Return type
+
+[**[]ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md)
 
 ### Authorization
 
@@ -156,6 +233,79 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetApplicableAutoWaivers
+
+> []ApiAutoPolicyWaiverStatusDTO GetApplicableAutoWaivers(ctx, ownerType, ownerId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | Enter the ownerType to specify the scope. The response will contain applicable auto policy waivers, if any, that are within the scope specified.
+	ownerId := "ownerId_example" // string | Enter the corresponding id for the ownerType.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.AutoPolicyWaiversAPI.GetApplicableAutoWaivers(context.Background(), ownerType, ownerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AutoPolicyWaiversAPI.GetApplicableAutoWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetApplicableAutoWaivers`: []ApiAutoPolicyWaiverStatusDTO
+	fmt.Fprintf(os.Stdout, "Response from `AutoPolicyWaiversAPI.GetApplicableAutoWaivers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Enter the ownerType to specify the scope. The response will contain applicable auto policy waivers, if any, that are within the scope specified. | 
+**ownerId** | **string** | Enter the corresponding id for the ownerType. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetApplicableAutoWaiversRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]ApiAutoPolicyWaiverStatusDTO**](ApiAutoPolicyWaiverStatusDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -408,7 +558,7 @@ func main() {
 	ownerType := "ownerType_example" // string | Enter the ownerType to specify the scope. The response will contain the details for waivers within the scope.
 	ownerId := "ownerId_example" // string | Enter the corresponding id for the ownerType specified above.
 	autoPolicyWaiverId := "autoPolicyWaiverId_example" // string | Enter the autoPolicyWaiverId to be updated.
-	apiAutoPolicyWaiverDTO := *sonatypeiq.NewApiAutoPolicyWaiverDTO() // ApiAutoPolicyWaiverDTO | The request JSON can include the fields<ol><li>autoPolicyWaiverId</li><li>threatLevel</li><li>pathForward</li><li>reachable</li><li>durationInDays</li></ol>
+	apiAutoPolicyWaiverDTO := *sonatypeiq.NewApiAutoPolicyWaiverDTO() // ApiAutoPolicyWaiverDTO | The request JSON can include the fields<ol><li>autoPolicyWaiverId</li><li>threatLevel</li><li>pathForward</li><li>reachable</li></ol>
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -442,7 +592,7 @@ Name | Type | Description  | Notes
 
 
 
- **apiAutoPolicyWaiverDTO** | [**ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md) | The request JSON can include the fields&lt;ol&gt;&lt;li&gt;autoPolicyWaiverId&lt;/li&gt;&lt;li&gt;threatLevel&lt;/li&gt;&lt;li&gt;pathForward&lt;/li&gt;&lt;li&gt;reachable&lt;/li&gt;&lt;li&gt;durationInDays&lt;/li&gt;&lt;/ol&gt; | 
+ **apiAutoPolicyWaiverDTO** | [**ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md) | The request JSON can include the fields&lt;ol&gt;&lt;li&gt;autoPolicyWaiverId&lt;/li&gt;&lt;li&gt;threatLevel&lt;/li&gt;&lt;li&gt;pathForward&lt;/li&gt;&lt;li&gt;reachable&lt;/li&gt;&lt;/ol&gt; | 
 
 ### Return type
 

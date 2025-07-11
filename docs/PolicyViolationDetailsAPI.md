@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetApplicableAutoWaiver**](PolicyViolationDetailsAPI.md#GetApplicableAutoWaiver) | **Get** /api/v2/policyViolations/{violationId}/applicableAutoWaiver | 
+[**GetApplicableWaiverRequests**](PolicyViolationDetailsAPI.md#GetApplicableWaiverRequests) | **Get** /api/v2/policyViolations/{violationId}/applicableWaiverRequests | 
 [**GetApplicableWaivers**](PolicyViolationDetailsAPI.md#GetApplicableWaivers) | **Get** /api/v2/policyViolations/{violationId}/applicableWaivers | 
 [**GetCrossStagePolicyViolationByConstituentId**](PolicyViolationDetailsAPI.md#GetCrossStagePolicyViolationByConstituentId) | **Get** /api/v2/policyViolations/crossStage | 
 [**GetCrossStagePolicyViolationById**](PolicyViolationDetailsAPI.md#GetCrossStagePolicyViolationById) | **Get** /api/v2/policyViolations/crossStage/{violationId} | 
@@ -70,6 +71,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApiAutoPolicyWaiverDTO**](ApiAutoPolicyWaiverDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetApplicableWaiverRequests
+
+> ApiPolicyWaiverRequestsApplicableToViolationDTO GetApplicableWaiverRequests(ctx, violationId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	violationId := "violationId_example" // string | Enter the policy violationId for which you want to obtain the applicable waiver requests.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.PolicyViolationDetailsAPI.GetApplicableWaiverRequests(context.Background(), violationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationDetailsAPI.GetApplicableWaiverRequests``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetApplicableWaiverRequests`: ApiPolicyWaiverRequestsApplicableToViolationDTO
+	fmt.Fprintf(os.Stdout, "Response from `PolicyViolationDetailsAPI.GetApplicableWaiverRequests`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**violationId** | **string** | Enter the policy violationId for which you want to obtain the applicable waiver requests. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetApplicableWaiverRequestsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ApiPolicyWaiverRequestsApplicableToViolationDTO**](ApiPolicyWaiverRequestsApplicableToViolationDTO.md)
 
 ### Authorization
 
@@ -293,7 +364,7 @@ Name | Type | Description  | Notes
 
 ## GetPolicyViolations
 
-> ApiApplicationViolationListDTOV2 GetPolicyViolations(ctx).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Execute()
+> ApiApplicationViolationListDTOV2 GetPolicyViolations(ctx).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).Execute()
 
 
 
@@ -315,10 +386,11 @@ func main() {
 	p := []string{"Inner_example"} // []string | Enter the policyIds to obtain the corresponding violation details
 	openTimeAfter := "openTimeAfter_example" // string | Enter the date (format YYYY-MM-DD) from which you want to retrieve the violation details (optional)
 	openTimeBefore := "openTimeBefore_example" // string | Enter the date (format YYYY-MM-DD) until which you want to retrieve the violation details (optional)
+	type_ := []string{"Type_example"} // []string | Set one or more policy violation type (active, legacy, waived) to include (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.PolicyViolationDetailsAPI.GetPolicyViolations(context.Background()).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Execute()
+	resp, r, err := apiClient.PolicyViolationDetailsAPI.GetPolicyViolations(context.Background()).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationDetailsAPI.GetPolicyViolations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -342,6 +414,7 @@ Name | Type | Description  | Notes
  **p** | **[]string** | Enter the policyIds to obtain the corresponding violation details | 
  **openTimeAfter** | **string** | Enter the date (format YYYY-MM-DD) from which you want to retrieve the violation details | 
  **openTimeBefore** | **string** | Enter the date (format YYYY-MM-DD) until which you want to retrieve the violation details | 
+ **type_** | **[]string** | Set one or more policy violation type (active, legacy, waived) to include | 
 
 ### Return type
 

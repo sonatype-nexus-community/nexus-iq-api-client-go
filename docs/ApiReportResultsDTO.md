@@ -17,7 +17,10 @@ Name | Type | Description | Notes
 **ReportHtmlUrl** | Pointer to **string** |  | [optional] 
 **ReportPdfUrl** | Pointer to **string** |  | [optional] 
 **ScanId** | Pointer to **string** |  | [optional] 
+**ScanTriggerInternal** | Pointer to **bool** |  | [optional] 
 **ScanTriggerType** | Pointer to **string** |  | [optional] 
+**ScanTriggerTypeDisplayName** | Pointer to **string** |  | [optional] 
+**ScannerVersion** | Pointer to **string** |  | [optional] 
 **Stage** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -364,6 +367,31 @@ SetScanId sets ScanId field to given value.
 
 HasScanId returns a boolean if a field has been set.
 
+### GetScanTriggerInternal
+
+`func (o *ApiReportResultsDTO) GetScanTriggerInternal() bool`
+
+GetScanTriggerInternal returns the ScanTriggerInternal field if non-nil, zero value otherwise.
+
+### GetScanTriggerInternalOk
+
+`func (o *ApiReportResultsDTO) GetScanTriggerInternalOk() (*bool, bool)`
+
+GetScanTriggerInternalOk returns a tuple with the ScanTriggerInternal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScanTriggerInternal
+
+`func (o *ApiReportResultsDTO) SetScanTriggerInternal(v bool)`
+
+SetScanTriggerInternal sets ScanTriggerInternal field to given value.
+
+### HasScanTriggerInternal
+
+`func (o *ApiReportResultsDTO) HasScanTriggerInternal() bool`
+
+HasScanTriggerInternal returns a boolean if a field has been set.
+
 ### GetScanTriggerType
 
 `func (o *ApiReportResultsDTO) GetScanTriggerType() string`
@@ -388,6 +416,56 @@ SetScanTriggerType sets ScanTriggerType field to given value.
 `func (o *ApiReportResultsDTO) HasScanTriggerType() bool`
 
 HasScanTriggerType returns a boolean if a field has been set.
+
+### GetScanTriggerTypeDisplayName
+
+`func (o *ApiReportResultsDTO) GetScanTriggerTypeDisplayName() string`
+
+GetScanTriggerTypeDisplayName returns the ScanTriggerTypeDisplayName field if non-nil, zero value otherwise.
+
+### GetScanTriggerTypeDisplayNameOk
+
+`func (o *ApiReportResultsDTO) GetScanTriggerTypeDisplayNameOk() (*string, bool)`
+
+GetScanTriggerTypeDisplayNameOk returns a tuple with the ScanTriggerTypeDisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScanTriggerTypeDisplayName
+
+`func (o *ApiReportResultsDTO) SetScanTriggerTypeDisplayName(v string)`
+
+SetScanTriggerTypeDisplayName sets ScanTriggerTypeDisplayName field to given value.
+
+### HasScanTriggerTypeDisplayName
+
+`func (o *ApiReportResultsDTO) HasScanTriggerTypeDisplayName() bool`
+
+HasScanTriggerTypeDisplayName returns a boolean if a field has been set.
+
+### GetScannerVersion
+
+`func (o *ApiReportResultsDTO) GetScannerVersion() string`
+
+GetScannerVersion returns the ScannerVersion field if non-nil, zero value otherwise.
+
+### GetScannerVersionOk
+
+`func (o *ApiReportResultsDTO) GetScannerVersionOk() (*string, bool)`
+
+GetScannerVersionOk returns a tuple with the ScannerVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScannerVersion
+
+`func (o *ApiReportResultsDTO) SetScannerVersion(v string)`
+
+SetScannerVersion sets ScannerVersion field to given value.
+
+### HasScannerVersion
+
+`func (o *ApiReportResultsDTO) HasScannerVersion() bool`
+
+HasScannerVersion returns a boolean if a field has been set.
 
 ### GetStage
 

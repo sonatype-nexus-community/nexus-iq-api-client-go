@@ -1,7 +1,7 @@
 /*
 Sonatype Lifecycle Public REST API
 
-Testing SpdxAPIService
+Testing SPDXAPIService
 
 */
 
@@ -17,33 +17,33 @@ import (
 	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
 )
 
-func Test_sonatypeiq_SpdxAPIService(t *testing.T) {
+func Test_sonatypeiq_SPDXAPIService(t *testing.T) {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test SpdxAPIService GetByScanId", func(t *testing.T) {
+	t.Run("Test SPDXAPIService GetByScanId", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var scanId string
 
-		httpRes, err := apiClient.SpdxAPI.GetByScanId(context.Background(), applicationId, scanId).Execute()
+		httpRes, err := apiClient.SPDXAPI.GetByScanId(context.Background(), applicationId, scanId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SpdxAPIService GetLatestForStage", func(t *testing.T) {
+	t.Run("Test SPDXAPIService GetLatestForStage", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var stageId string
 
-		httpRes, err := apiClient.SpdxAPI.GetLatestForStage(context.Background(), applicationId, stageId).Execute()
+		httpRes, err := apiClient.SPDXAPI.GetLatestForStage(context.Background(), applicationId, stageId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

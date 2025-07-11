@@ -20,6 +20,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -79,6 +81,8 @@ Other parameters are passed through a pointer to a apiCreateUserTokenRequest str
 
 
 
+
+
 ### Example
 
 ```go
@@ -123,7 +127,7 @@ Other parameters are passed through a pointer to a apiDeleteCurrentUserTokenRequ
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -133,6 +137,8 @@ Other parameters are passed through a pointer to a apiDeleteCurrentUserTokenRequ
 ## DeleteUserTokenByUserCode
 
 > DeleteUserTokenByUserCode(ctx, userCode).Execute()
+
+
 
 
 
@@ -149,7 +155,7 @@ import (
 )
 
 func main() {
-	userCode := "userCode_example" // string | 
+	userCode := "userCode_example" // string | Enter the `userCode` to be deleted.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -167,7 +173,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userCode** | **string** |  | 
+**userCode** | **string** | Enter the &#x60;userCode&#x60; to be deleted. | 
 
 ### Other Parameters
 
@@ -189,7 +195,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -199,6 +205,8 @@ Name | Type | Description  | Notes
 ## GetUserTokenByUsernameAndRealmId
 
 > ApiUserTokenDTO GetUserTokenByUsernameAndRealmId(ctx, username).Realm(realm).Execute()
+
+
 
 
 
@@ -215,8 +223,8 @@ import (
 )
 
 func main() {
-	username := "username_example" // string | 
-	realm := "realm_example" // string |  (optional) (default to "Internal")
+	username := "username_example" // string | Enter the username.
+	realm := "realm_example" // string | Enter the realmId. Possible values are `Internal`, `SAML` , `OAUTH2` , and `Crowd`. (optional) (default to "Internal")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -236,7 +244,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**username** | **string** |  | 
+**username** | **string** | Enter the username. | 
 
 ### Other Parameters
 
@@ -246,7 +254,7 @@ Other parameters are passed through a pointer to a apiGetUserTokenByUsernameAndR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **realm** | **string** |  | [default to &quot;Internal&quot;]
+ **realm** | **string** | Enter the realmId. Possible values are &#x60;Internal&#x60;, &#x60;SAML&#x60; , &#x60;OAUTH2&#x60; , and &#x60;Crowd&#x60;. | [default to &quot;Internal&quot;]
 
 ### Return type
 
@@ -269,6 +277,8 @@ Name | Type | Description  | Notes
 ## GetUserTokenExistsForCurrentUser
 
 > ApiUserTokenExistsDTO GetUserTokenExistsForCurrentUser(ctx).Execute()
+
+
 
 
 
@@ -331,6 +341,8 @@ Other parameters are passed through a pointer to a apiGetUserTokenExistsForCurre
 
 
 
+
+
 ### Example
 
 ```go
@@ -344,9 +356,9 @@ import (
 )
 
 func main() {
-	createdAfter := "createdAfter_example" // string |  (optional)
-	createdBefore := "createdBefore_example" // string |  (optional)
-	realm := "realm_example" // string |  (optional) (default to "Internal")
+	createdAfter := "createdAfter_example" // string | Enter the start date for the date range in `yyyy-mm-dd` format. (optional)
+	createdBefore := "createdBefore_example" // string | Enter the end date for the date range in `yyyy-mm-dd` format. (optional)
+	realm := "realm_example" // string | Enter the `realmId`. Possible values are `Internal`, `SAML` , `OAUTH2`, and `Crowd`. (optional) (default to "Internal")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -371,9 +383,9 @@ Other parameters are passed through a pointer to a apiGetUserTokensByCreatedBetw
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createdAfter** | **string** |  | 
- **createdBefore** | **string** |  | 
- **realm** | **string** |  | [default to &quot;Internal&quot;]
+ **createdAfter** | **string** | Enter the start date for the date range in &#x60;yyyy-mm-dd&#x60; format. | 
+ **createdBefore** | **string** | Enter the end date for the date range in &#x60;yyyy-mm-dd&#x60; format. | 
+ **realm** | **string** | Enter the &#x60;realmId&#x60;. Possible values are &#x60;Internal&#x60;, &#x60;SAML&#x60; , &#x60;OAUTH2&#x60;, and &#x60;Crowd&#x60;. | [default to &quot;Internal&quot;]
 
 ### Return type
 
@@ -396,6 +408,8 @@ Name | Type | Description  | Notes
 ## PurgeUserTokens
 
 > PurgeUserTokens(ctx).Execute()
+
+
 
 
 
@@ -443,7 +457,7 @@ Other parameters are passed through a pointer to a apiPurgeUserTokensRequest str
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

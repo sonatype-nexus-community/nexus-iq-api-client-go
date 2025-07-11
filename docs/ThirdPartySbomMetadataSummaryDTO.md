@@ -8,9 +8,11 @@ Name | Type | Description | Notes
 **Critical** | Pointer to **int32** |  | [optional] 
 **High** | Pointer to **int32** |  | [optional] 
 **ImportDate** | Pointer to **time.Time** |  | [optional] 
+**IsValid** | Pointer to **bool** |  | [optional] 
 **Low** | Pointer to **int32** |  | [optional] 
 **Medium** | Pointer to **int32** |  | [optional] 
 **None** | Pointer to **int32** |  | [optional] 
+**ReleaseStatusPercentage** | Pointer to **float64** |  | [optional] 
 **Spec** | Pointer to **string** |  | [optional] 
 **SpecVersion** | Pointer to **string** |  | [optional] 
 
@@ -133,6 +135,31 @@ SetImportDate sets ImportDate field to given value.
 
 HasImportDate returns a boolean if a field has been set.
 
+### GetIsValid
+
+`func (o *ThirdPartySbomMetadataSummaryDTO) GetIsValid() bool`
+
+GetIsValid returns the IsValid field if non-nil, zero value otherwise.
+
+### GetIsValidOk
+
+`func (o *ThirdPartySbomMetadataSummaryDTO) GetIsValidOk() (*bool, bool)`
+
+GetIsValidOk returns a tuple with the IsValid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsValid
+
+`func (o *ThirdPartySbomMetadataSummaryDTO) SetIsValid(v bool)`
+
+SetIsValid sets IsValid field to given value.
+
+### HasIsValid
+
+`func (o *ThirdPartySbomMetadataSummaryDTO) HasIsValid() bool`
+
+HasIsValid returns a boolean if a field has been set.
+
 ### GetLow
 
 `func (o *ThirdPartySbomMetadataSummaryDTO) GetLow() int32`
@@ -207,6 +234,31 @@ SetNone sets None field to given value.
 `func (o *ThirdPartySbomMetadataSummaryDTO) HasNone() bool`
 
 HasNone returns a boolean if a field has been set.
+
+### GetReleaseStatusPercentage
+
+`func (o *ThirdPartySbomMetadataSummaryDTO) GetReleaseStatusPercentage() float64`
+
+GetReleaseStatusPercentage returns the ReleaseStatusPercentage field if non-nil, zero value otherwise.
+
+### GetReleaseStatusPercentageOk
+
+`func (o *ThirdPartySbomMetadataSummaryDTO) GetReleaseStatusPercentageOk() (*float64, bool)`
+
+GetReleaseStatusPercentageOk returns a tuple with the ReleaseStatusPercentage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseStatusPercentage
+
+`func (o *ThirdPartySbomMetadataSummaryDTO) SetReleaseStatusPercentage(v float64)`
+
+SetReleaseStatusPercentage sets ReleaseStatusPercentage field to given value.
+
+### HasReleaseStatusPercentage
+
+`func (o *ThirdPartySbomMetadataSummaryDTO) HasReleaseStatusPercentage() bool`
+
+HasReleaseStatusPercentage returns a boolean if a field has been set.
 
 ### GetSpec
 

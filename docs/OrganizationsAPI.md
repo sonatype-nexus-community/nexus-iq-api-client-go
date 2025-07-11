@@ -14,7 +14,9 @@ Method | HTTP request | Description
 
 ## AddOrganization
 
-> ApiOrganizationDTO AddOrganization(ctx).ApiOrganizationDTO(apiOrganizationDTO).Execute()
+> AddOrganization(ctx).ApiOrganizationDTO(apiOrganizationDTO).Execute()
+
+
 
 
 
@@ -31,17 +33,15 @@ import (
 )
 
 func main() {
-	apiOrganizationDTO := *sonatypeiq.NewApiOrganizationDTO() // ApiOrganizationDTO |  (optional)
+	apiOrganizationDTO := *sonatypeiq.NewApiOrganizationDTO() // ApiOrganizationDTO | The request JSON should include the name of the organization (should be unique), name of the parent organization and tags containing additional organization details. If the parent organization is not specified, this organization will be created under the root organization. Tags represent identifying characteristics of an application. They are created at the organization level and then applied to applications under the organization. The tags can be used to decide which applications will be evaluated against a selected policy. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrganizationsAPI.AddOrganization(context.Background()).ApiOrganizationDTO(apiOrganizationDTO).Execute()
+	r, err := apiClient.OrganizationsAPI.AddOrganization(context.Background()).ApiOrganizationDTO(apiOrganizationDTO).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.AddOrganization``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `AddOrganization`: ApiOrganizationDTO
-	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.AddOrganization`: %v\n", resp)
 }
 ```
 
@@ -56,11 +56,11 @@ Other parameters are passed through a pointer to a apiAddOrganizationRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiOrganizationDTO** | [**ApiOrganizationDTO**](ApiOrganizationDTO.md) |  | 
+ **apiOrganizationDTO** | [**ApiOrganizationDTO**](ApiOrganizationDTO.md) | The request JSON should include the name of the organization (should be unique), name of the parent organization and tags containing additional organization details. If the parent organization is not specified, this organization will be created under the root organization. Tags represent identifying characteristics of an application. They are created at the organization level and then applied to applications under the organization. The tags can be used to decide which applications will be evaluated against a selected policy. | 
 
 ### Return type
 
-[**ApiOrganizationDTO**](ApiOrganizationDTO.md)
+ (empty response body)
 
 ### Authorization
 
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -79,6 +79,8 @@ Name | Type | Description  | Notes
 ## DeleteOrganization
 
 > DeleteOrganization(ctx, organizationId).Execute()
+
+
 
 
 
@@ -95,7 +97,7 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | Enter the organization id to be deleted.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -113,7 +115,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | Enter the organization id to be deleted. | 
 
 ### Other Parameters
 
@@ -135,7 +137,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -145,6 +147,8 @@ Name | Type | Description  | Notes
 ## GetOrganization
 
 > ApiOrganizationDTO GetOrganization(ctx, organizationId).Execute()
+
+
 
 
 
@@ -161,7 +165,7 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
+	organizationId := "organizationId_example" // string | Enter the organization id.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -181,7 +185,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
+**organizationId** | **string** | Enter the organization id. | 
 
 ### Other Parameters
 
@@ -216,6 +220,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -229,7 +235,7 @@ import (
 )
 
 func main() {
-	organizationName := []string{"Inner_example"} // []string |  (optional)
+	organizationName := []string{"Inner_example"} // []string | Enter the organization names. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -254,7 +260,7 @@ Other parameters are passed through a pointer to a apiGetOrganizationsRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **organizationName** | **[]string** |  | 
+ **organizationName** | **[]string** | Enter the organization names. | 
 
 ### Return type
 
@@ -280,6 +286,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -293,8 +301,8 @@ import (
 )
 
 func main() {
-	organizationId := "organizationId_example" // string | 
-	destinationId := "destinationId_example" // string | 
+	organizationId := "organizationId_example" // string | Enter the id for the organization to be moved under the new parent.
+	destinationId := "destinationId_example" // string | Enter the id for the new parent organization.
 	failEarlyOnError := true // bool |  (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
@@ -313,8 +321,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationId** | **string** |  | 
-**destinationId** | **string** |  | 
+**organizationId** | **string** | Enter the id for the organization to be moved under the new parent. | 
+**destinationId** | **string** | Enter the id for the new parent organization. | 
 
 ### Other Parameters
 
@@ -338,7 +346,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

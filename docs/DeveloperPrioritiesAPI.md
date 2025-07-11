@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetPriorities
 
-> DevelopmentPrioritizationResults GetPriorities(ctx, applicationId, scanId).IncludeRemediation(includeRemediation).Page(page).PageSize(pageSize).OptionalComponentNameFilter(optionalComponentNameFilter).Execute()
+> DevelopmentPrioritizationResults GetPriorities(ctx, applicationId, scanId).IncludeRemediation(includeRemediation).Page(page).PageSize(pageSize).ComponentNameFilter(componentNameFilter).FilterOnPolicyActions(filterOnPolicyActions).Execute()
 
 
 
@@ -30,16 +30,17 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
-	scanId := "scanId_example" // string | 
-	includeRemediation := true // bool |  (optional) (default to false)
-	page := int32(56) // int32 |  (optional) (default to 1)
-	pageSize := int32(56) // int32 |  (optional) (default to 10)
-	optionalComponentNameFilter := "optionalComponentNameFilter_example" // string |  (optional)
+	applicationId := "applicationId_example" // string | Enter the applicationId.
+	scanId := "scanId_example" // string | Enter the scanId.
+	includeRemediation := true // bool | Whether to include remediation type and version for the component or not (optional) (default to false)
+	page := int32(56) // int32 | Current page number. (optional) (default to 1)
+	pageSize := int32(56) // int32 | Enter the no. of results that should be visible per page. (optional) (default to 10)
+	componentNameFilter := "componentNameFilter_example" // string | Component name to filter by (optional)
+	filterOnPolicyActions := true // bool | Whether to enable Fail/Warn policy action filter or not (optional) (default to true)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.DeveloperPrioritiesAPI.GetPriorities(context.Background(), applicationId, scanId).IncludeRemediation(includeRemediation).Page(page).PageSize(pageSize).OptionalComponentNameFilter(optionalComponentNameFilter).Execute()
+	resp, r, err := apiClient.DeveloperPrioritiesAPI.GetPriorities(context.Background(), applicationId, scanId).IncludeRemediation(includeRemediation).Page(page).PageSize(pageSize).ComponentNameFilter(componentNameFilter).FilterOnPolicyActions(filterOnPolicyActions).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DeveloperPrioritiesAPI.GetPriorities``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -55,8 +56,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
-**scanId** | **string** |  | 
+**applicationId** | **string** | Enter the applicationId. | 
+**scanId** | **string** | Enter the scanId. | 
 
 ### Other Parameters
 
@@ -67,10 +68,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **includeRemediation** | **bool** |  | [default to false]
- **page** | **int32** |  | [default to 1]
- **pageSize** | **int32** |  | [default to 10]
- **optionalComponentNameFilter** | **string** |  | 
+ **includeRemediation** | **bool** | Whether to include remediation type and version for the component or not | [default to false]
+ **page** | **int32** | Current page number. | [default to 1]
+ **pageSize** | **int32** | Enter the no. of results that should be visible per page. | [default to 10]
+ **componentNameFilter** | **string** | Component name to filter by | 
+ **filterOnPolicyActions** | **bool** | Whether to enable Fail/Warn policy action filter or not | [default to true]
 
 ### Return type
 
@@ -111,8 +113,8 @@ import (
 )
 
 func main() {
-	applicationId := "applicationId_example" // string | 
-	scanId := "scanId_example" // string | 
+	applicationId := "applicationId_example" // string | Enter the applicationId.
+	scanId := "scanId_example" // string | Enter the scanId.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -130,8 +132,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**applicationId** | **string** |  | 
-**scanId** | **string** |  | 
+**applicationId** | **string** | Enter the applicationId. | 
+**scanId** | **string** | Enter the scanId. | 
 
 ### Other Parameters
 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClaimerId** | Pointer to **string** |  | [optional] 
+**ClaimerName** | Pointer to **string** |  | [optional] 
 **Comment** | Pointer to **string** |  | [optional] 
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
 **CreateTime** | Pointer to **time.Time** |  | [optional] 
@@ -28,6 +30,56 @@ will change when the set of required properties is changed
 NewApiHashComponentIdentifierDTOWithDefaults instantiates a new ApiHashComponentIdentifierDTO object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClaimerId
+
+`func (o *ApiHashComponentIdentifierDTO) GetClaimerId() string`
+
+GetClaimerId returns the ClaimerId field if non-nil, zero value otherwise.
+
+### GetClaimerIdOk
+
+`func (o *ApiHashComponentIdentifierDTO) GetClaimerIdOk() (*string, bool)`
+
+GetClaimerIdOk returns a tuple with the ClaimerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClaimerId
+
+`func (o *ApiHashComponentIdentifierDTO) SetClaimerId(v string)`
+
+SetClaimerId sets ClaimerId field to given value.
+
+### HasClaimerId
+
+`func (o *ApiHashComponentIdentifierDTO) HasClaimerId() bool`
+
+HasClaimerId returns a boolean if a field has been set.
+
+### GetClaimerName
+
+`func (o *ApiHashComponentIdentifierDTO) GetClaimerName() string`
+
+GetClaimerName returns the ClaimerName field if non-nil, zero value otherwise.
+
+### GetClaimerNameOk
+
+`func (o *ApiHashComponentIdentifierDTO) GetClaimerNameOk() (*string, bool)`
+
+GetClaimerNameOk returns a tuple with the ClaimerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClaimerName
+
+`func (o *ApiHashComponentIdentifierDTO) SetClaimerName(v string)`
+
+SetClaimerName sets ClaimerName field to given value.
+
+### HasClaimerName
+
+`func (o *ApiHashComponentIdentifierDTO) HasClaimerName() bool`
+
+HasClaimerName returns a boolean if a field has been set.
 
 ### GetComment
 

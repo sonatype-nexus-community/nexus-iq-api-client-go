@@ -6,6 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Component** | Pointer to [**ApiComponentDTOV2**](ApiComponentDTOV2.md) |  | [optional] 
 **ConstraintViolations** | Pointer to [**[]ApiConstraintViolationDTO**](ApiConstraintViolationDTO.md) |  | [optional] 
+**FixTime** | Pointer to **time.Time** |  | [optional] 
+**IsLegacy** | Pointer to **bool** |  | [optional] 
+**IsWaived** | Pointer to **bool** |  | [optional] 
+**LegacyViolationTime** | Pointer to **time.Time** |  | [optional] 
 **OpenTime** | Pointer to **time.Time** |  | [optional] 
 **PolicyId** | Pointer to **string** |  | [optional] 
 **PolicyName** | Pointer to **string** |  | [optional] 
@@ -14,6 +18,7 @@ Name | Type | Description | Notes
 **ReportUrl** | Pointer to **string** |  | [optional] 
 **StageId** | Pointer to **string** |  | [optional] 
 **ThreatLevel** | Pointer to **int32** |  | [optional] 
+**WaiveTime** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
@@ -83,6 +88,106 @@ SetConstraintViolations sets ConstraintViolations field to given value.
 `func (o *ApiEnhancedPolicyViolationDTOV2) HasConstraintViolations() bool`
 
 HasConstraintViolations returns a boolean if a field has been set.
+
+### GetFixTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetFixTime() time.Time`
+
+GetFixTime returns the FixTime field if non-nil, zero value otherwise.
+
+### GetFixTimeOk
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetFixTimeOk() (*time.Time, bool)`
+
+GetFixTimeOk returns a tuple with the FixTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFixTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) SetFixTime(v time.Time)`
+
+SetFixTime sets FixTime field to given value.
+
+### HasFixTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) HasFixTime() bool`
+
+HasFixTime returns a boolean if a field has been set.
+
+### GetIsLegacy
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetIsLegacy() bool`
+
+GetIsLegacy returns the IsLegacy field if non-nil, zero value otherwise.
+
+### GetIsLegacyOk
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetIsLegacyOk() (*bool, bool)`
+
+GetIsLegacyOk returns a tuple with the IsLegacy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsLegacy
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) SetIsLegacy(v bool)`
+
+SetIsLegacy sets IsLegacy field to given value.
+
+### HasIsLegacy
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) HasIsLegacy() bool`
+
+HasIsLegacy returns a boolean if a field has been set.
+
+### GetIsWaived
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetIsWaived() bool`
+
+GetIsWaived returns the IsWaived field if non-nil, zero value otherwise.
+
+### GetIsWaivedOk
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetIsWaivedOk() (*bool, bool)`
+
+GetIsWaivedOk returns a tuple with the IsWaived field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsWaived
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) SetIsWaived(v bool)`
+
+SetIsWaived sets IsWaived field to given value.
+
+### HasIsWaived
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) HasIsWaived() bool`
+
+HasIsWaived returns a boolean if a field has been set.
+
+### GetLegacyViolationTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetLegacyViolationTime() time.Time`
+
+GetLegacyViolationTime returns the LegacyViolationTime field if non-nil, zero value otherwise.
+
+### GetLegacyViolationTimeOk
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetLegacyViolationTimeOk() (*time.Time, bool)`
+
+GetLegacyViolationTimeOk returns a tuple with the LegacyViolationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLegacyViolationTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) SetLegacyViolationTime(v time.Time)`
+
+SetLegacyViolationTime sets LegacyViolationTime field to given value.
+
+### HasLegacyViolationTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) HasLegacyViolationTime() bool`
+
+HasLegacyViolationTime returns a boolean if a field has been set.
 
 ### GetOpenTime
 
@@ -283,6 +388,31 @@ SetThreatLevel sets ThreatLevel field to given value.
 `func (o *ApiEnhancedPolicyViolationDTOV2) HasThreatLevel() bool`
 
 HasThreatLevel returns a boolean if a field has been set.
+
+### GetWaiveTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetWaiveTime() time.Time`
+
+GetWaiveTime returns the WaiveTime field if non-nil, zero value otherwise.
+
+### GetWaiveTimeOk
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetWaiveTimeOk() (*time.Time, bool)`
+
+GetWaiveTimeOk returns a tuple with the WaiveTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWaiveTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) SetWaiveTime(v time.Time)`
+
+SetWaiveTime sets WaiveTime field to given value.
+
+### HasWaiveTime
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) HasWaiveTime() bool`
+
+HasWaiveTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

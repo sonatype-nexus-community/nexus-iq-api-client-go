@@ -17,6 +17,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -61,7 +63,7 @@ Other parameters are passed through a pointer to a apiDeleteCrowdConfigurationRe
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -71,6 +73,8 @@ Other parameters are passed through a pointer to a apiDeleteCrowdConfigurationRe
 ## GetCrowdConfiguration
 
 > ApiCrowdConfigurationDTO GetCrowdConfiguration(ctx).Execute()
+
+
 
 
 
@@ -133,6 +137,8 @@ Other parameters are passed through a pointer to a apiGetCrowdConfigurationReque
 
 
 
+
+
 ### Example
 
 ```go
@@ -146,7 +152,7 @@ import (
 )
 
 func main() {
-	apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
+	apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO | The request JSON should include the `serverUrl`, `applicationName`, and the `applicationPassword` which will be used for authentication against the Atlassian Crowd Server.  If updating the `serverUrl`, the `applicationPassword` field is required. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -169,7 +175,7 @@ Other parameters are passed through a pointer to a apiInsertOrUpdateCrowdConfigu
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiCrowdConfigurationDTO** | [**ApiCrowdConfigurationDTO**](ApiCrowdConfigurationDTO.md) |  | 
+ **apiCrowdConfigurationDTO** | [**ApiCrowdConfigurationDTO**](ApiCrowdConfigurationDTO.md) | The request JSON should include the &#x60;serverUrl&#x60;, &#x60;applicationName&#x60;, and the &#x60;applicationPassword&#x60; which will be used for authentication against the Atlassian Crowd Server.  If updating the &#x60;serverUrl&#x60;, the &#x60;applicationPassword&#x60; field is required. | 
 
 ### Return type
 
@@ -182,7 +188,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -192,6 +198,8 @@ Name | Type | Description  | Notes
 ## TestCrowdConfiguration
 
 > ApiStatusDTO TestCrowdConfiguration(ctx).ApiCrowdConfigurationDTO(apiCrowdConfigurationDTO).Execute()
+
+
 
 
 
@@ -208,7 +216,7 @@ import (
 )
 
 func main() {
-	apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO |  (optional)
+	apiCrowdConfigurationDTO := *sonatypeiq.NewApiCrowdConfigurationDTO() // ApiCrowdConfigurationDTO | To test an existing configuration, the request body is not required.  To test a new configuration, provide the `serverURl`, `applicationName`, and `applicationPassword` for the configuration. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -233,7 +241,7 @@ Other parameters are passed through a pointer to a apiTestCrowdConfigurationRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiCrowdConfigurationDTO** | [**ApiCrowdConfigurationDTO**](ApiCrowdConfigurationDTO.md) |  | 
+ **apiCrowdConfigurationDTO** | [**ApiCrowdConfigurationDTO**](ApiCrowdConfigurationDTO.md) | To test an existing configuration, the request body is not required.  To test a new configuration, provide the &#x60;serverURl&#x60;, &#x60;applicationName&#x60;, and &#x60;applicationPassword&#x60; for the configuration. | 
 
 ### Return type
 
