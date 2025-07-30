@@ -262,6 +262,8 @@ Class | Method | HTTP request | Description
 *PolicyWaiversAPI* | [**GetTransitivePolicyWaiversByAppScanComponent**](docs/PolicyWaiversAPI.md#gettransitivepolicywaiversbyappscancomponent) | **Get** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/{scanId} | 
 *PolicyWaiversAPI* | [**RequestPolicyWaiver**](docs/PolicyWaiversAPI.md#requestpolicywaiver) | **Post** /api/v2/policyWaivers/waiverRequests/{policyViolationId} | 
 *PolicyWaiversAPI* | [**UpdatePolicyWaiver**](docs/PolicyWaiversAPI.md#updatepolicywaiver) | **Put** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
+*ProductLicenseAPI* | [**InstallLicense**](docs/ProductLicenseAPI.md#installlicense) | **Post** /api/v2/product/license | 
+*ProductLicenseAPI* | [**UninstallLicense**](docs/ProductLicenseAPI.md#uninstalllicense) | **Delete** /api/v2/product/license | 
 *ReportsAPI* | [**GetAll1**](docs/ReportsAPI.md#getall1) | **Get** /api/v2/reports/applications | 
 *ReportsAPI* | [**GetByApplicationId**](docs/ReportsAPI.md#getbyapplicationid) | **Get** /api/v2/reports/applications/{applicationId} | 
 *ReportsAPI* | [**GetComponentsInQuarantine**](docs/ReportsAPI.md#getcomponentsinquarantine) | **Get** /api/v2/reports/components/quarantined | 
@@ -529,6 +531,7 @@ Class | Method | HTTP request | Description
  - [GroupingByDTO](docs/GroupingByDTO.md)
  - [ImportSbomRequest](docs/ImportSbomRequest.md)
  - [InnerSourceData](docs/InnerSourceData.md)
+ - [InstallLicenseRequest](docs/InstallLicenseRequest.md)
  - [KevData](docs/KevData.md)
  - [LabelsByOwner](docs/LabelsByOwner.md)
  - [LegalSourceLinkDTO](docs/LegalSourceLinkDTO.md)

@@ -129,6 +129,8 @@ type APIClient struct {
 
 	PolicyWaiversAPI *PolicyWaiversAPIService
 
+	ProductLicenseAPI *ProductLicenseAPIService
+
 	ReportsAPI *ReportsAPIService
 
 	RepositoriesAPI *RepositoriesAPIService
@@ -214,6 +216,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PolicyWaiverReasonsAPI = (*PolicyWaiverReasonsAPIService)(&c.common)
 	c.PolicyWaiverRequestsAPI = (*PolicyWaiverRequestsAPIService)(&c.common)
 	c.PolicyWaiversAPI = (*PolicyWaiversAPIService)(&c.common)
+	c.ProductLicenseAPI = (*ProductLicenseAPIService)(&c.common)
 	c.ReportsAPI = (*ReportsAPIService)(&c.common)
 	c.RepositoriesAPI = (*RepositoriesAPIService)(&c.common)
 	c.RoleMembershipsAPI = (*RoleMembershipsAPIService)(&c.common)

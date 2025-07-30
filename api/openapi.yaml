@@ -6627,6 +6627,34 @@ paths:
           description: The policy waiver was updated successfully.
       tags:
       - Policy Waivers
+  /api/v2/product/license:
+    delete:
+      description: |-
+        Use this method to uninstall a product license.
+
+        Permissions required: Edit System Configuration and Users
+      operationId: uninstallLicense
+      responses:
+        "204":
+          description: License uninstalled successfully
+      tags:
+      - Product License
+    post:
+      description: |-
+        Use this method to install a product license
+
+        Permissions required: Edit System Configuration and Users
+      operationId: installLicense
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/installLicense_request'
+      responses:
+        "200":
+          description: License installed successfully
+      tags:
+      - Product License
   /api/v2/reports/applications:
     get:
       description: "Use this method to view all application reports for applications\
@@ -31255,6 +31283,13 @@ components:
           $ref: '#/components/schemas/ApiComponentRemediationValueDTO'
       required:
       - remediation
+      type: object
+    installLicense_request:
+      properties:
+        file:
+          description: Your product license file
+          format: binary
+          type: string
       type: object
     importSbom_request:
       properties:
