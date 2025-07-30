@@ -20,7 +20,7 @@ var _ MappedNullable = &ApiJiraConfigurationDTO{}
 // ApiJiraConfigurationDTO struct for ApiJiraConfigurationDTO
 type ApiJiraConfigurationDTO struct {
 	CustomFields map[string]map[string]interface{} `json:"customFields,omitempty"`
-	Password []string `json:"password,omitempty"`
+	Password *string `json:"password,omitempty"`
 	Url *string `json:"url,omitempty"`
 	Username *string `json:"username,omitempty"`
 }
@@ -75,17 +75,17 @@ func (o *ApiJiraConfigurationDTO) SetCustomFields(v map[string]map[string]interf
 }
 
 // GetPassword returns the Password field value if set, zero value otherwise.
-func (o *ApiJiraConfigurationDTO) GetPassword() []string {
+func (o *ApiJiraConfigurationDTO) GetPassword() string {
 	if o == nil || IsNil(o.Password) {
-		var ret []string
+		var ret string
 		return ret
 	}
-	return o.Password
+	return *o.Password
 }
 
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ApiJiraConfigurationDTO) GetPasswordOk() ([]string, bool) {
+func (o *ApiJiraConfigurationDTO) GetPasswordOk() (*string, bool) {
 	if o == nil || IsNil(o.Password) {
 		return nil, false
 	}
@@ -101,9 +101,9 @@ func (o *ApiJiraConfigurationDTO) HasPassword() bool {
 	return false
 }
 
-// SetPassword gets a reference to the given []string and assigns it to the Password field.
-func (o *ApiJiraConfigurationDTO) SetPassword(v []string) {
-	o.Password = v
+// SetPassword gets a reference to the given string and assigns it to the Password field.
+func (o *ApiJiraConfigurationDTO) SetPassword(v string) {
+	o.Password = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CustomFields** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
-**Password** | Pointer to **[]string** |  | [optional] 
+**Password** | Pointer to **string** |  | [optional] 
 **Url** | Pointer to **string** |  | [optional] 
 **Username** | Pointer to **string** |  | [optional] 
 
@@ -55,20 +55,20 @@ HasCustomFields returns a boolean if a field has been set.
 
 ### GetPassword
 
-`func (o *ApiJiraConfigurationDTO) GetPassword() []string`
+`func (o *ApiJiraConfigurationDTO) GetPassword() string`
 
 GetPassword returns the Password field if non-nil, zero value otherwise.
 
 ### GetPasswordOk
 
-`func (o *ApiJiraConfigurationDTO) GetPasswordOk() (*[]string, bool)`
+`func (o *ApiJiraConfigurationDTO) GetPasswordOk() (*string, bool)`
 
 GetPasswordOk returns a tuple with the Password field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPassword
 
-`func (o *ApiJiraConfigurationDTO) SetPassword(v []string)`
+`func (o *ApiJiraConfigurationDTO) SetPassword(v string)`
 
 SetPassword sets Password field to given value.
 

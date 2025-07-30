@@ -18422,9 +18422,7 @@ components:
       type: object
     ApiJiraConfigurationDTO:
       example:
-        password:
-        - password
-        - password
+        password: password
         customFields:
           key: "{}"
         url: url
@@ -18435,9 +18433,7 @@ components:
             type: object
           type: object
         password:
-          items:
-            type: string
-          type: array
+          type: string
         url:
           type: string
         username:
