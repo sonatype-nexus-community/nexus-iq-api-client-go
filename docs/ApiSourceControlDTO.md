@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **EnablePullRequests** | Pointer to **bool** |  | [optional] 
 **EnableStatusChecks** | Pointer to **bool** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
+**InnerSourceAutomatedUpdatesEnabled** | Pointer to **bool** |  | [optional] 
 **ManualPullRequestsEnabled** | Pointer to **bool** |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
@@ -165,6 +166,31 @@ SetId sets Id field to given value.
 `func (o *ApiSourceControlDTO) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetInnerSourceAutomatedUpdatesEnabled
+
+`func (o *ApiSourceControlDTO) GetInnerSourceAutomatedUpdatesEnabled() bool`
+
+GetInnerSourceAutomatedUpdatesEnabled returns the InnerSourceAutomatedUpdatesEnabled field if non-nil, zero value otherwise.
+
+### GetInnerSourceAutomatedUpdatesEnabledOk
+
+`func (o *ApiSourceControlDTO) GetInnerSourceAutomatedUpdatesEnabledOk() (*bool, bool)`
+
+GetInnerSourceAutomatedUpdatesEnabledOk returns a tuple with the InnerSourceAutomatedUpdatesEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInnerSourceAutomatedUpdatesEnabled
+
+`func (o *ApiSourceControlDTO) SetInnerSourceAutomatedUpdatesEnabled(v bool)`
+
+SetInnerSourceAutomatedUpdatesEnabled sets InnerSourceAutomatedUpdatesEnabled field to given value.
+
+### HasInnerSourceAutomatedUpdatesEnabled
+
+`func (o *ApiSourceControlDTO) HasInnerSourceAutomatedUpdatesEnabled() bool`
+
+HasInnerSourceAutomatedUpdatesEnabled returns a boolean if a field has been set.
 
 ### GetManualPullRequestsEnabled
 

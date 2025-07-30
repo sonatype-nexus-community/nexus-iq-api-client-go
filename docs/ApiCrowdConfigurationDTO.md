@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApplicationName** | Pointer to **string** |  | [optional] 
-**ApplicationPassword** | Pointer to **[]string** |  | [optional] 
+**ApplicationPassword** | Pointer to **string** |  | [optional] 
 **ServerUrl** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -54,20 +54,20 @@ HasApplicationName returns a boolean if a field has been set.
 
 ### GetApplicationPassword
 
-`func (o *ApiCrowdConfigurationDTO) GetApplicationPassword() []string`
+`func (o *ApiCrowdConfigurationDTO) GetApplicationPassword() string`
 
 GetApplicationPassword returns the ApplicationPassword field if non-nil, zero value otherwise.
 
 ### GetApplicationPasswordOk
 
-`func (o *ApiCrowdConfigurationDTO) GetApplicationPasswordOk() (*[]string, bool)`
+`func (o *ApiCrowdConfigurationDTO) GetApplicationPasswordOk() (*string, bool)`
 
 GetApplicationPasswordOk returns a tuple with the ApplicationPassword field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApplicationPassword
 
-`func (o *ApiCrowdConfigurationDTO) SetApplicationPassword(v []string)`
+`func (o *ApiCrowdConfigurationDTO) SetApplicationPassword(v string)`
 
 SetApplicationPassword sets ApplicationPassword field to given value.
 

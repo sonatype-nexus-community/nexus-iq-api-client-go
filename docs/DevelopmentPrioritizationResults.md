@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**HasAutoWaiversConfigured** | Pointer to **bool** |  | [optional] 
 **Priorities** | Pointer to [**ApiPageResultPrioritizedComponent**](ApiPageResultPrioritizedComponent.md) |  | [optional] 
 **ScanIdFromLatestBuildStageEvaluation** | Pointer to **string** |  | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewDevelopmentPrioritizationResultsWithDefaults instantiates a new DevelopmentPrioritizationResults object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetHasAutoWaiversConfigured
+
+`func (o *DevelopmentPrioritizationResults) GetHasAutoWaiversConfigured() bool`
+
+GetHasAutoWaiversConfigured returns the HasAutoWaiversConfigured field if non-nil, zero value otherwise.
+
+### GetHasAutoWaiversConfiguredOk
+
+`func (o *DevelopmentPrioritizationResults) GetHasAutoWaiversConfiguredOk() (*bool, bool)`
+
+GetHasAutoWaiversConfiguredOk returns a tuple with the HasAutoWaiversConfigured field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAutoWaiversConfigured
+
+`func (o *DevelopmentPrioritizationResults) SetHasAutoWaiversConfigured(v bool)`
+
+SetHasAutoWaiversConfigured sets HasAutoWaiversConfigured field to given value.
+
+### HasHasAutoWaiversConfigured
+
+`func (o *DevelopmentPrioritizationResults) HasHasAutoWaiversConfigured() bool`
+
+HasHasAutoWaiversConfigured returns a boolean if a field has been set.
 
 ### GetPriorities
 
