@@ -440,6 +440,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -453,7 +455,7 @@ import (
 )
 
 func main() {
-	violationId := "violationId_example" // string | 
+	violationId := "violationId_example" // string | Policy violation id to find similar waivers for.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -473,7 +475,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**violationId** | **string** |  | 
+**violationId** | **string** | Policy violation id to find similar waivers for. | 
 
 ### Other Parameters
 

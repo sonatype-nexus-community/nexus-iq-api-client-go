@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**GetSbomComponents**](SBOMAPI.md#GetSbomComponents) | **Get** /api/v2/sbom/applications/{applicationId}/versions/{version}/components | Gets the components found in a specific sbom version
 [**GetSbomMetadataSummaryForApplication**](SBOMAPI.md#GetSbomMetadataSummaryForApplication) | **Get** /api/v2/sbom/applications/{applicationId} | Gets a paginated list of SBOMs for an application
 [**GetSbomVersion**](SBOMAPI.md#GetSbomVersion) | **Get** /api/v2/sbom/applications/{applicationId}/versions/{version} | Gets a sbom version
+[**GetVulnerabilityDetails**](SBOMAPI.md#GetVulnerabilityDetails) | **Get** /api/v2/sbom/applications/{applicationId}/versions/{version}/vulnerability/{refId} | 
 [**ImportSbom**](SBOMAPI.md#ImportSbom) | **Post** /api/v2/sbom/import | Import a new sbom version
 [**SaveVulnerabilityAnalysis**](SBOMAPI.md#SaveVulnerabilityAnalysis) | **Put** /api/v2/sbom/applications/{applicationId}/versions/{version}/vulnerability/{refId}/analysis | Updates a vulnerability analysis annotation for a specific SBOM vulnerability
 
@@ -467,7 +468,7 @@ Name | Type | Description  | Notes
 
 ## GetSbomVersion
 
-> GetSbomVersion(ctx, applicationId, version).State(state).Specification(specification).Accept(accept).Execute()
+> string GetSbomVersion(ctx, applicationId, version).State(state).Specification(specification).Accept(accept).Execute()
 
 Gets a sbom version
 
@@ -494,11 +495,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SBOMAPI.GetSbomVersion(context.Background(), applicationId, version).State(state).Specification(specification).Accept(accept).Execute()
+	resp, r, err := apiClient.SBOMAPI.GetSbomVersion(context.Background(), applicationId, version).State(state).Specification(specification).Accept(accept).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SBOMAPI.GetSbomVersion``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetSbomVersion`: string
+	fmt.Fprintf(os.Stdout, "Response from `SBOMAPI.GetSbomVersion`: %v\n", resp)
 }
 ```
 
@@ -526,6 +529,84 @@ Name | Type | Description  | Notes
 
 ### Return type
 
+**string**
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVulnerabilityDetails
+
+> GetVulnerabilityDetails(ctx, applicationId, version, refId).PackageUrl(packageUrl).ComponentHash(componentHash).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	applicationId := "applicationId_example" // string | The internal id of the application
+	version := "version_example" // string | The version for a specific SBOM where the vulnerability is present
+	refId := "refId_example" // string | The vulnerability id of a vulnerability
+	packageUrl := "packageUrl_example" // string | (One of packageUrl or componentHash is required) Enter the packageUrl of the component with the vulnerability (optional)
+	componentHash := "componentHash_example" // string | (One of packageUrl or componentHash is required) Enter the componentHash of the component with the vulnerability (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SBOMAPI.GetVulnerabilityDetails(context.Background(), applicationId, version, refId).PackageUrl(packageUrl).ComponentHash(componentHash).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SBOMAPI.GetVulnerabilityDetails``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**applicationId** | **string** | The internal id of the application | 
+**version** | **string** | The version for a specific SBOM where the vulnerability is present | 
+**refId** | **string** | The vulnerability id of a vulnerability | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVulnerabilityDetailsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **packageUrl** | **string** | (One of packageUrl or componentHash is required) Enter the packageUrl of the component with the vulnerability | 
+ **componentHash** | **string** | (One of packageUrl or componentHash is required) Enter the componentHash of the component with the vulnerability | 
+
+### Return type
+
  (empty response body)
 
 ### Authorization
@@ -535,7 +616,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json|application/xml
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -544,7 +625,7 @@ Name | Type | Description  | Notes
 
 ## ImportSbom
 
-> ImportSbom(ctx).EnableBinaryImport(enableBinaryImport).IgnoreValidationError(ignoreValidationError).ImportSbomRequest(importSbomRequest).Execute()
+> ApiThirdPartyScanTicketDTO ImportSbom(ctx).ApplicationId(applicationId).File(file).EnableBinaryImport(enableBinaryImport).IgnoreValidationError(ignoreValidationError).ApplicationVersion(applicationVersion).Execute()
 
 Import a new sbom version
 
@@ -563,17 +644,21 @@ import (
 )
 
 func main() {
+	applicationId := "applicationId_example" // string | The internal id of the application.
+	file := os.NewFile(1234, "some_file") // *os.File | Your SBOM.
 	enableBinaryImport := true // bool | Enable importing as a binary file. (optional) (default to false)
 	ignoreValidationError := true // bool | Skip the SBOM validation if an error occurs. (optional) (default to false)
-	importSbomRequest := *sonatypeiq.NewImportSbomRequest("ApplicationId_example") // ImportSbomRequest |  (optional)
+	applicationVersion := "applicationVersion_example" // string | The SBOM version. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SBOMAPI.ImportSbom(context.Background()).EnableBinaryImport(enableBinaryImport).IgnoreValidationError(ignoreValidationError).ImportSbomRequest(importSbomRequest).Execute()
+	resp, r, err := apiClient.SBOMAPI.ImportSbom(context.Background()).ApplicationId(applicationId).File(file).EnableBinaryImport(enableBinaryImport).IgnoreValidationError(ignoreValidationError).ApplicationVersion(applicationVersion).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SBOMAPI.ImportSbom``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `ImportSbom`: ApiThirdPartyScanTicketDTO
+	fmt.Fprintf(os.Stdout, "Response from `SBOMAPI.ImportSbom`: %v\n", resp)
 }
 ```
 
@@ -588,13 +673,15 @@ Other parameters are passed through a pointer to a apiImportSbomRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **applicationId** | **string** | The internal id of the application. | 
+ **file** | ***os.File** | Your SBOM. | 
  **enableBinaryImport** | **bool** | Enable importing as a binary file. | [default to false]
  **ignoreValidationError** | **bool** | Skip the SBOM validation if an error occurs. | [default to false]
- **importSbomRequest** | [**ImportSbomRequest**](ImportSbomRequest.md) |  | 
+ **applicationVersion** | **string** | The SBOM version. | 
 
 ### Return type
 
- (empty response body)
+[**ApiThirdPartyScanTicketDTO**](ApiThirdPartyScanTicketDTO.md)
 
 ### Authorization
 
@@ -602,7 +689,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

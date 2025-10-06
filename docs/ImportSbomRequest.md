@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApplicationId** | **string** | The internal id of the application | 
-**ApplicationVersion** | Pointer to **string** |  | [optional] 
-**File** | Pointer to [**FormDataContentDisposition**](FormDataContentDisposition.md) |  | [optional] 
+**ApplicationId** | **string** | The internal id of the application. | 
+**ApplicationVersion** | Pointer to **string** | The SBOM version. | [optional] 
+**File** | ***os.File** | Your SBOM. | 
 
 ## Methods
 
 ### NewImportSbomRequest
 
-`func NewImportSbomRequest(applicationId string, ) *ImportSbomRequest`
+`func NewImportSbomRequest(applicationId string, file *os.File, ) *ImportSbomRequest`
 
 NewImportSbomRequest instantiates a new ImportSbomRequest object
 This constructor will assign default values to properties that have it defined,
@@ -74,28 +74,23 @@ HasApplicationVersion returns a boolean if a field has been set.
 
 ### GetFile
 
-`func (o *ImportSbomRequest) GetFile() FormDataContentDisposition`
+`func (o *ImportSbomRequest) GetFile() *os.File`
 
 GetFile returns the File field if non-nil, zero value otherwise.
 
 ### GetFileOk
 
-`func (o *ImportSbomRequest) GetFileOk() (*FormDataContentDisposition, bool)`
+`func (o *ImportSbomRequest) GetFileOk() (**os.File, bool)`
 
 GetFileOk returns a tuple with the File field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFile
 
-`func (o *ImportSbomRequest) SetFile(v FormDataContentDisposition)`
+`func (o *ImportSbomRequest) SetFile(v *os.File)`
 
 SetFile sets File field to given value.
 
-### HasFile
-
-`func (o *ImportSbomRequest) HasFile() bool`
-
-HasFile returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

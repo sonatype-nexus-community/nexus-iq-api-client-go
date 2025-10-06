@@ -29,9 +29,10 @@ func Test_sonatypeiq_LicenseOverridesAPIService(t *testing.T) {
 		var ownerType string
 		var ownerId string
 
-		httpRes, err := apiClient.LicenseOverridesAPI.AddLicenseOverride(context.Background(), ownerType, ownerId).Execute()
+		resp, httpRes, err := apiClient.LicenseOverridesAPI.AddLicenseOverride(context.Background(), ownerType, ownerId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -58,9 +59,10 @@ func Test_sonatypeiq_LicenseOverridesAPIService(t *testing.T) {
 		var ownerType string
 		var ownerId string
 
-		httpRes, err := apiClient.LicenseOverridesAPI.GetAppliedLicenseOverrides(context.Background(), ownerType, ownerId).Execute()
+		resp, httpRes, err := apiClient.LicenseOverridesAPI.GetAppliedLicenseOverrides(context.Background(), ownerType, ownerId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	file := os.NewFile(1234, "some_file") // *os.File | Your product license file (optional)
+	file := os.NewFile(1234, "some_file") // *os.File | Your product license file
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)

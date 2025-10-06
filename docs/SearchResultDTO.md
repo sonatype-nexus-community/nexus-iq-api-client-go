@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **IsExactTotalNumberOfHits** | Pointer to **bool** |  | [optional] 
 **Page** | Pointer to **int32** |  | [optional] 
 **PageSize** | Pointer to **int32** |  | [optional] 
+**SearchAfter** | Pointer to **[]string** |  | [optional] 
 **SearchQuery** | Pointer to **string** |  | [optional] 
-**TotalNumberOfHits** | Pointer to **int32** |  | [optional] 
+**TotalNumberOfHits** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -130,6 +131,31 @@ SetPageSize sets PageSize field to given value.
 
 HasPageSize returns a boolean if a field has been set.
 
+### GetSearchAfter
+
+`func (o *SearchResultDTO) GetSearchAfter() []string`
+
+GetSearchAfter returns the SearchAfter field if non-nil, zero value otherwise.
+
+### GetSearchAfterOk
+
+`func (o *SearchResultDTO) GetSearchAfterOk() (*[]string, bool)`
+
+GetSearchAfterOk returns a tuple with the SearchAfter field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSearchAfter
+
+`func (o *SearchResultDTO) SetSearchAfter(v []string)`
+
+SetSearchAfter sets SearchAfter field to given value.
+
+### HasSearchAfter
+
+`func (o *SearchResultDTO) HasSearchAfter() bool`
+
+HasSearchAfter returns a boolean if a field has been set.
+
 ### GetSearchQuery
 
 `func (o *SearchResultDTO) GetSearchQuery() string`
@@ -157,20 +183,20 @@ HasSearchQuery returns a boolean if a field has been set.
 
 ### GetTotalNumberOfHits
 
-`func (o *SearchResultDTO) GetTotalNumberOfHits() int32`
+`func (o *SearchResultDTO) GetTotalNumberOfHits() int64`
 
 GetTotalNumberOfHits returns the TotalNumberOfHits field if non-nil, zero value otherwise.
 
 ### GetTotalNumberOfHitsOk
 
-`func (o *SearchResultDTO) GetTotalNumberOfHitsOk() (*int32, bool)`
+`func (o *SearchResultDTO) GetTotalNumberOfHitsOk() (*int64, bool)`
 
 GetTotalNumberOfHitsOk returns a tuple with the TotalNumberOfHits field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalNumberOfHits
 
-`func (o *SearchResultDTO) SetTotalNumberOfHits(v int32)`
+`func (o *SearchResultDTO) SetTotalNumberOfHits(v int64)`
 
 SetTotalNumberOfHits sets TotalNumberOfHits field to given value.
 

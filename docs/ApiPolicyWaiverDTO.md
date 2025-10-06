@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to [**ComponentDisplayName**](ComponentDisplayName.md) |  | [optional] 
 **ExpireWhenRemediationAvailable** | Pointer to **bool** |  | [optional] 
 **ExpiryTime** | Pointer to **time.Time** |  | [optional] 
+**ForContainerImage** | Pointer to **bool** |  | [optional] 
+**ForContainerImageComponent** | Pointer to **bool** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
 **IsObsolete** | Pointer to **bool** |  | [optional] 
 **MatcherStrategy** | Pointer to **string** |  | [optional] 
@@ -375,6 +377,56 @@ SetExpiryTime sets ExpiryTime field to given value.
 `func (o *ApiPolicyWaiverDTO) HasExpiryTime() bool`
 
 HasExpiryTime returns a boolean if a field has been set.
+
+### GetForContainerImage
+
+`func (o *ApiPolicyWaiverDTO) GetForContainerImage() bool`
+
+GetForContainerImage returns the ForContainerImage field if non-nil, zero value otherwise.
+
+### GetForContainerImageOk
+
+`func (o *ApiPolicyWaiverDTO) GetForContainerImageOk() (*bool, bool)`
+
+GetForContainerImageOk returns a tuple with the ForContainerImage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForContainerImage
+
+`func (o *ApiPolicyWaiverDTO) SetForContainerImage(v bool)`
+
+SetForContainerImage sets ForContainerImage field to given value.
+
+### HasForContainerImage
+
+`func (o *ApiPolicyWaiverDTO) HasForContainerImage() bool`
+
+HasForContainerImage returns a boolean if a field has been set.
+
+### GetForContainerImageComponent
+
+`func (o *ApiPolicyWaiverDTO) GetForContainerImageComponent() bool`
+
+GetForContainerImageComponent returns the ForContainerImageComponent field if non-nil, zero value otherwise.
+
+### GetForContainerImageComponentOk
+
+`func (o *ApiPolicyWaiverDTO) GetForContainerImageComponentOk() (*bool, bool)`
+
+GetForContainerImageComponentOk returns a tuple with the ForContainerImageComponent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForContainerImageComponent
+
+`func (o *ApiPolicyWaiverDTO) SetForContainerImageComponent(v bool)`
+
+SetForContainerImageComponent sets ForContainerImageComponent field to given value.
+
+### HasForContainerImageComponent
+
+`func (o *ApiPolicyWaiverDTO) HasForContainerImageComponent() bool`
+
+HasForContainerImageComponent returns a boolean if a field has been set.
 
 ### GetHash
 

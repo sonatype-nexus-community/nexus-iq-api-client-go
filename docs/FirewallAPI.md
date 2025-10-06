@@ -6,11 +6,14 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddProprietaryComponentNames**](FirewallAPI.md#AddProprietaryComponentNames) | **Post** /api/v2/malware-defense/namespace_confusion/{format} | 
 [**AddRepositoryManager**](FirewallAPI.md#AddRepositoryManager) | **Post** /api/v2/malware-defense/repositoryManagers | 
+[**AddWaiver**](FirewallAPI.md#AddWaiver) | **Post** /api/v2/malware-defense/container-image/{containerImageId}/policyWaiver | 
 [**ConfigureRepositories**](FirewallAPI.md#ConfigureRepositories) | **Post** /api/v2/malware-defense/repositories/configuration/{repositoryManagerId} | 
+[**DeleteContainerImagePolicyWaiver**](FirewallAPI.md#DeleteContainerImagePolicyWaiver) | **Delete** /api/v2/malware-defense/container-image/{containerImageId}/policyWaiver | 
 [**DeleteRepositoryManager**](FirewallAPI.md#DeleteRepositoryManager) | **Delete** /api/v2/malware-defense/repositoryManagers/{repositoryManagerId} | 
 [**EvaluateComponents1**](FirewallAPI.md#EvaluateComponents1) | **Post** /api/v2/malware-defense/components/{repositoryManagerId}/{repositoryId}/evaluate | 
 [**EvaluateMalware**](FirewallAPI.md#EvaluateMalware) | **Post** /api/v2/malware-defense/evaluate | 
 [**GetConfiguredRepositories**](FirewallAPI.md#GetConfiguredRepositories) | **Get** /api/v2/malware-defense/repositories/configuration/{repositoryManagerId} | 
+[**GetContainerImagesInQuarantine**](FirewallAPI.md#GetContainerImagesInQuarantine) | **Get** /api/v2/malware-defense/container-image/policyViolations/quarantined | 
 [**GetFirewallAutoUnquarantineConfig**](FirewallAPI.md#GetFirewallAutoUnquarantineConfig) | **Get** /api/v2/malware-defense/releaseQuarantine/configuration | 
 [**GetFirewallMetrics**](FirewallAPI.md#GetFirewallMetrics) | **Get** /api/v2/malware-defense/metrics/embedded | 
 [**GetFirewallUnquarantineSummary**](FirewallAPI.md#GetFirewallUnquarantineSummary) | **Get** /api/v2/malware-defense/releaseQuarantine/summary | 
@@ -23,6 +26,7 @@ Method | HTTP request | Description
 [**GetRepositoryManagers**](FirewallAPI.md#GetRepositoryManagers) | **Get** /api/v2/malware-defense/repositoryManagers | 
 [**GetRoiFirewallMetrics**](FirewallAPI.md#GetRoiFirewallMetrics) | **Get** /api/v2/malware-defense/metrics/embedded/roi-firewall-metrics/{currencyType} | 
 [**GetUnquarantineList**](FirewallAPI.md#GetUnquarantineList) | **Get** /api/v2/malware-defense/components/autoReleasedFromQuarantine | 
+[**GetWaivers**](FirewallAPI.md#GetWaivers) | **Get** /api/v2/malware-defense/container-image/policyWaiver | 
 [**RemoveProprietaryComponentNames**](FirewallAPI.md#RemoveProprietaryComponentNames) | **Delete** /api/v2/malware-defense/namespace_confusion/{format} | 
 [**SetFirewallAutoUnquarantineConfig**](FirewallAPI.md#SetFirewallAutoUnquarantineConfig) | **Put** /api/v2/malware-defense/releaseQuarantine/configuration | 
 [**SetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#SetQuarantinedComponentViewAnonymousAccess) | **Put** /api/v2/malware-defense/quarantinedComponentView/configuration/anonymousAccess/{enabled} | 
@@ -32,6 +36,8 @@ Method | HTTP request | Description
 ## AddProprietaryComponentNames
 
 > AddProprietaryComponentNames(ctx, format).RequestBody(requestBody).Execute()
+
+
 
 
 
@@ -48,8 +54,8 @@ import (
 )
 
 func main() {
-	format := "format_example" // string | 
-	requestBody := []string{"Property_example"} // []string |  (optional)
+	format := "maven" // string | Format for which the proprietary namespaces are being added.
+	requestBody := []string{"Property_example"} // []string | List of namespaces to register as proprietary for this format.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -67,7 +73,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**format** | **string** |  | 
+**format** | **string** | Format for which the proprietary namespaces are being added. | 
 
 ### Other Parameters
 
@@ -77,7 +83,7 @@ Other parameters are passed through a pointer to a apiAddProprietaryComponentNam
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **requestBody** | **[]string** |  | 
+ **requestBody** | **[]string** | List of namespaces to register as proprietary for this format. | 
 
 ### Return type
 
@@ -90,7 +96,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -163,6 +169,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## AddWaiver
+
+> AddWaiver(ctx, containerImageId).ApiContainerImageWaiverDTO(apiContainerImageWaiverDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	containerImageId := "containerImageId_example" // string | Enter the container image id.
+	apiContainerImageWaiverDTO := *sonatypeiq.NewApiContainerImageWaiverDTO() // ApiContainerImageWaiverDTO | The request JSON can include the fields<ol><li>expiryTime (default null): Sets the datetime when the waiver expires.</li><li>waiverReasonId (default null): Sets the specific reason chosen for the waiver.</li><li>comment (default null): Further explanation about the waiver.</li></ol> (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.FirewallAPI.AddWaiver(context.Background(), containerImageId).ApiContainerImageWaiverDTO(apiContainerImageWaiverDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.AddWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**containerImageId** | **string** | Enter the container image id. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddWaiverRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **apiContainerImageWaiverDTO** | [**ApiContainerImageWaiverDTO**](ApiContainerImageWaiverDTO.md) | The request JSON can include the fields&lt;ol&gt;&lt;li&gt;expiryTime (default null): Sets the datetime when the waiver expires.&lt;/li&gt;&lt;li&gt;waiverReasonId (default null): Sets the specific reason chosen for the waiver.&lt;/li&gt;&lt;li&gt;comment (default null): Further explanation about the waiver.&lt;/li&gt;&lt;/ol&gt; | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ConfigureRepositories
 
 > ConfigureRepositories(ctx, repositoryManagerId).ApiRepositoryListDTO(apiRepositoryListDTO).Execute()
@@ -226,6 +302,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteContainerImagePolicyWaiver
+
+> DeleteContainerImagePolicyWaiver(ctx, containerImageId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	containerImageId := "containerImageId_example" // string | Enter the container id.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.FirewallAPI.DeleteContainerImagePolicyWaiver(context.Background(), containerImageId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.DeleteContainerImagePolicyWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**containerImageId** | **string** | Enter the container id. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteContainerImagePolicyWaiverRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -514,6 +658,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetContainerImagesInQuarantine
+
+> ContainerImageInQuarantineDataResult GetContainerImagesInQuarantine(ctx).Page(page).PageSize(pageSize).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	page := int32(56) // int32 |  (optional)
+	pageSize := int32(56) // int32 |  (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.FirewallAPI.GetContainerImagesInQuarantine(context.Background()).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetContainerImagesInQuarantine``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetContainerImagesInQuarantine`: ContainerImageInQuarantineDataResult
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetContainerImagesInQuarantine`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContainerImagesInQuarantineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int32** |  | 
+ **pageSize** | **int32** |  | 
+
+### Return type
+
+[**ContainerImageInQuarantineDataResult**](ContainerImageInQuarantineDataResult.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetFirewallAutoUnquarantineConfig
 
 > []ApiFirewallReleaseQuarantineConfigDTO GetFirewallAutoUnquarantineConfig(ctx).Execute()
@@ -577,7 +789,7 @@ Other parameters are passed through a pointer to a apiGetFirewallAutoUnquarantin
 
 ## GetFirewallMetrics
 
-> GetFirewallMetrics(ctx).Execute()
+> map[string]ApiFirewallMetricsResultDTO GetFirewallMetrics(ctx).Execute()
 
 
 
@@ -599,11 +811,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.FirewallAPI.GetFirewallMetrics(context.Background()).Execute()
+	resp, r, err := apiClient.FirewallAPI.GetFirewallMetrics(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetFirewallMetrics``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetFirewallMetrics`: map[string]ApiFirewallMetricsResultDTO
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetFirewallMetrics`: %v\n", resp)
 }
 ```
 
@@ -618,7 +832,7 @@ Other parameters are passed through a pointer to a apiGetFirewallMetricsRequest 
 
 ### Return type
 
- (empty response body)
+[**map[string]ApiFirewallMetricsResultDTO**](ApiFirewallMetricsResultDTO.md)
 
 ### Authorization
 
@@ -627,7 +841,7 @@ Other parameters are passed through a pointer to a apiGetFirewallMetricsRequest 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -758,7 +972,7 @@ Other parameters are passed through a pointer to a apiGetMalwareDefenseMetricsRe
 
 ## GetQuarantineList
 
-> GetQuarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).SortBy(sortBy).Asc(asc).Execute()
+> ApiFirewallQuarantinedComponentDtoResult GetQuarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).SortBy(sortBy).Asc(asc).Execute()
 
 
 
@@ -788,11 +1002,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.FirewallAPI.GetQuarantineList(context.Background()).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).SortBy(sortBy).Asc(asc).Execute()
+	resp, r, err := apiClient.FirewallAPI.GetQuarantineList(context.Background()).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).SortBy(sortBy).Asc(asc).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetQuarantineList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetQuarantineList`: ApiFirewallQuarantinedComponentDtoResult
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetQuarantineList`: %v\n", resp)
 }
 ```
 
@@ -818,7 +1034,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApiFirewallQuarantinedComponentDtoResult**](ApiFirewallQuarantinedComponentDtoResult.md)
 
 ### Authorization
 
@@ -827,7 +1043,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -897,7 +1113,7 @@ Other parameters are passed through a pointer to a apiGetQuarantineSummaryReques
 
 ## GetQuarantinedComponentViewAnonymousAccess
 
-> GetQuarantinedComponentViewAnonymousAccess(ctx).Execute()
+> bool GetQuarantinedComponentViewAnonymousAccess(ctx).Execute()
 
 
 
@@ -919,11 +1135,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.FirewallAPI.GetQuarantinedComponentViewAnonymousAccess(context.Background()).Execute()
+	resp, r, err := apiClient.FirewallAPI.GetQuarantinedComponentViewAnonymousAccess(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetQuarantinedComponentViewAnonymousAccess``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetQuarantinedComponentViewAnonymousAccess`: bool
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetQuarantinedComponentViewAnonymousAccess`: %v\n", resp)
 }
 ```
 
@@ -938,7 +1156,7 @@ Other parameters are passed through a pointer to a apiGetQuarantinedComponentVie
 
 ### Return type
 
- (empty response body)
+**bool**
 
 ### Authorization
 
@@ -947,7 +1165,7 @@ Other parameters are passed through a pointer to a apiGetQuarantinedComponentVie
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: text/plain
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1152,6 +1370,8 @@ Other parameters are passed through a pointer to a apiGetRepositoryManagersReque
 
 
 
+
+
 ### Example
 
 ```go
@@ -1165,7 +1385,7 @@ import (
 )
 
 func main() {
-	currencyType := "currencyType_example" // string | 
+	currencyType := "currencyType_example" // string | The currency to use for the ROI malware defense metrics.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -1185,7 +1405,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currencyType** | **string** |  | 
+**currencyType** | **string** | The currency to use for the ROI malware defense metrics. | 
 
 ### Other Parameters
 
@@ -1216,7 +1436,7 @@ Name | Type | Description  | Notes
 
 ## GetUnquarantineList
 
-> GetUnquarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).SortBy(sortBy).Asc(asc).Execute()
+> ApiFirewallComponentDTOResult GetUnquarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).SortBy(sortBy).Asc(asc).Execute()
 
 
 
@@ -1244,11 +1464,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.FirewallAPI.GetUnquarantineList(context.Background()).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).SortBy(sortBy).Asc(asc).Execute()
+	resp, r, err := apiClient.FirewallAPI.GetUnquarantineList(context.Background()).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).SortBy(sortBy).Asc(asc).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetUnquarantineList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetUnquarantineList`: ApiFirewallComponentDTOResult
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetUnquarantineList`: %v\n", resp)
 }
 ```
 
@@ -1272,7 +1494,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApiFirewallComponentDTOResult**](ApiFirewallComponentDTOResult.md)
 
 ### Authorization
 
@@ -1281,16 +1503,18 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## RemoveProprietaryComponentNames
+## GetWaivers
 
-> RemoveProprietaryComponentNames(ctx, format).Execute()
+> PolicyContainerWaiverDataResult GetWaivers(ctx).Page(page).PageSize(pageSize).Execute()
+
+
 
 
 
@@ -1307,7 +1531,75 @@ import (
 )
 
 func main() {
-	format := "format_example" // string | 
+	page := int32(56) // int32 |  (optional)
+	pageSize := int32(56) // int32 |  (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.FirewallAPI.GetWaivers(context.Background()).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetWaivers`: PolicyContainerWaiverDataResult
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetWaivers`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetWaiversRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int32** |  | 
+ **pageSize** | **int32** |  | 
+
+### Return type
+
+[**PolicyContainerWaiverDataResult**](PolicyContainerWaiverDataResult.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RemoveProprietaryComponentNames
+
+> RemoveProprietaryComponentNames(ctx, format).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	format := "maven" // string | Format for which the proprietary namespaces are being removed.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -1325,7 +1617,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**format** | **string** |  | 
+**format** | **string** | Format for which the proprietary namespaces are being removed. | 
 
 ### Other Parameters
 
@@ -1347,7 +1639,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

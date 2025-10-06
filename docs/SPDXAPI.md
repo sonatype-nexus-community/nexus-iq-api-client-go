@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## GetByScanId
 
-> GetByScanId(ctx, applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+> string GetByScanId(ctx, applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
 
 
 
@@ -38,11 +38,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SPDXAPI.GetByScanId(context.Background(), applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+	resp, r, err := apiClient.SPDXAPI.GetByScanId(context.Background(), applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SPDXAPI.GetByScanId``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetByScanId`: string
+	fmt.Fprintf(os.Stdout, "Response from `SPDXAPI.GetByScanId`: %v\n", resp)
 }
 ```
 
@@ -70,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+**string**
 
 ### Authorization
 
@@ -79,7 +81,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json, application/octet-stream, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -88,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## GetLatestForStage
 
-> GetLatestForStage(ctx, applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+> string GetLatestForStage(ctx, applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
 
 
 
@@ -115,11 +117,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.SPDXAPI.GetLatestForStage(context.Background(), applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+	resp, r, err := apiClient.SPDXAPI.GetLatestForStage(context.Background(), applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SPDXAPI.GetLatestForStage``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetLatestForStage`: string
+	fmt.Fprintf(os.Stdout, "Response from `SPDXAPI.GetLatestForStage`: %v\n", resp)
 }
 ```
 
@@ -147,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+**string**
 
 ### Authorization
 
@@ -156,7 +160,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json, application/octet-stream, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

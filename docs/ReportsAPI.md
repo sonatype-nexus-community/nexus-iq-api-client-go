@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ## GetMetrics
 
-> GetMetrics(ctx).ApiMetricsReportingQueryDTOV2(apiMetricsReportingQueryDTOV2).Execute()
+> []ApiMetricsReportingDTOV2 GetMetrics(ctx).ApiMetricsReportingQueryDTOV2(apiMetricsReportingQueryDTOV2).Execute()
 
 
 
@@ -297,11 +297,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ReportsAPI.GetMetrics(context.Background()).ApiMetricsReportingQueryDTOV2(apiMetricsReportingQueryDTOV2).Execute()
+	resp, r, err := apiClient.ReportsAPI.GetMetrics(context.Background()).ApiMetricsReportingQueryDTOV2(apiMetricsReportingQueryDTOV2).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetMetrics``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetMetrics`: []ApiMetricsReportingDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetMetrics`: %v\n", resp)
 }
 ```
 
@@ -320,7 +322,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**[]ApiMetricsReportingDTOV2**](ApiMetricsReportingDTOV2.md)
 
 ### Authorization
 

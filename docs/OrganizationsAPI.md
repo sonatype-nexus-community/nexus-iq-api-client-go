@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 
 ## MoveOrganization
 
-> MoveOrganization(ctx, organizationId, destinationId).FailEarlyOnError(failEarlyOnError).Execute()
+> MoveOrganizationResponseDTO MoveOrganization(ctx, organizationId, destinationId).FailEarlyOnError(failEarlyOnError).Execute()
 
 
 
@@ -309,11 +309,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.OrganizationsAPI.MoveOrganization(context.Background(), organizationId, destinationId).FailEarlyOnError(failEarlyOnError).Execute()
+	resp, r, err := apiClient.OrganizationsAPI.MoveOrganization(context.Background(), organizationId, destinationId).FailEarlyOnError(failEarlyOnError).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.MoveOrganization``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `MoveOrganization`: MoveOrganizationResponseDTO
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.MoveOrganization`: %v\n", resp)
 }
 ```
 
@@ -339,7 +341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**MoveOrganizationResponseDTO**](MoveOrganizationResponseDTO.md)
 
 ### Authorization
 
@@ -348,7 +350,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

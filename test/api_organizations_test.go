@@ -80,9 +80,10 @@ func Test_sonatypeiq_OrganizationsAPIService(t *testing.T) {
 		var organizationId string
 		var destinationId string
 
-		httpRes, err := apiClient.OrganizationsAPI.MoveOrganization(context.Background(), organizationId, destinationId).Execute()
+		resp, httpRes, err := apiClient.OrganizationsAPI.MoveOrganization(context.Background(), organizationId, destinationId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

@@ -269,6 +269,8 @@ Other parameters are passed through a pointer to a apiGetConfiguration6Request s
 
 
 
+
+
 ### Example
 
 ```go

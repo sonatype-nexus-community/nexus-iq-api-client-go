@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Page** | Pointer to **int32** |  | [optional] 
-**PageCount** | Pointer to **int64** |  | [optional] 
-**PageSize** | Pointer to **int32** |  | [optional] 
-**Results** | Pointer to [**[]PrioritizedComponent**](PrioritizedComponent.md) |  | [optional] 
-**Total** | Pointer to **int64** |  | [optional] 
+**Page** | Pointer to **int32** | Current page number | [optional] 
+**PageCount** | Pointer to **int64** | Total number of pages | [optional] 
+**PageSize** | Pointer to **int32** | Number of items per page | [optional] 
+**Results** | Pointer to [**[]PrioritizedComponent**](PrioritizedComponent.md) | List of items for the current page | [optional] 
+**Total** | Pointer to **int64** | Total number of items | [optional] 
 
 ## Methods
 

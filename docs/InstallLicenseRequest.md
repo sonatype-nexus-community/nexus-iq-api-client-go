@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**File** | Pointer to ***os.File** | Your product license file | [optional] 
+**File** | ***os.File** | Your product license file | 
 
 ## Methods
 
 ### NewInstallLicenseRequest
 
-`func NewInstallLicenseRequest() *InstallLicenseRequest`
+`func NewInstallLicenseRequest(file *os.File, ) *InstallLicenseRequest`
 
 NewInstallLicenseRequest instantiates a new InstallLicenseRequest object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetFile sets File field to given value.
 
-### HasFile
-
-`func (o *InstallLicenseRequest) HasFile() bool`
-
-HasFile returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

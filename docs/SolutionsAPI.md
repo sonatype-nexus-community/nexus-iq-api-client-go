@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 
 
+
+
 ### Example
 
 ```go
@@ -27,7 +29,7 @@ import (
 )
 
 func main() {
-	allowRelativeUrls := true // bool |  (optional) (default to false)
+	allowRelativeUrls := true // bool | Whether or not relative URLs should be allowed. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -52,7 +54,7 @@ Other parameters are passed through a pointer to a apiGetLicensedSolutionsReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **allowRelativeUrls** | **bool** |  | [default to false]
+ **allowRelativeUrls** | **bool** | Whether or not relative URLs should be allowed. | [default to false]
 
 ### Return type
 

@@ -168,6 +168,8 @@ Name | Type | Description  | Notes
 
 
 
+
+
 ### Example
 
 ```go
@@ -181,11 +183,11 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | 
-	ownerId := "ownerId_example" // string | 
-	autoPolicyWaiverId := "autoPolicyWaiverId_example" // string | 
-	page := int32(56) // int32 |  (optional) (default to 1)
-	pageSize := int32(56) // int32 |  (optional) (default to 10)
+	ownerType := "ownerType_example" // string | Enter the owner type.
+	ownerId := "ownerId_example" // string | Enter the owner id.
+	autoPolicyWaiverId := "autoPolicyWaiverId_example" // string | Enter the id of the automatic policy waiver.
+	page := int32(56) // int32 | Enter the page. (optional) (default to 1)
+	pageSize := int32(56) // int32 | Enter the page size. (optional) (default to 10)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -205,9 +207,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** |  | 
-**ownerId** | **string** |  | 
-**autoPolicyWaiverId** | **string** |  | 
+**ownerType** | **string** | Enter the owner type. | 
+**ownerId** | **string** | Enter the owner id. | 
+**autoPolicyWaiverId** | **string** | Enter the id of the automatic policy waiver. | 
 
 ### Other Parameters
 
@@ -219,8 +221,8 @@ Name | Type | Description  | Notes
 
 
 
- **page** | **int32** |  | [default to 1]
- **pageSize** | **int32** |  | [default to 10]
+ **page** | **int32** | Enter the page. | [default to 1]
+ **pageSize** | **int32** | Enter the page size. | [default to 10]
 
 ### Return type
 

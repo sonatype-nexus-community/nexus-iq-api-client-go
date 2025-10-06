@@ -29,9 +29,10 @@ func Test_sonatypeiq_SPDXAPIService(t *testing.T) {
 		var applicationId string
 		var scanId string
 
-		httpRes, err := apiClient.SPDXAPI.GetByScanId(context.Background(), applicationId, scanId).Execute()
+		resp, httpRes, err := apiClient.SPDXAPI.GetByScanId(context.Background(), applicationId, scanId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -43,9 +44,10 @@ func Test_sonatypeiq_SPDXAPIService(t *testing.T) {
 		var applicationId string
 		var stageId string
 
-		httpRes, err := apiClient.SPDXAPI.GetLatestForStage(context.Background(), applicationId, stageId).Execute()
+		resp, httpRes, err := apiClient.SPDXAPI.GetLatestForStage(context.Background(), applicationId, stageId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

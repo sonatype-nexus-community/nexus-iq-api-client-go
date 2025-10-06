@@ -47,6 +47,19 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirewallAPIService AddWaiver", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var containerImageId string
+
+		httpRes, err := apiClient.FirewallAPI.AddWaiver(context.Background(), containerImageId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService ConfigureRepositories", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -54,6 +67,19 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 		var repositoryManagerId string
 
 		httpRes, err := apiClient.FirewallAPI.ConfigureRepositories(context.Background(), repositoryManagerId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirewallAPIService DeleteContainerImagePolicyWaiver", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var containerImageId string
+
+		httpRes, err := apiClient.FirewallAPI.DeleteContainerImagePolicyWaiver(context.Background(), containerImageId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -114,6 +140,18 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirewallAPIService GetContainerImagesInQuarantine", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.FirewallAPI.GetContainerImagesInQuarantine(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService GetFirewallAutoUnquarantineConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -130,9 +168,10 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.FirewallAPI.GetFirewallMetrics(context.Background()).Execute()
+		resp, httpRes, err := apiClient.FirewallAPI.GetFirewallMetrics(context.Background()).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -165,9 +204,10 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.FirewallAPI.GetQuarantineList(context.Background()).Execute()
+		resp, httpRes, err := apiClient.FirewallAPI.GetQuarantineList(context.Background()).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -188,9 +228,10 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.FirewallAPI.GetQuarantinedComponentViewAnonymousAccess(context.Background()).Execute()
+		resp, httpRes, err := apiClient.FirewallAPI.GetQuarantinedComponentViewAnonymousAccess(context.Background()).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -251,9 +292,22 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.FirewallAPI.GetUnquarantineList(context.Background()).Execute()
+		resp, httpRes, err := apiClient.FirewallAPI.GetUnquarantineList(context.Background()).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirewallAPIService GetWaivers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.FirewallAPI.GetWaivers(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

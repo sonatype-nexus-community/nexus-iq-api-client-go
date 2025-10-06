@@ -5,6 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BaseBranch** | Pointer to **string** |  | [optional] 
+**ClosePrAfterDays** | Pointer to **int32** |  | [optional] 
+**ClosePrAfterDaysOpenEnabled** | Pointer to **bool** |  | [optional] 
+**ClosePrOnFailedChecksEnabled** | Pointer to **bool** |  | [optional] 
 **CommitStatusEnabled** | Pointer to **bool** |  | [optional] 
 **EnablePullRequests** | Pointer to **bool** |  | [optional] 
 **EnableStatusChecks** | Pointer to **bool** |  | [optional] 
@@ -66,6 +69,81 @@ SetBaseBranch sets BaseBranch field to given value.
 `func (o *ApiSourceControlDTO) HasBaseBranch() bool`
 
 HasBaseBranch returns a boolean if a field has been set.
+
+### GetClosePrAfterDays
+
+`func (o *ApiSourceControlDTO) GetClosePrAfterDays() int32`
+
+GetClosePrAfterDays returns the ClosePrAfterDays field if non-nil, zero value otherwise.
+
+### GetClosePrAfterDaysOk
+
+`func (o *ApiSourceControlDTO) GetClosePrAfterDaysOk() (*int32, bool)`
+
+GetClosePrAfterDaysOk returns a tuple with the ClosePrAfterDays field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClosePrAfterDays
+
+`func (o *ApiSourceControlDTO) SetClosePrAfterDays(v int32)`
+
+SetClosePrAfterDays sets ClosePrAfterDays field to given value.
+
+### HasClosePrAfterDays
+
+`func (o *ApiSourceControlDTO) HasClosePrAfterDays() bool`
+
+HasClosePrAfterDays returns a boolean if a field has been set.
+
+### GetClosePrAfterDaysOpenEnabled
+
+`func (o *ApiSourceControlDTO) GetClosePrAfterDaysOpenEnabled() bool`
+
+GetClosePrAfterDaysOpenEnabled returns the ClosePrAfterDaysOpenEnabled field if non-nil, zero value otherwise.
+
+### GetClosePrAfterDaysOpenEnabledOk
+
+`func (o *ApiSourceControlDTO) GetClosePrAfterDaysOpenEnabledOk() (*bool, bool)`
+
+GetClosePrAfterDaysOpenEnabledOk returns a tuple with the ClosePrAfterDaysOpenEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClosePrAfterDaysOpenEnabled
+
+`func (o *ApiSourceControlDTO) SetClosePrAfterDaysOpenEnabled(v bool)`
+
+SetClosePrAfterDaysOpenEnabled sets ClosePrAfterDaysOpenEnabled field to given value.
+
+### HasClosePrAfterDaysOpenEnabled
+
+`func (o *ApiSourceControlDTO) HasClosePrAfterDaysOpenEnabled() bool`
+
+HasClosePrAfterDaysOpenEnabled returns a boolean if a field has been set.
+
+### GetClosePrOnFailedChecksEnabled
+
+`func (o *ApiSourceControlDTO) GetClosePrOnFailedChecksEnabled() bool`
+
+GetClosePrOnFailedChecksEnabled returns the ClosePrOnFailedChecksEnabled field if non-nil, zero value otherwise.
+
+### GetClosePrOnFailedChecksEnabledOk
+
+`func (o *ApiSourceControlDTO) GetClosePrOnFailedChecksEnabledOk() (*bool, bool)`
+
+GetClosePrOnFailedChecksEnabledOk returns a tuple with the ClosePrOnFailedChecksEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClosePrOnFailedChecksEnabled
+
+`func (o *ApiSourceControlDTO) SetClosePrOnFailedChecksEnabled(v bool)`
+
+SetClosePrOnFailedChecksEnabled sets ClosePrOnFailedChecksEnabled field to given value.
+
+### HasClosePrOnFailedChecksEnabled
+
+`func (o *ApiSourceControlDTO) HasClosePrOnFailedChecksEnabled() bool`
+
+HasClosePrOnFailedChecksEnabled returns a boolean if a field has been set.
 
 ### GetCommitStatusEnabled
 
