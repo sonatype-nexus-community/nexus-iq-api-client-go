@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## GetSuggestedRemediationForComponent
 
-> GetSuggestedRemediationForComponent(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+> GetSuggestedRemediationForComponent200Response GetSuggestedRemediationForComponent(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiComponentDTOV2(apiComponentDTOV2).Execute()
 
 
 
@@ -252,11 +252,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiComponentDTOV2(apiComponentDTOV2).Execute()
+	resp, r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponent(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiComponentDTOV2(apiComponentDTOV2).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponent``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetSuggestedRemediationForComponent`: GetSuggestedRemediationForComponent200Response
+	fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetSuggestedRemediationForComponent`: %v\n", resp)
 }
 ```
 
@@ -286,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**GetSuggestedRemediationForComponent200Response**](GetSuggestedRemediationForComponent200Response.md)
 
 ### Authorization
 
@@ -295,7 +297,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
