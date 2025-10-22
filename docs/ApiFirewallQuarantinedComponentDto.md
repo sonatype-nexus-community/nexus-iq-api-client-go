@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **MatchState** | Pointer to **string** |  | [optional] 
 **Pathname** | Pointer to **string** |  | [optional] 
 **PolicyName** | Pointer to **string** |  | [optional] 
-**QuarantineDate** | Pointer to **time.Time** |  | [optional] 
+**QuarantineDate** | Pointer to **string** |  | [optional] 
 **Quarantined** | Pointer to **bool** |  | [optional] 
 **RepositoryId** | Pointer to **string** |  | [optional] 
 **RepositoryName** | Pointer to **string** |  | [optional] 
@@ -187,20 +187,20 @@ HasPolicyName returns a boolean if a field has been set.
 
 ### GetQuarantineDate
 
-`func (o *ApiFirewallQuarantinedComponentDto) GetQuarantineDate() time.Time`
+`func (o *ApiFirewallQuarantinedComponentDto) GetQuarantineDate() string`
 
 GetQuarantineDate returns the QuarantineDate field if non-nil, zero value otherwise.
 
 ### GetQuarantineDateOk
 
-`func (o *ApiFirewallQuarantinedComponentDto) GetQuarantineDateOk() (*time.Time, bool)`
+`func (o *ApiFirewallQuarantinedComponentDto) GetQuarantineDateOk() (*string, bool)`
 
 GetQuarantineDateOk returns a tuple with the QuarantineDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuarantineDate
 
-`func (o *ApiFirewallQuarantinedComponentDto) SetQuarantineDate(v time.Time)`
+`func (o *ApiFirewallQuarantinedComponentDto) SetQuarantineDate(v string)`
 
 SetQuarantineDate sets QuarantineDate field to given value.
 

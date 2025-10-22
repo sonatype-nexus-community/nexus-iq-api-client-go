@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddBulkPolicyWaivers**](PolicyWaiversAPI.md#AddBulkPolicyWaivers) | **Post** /api/v2/policyWaivers/{ownerType}/{ownerId} | 
 [**AddPolicyWaiverByPolicyViolationId**](PolicyWaiversAPI.md#AddPolicyWaiverByPolicyViolationId) | **Post** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyViolationId} | 
 [**AddWaiverToTransitivePolicyViolationsByAppScanComponent**](PolicyWaiversAPI.md#AddWaiverToTransitivePolicyViolationsByAppScanComponent) | **Post** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/{scanId} | 
 [**AddWaiverToTransitivePolicyViolationsByOwnerStageComponent**](PolicyWaiversAPI.md#AddWaiverToTransitivePolicyViolationsByOwnerStageComponent) | **Post** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/stages/{stageId} | 
@@ -14,6 +15,79 @@ Method | HTTP request | Description
 [**RequestPolicyWaiver**](PolicyWaiversAPI.md#RequestPolicyWaiver) | **Post** /api/v2/policyWaivers/waiverRequests/{policyViolationId} | 
 [**UpdatePolicyWaiver**](PolicyWaiversAPI.md#UpdatePolicyWaiver) | **Put** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
 
+
+
+## AddBulkPolicyWaivers
+
+> AddBulkPolicyWaivers(ctx, ownerType, ownerId).ApiBulkWaiversDTO(apiBulkWaiversDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | Indicates the scope of the waiver. Possible values are application, organization, repository, repository_manager, repository_container.
+	ownerId := "ownerId_example" // string | Enter the id for the ownerType provided above. E.g. applicationId if the ownerType is application.
+	apiBulkWaiversDTO := *sonatypeiq.NewApiBulkWaiversDTO() // ApiBulkWaiversDTO | The request JSON should include:<ol><li>violationIds (required, list of policy violation IDs, maximum 1000)</li><li>apiWaiverOptionsDTO (required) containing:<ul><li>comment (optional, to indicate the reason of the waiver)</li><li>matcherStrategy (enumeration, required) can have values EXACT_COMPONENT or ALL_VERSIONS</li><li>expiryTime (optional) to set the datetime when the waiver expires</li><li>waiverReasonId (optional) waiver reason ID</li><li>expireWhenRemediationAvailable (optional boolean, default false) expire waiver when remediation is available, can only be applied to Exact Components.</li></ul></li></ol>
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiversAPI.AddBulkPolicyWaivers(context.Background(), ownerType, ownerId).ApiBulkWaiversDTO(apiBulkWaiversDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.AddBulkPolicyWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Indicates the scope of the waiver. Possible values are application, organization, repository, repository_manager, repository_container. | 
+**ownerId** | **string** | Enter the id for the ownerType provided above. E.g. applicationId if the ownerType is application. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddBulkPolicyWaiversRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **apiBulkWaiversDTO** | [**ApiBulkWaiversDTO**](ApiBulkWaiversDTO.md) | The request JSON should include:&lt;ol&gt;&lt;li&gt;violationIds (required, list of policy violation IDs, maximum 1000)&lt;/li&gt;&lt;li&gt;apiWaiverOptionsDTO (required) containing:&lt;ul&gt;&lt;li&gt;comment (optional, to indicate the reason of the waiver)&lt;/li&gt;&lt;li&gt;matcherStrategy (enumeration, required) can have values EXACT_COMPONENT or ALL_VERSIONS&lt;/li&gt;&lt;li&gt;expiryTime (optional) to set the datetime when the waiver expires&lt;/li&gt;&lt;li&gt;waiverReasonId (optional) waiver reason ID&lt;/li&gt;&lt;li&gt;expireWhenRemediationAvailable (optional boolean, default false) expire waiver when remediation is available, can only be applied to Exact Components.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt; | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## AddPolicyWaiverByPolicyViolationId

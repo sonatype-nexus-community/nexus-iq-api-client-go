@@ -4,32 +4,31 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddProprietaryComponentNames**](FirewallAPI.md#AddProprietaryComponentNames) | **Post** /api/v2/malware-defense/namespace_confusion/{format} | 
-[**AddRepositoryManager**](FirewallAPI.md#AddRepositoryManager) | **Post** /api/v2/malware-defense/repositoryManagers | 
-[**AddWaiver**](FirewallAPI.md#AddWaiver) | **Post** /api/v2/malware-defense/container-image/{containerImageId}/policyWaiver | 
-[**ConfigureRepositories**](FirewallAPI.md#ConfigureRepositories) | **Post** /api/v2/malware-defense/repositories/configuration/{repositoryManagerId} | 
-[**DeleteContainerImagePolicyWaiver**](FirewallAPI.md#DeleteContainerImagePolicyWaiver) | **Delete** /api/v2/malware-defense/container-image/{containerImageId}/policyWaiver | 
-[**DeleteRepositoryManager**](FirewallAPI.md#DeleteRepositoryManager) | **Delete** /api/v2/malware-defense/repositoryManagers/{repositoryManagerId} | 
-[**EvaluateComponents1**](FirewallAPI.md#EvaluateComponents1) | **Post** /api/v2/malware-defense/components/{repositoryManagerId}/{repositoryId}/evaluate | 
+[**AddProprietaryComponentNames**](FirewallAPI.md#AddProprietaryComponentNames) | **Post** /api/v2/firewall/namespace_confusion/{format} | 
+[**AddRepositoryManager**](FirewallAPI.md#AddRepositoryManager) | **Post** /api/v2/firewall/repositoryManagers | 
+[**AddWaiver**](FirewallAPI.md#AddWaiver) | **Post** /api/v2/firewall/container-image/{containerImageId}/policyWaiver | 
+[**ConfigureRepositories**](FirewallAPI.md#ConfigureRepositories) | **Post** /api/v2/firewall/repositories/configuration/{repositoryManagerId} | 
+[**DeleteContainerImagePolicyWaiver**](FirewallAPI.md#DeleteContainerImagePolicyWaiver) | **Delete** /api/v2/firewall/container-image/{containerImageId}/policyWaiver | 
+[**DeleteRepositoryManager**](FirewallAPI.md#DeleteRepositoryManager) | **Delete** /api/v2/firewall/repositoryManagers/{repositoryManagerId} | 
+[**EvaluateComponents1**](FirewallAPI.md#EvaluateComponents1) | **Post** /api/v2/firewall/components/{repositoryManagerId}/{repositoryId}/evaluate | 
 [**EvaluateMalware**](FirewallAPI.md#EvaluateMalware) | **Post** /api/v2/malware-defense/evaluate | 
-[**GetConfiguredRepositories**](FirewallAPI.md#GetConfiguredRepositories) | **Get** /api/v2/malware-defense/repositories/configuration/{repositoryManagerId} | 
-[**GetContainerImagesInQuarantine**](FirewallAPI.md#GetContainerImagesInQuarantine) | **Get** /api/v2/malware-defense/container-image/policyViolations/quarantined | 
-[**GetFirewallAutoUnquarantineConfig**](FirewallAPI.md#GetFirewallAutoUnquarantineConfig) | **Get** /api/v2/malware-defense/releaseQuarantine/configuration | 
-[**GetFirewallMetrics**](FirewallAPI.md#GetFirewallMetrics) | **Get** /api/v2/malware-defense/metrics/embedded | 
-[**GetFirewallUnquarantineSummary**](FirewallAPI.md#GetFirewallUnquarantineSummary) | **Get** /api/v2/malware-defense/releaseQuarantine/summary | 
+[**GetConfiguredRepositories**](FirewallAPI.md#GetConfiguredRepositories) | **Get** /api/v2/firewall/repositories/configuration/{repositoryManagerId} | 
+[**GetContainerImagesInQuarantine**](FirewallAPI.md#GetContainerImagesInQuarantine) | **Get** /api/v2/firewall/container-image/policyViolations/quarantined | 
+[**GetFirewallAutoUnquarantineConfig**](FirewallAPI.md#GetFirewallAutoUnquarantineConfig) | **Get** /api/v2/firewall/releaseQuarantine/configuration | 
+[**GetFirewallMetrics**](FirewallAPI.md#GetFirewallMetrics) | **Get** /api/v2/firewall/metrics/embedded | 
+[**GetFirewallUnquarantineSummary**](FirewallAPI.md#GetFirewallUnquarantineSummary) | **Get** /api/v2/firewall/releaseQuarantine/summary | 
 [**GetMalwareDefenseMetrics**](FirewallAPI.md#GetMalwareDefenseMetrics) | **Get** /api/v2/malware-defense/metrics | 
-[**GetQuarantineList**](FirewallAPI.md#GetQuarantineList) | **Get** /api/v2/malware-defense/components/quarantined | 
-[**GetQuarantineSummary**](FirewallAPI.md#GetQuarantineSummary) | **Get** /api/v2/malware-defense/quarantine/summary | 
-[**GetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#GetQuarantinedComponentViewAnonymousAccess) | **Get** /api/v2/malware-defense/quarantinedComponentView/configuration/anonymousAccess | 
-[**GetRepositoryContainer**](FirewallAPI.md#GetRepositoryContainer) | **Get** /api/v2/malware-defense/repositoryContainer | 
-[**GetRepositoryManager**](FirewallAPI.md#GetRepositoryManager) | **Get** /api/v2/malware-defense/repositoryManagers/{repositoryManagerId} | 
-[**GetRepositoryManagers**](FirewallAPI.md#GetRepositoryManagers) | **Get** /api/v2/malware-defense/repositoryManagers | 
-[**GetRoiFirewallMetrics**](FirewallAPI.md#GetRoiFirewallMetrics) | **Get** /api/v2/malware-defense/metrics/embedded/roi-firewall-metrics/{currencyType} | 
-[**GetUnquarantineList**](FirewallAPI.md#GetUnquarantineList) | **Get** /api/v2/malware-defense/components/autoReleasedFromQuarantine | 
-[**GetWaivers**](FirewallAPI.md#GetWaivers) | **Get** /api/v2/malware-defense/container-image/policyWaiver | 
-[**RemoveProprietaryComponentNames**](FirewallAPI.md#RemoveProprietaryComponentNames) | **Delete** /api/v2/malware-defense/namespace_confusion/{format} | 
-[**SetFirewallAutoUnquarantineConfig**](FirewallAPI.md#SetFirewallAutoUnquarantineConfig) | **Put** /api/v2/malware-defense/releaseQuarantine/configuration | 
-[**SetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#SetQuarantinedComponentViewAnonymousAccess) | **Put** /api/v2/malware-defense/quarantinedComponentView/configuration/anonymousAccess/{enabled} | 
+[**GetQuarantineList**](FirewallAPI.md#GetQuarantineList) | **Get** /api/v2/firewall/components/quarantined | 
+[**GetQuarantineSummary**](FirewallAPI.md#GetQuarantineSummary) | **Get** /api/v2/firewall/quarantine/summary | 
+[**GetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#GetQuarantinedComponentViewAnonymousAccess) | **Get** /api/v2/firewall/quarantinedComponentView/configuration/anonymousAccess | 
+[**GetRepositoryContainer**](FirewallAPI.md#GetRepositoryContainer) | **Get** /api/v2/firewall/repositoryContainer | 
+[**GetRepositoryManager**](FirewallAPI.md#GetRepositoryManager) | **Get** /api/v2/firewall/repositoryManagers/{repositoryManagerId} | 
+[**GetRepositoryManagers**](FirewallAPI.md#GetRepositoryManagers) | **Get** /api/v2/firewall/repositoryManagers | 
+[**GetUnquarantineList**](FirewallAPI.md#GetUnquarantineList) | **Get** /api/v2/firewall/components/autoReleasedFromQuarantine | 
+[**GetWaivers**](FirewallAPI.md#GetWaivers) | **Get** /api/v2/firewall/container-image/policyWaiver | 
+[**RemoveProprietaryComponentNames**](FirewallAPI.md#RemoveProprietaryComponentNames) | **Delete** /api/v2/firewall/namespace_confusion/{format} | 
+[**SetFirewallAutoUnquarantineConfig**](FirewallAPI.md#SetFirewallAutoUnquarantineConfig) | **Put** /api/v2/firewall/releaseQuarantine/configuration | 
+[**SetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#SetQuarantinedComponentViewAnonymousAccess) | **Put** /api/v2/firewall/quarantinedComponentView/configuration/anonymousAccess/{enabled} | 
 
 
 
@@ -1349,76 +1348,6 @@ Other parameters are passed through a pointer to a apiGetRepositoryManagersReque
 ### Return type
 
 [**ApiRepositoryManagerListDTO**](ApiRepositoryManagerListDTO.md)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetRoiFirewallMetrics
-
-> RoiFirewallMetricsDTO GetRoiFirewallMetrics(ctx, currencyType).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-	currencyType := "currencyType_example" // string | The currency to use for the ROI malware defense metrics.
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirewallAPI.GetRoiFirewallMetrics(context.Background(), currencyType).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetRoiFirewallMetrics``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetRoiFirewallMetrics`: RoiFirewallMetricsDTO
-	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetRoiFirewallMetrics`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currencyType** | **string** | The currency to use for the ROI malware defense metrics. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetRoiFirewallMetricsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**RoiFirewallMetricsDTO**](RoiFirewallMetricsDTO.md)
 
 ### Authorization
 
