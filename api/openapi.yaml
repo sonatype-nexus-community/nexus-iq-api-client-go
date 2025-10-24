@@ -2827,6 +2827,24 @@ paths:
           description: SAML is not configured.
       tags:
       - Config SAML
+    put:
+      description: |-
+        Use this method to enable SSO using SAML. This request uses the content type multipart/form-data to transmit the configuration to IQ Server.
+
+        Permissions required: Edit System Configuration and Users
+      operationId: insertOrUpdateSamlConfiguration
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/insertOrUpdateSamlConfiguration_request"
+      responses:
+        "204":
+          description: Configuration successful.
+        "400":
+          description: Invalid configuration.
+      tags:
+      - Config SAML
   /api/v2/config/saml/metadata:
     get:
       description: |-
@@ -32778,6 +32796,15 @@ components:
           $ref: "#/components/schemas/ApiComponentRemediationValueDTO"
       required:
       - remediation
+      type: object
+    insertOrUpdateSamlConfiguration_request:
+      properties:
+        identityProviderXml:
+          description: Enter the SAML metadata XML of your IdP. Refer to the IdP documentation
+            to obtain this metadata.
+          type: string
+        samlConfiguration:
+          $ref: "#/components/schemas/ApiSamlConfigurationDTO"
       type: object
     installLicense_request:
       properties:

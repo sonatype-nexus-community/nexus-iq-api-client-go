@@ -313,3 +313,116 @@ func (a *ConfigSAMLAPIService) GetSamlConfigurationExecute(r ApiGetSamlConfigura
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+
+type ApiInsertOrUpdateSamlConfigurationRequest struct {
+	ctx context.Context
+	ApiService *ConfigSAMLAPIService
+	identityProviderXml *string
+	samlConfiguration *ApiSamlConfigurationDTO
+}
+
+// Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata.
+func (r ApiInsertOrUpdateSamlConfigurationRequest) IdentityProviderXml(identityProviderXml string) ApiInsertOrUpdateSamlConfigurationRequest {
+	r.identityProviderXml = &identityProviderXml
+	return r
+}
+
+func (r ApiInsertOrUpdateSamlConfigurationRequest) SamlConfiguration(samlConfiguration ApiSamlConfigurationDTO) ApiInsertOrUpdateSamlConfigurationRequest {
+	r.samlConfiguration = &samlConfiguration
+	return r
+}
+
+func (r ApiInsertOrUpdateSamlConfigurationRequest) Execute() (*http.Response, error) {
+	return r.ApiService.InsertOrUpdateSamlConfigurationExecute(r)
+}
+
+/*
+InsertOrUpdateSamlConfiguration Method for InsertOrUpdateSamlConfiguration
+
+Use this method to enable SSO using SAML. This request uses the content type multipart/form-data to transmit the configuration to IQ Server.
+
+Permissions required: Edit System Configuration and Users
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiInsertOrUpdateSamlConfigurationRequest
+*/
+func (a *ConfigSAMLAPIService) InsertOrUpdateSamlConfiguration(ctx context.Context) ApiInsertOrUpdateSamlConfigurationRequest {
+	return ApiInsertOrUpdateSamlConfigurationRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+func (a *ConfigSAMLAPIService) InsertOrUpdateSamlConfigurationExecute(r ApiInsertOrUpdateSamlConfigurationRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigSAMLAPIService.InsertOrUpdateSamlConfiguration")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/config/saml"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"multipart/form-data"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.identityProviderXml != nil {
+		parameterAddToHeaderOrQuery(localVarFormParams, "identityProviderXml", r.identityProviderXml, "", "")
+	}
+	if r.samlConfiguration != nil {
+		paramJson, err := parameterToJson(*r.samlConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		localVarFormParams.Add("samlConfiguration", paramJson)
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}

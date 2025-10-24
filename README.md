@@ -156,6 +156,7 @@ Class | Method | HTTP request | Description
 *ConfigSAMLAPI* | [**DeleteSamlConfiguration**](docs/ConfigSAMLAPI.md#deletesamlconfiguration) | **Delete** /api/v2/config/saml | 
 *ConfigSAMLAPI* | [**GetMetadata**](docs/ConfigSAMLAPI.md#getmetadata) | **Get** /api/v2/config/saml/metadata | 
 *ConfigSAMLAPI* | [**GetSamlConfiguration**](docs/ConfigSAMLAPI.md#getsamlconfiguration) | **Get** /api/v2/config/saml | 
+*ConfigSAMLAPI* | [**InsertOrUpdateSamlConfiguration**](docs/ConfigSAMLAPI.md#insertorupdatesamlconfiguration) | **Put** /api/v2/config/saml | 
 *ConfigSourceControlAPI* | [**DeleteConfiguration5**](docs/ConfigSourceControlAPI.md#deleteconfiguration5) | **Delete** /api/v2/config/sourceControl | 
 *ConfigSourceControlAPI* | [**GetConfiguration5**](docs/ConfigSourceControlAPI.md#getconfiguration5) | **Get** /api/v2/config/sourceControl | 
 *ConfigSourceControlAPI* | [**SetConfiguration5**](docs/ConfigSourceControlAPI.md#setconfiguration5) | **Put** /api/v2/config/sourceControl | 
@@ -547,6 +548,7 @@ Class | Method | HTTP request | Description
  - [GroupingByDTO](docs/GroupingByDTO.md)
  - [ImportSbomRequest](docs/ImportSbomRequest.md)
  - [InnerSourceData](docs/InnerSourceData.md)
+ - [InsertOrUpdateSamlConfigurationRequest](docs/InsertOrUpdateSamlConfigurationRequest.md)
  - [InstallLicenseRequest](docs/InstallLicenseRequest.md)
  - [KevData](docs/KevData.md)
  - [LabelsByOwner](docs/LabelsByOwner.md)

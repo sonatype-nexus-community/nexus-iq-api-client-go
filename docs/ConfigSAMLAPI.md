@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**DeleteSamlConfiguration**](ConfigSAMLAPI.md#DeleteSamlConfiguration) | **Delete** /api/v2/config/saml | 
 [**GetMetadata**](ConfigSAMLAPI.md#GetMetadata) | **Get** /api/v2/config/saml/metadata | 
 [**GetSamlConfiguration**](ConfigSAMLAPI.md#GetSamlConfiguration) | **Get** /api/v2/config/saml | 
+[**InsertOrUpdateSamlConfiguration**](ConfigSAMLAPI.md#InsertOrUpdateSamlConfiguration) | **Put** /api/v2/config/saml | 
 
 
 
@@ -185,6 +186,72 @@ Other parameters are passed through a pointer to a apiGetSamlConfigurationReques
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## InsertOrUpdateSamlConfiguration
+
+> InsertOrUpdateSamlConfiguration(ctx).IdentityProviderXml(identityProviderXml).SamlConfiguration(samlConfiguration).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	identityProviderXml := "identityProviderXml_example" // string | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. (optional)
+	samlConfiguration := *sonatypeiq.NewApiSamlConfigurationDTO() // ApiSamlConfigurationDTO |  (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConfigSAMLAPI.InsertOrUpdateSamlConfiguration(context.Background()).IdentityProviderXml(identityProviderXml).SamlConfiguration(samlConfiguration).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigSAMLAPI.InsertOrUpdateSamlConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiInsertOrUpdateSamlConfigurationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **identityProviderXml** | **string** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | 
+ **samlConfiguration** | [**ApiSamlConfigurationDTO**](ApiSamlConfigurationDTO.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
