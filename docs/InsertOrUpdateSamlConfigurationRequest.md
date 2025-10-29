@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IdentityProviderXml** | Pointer to **string** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | [optional] 
-**SamlConfiguration** | Pointer to [**ApiSamlConfigurationDTO**](ApiSamlConfigurationDTO.md) |  | [optional] 
+**IdentityProviderXml** | ***os.File** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | 
+**SamlConfiguration** | [**ApiSamlConfigurationDTO**](ApiSamlConfigurationDTO.md) |  | 
 
 ## Methods
 
 ### NewInsertOrUpdateSamlConfigurationRequest
 
-`func NewInsertOrUpdateSamlConfigurationRequest() *InsertOrUpdateSamlConfigurationRequest`
+`func NewInsertOrUpdateSamlConfigurationRequest(identityProviderXml *os.File, samlConfiguration ApiSamlConfigurationDTO, ) *InsertOrUpdateSamlConfigurationRequest`
 
 NewInsertOrUpdateSamlConfigurationRequest instantiates a new InsertOrUpdateSamlConfigurationRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,28 +28,23 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetIdentityProviderXml
 
-`func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXml() string`
+`func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXml() *os.File`
 
 GetIdentityProviderXml returns the IdentityProviderXml field if non-nil, zero value otherwise.
 
 ### GetIdentityProviderXmlOk
 
-`func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXmlOk() (*string, bool)`
+`func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXmlOk() (**os.File, bool)`
 
 GetIdentityProviderXmlOk returns a tuple with the IdentityProviderXml field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIdentityProviderXml
 
-`func (o *InsertOrUpdateSamlConfigurationRequest) SetIdentityProviderXml(v string)`
+`func (o *InsertOrUpdateSamlConfigurationRequest) SetIdentityProviderXml(v *os.File)`
 
 SetIdentityProviderXml sets IdentityProviderXml field to given value.
 
-### HasIdentityProviderXml
-
-`func (o *InsertOrUpdateSamlConfigurationRequest) HasIdentityProviderXml() bool`
-
-HasIdentityProviderXml returns a boolean if a field has been set.
 
 ### GetSamlConfiguration
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetSamlConfiguration sets SamlConfiguration field to given value.
 
-### HasSamlConfiguration
-
-`func (o *InsertOrUpdateSamlConfigurationRequest) HasSamlConfiguration() bool`
-
-HasSamlConfiguration returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -12,7 +12,6 @@ package sonatypeiq
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the ApiComponentDetailsDTOV2 type satisfies the MappedNullable interface at compile time
@@ -20,7 +19,7 @@ var _ MappedNullable = &ApiComponentDetailsDTOV2{}
 
 // ApiComponentDetailsDTOV2 struct for ApiComponentDetailsDTOV2
 type ApiComponentDetailsDTOV2 struct {
-	CatalogDate *time.Time `json:"catalogDate,omitempty"`
+	CatalogDate *string `json:"catalogDate,omitempty"`
 	Component *ApiComponentDTOV2 `json:"component,omitempty"`
 	HygieneRating NullableString `json:"hygieneRating,omitempty"`
 	IntegrityRating NullableString `json:"integrityRating,omitempty"`
@@ -50,9 +49,9 @@ func NewApiComponentDetailsDTOV2WithDefaults() *ApiComponentDetailsDTOV2 {
 }
 
 // GetCatalogDate returns the CatalogDate field value if set, zero value otherwise.
-func (o *ApiComponentDetailsDTOV2) GetCatalogDate() time.Time {
+func (o *ApiComponentDetailsDTOV2) GetCatalogDate() string {
 	if o == nil || IsNil(o.CatalogDate) {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 	return *o.CatalogDate
@@ -60,7 +59,7 @@ func (o *ApiComponentDetailsDTOV2) GetCatalogDate() time.Time {
 
 // GetCatalogDateOk returns a tuple with the CatalogDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ApiComponentDetailsDTOV2) GetCatalogDateOk() (*time.Time, bool) {
+func (o *ApiComponentDetailsDTOV2) GetCatalogDateOk() (*string, bool) {
 	if o == nil || IsNil(o.CatalogDate) {
 		return nil, false
 	}
@@ -76,8 +75,8 @@ func (o *ApiComponentDetailsDTOV2) HasCatalogDate() bool {
 	return false
 }
 
-// SetCatalogDate gets a reference to the given time.Time and assigns it to the CatalogDate field.
-func (o *ApiComponentDetailsDTOV2) SetCatalogDate(v time.Time) {
+// SetCatalogDate gets a reference to the given string and assigns it to the CatalogDate field.
+func (o *ApiComponentDetailsDTOV2) SetCatalogDate(v string) {
 	o.CatalogDate = &v
 }
 

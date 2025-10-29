@@ -213,8 +213,8 @@ import (
 )
 
 func main() {
-	identityProviderXml := "identityProviderXml_example" // string | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. (optional)
-	samlConfiguration := *sonatypeiq.NewApiSamlConfigurationDTO() // ApiSamlConfigurationDTO |  (optional)
+	identityProviderXml := os.NewFile(1234, "some_file") // *os.File | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata.
+	samlConfiguration := *sonatypeiq.NewApiSamlConfigurationDTO() // ApiSamlConfigurationDTO | 
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -237,7 +237,7 @@ Other parameters are passed through a pointer to a apiInsertOrUpdateSamlConfigur
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identityProviderXml** | **string** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | 
+ **identityProviderXml** | ***os.File** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | 
  **samlConfiguration** | [**ApiSamlConfigurationDTO**](ApiSamlConfigurationDTO.md) |  | 
 
 ### Return type

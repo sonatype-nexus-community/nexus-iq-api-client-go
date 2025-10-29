@@ -11426,7 +11426,7 @@ components:
           hash: hash
         relativePopularity: 2
         integrityRating: integrityRating
-        catalogDate: 2000-01-23T04:56:07.000+00:00
+        catalogDate: catalogDate
         matchState: matchState
         policyData:
           policyViolations:
@@ -11546,7 +11546,6 @@ components:
             status: status
       properties:
         catalogDate:
-          format: date-time
           type: string
         component:
           $ref: "#/components/schemas/ApiComponentDTOV2"
@@ -11631,7 +11630,7 @@ components:
             hash: hash
           relativePopularity: 2
           integrityRating: integrityRating
-          catalogDate: 2000-01-23T04:56:07.000+00:00
+          catalogDate: catalogDate
           matchState: matchState
           policyData:
             policyViolations:
@@ -11777,7 +11776,7 @@ components:
             hash: hash
           relativePopularity: 2
           integrityRating: integrityRating
-          catalogDate: 2000-01-23T04:56:07.000+00:00
+          catalogDate: catalogDate
           matchState: matchState
           policyData:
             policyViolations:
@@ -11966,7 +11965,7 @@ components:
             hash: hash
           relativePopularity: 2
           integrityRating: integrityRating
-          catalogDate: 2000-01-23T04:56:07.000+00:00
+          catalogDate: catalogDate
           matchState: matchState
           policyData:
             policyViolations:
@@ -12112,7 +12111,7 @@ components:
             hash: hash
           relativePopularity: 2
           integrityRating: integrityRating
-          catalogDate: 2000-01-23T04:56:07.000+00:00
+          catalogDate: catalogDate
           matchState: matchState
           policyData:
             policyViolations:
@@ -32802,9 +32801,13 @@ components:
         identityProviderXml:
           description: Enter the SAML metadata XML of your IdP. Refer to the IdP documentation
             to obtain this metadata.
+          format: binary
           type: string
         samlConfiguration:
           $ref: "#/components/schemas/ApiSamlConfigurationDTO"
+      required:
+      - identityProviderXml
+      - samlConfiguration
       type: object
     installLicense_request:
       properties:

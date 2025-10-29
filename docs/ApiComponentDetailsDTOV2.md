@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CatalogDate** | Pointer to **time.Time** |  | [optional] 
+**CatalogDate** | Pointer to **string** |  | [optional] 
 **Component** | Pointer to [**ApiComponentDTOV2**](ApiComponentDTOV2.md) |  | [optional] 
 **HygieneRating** | Pointer to **NullableString** |  | [optional] 
 **IntegrityRating** | Pointer to **NullableString** |  | [optional] 
@@ -36,20 +36,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCatalogDate
 
-`func (o *ApiComponentDetailsDTOV2) GetCatalogDate() time.Time`
+`func (o *ApiComponentDetailsDTOV2) GetCatalogDate() string`
 
 GetCatalogDate returns the CatalogDate field if non-nil, zero value otherwise.
 
 ### GetCatalogDateOk
 
-`func (o *ApiComponentDetailsDTOV2) GetCatalogDateOk() (*time.Time, bool)`
+`func (o *ApiComponentDetailsDTOV2) GetCatalogDateOk() (*string, bool)`
 
 GetCatalogDateOk returns a tuple with the CatalogDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCatalogDate
 
-`func (o *ApiComponentDetailsDTOV2) SetCatalogDate(v time.Time)`
+`func (o *ApiComponentDetailsDTOV2) SetCatalogDate(v string)`
 
 SetCatalogDate sets CatalogDate field to given value.
 
