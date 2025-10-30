@@ -30064,9 +30064,9 @@ components:
         repositoryPublicId: repositoryPublicId
         repositoryId: repositoryId
         applicationId: applicationId
-        openTime: openTime
+        openTime: 5.962133916683182
         applicationName: applicationName
-        threatLevel: 5
+        threatLevel: 2
         policyViolationCount: 5
       properties:
         applicationId:
@@ -30076,7 +30076,7 @@ components:
         applicationPublicId:
           type: string
         openTime:
-          type: string
+          type: number
         policyViolationCount:
           format: int64
           type: integer
@@ -30093,7 +30093,7 @@ components:
     ContainerImageInQuarantineDataResult:
       example:
         pageCount: 6
-        total: 2
+        total: 7
         pageSize: 1
         page: 0
         results:
@@ -30102,18 +30102,18 @@ components:
           repositoryPublicId: repositoryPublicId
           repositoryId: repositoryId
           applicationId: applicationId
-          openTime: openTime
+          openTime: 5.962133916683182
           applicationName: applicationName
-          threatLevel: 5
+          threatLevel: 2
           policyViolationCount: 5
         - applicationPublicId: applicationPublicId
           scanId: scanId
           repositoryPublicId: repositoryPublicId
           repositoryId: repositoryId
           applicationId: applicationId
-          openTime: openTime
+          openTime: 5.962133916683182
           applicationName: applicationName
-          threatLevel: 5
+          threatLevel: 2
           policyViolationCount: 5
       properties:
         page:

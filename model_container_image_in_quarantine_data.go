@@ -22,7 +22,7 @@ type ContainerImageInQuarantineData struct {
 	ApplicationId *string `json:"applicationId,omitempty"`
 	ApplicationName *string `json:"applicationName,omitempty"`
 	ApplicationPublicId *string `json:"applicationPublicId,omitempty"`
-	OpenTime *string `json:"openTime,omitempty"`
+	OpenTime *float32 `json:"openTime,omitempty"`
 	PolicyViolationCount *int64 `json:"policyViolationCount,omitempty"`
 	RepositoryId *string `json:"repositoryId,omitempty"`
 	RepositoryPublicId *string `json:"repositoryPublicId,omitempty"`
@@ -144,9 +144,9 @@ func (o *ContainerImageInQuarantineData) SetApplicationPublicId(v string) {
 }
 
 // GetOpenTime returns the OpenTime field value if set, zero value otherwise.
-func (o *ContainerImageInQuarantineData) GetOpenTime() string {
+func (o *ContainerImageInQuarantineData) GetOpenTime() float32 {
 	if o == nil || IsNil(o.OpenTime) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.OpenTime
@@ -154,7 +154,7 @@ func (o *ContainerImageInQuarantineData) GetOpenTime() string {
 
 // GetOpenTimeOk returns a tuple with the OpenTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerImageInQuarantineData) GetOpenTimeOk() (*string, bool) {
+func (o *ContainerImageInQuarantineData) GetOpenTimeOk() (*float32, bool) {
 	if o == nil || IsNil(o.OpenTime) {
 		return nil, false
 	}
@@ -170,8 +170,8 @@ func (o *ContainerImageInQuarantineData) HasOpenTime() bool {
 	return false
 }
 
-// SetOpenTime gets a reference to the given string and assigns it to the OpenTime field.
-func (o *ContainerImageInQuarantineData) SetOpenTime(v string) {
+// SetOpenTime gets a reference to the given float32 and assigns it to the OpenTime field.
+func (o *ContainerImageInQuarantineData) SetOpenTime(v float32) {
 	o.OpenTime = &v
 }
 
