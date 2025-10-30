@@ -12,7 +12,6 @@ package sonatypeiq
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the ContainerImageInQuarantineData type satisfies the MappedNullable interface at compile time
@@ -23,7 +22,7 @@ type ContainerImageInQuarantineData struct {
 	ApplicationId *string `json:"applicationId,omitempty"`
 	ApplicationName *string `json:"applicationName,omitempty"`
 	ApplicationPublicId *string `json:"applicationPublicId,omitempty"`
-	OpenTime *time.Time `json:"openTime,omitempty"`
+	OpenTime *string `json:"openTime,omitempty"`
 	PolicyViolationCount *int64 `json:"policyViolationCount,omitempty"`
 	RepositoryId *string `json:"repositoryId,omitempty"`
 	RepositoryPublicId *string `json:"repositoryPublicId,omitempty"`
@@ -145,9 +144,9 @@ func (o *ContainerImageInQuarantineData) SetApplicationPublicId(v string) {
 }
 
 // GetOpenTime returns the OpenTime field value if set, zero value otherwise.
-func (o *ContainerImageInQuarantineData) GetOpenTime() time.Time {
+func (o *ContainerImageInQuarantineData) GetOpenTime() string {
 	if o == nil || IsNil(o.OpenTime) {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 	return *o.OpenTime
@@ -155,7 +154,7 @@ func (o *ContainerImageInQuarantineData) GetOpenTime() time.Time {
 
 // GetOpenTimeOk returns a tuple with the OpenTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerImageInQuarantineData) GetOpenTimeOk() (*time.Time, bool) {
+func (o *ContainerImageInQuarantineData) GetOpenTimeOk() (*string, bool) {
 	if o == nil || IsNil(o.OpenTime) {
 		return nil, false
 	}
@@ -171,8 +170,8 @@ func (o *ContainerImageInQuarantineData) HasOpenTime() bool {
 	return false
 }
 
-// SetOpenTime gets a reference to the given time.Time and assigns it to the OpenTime field.
-func (o *ContainerImageInQuarantineData) SetOpenTime(v time.Time) {
+// SetOpenTime gets a reference to the given string and assigns it to the OpenTime field.
+func (o *ContainerImageInQuarantineData) SetOpenTime(v string) {
 	o.OpenTime = &v
 }
 

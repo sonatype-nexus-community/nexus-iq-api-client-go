@@ -30064,7 +30064,7 @@ components:
         repositoryPublicId: repositoryPublicId
         repositoryId: repositoryId
         applicationId: applicationId
-        openTime: 2000-01-23T04:56:07.000+00:00
+        openTime: openTime
         applicationName: applicationName
         threatLevel: 5
         policyViolationCount: 5
@@ -30076,7 +30076,6 @@ components:
         applicationPublicId:
           type: string
         openTime:
-          format: date-time
           type: string
         policyViolationCount:
           format: int64
@@ -30103,7 +30102,7 @@ components:
           repositoryPublicId: repositoryPublicId
           repositoryId: repositoryId
           applicationId: applicationId
-          openTime: 2000-01-23T04:56:07.000+00:00
+          openTime: openTime
           applicationName: applicationName
           threatLevel: 5
           policyViolationCount: 5
@@ -30112,7 +30111,7 @@ components:
           repositoryPublicId: repositoryPublicId
           repositoryId: repositoryId
           applicationId: applicationId
-          openTime: 2000-01-23T04:56:07.000+00:00
+          openTime: openTime
           applicationName: applicationName
           threatLevel: 5
           policyViolationCount: 5

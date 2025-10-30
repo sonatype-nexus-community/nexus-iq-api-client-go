@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ApplicationId** | Pointer to **string** |  | [optional] 
 **ApplicationName** | Pointer to **string** |  | [optional] 
 **ApplicationPublicId** | Pointer to **string** |  | [optional] 
-**OpenTime** | Pointer to **time.Time** |  | [optional] 
+**OpenTime** | Pointer to **string** |  | [optional] 
 **PolicyViolationCount** | Pointer to **int64** |  | [optional] 
 **RepositoryId** | Pointer to **string** |  | [optional] 
 **RepositoryPublicId** | Pointer to **string** |  | [optional] 
@@ -110,20 +110,20 @@ HasApplicationPublicId returns a boolean if a field has been set.
 
 ### GetOpenTime
 
-`func (o *ContainerImageInQuarantineData) GetOpenTime() time.Time`
+`func (o *ContainerImageInQuarantineData) GetOpenTime() string`
 
 GetOpenTime returns the OpenTime field if non-nil, zero value otherwise.
 
 ### GetOpenTimeOk
 
-`func (o *ContainerImageInQuarantineData) GetOpenTimeOk() (*time.Time, bool)`
+`func (o *ContainerImageInQuarantineData) GetOpenTimeOk() (*string, bool)`
 
 GetOpenTimeOk returns a tuple with the OpenTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOpenTime
 
-`func (o *ContainerImageInQuarantineData) SetOpenTime(v time.Time)`
+`func (o *ContainerImageInQuarantineData) SetOpenTime(v string)`
 
 SetOpenTime sets OpenTime field to given value.
 
