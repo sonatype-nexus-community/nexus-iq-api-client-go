@@ -12,7 +12,6 @@ package sonatypeiq
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // checks if the ApiReportPolicyDataDTOV2 type satisfies the MappedNullable interface at compile time
@@ -25,7 +24,7 @@ type ApiReportPolicyDataDTOV2 struct {
 	Components []ApiReportComponentPolicyViolationsDTOV2 `json:"components,omitempty"`
 	Counts *map[string]int32 `json:"counts,omitempty"`
 	Initiator *string `json:"initiator,omitempty"`
-	ReportTime *time.Time `json:"reportTime,omitempty"`
+	ReportTime *float32 `json:"reportTime,omitempty"`
 	ReportTitle *string `json:"reportTitle,omitempty"`
 }
 
@@ -207,9 +206,9 @@ func (o *ApiReportPolicyDataDTOV2) SetInitiator(v string) {
 }
 
 // GetReportTime returns the ReportTime field value if set, zero value otherwise.
-func (o *ApiReportPolicyDataDTOV2) GetReportTime() time.Time {
+func (o *ApiReportPolicyDataDTOV2) GetReportTime() float32 {
 	if o == nil || IsNil(o.ReportTime) {
-		var ret time.Time
+		var ret float32
 		return ret
 	}
 	return *o.ReportTime
@@ -217,7 +216,7 @@ func (o *ApiReportPolicyDataDTOV2) GetReportTime() time.Time {
 
 // GetReportTimeOk returns a tuple with the ReportTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ApiReportPolicyDataDTOV2) GetReportTimeOk() (*time.Time, bool) {
+func (o *ApiReportPolicyDataDTOV2) GetReportTimeOk() (*float32, bool) {
 	if o == nil || IsNil(o.ReportTime) {
 		return nil, false
 	}
@@ -233,8 +232,8 @@ func (o *ApiReportPolicyDataDTOV2) HasReportTime() bool {
 	return false
 }
 
-// SetReportTime gets a reference to the given time.Time and assigns it to the ReportTime field.
-func (o *ApiReportPolicyDataDTOV2) SetReportTime(v time.Time) {
+// SetReportTime gets a reference to the given float32 and assigns it to the ReportTime field.
+func (o *ApiReportPolicyDataDTOV2) SetReportTime(v float32) {
 	o.ReportTime = &v
 }
 

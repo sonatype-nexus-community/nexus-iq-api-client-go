@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Components** | Pointer to [**[]ApiReportComponentPolicyViolationsDTOV2**](ApiReportComponentPolicyViolationsDTOV2.md) |  | [optional] 
 **Counts** | Pointer to **map[string]int32** |  | [optional] 
 **Initiator** | Pointer to **string** |  | [optional] 
-**ReportTime** | Pointer to **time.Time** |  | [optional] 
+**ReportTime** | Pointer to **float32** |  | [optional] 
 **ReportTitle** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -158,20 +158,20 @@ HasInitiator returns a boolean if a field has been set.
 
 ### GetReportTime
 
-`func (o *ApiReportPolicyDataDTOV2) GetReportTime() time.Time`
+`func (o *ApiReportPolicyDataDTOV2) GetReportTime() float32`
 
 GetReportTime returns the ReportTime field if non-nil, zero value otherwise.
 
 ### GetReportTimeOk
 
-`func (o *ApiReportPolicyDataDTOV2) GetReportTimeOk() (*time.Time, bool)`
+`func (o *ApiReportPolicyDataDTOV2) GetReportTimeOk() (*float32, bool)`
 
 GetReportTimeOk returns a tuple with the ReportTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReportTime
 
-`func (o *ApiReportPolicyDataDTOV2) SetReportTime(v time.Time)`
+`func (o *ApiReportPolicyDataDTOV2) SetReportTime(v float32)`
 
 SetReportTime sets ReportTime field to given value.
 

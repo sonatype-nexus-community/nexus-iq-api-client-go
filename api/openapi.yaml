@@ -24638,7 +24638,7 @@ components:
         initiator: initiator
         reportTitle: reportTitle
         commitHash: commitHash
-        reportTime: 2000-01-23T04:56:07.000+00:00
+        reportTime: 1.4658129805029452
       properties:
         application:
           $ref: "#/components/schemas/ApiApplicationBaseDTO"
@@ -24656,8 +24656,7 @@ components:
         initiator:
           type: string
         reportTime:
-          format: date-time
-          type: string
+          type: number
         reportTitle:
           type: string
       type: object
