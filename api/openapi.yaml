@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.197.0-01
+  version: 1.198.0-01
 servers:
 - url: /
 security:
@@ -67,6 +67,8 @@ tags:
 - description: "Use this REST API to manage the configuration of an SMTP server, to\
     \ receive email notifications."
   name: Config Mail
+- description: Use this REST API to manage the OIDC configuration for IQ Server.
+  name: Config OIDC
 - description: Use this REST API to manage the configuration of IQ Server with an
     existing HTTP proxy server.
   name: Config Proxy Server
@@ -155,11 +157,11 @@ tags:
     You can view existing role assignments and grant or revoke user authorization on organizations, applications and repositories.
   name: Role Memberships
 - description: |-
-    Roles provide sets of permissions that grant access to the functionality in the user interface,through integrations, and when using REST APIs.
+    Roles provide sets of permissions that grant access to the functionality in the user interface, through integrations, and when using REST APIs.
 
     Permissions are granted by assigning users or groups to the system roles or at the various levels in the organizational hierarchy: root organization, repository managers, and applications and organizations.
 
-    Use this REST API to retrieve role IDs, role names and descriptions.
+    Use this REST API to manage roles.
   name: Roles
 - description: Use this REST API to retrieve security vulnerabilities that have been
     overridden.
@@ -2730,6 +2732,55 @@ paths:
           description: Missing or invalid values provided.
       tags:
       - Config Mail
+  /api/v2/config/oidc:
+    delete:
+      description: |-
+        Use this method to delete the OIDC configuration.
+
+        Permissions required: Edit System Configuration and Users
+      operationId: deleteOidcConfiguration
+      responses:
+        "404":
+          description: OIDC is not configured.
+      tags:
+      - Config OIDC
+    get:
+      description: |-
+        Use this method to retrieve the OIDC configuration.
+
+        Permissions required: Edit System Configuration and Users
+      operationId: getOidcConfiguration
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SsoConfigurationDTO"
+          description: "The response contains:\n - `oidcConfiguration` field that\
+            \ contains all the oidc configuration data \n - `oAuth2Configuration`\
+            \ field that contains the OAuth2 configuration required for oidc"
+        "404":
+          description: OIDC is not configured.
+      tags:
+      - Config OIDC
+    put:
+      description: |-
+        Use this method to enable SSO using OpenID Connect (OIDC). This request uses the content type application/json to transmit the configuration to IQ Server.
+
+        Permissions required: Edit System Configuration and Users
+      operationId: insertOrUpdateOidcConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SsoConfigurationDTO"
+      responses:
+        "204":
+          description: Configuration successful.
+        "400":
+          description: Invalid configuration.
+      tags:
+      - Config OIDC
   /api/v2/config/reverseProxyAuthentication:
     delete:
       description: |-
@@ -7310,6 +7361,53 @@ paths:
             \ members who inherit a role based on the organization hierarchy."
       tags:
       - Role Memberships
+  /api/v2/roleMemberships/{ownerType}/role/{roleId}/members:
+    put:
+      description: |-
+        Use this method to set all members for a specific role in the global or repository container context. This operation atomically replaces all existing members for the role with the provided list.
+
+        Permissions required: Edit system configuration and users for a global context or edit access control for a non-global context
+      operationId: setBulkRoleMembersGlobalOrRepositoryContainer
+      parameters:
+      - description: Enter the ownerType.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - repository_container
+          - global
+          pattern: global|repository_container
+          type: string
+        style: simple
+      - description: |-
+          Enter the roleId for the role whose members should be set.
+
+          Use the Roles REST API for roleIds and descriptions.
+        explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/ApiMemberWithDetailsDTO"
+              type: array
+        description: List of members to assign to this role. Provide an empty list
+          to remove all members.
+        required: true
+      responses:
+        "204":
+          description: The role membership has been successfully updated with the
+            provided members.
+      tags:
+      - Role Memberships
   /api/v2/roleMemberships/{ownerType}/role/{roleId}/{memberType}/{memberName}:
     delete:
       description: |-
@@ -7425,6 +7523,36 @@ paths:
             on the given context.
       tags:
       - Role Memberships
+  /api/v2/roleMemberships/{ownerType}/roles:
+    get:
+      description: |-
+        Use this method to retrieve all role memberships for global or repository container context with full details including role names, descriptions, and member information.
+
+        Permissions required: Edit system configuration and users for a global context or view IQ elements for a non-global context
+      operationId: getBulkRoleMembershipsGlobalOrRepositoryContainer
+      parameters:
+      - description: Enter the value for ownerType.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - repository_container
+          - global
+          pattern: global|repository_container
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiApplicableMembershipMappingsDTO"
+          description: The response contains all roles with their members. Also includes
+            a flag indicating whether group search is enabled.
+      tags:
+      - Role Memberships
   /api/v2/roleMemberships/{ownerType}/{internalOwnerId}:
     get:
       description: |-
@@ -7463,6 +7591,65 @@ paths:
           description: "The response contains the assigned role Ids, users and user\
             \ groups for the application or organization requested. It also includes\
             \ members who inherit a role based on the organization hierarchy."
+      tags:
+      - Role Memberships
+  /api/v2/roleMemberships/{ownerType}/{internalOwnerId}/role/{roleId}/members:
+    put:
+      description: |-
+        Use this method to set all members for a specific role. This operation atomically replaces all existing members for the role with the provided list.
+
+        Permissions required: Edit access control
+      operationId: setBulkRoleMembersNonGlobal
+      parameters:
+      - description: Enter the ownerType for which you want to set role members.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_manager
+          - repository
+          pattern: application|organization|repository_manager|repository
+          type: string
+        style: simple
+      - description: "Enter the id associated with the ownerType specified above.\
+          \ For applications, use the public ID. For organizations, repositories,\
+          \ and repository managers, use the internal ID."
+        explode: false
+        in: path
+        name: internalOwnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: |-
+          Enter the roleId for the role whose members should be set.
+
+          Use the Roles REST API for roleIds and descriptions.
+        explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/ApiMemberWithDetailsDTO"
+              type: array
+        description: List of members to assign to this role. Provide an empty list
+          to remove all members.
+        required: true
+      responses:
+        "204":
+          description: The role membership has been successfully updated with the
+            provided members.
       tags:
       - Role Memberships
   /api/v2/roleMemberships/{ownerType}/{internalOwnerId}/role/{roleId}/{memberType}/{memberName}:
@@ -7592,10 +7779,64 @@ paths:
         schema:
           type: string
         style: simple
+      - description: |-
+          If true, attempts to validate if the specified user or group exists before assigning the role.
+          If false or omitted, the request behaves as before (no validation check).
+        explode: true
+        in: query
+        name: validateMember
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
       responses:
         "204":
           description: The specified roleId has been has been granted to the user
             or user group for the requested context.
+      tags:
+      - Role Memberships
+  /api/v2/roleMemberships/{ownerType}/{internalOwnerId}/roles:
+    get:
+      description: |-
+        Use this method to retrieve all role memberships with full details including role names, descriptions, and member information organized by owner (for inheritance display).
+
+        Permissions required: Edit system configuration and users for a global context or view IQ elements for a non-global context
+      operationId: getBulkRoleMembershipsNonGlobal
+      parameters:
+      - description: Enter the ownerType for which you want to retrieve role memberships.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_manager
+          - repository
+          pattern: application|organization|repository_manager|repository
+          type: string
+        style: simple
+      - description: "Enter the corresponding id for the ownerType specified above.\
+          \ For applications, use the public ID. For organizations, repositories,\
+          \ and repository managers, use the internal ID."
+        explode: false
+        in: path
+        name: internalOwnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiApplicableMembershipMappingsDTO"
+          description: |-
+            The response contains all roles with their members organized by owner, including inherited members from parent organizations or repository hierarchies. Also includes a flag indicating whether group search is
+            enabled.
       tags:
       - Role Memberships
   /api/v2/roles:
@@ -7612,6 +7853,115 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiRoleListDTO"
           description: "The response contains the role IDs, role names and descriptions."
+      tags:
+      - Roles
+    post:
+      description: |-
+        Use this method to create a new custom role with specified permissions.
+
+        Permissions required: Edit Roles
+      operationId: addRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiRoleDTO"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiRoleDTO"
+          description: The role was created successfully. The response contains the
+            created role details.
+      tags:
+      - Roles
+  /api/v2/roles/new:
+    get:
+      description: |-
+        Use this method to retrieve a template for creating a new custom role, including all available permissions that can be assigned.
+
+        Permissions required: Edit Roles
+      operationId: getTemplateForNewRole
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiRoleDTO"
+          description: The response contains a role template with available permissions.
+      tags:
+      - Roles
+  /api/v2/roles/{roleId}:
+    delete:
+      description: |-
+        Use this method to delete a custom role.
+
+        Permissions required: Edit Roles
+      operationId: deleteRole
+      parameters:
+      - explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: The role was deleted successfully.
+      tags:
+      - Roles
+    get:
+      description: |-
+        Use this method to retrieve details for a specific role, including its permissions.
+
+        Permissions required: View All Roles
+      operationId: getRoleById
+      parameters:
+      - explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiRoleDTO"
+          description: The response contains the role details including permissions.
+      tags:
+      - Roles
+    put:
+      description: |-
+        Use this method to update an existing custom role and its permissions.
+
+        Permissions required: Edit Roles
+      operationId: updateRole
+      parameters:
+      - explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiRoleDTO"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiRoleDTO"
+          description: The role was updated successfully. The response contains the
+            updated role details.
       tags:
       - Roles
   /api/v2/scan/applications/{applicationId}/sources/{source}:
@@ -8588,6 +8938,24 @@ paths:
             \ of `userCode`, `username` `passCode`, and the IQ Server `realm`."
       tags:
       - User Tokens
+  /api/v2/userTokens/currentUser/createTime:
+    get:
+      description: |-
+        Use this method to retrieve the creation time of the user token for the currently logged in user.
+
+        Permissions required: None
+      operationId: getCurrentUserTokenCreateTime
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: The response contains the token creation time in ISO format.
+        "404":
+          description: User token does not exist for the current user.
+      tags:
+      - User Tokens
   /api/v2/userTokens/currentUser/hasToken:
     get:
       description: "Use this method to check if a user token has been issued to the\
@@ -9075,6 +9443,82 @@ components:
           type: string
         targetType:
           type: string
+      type: object
+    ApiApplicableMembershipMappingsDTO:
+      example:
+        groupSearchEnabled: true
+        membersByRole:
+        - membersByOwner:
+          - ownerType: ownerType
+            ownerName: ownerName
+            members:
+            - internalName: internalName
+              displayName: displayName
+              realm: realm
+              type: USER
+              email: email
+            - internalName: internalName
+              displayName: displayName
+              realm: realm
+              type: USER
+              email: email
+            ownerId: ownerId
+          - ownerType: ownerType
+            ownerName: ownerName
+            members:
+            - internalName: internalName
+              displayName: displayName
+              realm: realm
+              type: USER
+              email: email
+            - internalName: internalName
+              displayName: displayName
+              realm: realm
+              type: USER
+              email: email
+            ownerId: ownerId
+          roleId: roleId
+          roleName: roleName
+          roleDescription: roleDescription
+        - membersByOwner:
+          - ownerType: ownerType
+            ownerName: ownerName
+            members:
+            - internalName: internalName
+              displayName: displayName
+              realm: realm
+              type: USER
+              email: email
+            - internalName: internalName
+              displayName: displayName
+              realm: realm
+              type: USER
+              email: email
+            ownerId: ownerId
+          - ownerType: ownerType
+            ownerName: ownerName
+            members:
+            - internalName: internalName
+              displayName: displayName
+              realm: realm
+              type: USER
+              email: email
+            - internalName: internalName
+              displayName: displayName
+              realm: realm
+              type: USER
+              email: email
+            ownerId: ownerId
+          roleId: roleId
+          roleName: roleName
+          roleDescription: roleDescription
+      properties:
+        groupSearchEnabled:
+          type: boolean
+        membersByRole:
+          items:
+            $ref: "#/components/schemas/ApiRoleWithMembersByOwnerDTO"
+          type: array
       type: object
     ApiApplicationBaseDTO:
       example:
@@ -20245,6 +20689,56 @@ components:
         userOrGroupName:
           type: string
       type: object
+    ApiMemberWithDetailsDTO:
+      example:
+        internalName: internalName
+        displayName: displayName
+        realm: realm
+        type: USER
+        email: email
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        internalName:
+          type: string
+        realm:
+          type: string
+        type:
+          enum:
+          - USER
+          - GROUP
+          type: string
+      type: object
+    ApiMembersByOwnerDTO:
+      example:
+        ownerType: ownerType
+        ownerName: ownerName
+        members:
+        - internalName: internalName
+          displayName: displayName
+          realm: realm
+          type: USER
+          email: email
+        - internalName: internalName
+          displayName: displayName
+          realm: realm
+          type: USER
+          email: email
+        ownerId: ownerId
+      properties:
+        members:
+          items:
+            $ref: "#/components/schemas/ApiMemberWithDetailsDTO"
+          type: array
+        ownerId:
+          type: string
+        ownerName:
+          type: string
+        ownerType:
+          type: string
+      type: object
     ApiMetricsReportingAggregationDTOV2:
       example:
         discoveredCounts:
@@ -20605,6 +21099,62 @@ components:
           description: Total number of items
           format: int64
           type: integer
+      type: object
+    ApiPermissionCategoryDTO:
+      example:
+        displayName: displayName
+        permissions:
+        - allowed: true
+          displayName: displayName
+          description: description
+          id: CONFIGURE_SYSTEM
+        - allowed: true
+          displayName: displayName
+          description: description
+          id: CONFIGURE_SYSTEM
+      properties:
+        displayName:
+          type: string
+        permissions:
+          items:
+            $ref: "#/components/schemas/ApiPermissionDTO"
+          type: array
+      type: object
+    ApiPermissionDTO:
+      example:
+        allowed: true
+        displayName: displayName
+        description: description
+        id: CONFIGURE_SYSTEM
+      properties:
+        allowed:
+          type: boolean
+        description:
+          type: string
+        displayName:
+          type: string
+        id:
+          enum:
+          - CONFIGURE_SYSTEM
+          - EDIT_ROLES
+          - VIEW_ROLES
+          - ACCESS_AUDIT_LOG
+          - WAIVE_POLICY_VIOLATIONS
+          - CHANGE_LICENSES
+          - CHANGE_SECURITY_VULNERABILITIES
+          - MANAGE_PROPRIETARY
+          - CLAIM_COMPONENT
+          - WRITE
+          - READ
+          - EDIT_ACCESS_CONTROL
+          - EVALUATE_APPLICATION
+          - EVALUATE_COMPONENT
+          - ADD_APPLICATION
+          - MANAGE_AUTOMATIC_APPLICATION_CREATION
+          - MANAGE_AUTOMATIC_SCM_CONFIGURATION
+          - LEGAL_REVIEWER
+          - CREATE_PULL_REQUESTS
+          type: string
       type: object
     ApiPolicyDTO:
       example:
@@ -27571,24 +28121,96 @@ components:
       type: object
     ApiRoleDTO:
       example:
+        permissionCategories:
+        - displayName: displayName
+          permissions:
+          - allowed: true
+            displayName: displayName
+            description: description
+            id: CONFIGURE_SYSTEM
+          - allowed: true
+            displayName: displayName
+            description: description
+            id: CONFIGURE_SYSTEM
+        - displayName: displayName
+          permissions:
+          - allowed: true
+            displayName: displayName
+            description: description
+            id: CONFIGURE_SYSTEM
+          - allowed: true
+            displayName: displayName
+            description: description
+            id: CONFIGURE_SYSTEM
+        builtIn: true
         name: name
         description: description
         id: id
       properties:
+        builtIn:
+          type: boolean
         description:
           type: string
         id:
           type: string
         name:
           type: string
+        permissionCategories:
+          items:
+            $ref: "#/components/schemas/ApiPermissionCategoryDTO"
+          type: array
       type: object
     ApiRoleListDTO:
       example:
         roles:
-        - name: name
+        - permissionCategories:
+          - displayName: displayName
+            permissions:
+            - allowed: true
+              displayName: displayName
+              description: description
+              id: CONFIGURE_SYSTEM
+            - allowed: true
+              displayName: displayName
+              description: description
+              id: CONFIGURE_SYSTEM
+          - displayName: displayName
+            permissions:
+            - allowed: true
+              displayName: displayName
+              description: description
+              id: CONFIGURE_SYSTEM
+            - allowed: true
+              displayName: displayName
+              description: description
+              id: CONFIGURE_SYSTEM
+          builtIn: true
+          name: name
           description: description
           id: id
-        - name: name
+        - permissionCategories:
+          - displayName: displayName
+            permissions:
+            - allowed: true
+              displayName: displayName
+              description: description
+              id: CONFIGURE_SYSTEM
+            - allowed: true
+              displayName: displayName
+              description: description
+              id: CONFIGURE_SYSTEM
+          - displayName: displayName
+            permissions:
+            - allowed: true
+              displayName: displayName
+              description: description
+              id: CONFIGURE_SYSTEM
+            - allowed: true
+              displayName: displayName
+              description: description
+              id: CONFIGURE_SYSTEM
+          builtIn: true
+          name: name
           description: description
           id: id
       properties:
@@ -27645,6 +28267,52 @@ components:
           items:
             $ref: "#/components/schemas/ApiRoleMemberMappingDTO"
           type: array
+      type: object
+    ApiRoleWithMembersByOwnerDTO:
+      example:
+        membersByOwner:
+        - ownerType: ownerType
+          ownerName: ownerName
+          members:
+          - internalName: internalName
+            displayName: displayName
+            realm: realm
+            type: USER
+            email: email
+          - internalName: internalName
+            displayName: displayName
+            realm: realm
+            type: USER
+            email: email
+          ownerId: ownerId
+        - ownerType: ownerType
+          ownerName: ownerName
+          members:
+          - internalName: internalName
+            displayName: displayName
+            realm: realm
+            type: USER
+            email: email
+          - internalName: internalName
+            displayName: displayName
+            realm: realm
+            type: USER
+            email: email
+          ownerId: ownerId
+        roleId: roleId
+        roleName: roleName
+        roleDescription: roleDescription
+      properties:
+        membersByOwner:
+          items:
+            $ref: "#/components/schemas/ApiMembersByOwnerDTO"
+          type: array
+        roleDescription:
+          type: string
+        roleId:
+          type: string
+        roleName:
+          type: string
       type: object
     ApiSamlConfigurationDTO:
       description: Enter the SAML configuration<ul><li>`identityProviderName` the
@@ -28872,18 +29540,16 @@ components:
       type: object
     ApiUserTokenDTO:
       example:
-        lastAccessTime: 2000-01-23T04:56:07.000+00:00
-        createTime: 2000-01-23T04:56:07.000+00:00
+        lastAccessTime: lastAccessTime
+        createTime: createTime
         realm: realm
         passCode: passCode
         userCode: userCode
         username: username
       properties:
         createTime:
-          format: date-time
           type: string
         lastAccessTime:
-          format: date-time
           type: string
         passCode:
           type: string
@@ -30379,6 +31045,65 @@ components:
           items:
             $ref: "#/components/schemas/ValidationWarning"
           type: array
+      type: object
+    OAuth2ConfigurationDTO:
+      example:
+        idpJwksUrl: idpJwksUrl
+        lastNameClaim: lastNameClaim
+        idpIssuer: idpIssuer
+        idpJwsAlgorithm: idpJwsAlgorithm
+        idpJwks: idpJwks
+        emailClaim: emailClaim
+        firstNameClaim: firstNameClaim
+        usernameClaim: usernameClaim
+        exactMatchClaimsJson: exactMatchClaimsJson
+        groupsClaim: groupsClaim
+      properties:
+        emailClaim:
+          type: string
+        exactMatchClaimsJson:
+          type: string
+        firstNameClaim:
+          type: string
+        groupsClaim:
+          type: string
+        idpIssuer:
+          type: string
+        idpJwks:
+          type: string
+        idpJwksUrl:
+          type: string
+        idpJwsAlgorithm:
+          type: string
+        lastNameClaim:
+          type: string
+        usernameClaim:
+          type: string
+      type: object
+    OidcConfigurationDTO:
+      example:
+        authorizationCustomParamsJson: authorizationCustomParamsJson
+        clientId: clientId
+        idpIssuer: idpIssuer
+        idpTokenUrl: idpTokenUrl
+        clientSecret: clientSecret
+        tokenRequestCustomParamsJson: tokenRequestCustomParamsJson
+        idpAuthorizationUrl: idpAuthorizationUrl
+      properties:
+        authorizationCustomParamsJson:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        idpAuthorizationUrl:
+          type: string
+        idpIssuer:
+          type: string
+        idpTokenUrl:
+          type: string
+        tokenRequestCustomParamsJson:
+          type: string
       type: object
     PolicyAlert:
       example:
@@ -32159,6 +32884,33 @@ components:
           type: array
         cweSource:
           type: string
+      type: object
+    SsoConfigurationDTO:
+      example:
+        oauth2Configuration:
+          idpJwksUrl: idpJwksUrl
+          lastNameClaim: lastNameClaim
+          idpIssuer: idpIssuer
+          idpJwsAlgorithm: idpJwsAlgorithm
+          idpJwks: idpJwks
+          emailClaim: emailClaim
+          firstNameClaim: firstNameClaim
+          usernameClaim: usernameClaim
+          exactMatchClaimsJson: exactMatchClaimsJson
+          groupsClaim: groupsClaim
+        oidcConfiguration:
+          authorizationCustomParamsJson: authorizationCustomParamsJson
+          clientId: clientId
+          idpIssuer: idpIssuer
+          idpTokenUrl: idpTokenUrl
+          clientSecret: clientSecret
+          tokenRequestCustomParamsJson: tokenRequestCustomParamsJson
+          idpAuthorizationUrl: idpAuthorizationUrl
+      properties:
+        oauth2Configuration:
+          $ref: "#/components/schemas/OAuth2ConfigurationDTO"
+        oidcConfiguration:
+          $ref: "#/components/schemas/OidcConfigurationDTO"
       type: object
     StageData:
       example:

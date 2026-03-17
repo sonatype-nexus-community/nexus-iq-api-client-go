@@ -22,6 +22,35 @@ func Test_sonatypeiq_RoleMembershipsAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test RoleMembershipsAPIService GetBulkRoleMembershipsGlobalOrRepositoryContainer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+
+		resp, httpRes, err := apiClient.RoleMembershipsAPI.GetBulkRoleMembershipsGlobalOrRepositoryContainer(context.Background(), ownerType).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RoleMembershipsAPIService GetBulkRoleMembershipsNonGlobal", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var internalOwnerId string
+
+		resp, httpRes, err := apiClient.RoleMembershipsAPI.GetBulkRoleMembershipsNonGlobal(context.Background(), ownerType, internalOwnerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test RoleMembershipsAPIService GetRoleMembershipsApplicationOrOrganization", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -111,6 +140,35 @@ func Test_sonatypeiq_RoleMembershipsAPIService(t *testing.T) {
 		var memberName string
 
 		httpRes, err := apiClient.RoleMembershipsAPI.RevokeRoleMembershipGlobalOrRepositoryContainer(context.Background(), ownerType, roleId, memberType, memberName).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RoleMembershipsAPIService SetBulkRoleMembersGlobalOrRepositoryContainer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var roleId string
+
+		httpRes, err := apiClient.RoleMembershipsAPI.SetBulkRoleMembersGlobalOrRepositoryContainer(context.Background(), ownerType, roleId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RoleMembershipsAPIService SetBulkRoleMembersNonGlobal", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var internalOwnerId string
+		var roleId string
+
+		httpRes, err := apiClient.RoleMembershipsAPI.SetBulkRoleMembersNonGlobal(context.Background(), ownerType, internalOwnerId, roleId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

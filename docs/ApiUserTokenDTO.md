@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreateTime** | Pointer to **time.Time** |  | [optional] 
-**LastAccessTime** | Pointer to **time.Time** |  | [optional] 
+**CreateTime** | Pointer to **string** |  | [optional] 
+**LastAccessTime** | Pointer to **string** |  | [optional] 
 **PassCode** | Pointer to **string** |  | [optional] 
 **Realm** | Pointer to **string** |  | [optional] 
 **UserCode** | Pointer to **string** |  | [optional] 
@@ -32,20 +32,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCreateTime
 
-`func (o *ApiUserTokenDTO) GetCreateTime() time.Time`
+`func (o *ApiUserTokenDTO) GetCreateTime() string`
 
 GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
 
 ### GetCreateTimeOk
 
-`func (o *ApiUserTokenDTO) GetCreateTimeOk() (*time.Time, bool)`
+`func (o *ApiUserTokenDTO) GetCreateTimeOk() (*string, bool)`
 
 GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreateTime
 
-`func (o *ApiUserTokenDTO) SetCreateTime(v time.Time)`
+`func (o *ApiUserTokenDTO) SetCreateTime(v string)`
 
 SetCreateTime sets CreateTime field to given value.
 
@@ -57,20 +57,20 @@ HasCreateTime returns a boolean if a field has been set.
 
 ### GetLastAccessTime
 
-`func (o *ApiUserTokenDTO) GetLastAccessTime() time.Time`
+`func (o *ApiUserTokenDTO) GetLastAccessTime() string`
 
 GetLastAccessTime returns the LastAccessTime field if non-nil, zero value otherwise.
 
 ### GetLastAccessTimeOk
 
-`func (o *ApiUserTokenDTO) GetLastAccessTimeOk() (*time.Time, bool)`
+`func (o *ApiUserTokenDTO) GetLastAccessTimeOk() (*string, bool)`
 
 GetLastAccessTimeOk returns a tuple with the LastAccessTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastAccessTime
 
-`func (o *ApiUserTokenDTO) SetLastAccessTime(v time.Time)`
+`func (o *ApiUserTokenDTO) SetLastAccessTime(v string)`
 
 SetLastAccessTime sets LastAccessTime field to given value.
 

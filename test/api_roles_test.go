@@ -22,11 +22,76 @@ func Test_sonatypeiq_RolesAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test RolesAPIService AddRole", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.RolesAPI.AddRole(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RolesAPIService DeleteRole", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var roleId string
+
+		httpRes, err := apiClient.RolesAPI.DeleteRole(context.Background(), roleId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RolesAPIService GetRoleById", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var roleId string
+
+		resp, httpRes, err := apiClient.RolesAPI.GetRoleById(context.Background(), roleId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test RolesAPIService GetRoles", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.RolesAPI.GetRoles(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RolesAPIService GetTemplateForNewRole", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.RolesAPI.GetTemplateForNewRole(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RolesAPIService UpdateRole", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var roleId string
+
+		resp, httpRes, err := apiClient.RolesAPI.UpdateRole(context.Background(), roleId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

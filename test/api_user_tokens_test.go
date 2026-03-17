@@ -58,6 +58,18 @@ func Test_sonatypeiq_UserTokensAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test UserTokensAPIService GetCurrentUserTokenCreateTime", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.UserTokensAPI.GetCurrentUserTokenCreateTime(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test UserTokensAPIService GetUserTokenByUsernameAndRealmId", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
