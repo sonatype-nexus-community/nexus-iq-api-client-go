@@ -2852,6 +2852,10 @@ paths:
       requestBody:
         content:
           multipart/form-data:
+            encoding:
+              samlConfiguration:
+                contentType: application/json
+                style: form
             schema:
               $ref: "#/components/schemas/insertOrUpdateSamlConfiguration_request"
       responses:

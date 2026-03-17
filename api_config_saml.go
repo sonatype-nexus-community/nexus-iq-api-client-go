@@ -396,7 +396,7 @@ func (a *ConfigSAMLAPIService) InsertOrUpdateSamlConfigurationExecute(r ApiInser
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	parameterAddToHeaderOrQuery(localVarFormParams, "identityProviderXml", r.identityProviderXml, "", "")
-	parameterAddToHeaderOrQuery(localVarFormParams, "samlConfiguration", r.samlConfiguration, "", "")
+	parameterAddToHeaderOrQuery(localVarFormParams, "samlConfiguration", r.samlConfiguration, "form", "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
