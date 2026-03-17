@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **GitExecutable** | Pointer to **string** |  | [optional] 
 **GitImplementation** | Pointer to **string** |  | [optional] 
 **GitTimeoutSeconds** | Pointer to **int32** |  | [optional] 
+**GpgPassphrase** | Pointer to **string** |  | [optional] 
+**GpgSigningKey** | Pointer to **string** |  | [optional] 
 **PrCommentPurgeWindow** | Pointer to **int32** |  | [optional] 
 **PrEventPurgeWindow** | Pointer to **int32** |  | [optional] 
 **PullRequestMonitoringIntervalSeconds** | Pointer to **int32** |  | [optional] 
@@ -235,6 +237,56 @@ SetGitTimeoutSeconds sets GitTimeoutSeconds field to given value.
 `func (o *ApiSourceControlConfigurationDTO) HasGitTimeoutSeconds() bool`
 
 HasGitTimeoutSeconds returns a boolean if a field has been set.
+
+### GetGpgPassphrase
+
+`func (o *ApiSourceControlConfigurationDTO) GetGpgPassphrase() string`
+
+GetGpgPassphrase returns the GpgPassphrase field if non-nil, zero value otherwise.
+
+### GetGpgPassphraseOk
+
+`func (o *ApiSourceControlConfigurationDTO) GetGpgPassphraseOk() (*string, bool)`
+
+GetGpgPassphraseOk returns a tuple with the GpgPassphrase field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgPassphrase
+
+`func (o *ApiSourceControlConfigurationDTO) SetGpgPassphrase(v string)`
+
+SetGpgPassphrase sets GpgPassphrase field to given value.
+
+### HasGpgPassphrase
+
+`func (o *ApiSourceControlConfigurationDTO) HasGpgPassphrase() bool`
+
+HasGpgPassphrase returns a boolean if a field has been set.
+
+### GetGpgSigningKey
+
+`func (o *ApiSourceControlConfigurationDTO) GetGpgSigningKey() string`
+
+GetGpgSigningKey returns the GpgSigningKey field if non-nil, zero value otherwise.
+
+### GetGpgSigningKeyOk
+
+`func (o *ApiSourceControlConfigurationDTO) GetGpgSigningKeyOk() (*string, bool)`
+
+GetGpgSigningKeyOk returns a tuple with the GpgSigningKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgSigningKey
+
+`func (o *ApiSourceControlConfigurationDTO) SetGpgSigningKey(v string)`
+
+SetGpgSigningKey sets GpgSigningKey field to given value.
+
+### HasGpgSigningKey
+
+`func (o *ApiSourceControlConfigurationDTO) HasGpgSigningKey() bool`
+
+HasGpgSigningKey returns a boolean if a field has been set.
 
 ### GetPrCommentPurgeWindow
 

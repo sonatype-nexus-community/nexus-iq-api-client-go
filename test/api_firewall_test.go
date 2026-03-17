@@ -126,6 +126,20 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirewallAPIService GetCascadeStatus", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var requestId string
+
+		resp, httpRes, err := apiClient.FirewallAPI.GetCascadeStatus(context.Background(), requestId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService GetConfiguredRepositories", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -291,6 +305,20 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.FirewallAPI.GetWaivers(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirewallAPIService InitiateCascadeReevaluation", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var componentHash string
+
+		resp, httpRes, err := apiClient.FirewallAPI.InitiateCascadeReevaluation(context.Background(), componentHash).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

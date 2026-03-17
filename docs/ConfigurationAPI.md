@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteConfiguration**](ConfigurationAPI.md#DeleteConfiguration) | **Delete** /api/v2/config | 
 [**GetConfiguration**](ConfigurationAPI.md#GetConfiguration) | **Get** /api/v2/config | 
+[**InvalidateCache**](ConfigurationAPI.md#InvalidateCache) | **Delete** /api/v2/config/integrationVersions/cache | 
 [**SetConfiguration**](ConfigurationAPI.md#SetConfiguration) | **Put** /api/v2/config | 
 
 
@@ -125,6 +126,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SystemConfig**](SystemConfig.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## InvalidateCache
+
+> CacheInvalidationResponse InvalidateCache(ctx).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigurationAPI.InvalidateCache(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigurationAPI.InvalidateCache``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `InvalidateCache`: CacheInvalidationResponse
+	fmt.Fprintf(os.Stdout, "Response from `ConfigurationAPI.InvalidateCache`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiInvalidateCacheRequest struct via the builder pattern
+
+
+### Return type
+
+[**CacheInvalidationResponse**](CacheInvalidationResponse.md)
 
 ### Authorization
 

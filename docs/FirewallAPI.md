@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**DeleteRepositoryManager**](FirewallAPI.md#DeleteRepositoryManager) | **Delete** /api/v2/firewall/repositoryManagers/{repositoryManagerId} | 
 [**EvaluateComponents1**](FirewallAPI.md#EvaluateComponents1) | **Post** /api/v2/firewall/components/{repositoryManagerId}/{repositoryId}/evaluate | 
 [**EvaluateMalware**](FirewallAPI.md#EvaluateMalware) | **Post** /api/v2/malware-defense/evaluate | 
+[**GetCascadeStatus**](FirewallAPI.md#GetCascadeStatus) | **Get** /api/v2/firewall/repositories/cascade-reevaluate/status/{requestId} | 
 [**GetConfiguredRepositories**](FirewallAPI.md#GetConfiguredRepositories) | **Get** /api/v2/firewall/repositories/configuration/{repositoryManagerId} | 
 [**GetContainerImagesInQuarantine**](FirewallAPI.md#GetContainerImagesInQuarantine) | **Get** /api/v2/firewall/container-image/policyViolations/quarantined | 
 [**GetFirewallAutoUnquarantineConfig**](FirewallAPI.md#GetFirewallAutoUnquarantineConfig) | **Get** /api/v2/firewall/releaseQuarantine/configuration | 
@@ -26,6 +27,7 @@ Method | HTTP request | Description
 [**GetRepositoryManagers**](FirewallAPI.md#GetRepositoryManagers) | **Get** /api/v2/firewall/repositoryManagers | 
 [**GetUnquarantineList**](FirewallAPI.md#GetUnquarantineList) | **Get** /api/v2/firewall/components/autoReleasedFromQuarantine | 
 [**GetWaivers**](FirewallAPI.md#GetWaivers) | **Get** /api/v2/firewall/container-image/policyWaiver | 
+[**InitiateCascadeReevaluation**](FirewallAPI.md#InitiateCascadeReevaluation) | **Post** /api/v2/firewall/repositories/cascade-reevaluate/componentHash/{componentHash} | 
 [**RemoveProprietaryComponentNames**](FirewallAPI.md#RemoveProprietaryComponentNames) | **Delete** /api/v2/firewall/namespace_confusion/{format} | 
 [**SetFirewallAutoUnquarantineConfig**](FirewallAPI.md#SetFirewallAutoUnquarantineConfig) | **Put** /api/v2/firewall/releaseQuarantine/configuration | 
 [**SetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#SetQuarantinedComponentViewAnonymousAccess) | **Put** /api/v2/firewall/quarantinedComponentView/configuration/anonymousAccess/{enabled} | 
@@ -578,6 +580,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCascadeStatus
+
+> CascadeStatusResponseDTO GetCascadeStatus(ctx, requestId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	requestId := "requestId_example" // string | The cascade request ID to check status for
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.FirewallAPI.GetCascadeStatus(context.Background(), requestId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetCascadeStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCascadeStatus`: CascadeStatusResponseDTO
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.GetCascadeStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**requestId** | **string** | The cascade request ID to check status for | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCascadeStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CascadeStatusResponseDTO**](CascadeStatusResponseDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -1492,6 +1564,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PolicyContainerWaiverDataResult**](PolicyContainerWaiverDataResult.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## InitiateCascadeReevaluation
+
+> CascadeReevaluateTicketDTO InitiateCascadeReevaluation(ctx, componentHash).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	componentHash := "componentHash_example" // string | The component hash to re-evaluate across all repositories
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.FirewallAPI.InitiateCascadeReevaluation(context.Background(), componentHash).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.InitiateCascadeReevaluation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `InitiateCascadeReevaluation`: CascadeReevaluateTicketDTO
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.InitiateCascadeReevaluation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**componentHash** | **string** | The component hash to re-evaluate across all repositories | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiInitiateCascadeReevaluationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CascadeReevaluateTicketDTO**](CascadeReevaluateTicketDTO.md)
 
 ### Authorization
 

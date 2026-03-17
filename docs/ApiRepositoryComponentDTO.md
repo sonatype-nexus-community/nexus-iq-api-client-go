@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
+**OriginalPurl** | Pointer to **string** |  | [optional] 
 **PackageUrl** | Pointer to **string** |  | [optional] 
 **QuarantineId** | Pointer to **string** |  | [optional] 
 **QuarantineReleaseTime** | Pointer to **time.Time** |  | [optional] 
@@ -107,6 +108,31 @@ SetHash sets Hash field to given value.
 `func (o *ApiRepositoryComponentDTO) HasHash() bool`
 
 HasHash returns a boolean if a field has been set.
+
+### GetOriginalPurl
+
+`func (o *ApiRepositoryComponentDTO) GetOriginalPurl() string`
+
+GetOriginalPurl returns the OriginalPurl field if non-nil, zero value otherwise.
+
+### GetOriginalPurlOk
+
+`func (o *ApiRepositoryComponentDTO) GetOriginalPurlOk() (*string, bool)`
+
+GetOriginalPurlOk returns a tuple with the OriginalPurl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalPurl
+
+`func (o *ApiRepositoryComponentDTO) SetOriginalPurl(v string)`
+
+SetOriginalPurl sets OriginalPurl field to given value.
+
+### HasOriginalPurl
+
+`func (o *ApiRepositoryComponentDTO) HasOriginalPurl() bool`
+
+HasOriginalPurl returns a boolean if a field has been set.
 
 ### GetPackageUrl
 

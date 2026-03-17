@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
 **Hash** | Pointer to **NullableString** |  | [optional] 
+**OriginalPurl** | Pointer to **string** |  | [optional] 
 **PackageUrl** | Pointer to **string** |  | [optional] 
 **Proprietary** | Pointer to **bool** |  | [optional] 
 **Sha256** | Pointer to **string** |  | [optional] 
@@ -116,6 +117,31 @@ HasHash returns a boolean if a field has been set.
 `func (o *ApiComponentDTOV2) UnsetHash()`
 
 UnsetHash ensures that no value is present for Hash, not even an explicit nil
+### GetOriginalPurl
+
+`func (o *ApiComponentDTOV2) GetOriginalPurl() string`
+
+GetOriginalPurl returns the OriginalPurl field if non-nil, zero value otherwise.
+
+### GetOriginalPurlOk
+
+`func (o *ApiComponentDTOV2) GetOriginalPurlOk() (*string, bool)`
+
+GetOriginalPurlOk returns a tuple with the OriginalPurl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalPurl
+
+`func (o *ApiComponentDTOV2) SetOriginalPurl(v string)`
+
+SetOriginalPurl sets OriginalPurl field to given value.
+
+### HasOriginalPurl
+
+`func (o *ApiComponentDTOV2) HasOriginalPurl() bool`
+
+HasOriginalPurl returns a boolean if a field has been set.
+
 ### GetPackageUrl
 
 `func (o *ApiComponentDTOV2) GetPackageUrl() string`

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CreateTime** | Pointer to **time.Time** |  | [optional] 
+**LastAccessTime** | Pointer to **time.Time** |  | [optional] 
 **PassCode** | Pointer to **string** |  | [optional] 
 **Realm** | Pointer to **string** |  | [optional] 
 **UserCode** | Pointer to **string** |  | [optional] 
@@ -27,6 +29,56 @@ will change when the set of required properties is changed
 NewApiUserTokenDTOWithDefaults instantiates a new ApiUserTokenDTO object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCreateTime
+
+`func (o *ApiUserTokenDTO) GetCreateTime() time.Time`
+
+GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
+
+### GetCreateTimeOk
+
+`func (o *ApiUserTokenDTO) GetCreateTimeOk() (*time.Time, bool)`
+
+GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreateTime
+
+`func (o *ApiUserTokenDTO) SetCreateTime(v time.Time)`
+
+SetCreateTime sets CreateTime field to given value.
+
+### HasCreateTime
+
+`func (o *ApiUserTokenDTO) HasCreateTime() bool`
+
+HasCreateTime returns a boolean if a field has been set.
+
+### GetLastAccessTime
+
+`func (o *ApiUserTokenDTO) GetLastAccessTime() time.Time`
+
+GetLastAccessTime returns the LastAccessTime field if non-nil, zero value otherwise.
+
+### GetLastAccessTimeOk
+
+`func (o *ApiUserTokenDTO) GetLastAccessTimeOk() (*time.Time, bool)`
+
+GetLastAccessTimeOk returns a tuple with the LastAccessTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastAccessTime
+
+`func (o *ApiUserTokenDTO) SetLastAccessTime(v time.Time)`
+
+SetLastAccessTime sets LastAccessTime field to given value.
+
+### HasLastAccessTime
+
+`func (o *ApiUserTokenDTO) HasLastAccessTime() bool`
+
+HasLastAccessTime returns a boolean if a field has been set.
 
 ### GetPassCode
 

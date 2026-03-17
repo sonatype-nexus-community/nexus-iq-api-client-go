@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **IdentificationSource** | Pointer to **string** |  | [optional] 
 **LicenseData** | Pointer to [**ApiLicenseDataDTOV2**](ApiLicenseDataDTOV2.md) |  | [optional] 
 **MatchState** | Pointer to **string** |  | [optional] 
+**OriginalPurl** | Pointer to **string** |  | [optional] 
 **PackageUrl** | Pointer to **string** |  | [optional] 
 **Pathnames** | Pointer to **[]string** |  | [optional] 
 **Proprietary** | Pointer to **bool** |  | [optional] 
@@ -264,6 +265,31 @@ SetMatchState sets MatchState field to given value.
 `func (o *ApiReportComponentDTOV2) HasMatchState() bool`
 
 HasMatchState returns a boolean if a field has been set.
+
+### GetOriginalPurl
+
+`func (o *ApiReportComponentDTOV2) GetOriginalPurl() string`
+
+GetOriginalPurl returns the OriginalPurl field if non-nil, zero value otherwise.
+
+### GetOriginalPurlOk
+
+`func (o *ApiReportComponentDTOV2) GetOriginalPurlOk() (*string, bool)`
+
+GetOriginalPurlOk returns a tuple with the OriginalPurl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalPurl
+
+`func (o *ApiReportComponentDTOV2) SetOriginalPurl(v string)`
+
+SetOriginalPurl sets OriginalPurl field to given value.
+
+### HasOriginalPurl
+
+`func (o *ApiReportComponentDTOV2) HasOriginalPurl() bool`
+
+HasOriginalPurl returns a boolean if a field has been set.
 
 ### GetPackageUrl
 
