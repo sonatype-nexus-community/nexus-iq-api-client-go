@@ -12,8 +12,6 @@ package sonatypeiq
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the InsertOrUpdateSamlConfigurationRequest type satisfies the MappedNullable interface at compile time
@@ -22,20 +20,16 @@ var _ MappedNullable = &InsertOrUpdateSamlConfigurationRequest{}
 // InsertOrUpdateSamlConfigurationRequest struct for InsertOrUpdateSamlConfigurationRequest
 type InsertOrUpdateSamlConfigurationRequest struct {
 	// Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata.
-	IdentityProviderXml string `json:"identityProviderXml"`
-	SamlConfiguration ApiSamlConfigurationDTO `json:"samlConfiguration"`
+	IdentityProviderXml *string `json:"identityProviderXml,omitempty"`
+	SamlConfiguration *ApiSamlConfigurationDTO `json:"samlConfiguration,omitempty"`
 }
-
-type _InsertOrUpdateSamlConfigurationRequest InsertOrUpdateSamlConfigurationRequest
 
 // NewInsertOrUpdateSamlConfigurationRequest instantiates a new InsertOrUpdateSamlConfigurationRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInsertOrUpdateSamlConfigurationRequest(identityProviderXml string, samlConfiguration ApiSamlConfigurationDTO) *InsertOrUpdateSamlConfigurationRequest {
+func NewInsertOrUpdateSamlConfigurationRequest() *InsertOrUpdateSamlConfigurationRequest {
 	this := InsertOrUpdateSamlConfigurationRequest{}
-	this.IdentityProviderXml = identityProviderXml
-	this.SamlConfiguration = samlConfiguration
 	return &this
 }
 
@@ -47,52 +41,68 @@ func NewInsertOrUpdateSamlConfigurationRequestWithDefaults() *InsertOrUpdateSaml
 	return &this
 }
 
-// GetIdentityProviderXml returns the IdentityProviderXml field value
+// GetIdentityProviderXml returns the IdentityProviderXml field value if set, zero value otherwise.
 func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXml() string {
-	if o == nil {
+	if o == nil || IsNil(o.IdentityProviderXml) {
 		var ret string
 		return ret
 	}
-
-	return o.IdentityProviderXml
+	return *o.IdentityProviderXml
 }
 
-// GetIdentityProviderXmlOk returns a tuple with the IdentityProviderXml field value
+// GetIdentityProviderXmlOk returns a tuple with the IdentityProviderXml field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXmlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IdentityProviderXml) {
 		return nil, false
 	}
-	return &o.IdentityProviderXml, true
+	return o.IdentityProviderXml, true
 }
 
-// SetIdentityProviderXml sets field value
+// HasIdentityProviderXml returns a boolean if a field has been set.
+func (o *InsertOrUpdateSamlConfigurationRequest) HasIdentityProviderXml() bool {
+	if o != nil && !IsNil(o.IdentityProviderXml) {
+		return true
+	}
+
+	return false
+}
+
+// SetIdentityProviderXml gets a reference to the given string and assigns it to the IdentityProviderXml field.
 func (o *InsertOrUpdateSamlConfigurationRequest) SetIdentityProviderXml(v string) {
-	o.IdentityProviderXml = v
+	o.IdentityProviderXml = &v
 }
 
-// GetSamlConfiguration returns the SamlConfiguration field value
+// GetSamlConfiguration returns the SamlConfiguration field value if set, zero value otherwise.
 func (o *InsertOrUpdateSamlConfigurationRequest) GetSamlConfiguration() ApiSamlConfigurationDTO {
-	if o == nil {
+	if o == nil || IsNil(o.SamlConfiguration) {
 		var ret ApiSamlConfigurationDTO
 		return ret
 	}
-
-	return o.SamlConfiguration
+	return *o.SamlConfiguration
 }
 
-// GetSamlConfigurationOk returns a tuple with the SamlConfiguration field value
+// GetSamlConfigurationOk returns a tuple with the SamlConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InsertOrUpdateSamlConfigurationRequest) GetSamlConfigurationOk() (*ApiSamlConfigurationDTO, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SamlConfiguration) {
 		return nil, false
 	}
-	return &o.SamlConfiguration, true
+	return o.SamlConfiguration, true
 }
 
-// SetSamlConfiguration sets field value
+// HasSamlConfiguration returns a boolean if a field has been set.
+func (o *InsertOrUpdateSamlConfigurationRequest) HasSamlConfiguration() bool {
+	if o != nil && !IsNil(o.SamlConfiguration) {
+		return true
+	}
+
+	return false
+}
+
+// SetSamlConfiguration gets a reference to the given ApiSamlConfigurationDTO and assigns it to the SamlConfiguration field.
 func (o *InsertOrUpdateSamlConfigurationRequest) SetSamlConfiguration(v ApiSamlConfigurationDTO) {
-	o.SamlConfiguration = v
+	o.SamlConfiguration = &v
 }
 
 func (o InsertOrUpdateSamlConfigurationRequest) MarshalJSON() ([]byte, error) {
@@ -105,47 +115,13 @@ func (o InsertOrUpdateSamlConfigurationRequest) MarshalJSON() ([]byte, error) {
 
 func (o InsertOrUpdateSamlConfigurationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["identityProviderXml"] = o.IdentityProviderXml
-	toSerialize["samlConfiguration"] = o.SamlConfiguration
+	if !IsNil(o.IdentityProviderXml) {
+		toSerialize["identityProviderXml"] = o.IdentityProviderXml
+	}
+	if !IsNil(o.SamlConfiguration) {
+		toSerialize["samlConfiguration"] = o.SamlConfiguration
+	}
 	return toSerialize, nil
-}
-
-func (o *InsertOrUpdateSamlConfigurationRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"identityProviderXml",
-		"samlConfiguration",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varInsertOrUpdateSamlConfigurationRequest := _InsertOrUpdateSamlConfigurationRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInsertOrUpdateSamlConfigurationRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = InsertOrUpdateSamlConfigurationRequest(varInsertOrUpdateSamlConfigurationRequest)
-
-	return err
 }
 
 type NullableInsertOrUpdateSamlConfigurationRequest struct {

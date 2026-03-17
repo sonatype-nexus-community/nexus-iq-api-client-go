@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IdentityProviderXml** | **string** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | 
-**SamlConfiguration** | [**ApiSamlConfigurationDTO**](ApiSamlConfigurationDTO.md) |  | 
+**IdentityProviderXml** | Pointer to **string** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | [optional] 
+**SamlConfiguration** | Pointer to [**ApiSamlConfigurationDTO**](ApiSamlConfigurationDTO.md) |  | [optional] 
 
 ## Methods
 
 ### NewInsertOrUpdateSamlConfigurationRequest
 
-`func NewInsertOrUpdateSamlConfigurationRequest(identityProviderXml string, samlConfiguration ApiSamlConfigurationDTO, ) *InsertOrUpdateSamlConfigurationRequest`
+`func NewInsertOrUpdateSamlConfigurationRequest() *InsertOrUpdateSamlConfigurationRequest`
 
 NewInsertOrUpdateSamlConfigurationRequest instantiates a new InsertOrUpdateSamlConfigurationRequest object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetIdentityProviderXml sets IdentityProviderXml field to given value.
 
+### HasIdentityProviderXml
+
+`func (o *InsertOrUpdateSamlConfigurationRequest) HasIdentityProviderXml() bool`
+
+HasIdentityProviderXml returns a boolean if a field has been set.
 
 ### GetSamlConfiguration
 
@@ -65,6 +70,11 @@ and a boolean to check if the value has been set.
 
 SetSamlConfiguration sets SamlConfiguration field to given value.
 
+### HasSamlConfiguration
+
+`func (o *InsertOrUpdateSamlConfigurationRequest) HasSamlConfiguration() bool`
+
+HasSamlConfiguration returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

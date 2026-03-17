@@ -371,12 +371,6 @@ func (a *ConfigSAMLAPIService) InsertOrUpdateSamlConfigurationExecute(r ApiInser
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.identityProviderXml == nil {
-		return nil, reportError("identityProviderXml is required and must be specified")
-	}
-	if r.samlConfiguration == nil {
-		return nil, reportError("samlConfiguration is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
@@ -395,8 +389,16 @@ func (a *ConfigSAMLAPIService) InsertOrUpdateSamlConfigurationExecute(r ApiInser
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	parameterAddToHeaderOrQuery(localVarFormParams, "identityProviderXml", r.identityProviderXml, "", "")
-	parameterAddToHeaderOrQuery(localVarFormParams, "samlConfiguration", r.samlConfiguration, "form", "")
+	if r.identityProviderXml != nil {
+		parameterAddToHeaderOrQuery(localVarFormParams, "identityProviderXml", r.identityProviderXml, "", "")
+	}
+	if r.samlConfiguration != nil {
+		paramJson, err := parameterToJson(*r.samlConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		localVarFormParams.Add("samlConfiguration", paramJson)
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
