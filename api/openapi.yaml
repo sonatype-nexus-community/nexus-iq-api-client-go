@@ -32481,7 +32481,6 @@ components:
         identityProviderXml:
           description: Enter the SAML metadata XML of your IdP. Refer to the IdP documentation
             to obtain this metadata.
-          format: binary
           type: string
         samlConfiguration:
           $ref: "#/components/schemas/ApiSamlConfigurationDTO"

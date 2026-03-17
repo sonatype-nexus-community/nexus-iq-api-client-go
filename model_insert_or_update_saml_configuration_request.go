@@ -12,7 +12,6 @@ package sonatypeiq
 
 import (
 	"encoding/json"
-	"os"
 	"bytes"
 	"fmt"
 )
@@ -23,7 +22,7 @@ var _ MappedNullable = &InsertOrUpdateSamlConfigurationRequest{}
 // InsertOrUpdateSamlConfigurationRequest struct for InsertOrUpdateSamlConfigurationRequest
 type InsertOrUpdateSamlConfigurationRequest struct {
 	// Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata.
-	IdentityProviderXml *os.File `json:"identityProviderXml"`
+	IdentityProviderXml string `json:"identityProviderXml"`
 	SamlConfiguration ApiSamlConfigurationDTO `json:"samlConfiguration"`
 }
 
@@ -33,7 +32,7 @@ type _InsertOrUpdateSamlConfigurationRequest InsertOrUpdateSamlConfigurationRequ
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInsertOrUpdateSamlConfigurationRequest(identityProviderXml *os.File, samlConfiguration ApiSamlConfigurationDTO) *InsertOrUpdateSamlConfigurationRequest {
+func NewInsertOrUpdateSamlConfigurationRequest(identityProviderXml string, samlConfiguration ApiSamlConfigurationDTO) *InsertOrUpdateSamlConfigurationRequest {
 	this := InsertOrUpdateSamlConfigurationRequest{}
 	this.IdentityProviderXml = identityProviderXml
 	this.SamlConfiguration = samlConfiguration
@@ -49,9 +48,9 @@ func NewInsertOrUpdateSamlConfigurationRequestWithDefaults() *InsertOrUpdateSaml
 }
 
 // GetIdentityProviderXml returns the IdentityProviderXml field value
-func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXml() *os.File {
+func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXml() string {
 	if o == nil {
-		var ret *os.File
+		var ret string
 		return ret
 	}
 
@@ -60,7 +59,7 @@ func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXml() *os.Fi
 
 // GetIdentityProviderXmlOk returns a tuple with the IdentityProviderXml field value
 // and a boolean to check if the value has been set.
-func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXmlOk() (**os.File, bool) {
+func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXmlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +67,7 @@ func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXmlOk() (**o
 }
 
 // SetIdentityProviderXml sets field value
-func (o *InsertOrUpdateSamlConfigurationRequest) SetIdentityProviderXml(v *os.File) {
+func (o *InsertOrUpdateSamlConfigurationRequest) SetIdentityProviderXml(v string) {
 	o.IdentityProviderXml = v
 }
 

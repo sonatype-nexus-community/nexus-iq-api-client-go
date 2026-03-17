@@ -16,7 +16,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 
@@ -318,13 +317,13 @@ func (a *ConfigSAMLAPIService) GetSamlConfigurationExecute(r ApiGetSamlConfigura
 type ApiInsertOrUpdateSamlConfigurationRequest struct {
 	ctx context.Context
 	ApiService *ConfigSAMLAPIService
-	identityProviderXml *os.File
+	identityProviderXml *string
 	samlConfiguration *ApiSamlConfigurationDTO
 }
 
 // Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata.
-func (r ApiInsertOrUpdateSamlConfigurationRequest) IdentityProviderXml(identityProviderXml *os.File) ApiInsertOrUpdateSamlConfigurationRequest {
-	r.identityProviderXml = identityProviderXml
+func (r ApiInsertOrUpdateSamlConfigurationRequest) IdentityProviderXml(identityProviderXml string) ApiInsertOrUpdateSamlConfigurationRequest {
+	r.identityProviderXml = &identityProviderXml
 	return r
 }
 
@@ -396,21 +395,7 @@ func (a *ConfigSAMLAPIService) InsertOrUpdateSamlConfigurationExecute(r ApiInser
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	var identityProviderXmlLocalVarFormFileName string
-	var identityProviderXmlLocalVarFileName     string
-	var identityProviderXmlLocalVarFileBytes    []byte
-
-	identityProviderXmlLocalVarFormFileName = "identityProviderXml"
-	identityProviderXmlLocalVarFile := r.identityProviderXml
-
-	if identityProviderXmlLocalVarFile != nil {
-		fbs, _ := io.ReadAll(identityProviderXmlLocalVarFile)
-
-		identityProviderXmlLocalVarFileBytes = fbs
-		identityProviderXmlLocalVarFileName = identityProviderXmlLocalVarFile.Name()
-		identityProviderXmlLocalVarFile.Close()
-		formFiles = append(formFiles, formFile{fileBytes: identityProviderXmlLocalVarFileBytes, fileName: identityProviderXmlLocalVarFileName, formFileName: identityProviderXmlLocalVarFormFileName})
-	}
+	parameterAddToHeaderOrQuery(localVarFormParams, "identityProviderXml", r.identityProviderXml, "", "")
 	parameterAddToHeaderOrQuery(localVarFormParams, "samlConfiguration", r.samlConfiguration, "", "")
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

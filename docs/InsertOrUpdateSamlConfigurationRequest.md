@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IdentityProviderXml** | ***os.File** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | 
+**IdentityProviderXml** | **string** | Enter the SAML metadata XML of your IdP. Refer to the IdP documentation to obtain this metadata. | 
 **SamlConfiguration** | [**ApiSamlConfigurationDTO**](ApiSamlConfigurationDTO.md) |  | 
 
 ## Methods
 
 ### NewInsertOrUpdateSamlConfigurationRequest
 
-`func NewInsertOrUpdateSamlConfigurationRequest(identityProviderXml *os.File, samlConfiguration ApiSamlConfigurationDTO, ) *InsertOrUpdateSamlConfigurationRequest`
+`func NewInsertOrUpdateSamlConfigurationRequest(identityProviderXml string, samlConfiguration ApiSamlConfigurationDTO, ) *InsertOrUpdateSamlConfigurationRequest`
 
 NewInsertOrUpdateSamlConfigurationRequest instantiates a new InsertOrUpdateSamlConfigurationRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetIdentityProviderXml
 
-`func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXml() *os.File`
+`func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXml() string`
 
 GetIdentityProviderXml returns the IdentityProviderXml field if non-nil, zero value otherwise.
 
 ### GetIdentityProviderXmlOk
 
-`func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXmlOk() (**os.File, bool)`
+`func (o *InsertOrUpdateSamlConfigurationRequest) GetIdentityProviderXmlOk() (*string, bool)`
 
 GetIdentityProviderXmlOk returns a tuple with the IdentityProviderXml field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIdentityProviderXml
 
-`func (o *InsertOrUpdateSamlConfigurationRequest) SetIdentityProviderXml(v *os.File)`
+`func (o *InsertOrUpdateSamlConfigurationRequest) SetIdentityProviderXml(v string)`
 
 SetIdentityProviderXml sets IdentityProviderXml field to given value.
 
