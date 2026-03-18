@@ -57,11 +57,11 @@ func Test_sonatypeiq_ConfigZscalerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigZscalerAPIService GetConfiguration6", func(t *testing.T) {
+	t.Run("Test ConfigZscalerAPIService GetConfiguration7", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ConfigZscalerAPI.GetConfiguration6(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigZscalerAPI.GetConfiguration7(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

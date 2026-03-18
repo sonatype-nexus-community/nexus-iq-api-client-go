@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreateTime** | Pointer to **string** |  | [optional] 
+**ExpirationDate** | Pointer to **time.Time** |  | [optional] 
 **LastAccessTime** | Pointer to **string** |  | [optional] 
 **PassCode** | Pointer to **string** |  | [optional] 
 **Realm** | Pointer to **string** |  | [optional] 
@@ -54,6 +55,31 @@ SetCreateTime sets CreateTime field to given value.
 `func (o *ApiUserTokenDTO) HasCreateTime() bool`
 
 HasCreateTime returns a boolean if a field has been set.
+
+### GetExpirationDate
+
+`func (o *ApiUserTokenDTO) GetExpirationDate() time.Time`
+
+GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
+
+### GetExpirationDateOk
+
+`func (o *ApiUserTokenDTO) GetExpirationDateOk() (*time.Time, bool)`
+
+GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationDate
+
+`func (o *ApiUserTokenDTO) SetExpirationDate(v time.Time)`
+
+SetExpirationDate sets ExpirationDate field to given value.
+
+### HasExpirationDate
+
+`func (o *ApiUserTokenDTO) HasExpirationDate() bool`
+
+HasExpirationDate returns a boolean if a field has been set.
 
 ### GetLastAccessTime
 

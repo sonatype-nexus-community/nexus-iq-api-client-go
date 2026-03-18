@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**DeleteAllCategories**](ConfigZscalerAPI.md#DeleteAllCategories) | **Delete** /api/v2/config/zscaler/update | 
 [**DeleteCategory**](ConfigZscalerAPI.md#DeleteCategory) | **Delete** /api/v2/config/zscaler/update/{format} | 
 [**DeleteConfiguration6**](ConfigZscalerAPI.md#DeleteConfiguration6) | **Delete** /api/v2/config/zscaler | 
-[**GetConfiguration6**](ConfigZscalerAPI.md#GetConfiguration6) | **Get** /api/v2/config/zscaler | 
+[**GetConfiguration7**](ConfigZscalerAPI.md#GetConfiguration7) | **Get** /api/v2/config/zscaler | 
 [**GetQuota**](ConfigZscalerAPI.md#GetQuota) | **Get** /api/v2/config/zscaler/zscalerLimits | 
 [**SetConfiguration6**](ConfigZscalerAPI.md#SetConfiguration6) | **Put** /api/v2/config/zscaler | 
 [**TestConfiguration1**](ConfigZscalerAPI.md#TestConfiguration1) | **Post** /api/v2/config/zscaler/testConfig | 
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiDeleteAllCategoriesRequest
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -190,7 +190,7 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration6Reques
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -202,9 +202,9 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration6Reques
 [[Back to README]](../README.md)
 
 
-## GetConfiguration6
+## GetConfiguration7
 
-> ApiZScalerConfigurationDTO GetConfiguration6(ctx).Execute()
+> ApiZScalerConfigurationDTO GetConfiguration7(ctx).Execute()
 
 
 
@@ -226,13 +226,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigZscalerAPI.GetConfiguration6(context.Background()).Execute()
+	resp, r, err := apiClient.ConfigZscalerAPI.GetConfiguration7(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigZscalerAPI.GetConfiguration6``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigZscalerAPI.GetConfiguration7``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfiguration6`: ApiZScalerConfigurationDTO
-	fmt.Fprintf(os.Stdout, "Response from `ConfigZscalerAPI.GetConfiguration6`: %v\n", resp)
+	// response from `GetConfiguration7`: ApiZScalerConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigZscalerAPI.GetConfiguration7`: %v\n", resp)
 }
 ```
 
@@ -242,7 +242,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfiguration6Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfiguration7Request struct via the builder pattern
 
 
 ### Return type
@@ -251,7 +251,7 @@ Other parameters are passed through a pointer to a apiGetConfiguration6Request s
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -312,7 +312,7 @@ Other parameters are passed through a pointer to a apiGetQuotaRequest struct via
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -378,7 +378,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -442,7 +442,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -510,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -569,7 +569,7 @@ Other parameters are passed through a pointer to a apiTriggerUpdateAllRequest st
 
 ### Authorization
 
-[BasicAuth](../README.md#BasicAuth)
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
