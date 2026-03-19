@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteConfiguration3**](ConfigProxyServerAPI.md#DeleteConfiguration3) | **Delete** /api/v2/config/httpProxyServer | 
-[**GetConfiguration3**](ConfigProxyServerAPI.md#GetConfiguration3) | **Get** /api/v2/config/httpProxyServer | 
-[**SetConfiguration3**](ConfigProxyServerAPI.md#SetConfiguration3) | **Put** /api/v2/config/httpProxyServer | 
+[**DeleteConfiguration4**](ConfigProxyServerAPI.md#DeleteConfiguration4) | **Delete** /api/v2/config/httpProxyServer | 
+[**GetConfiguration4**](ConfigProxyServerAPI.md#GetConfiguration4) | **Get** /api/v2/config/httpProxyServer | 
+[**SetConfiguration4**](ConfigProxyServerAPI.md#SetConfiguration4) | **Put** /api/v2/config/httpProxyServer | 
 
 
 
-## DeleteConfiguration3
+## DeleteConfiguration4
 
-> DeleteConfiguration3(ctx).Execute()
+> DeleteConfiguration4(ctx).Execute()
 
 
 
@@ -34,9 +34,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigProxyServerAPI.DeleteConfiguration3(context.Background()).Execute()
+	r, err := apiClient.ConfigProxyServerAPI.DeleteConfiguration4(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.DeleteConfiguration3``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.DeleteConfiguration4``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -48,7 +48,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteConfiguration3Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteConfiguration4Request struct via the builder pattern
 
 
 ### Return type
@@ -69,9 +69,9 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration3Reques
 [[Back to README]](../README.md)
 
 
-## GetConfiguration3
+## GetConfiguration4
 
-> ApiProxyServerConfigurationDTO GetConfiguration3(ctx).Execute()
+> ApiProxyServerConfigurationDTO GetConfiguration4(ctx).Execute()
 
 
 
@@ -93,13 +93,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigProxyServerAPI.GetConfiguration3(context.Background()).Execute()
+	resp, r, err := apiClient.ConfigProxyServerAPI.GetConfiguration4(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.GetConfiguration3``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.GetConfiguration4``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfiguration3`: ApiProxyServerConfigurationDTO
-	fmt.Fprintf(os.Stdout, "Response from `ConfigProxyServerAPI.GetConfiguration3`: %v\n", resp)
+	// response from `GetConfiguration4`: ApiProxyServerConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigProxyServerAPI.GetConfiguration4`: %v\n", resp)
 }
 ```
 
@@ -109,7 +109,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfiguration3Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfiguration4Request struct via the builder pattern
 
 
 ### Return type
@@ -130,9 +130,9 @@ Other parameters are passed through a pointer to a apiGetConfiguration3Request s
 [[Back to README]](../README.md)
 
 
-## SetConfiguration3
+## SetConfiguration4
 
-> SetConfiguration3(ctx).ApiProxyServerConfigurationDTO(apiProxyServerConfigurationDTO).Execute()
+> SetConfiguration4(ctx).ApiProxyServerConfigurationDTO(apiProxyServerConfigurationDTO).Execute()
 
 
 
@@ -155,9 +155,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigProxyServerAPI.SetConfiguration3(context.Background()).ApiProxyServerConfigurationDTO(apiProxyServerConfigurationDTO).Execute()
+	r, err := apiClient.ConfigProxyServerAPI.SetConfiguration4(context.Background()).ApiProxyServerConfigurationDTO(apiProxyServerConfigurationDTO).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.SetConfiguration3``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigProxyServerAPI.SetConfiguration4``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -169,7 +169,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSetConfiguration3Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetConfiguration4Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

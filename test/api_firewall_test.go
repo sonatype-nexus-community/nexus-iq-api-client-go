@@ -364,4 +364,16 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirewallAPIService VerifyConnectionAndGetApplications", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.FirewallAPI.VerifyConnectionAndGetApplications(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }

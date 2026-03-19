@@ -22,22 +22,22 @@ func Test_sonatypeiq_ConfigSourceControlAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test ConfigSourceControlAPIService DeleteConfiguration5", func(t *testing.T) {
+	t.Run("Test ConfigSourceControlAPIService DeleteConfiguration6", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigSourceControlAPI.DeleteConfiguration5(context.Background()).Execute()
+		httpRes, err := apiClient.ConfigSourceControlAPI.DeleteConfiguration6(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ConfigSourceControlAPIService GetConfiguration5", func(t *testing.T) {
+	t.Run("Test ConfigSourceControlAPIService GetConfiguration6", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ConfigSourceControlAPI.GetConfiguration5(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigSourceControlAPI.GetConfiguration6(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -45,11 +45,11 @@ func Test_sonatypeiq_ConfigSourceControlAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigSourceControlAPIService SetConfiguration5", func(t *testing.T) {
+	t.Run("Test ConfigSourceControlAPIService SetConfiguration6", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigSourceControlAPI.SetConfiguration5(context.Background()).Execute()
+		httpRes, err := apiClient.ConfigSourceControlAPI.SetConfiguration6(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

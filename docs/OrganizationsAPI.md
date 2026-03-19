@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteOrganization**](OrganizationsAPI.md#DeleteOrganization) | **Delete** /api/v2/organizations/{organizationId} | 
 [**GetOrganization**](OrganizationsAPI.md#GetOrganization) | **Get** /api/v2/organizations/{organizationId} | 
 [**GetOrganizations**](OrganizationsAPI.md#GetOrganizations) | **Get** /api/v2/organizations | 
+[**GetOrganizationsByIds**](OrganizationsAPI.md#GetOrganizationsByIds) | **Get** /api/v2/organizations/byid | 
 [**MoveOrganization**](OrganizationsAPI.md#MoveOrganization) | **Put** /api/v2/organizations/{organizationId}/move/destination/{destinationId} | 
 
 
@@ -263,6 +264,72 @@ Other parameters are passed through a pointer to a apiGetOrganizationsRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **organizationName** | **[]string** | Enter the organization names. | 
+
+### Return type
+
+[**ApiOrganizationListDTO**](ApiOrganizationListDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOrganizationsByIds
+
+> ApiOrganizationListDTO GetOrganizationsByIds(ctx).Id(id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	id := []string{"Inner_example"} // []string | Enter the internal organization IDs. (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.GetOrganizationsByIds(context.Background()).Id(id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetOrganizationsByIds``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOrganizationsByIds`: ApiOrganizationListDTO
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.GetOrganizationsByIds`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrganizationsByIdsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **[]string** | Enter the internal organization IDs. | 
 
 ### Return type
 

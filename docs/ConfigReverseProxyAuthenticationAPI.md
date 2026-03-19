@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteConfiguration4**](ConfigReverseProxyAuthenticationAPI.md#DeleteConfiguration4) | **Delete** /api/v2/config/reverseProxyAuthentication | 
-[**GetConfiguration4**](ConfigReverseProxyAuthenticationAPI.md#GetConfiguration4) | **Get** /api/v2/config/reverseProxyAuthentication | 
-[**SetConfiguration4**](ConfigReverseProxyAuthenticationAPI.md#SetConfiguration4) | **Put** /api/v2/config/reverseProxyAuthentication | 
+[**DeleteConfiguration5**](ConfigReverseProxyAuthenticationAPI.md#DeleteConfiguration5) | **Delete** /api/v2/config/reverseProxyAuthentication | 
+[**GetConfiguration5**](ConfigReverseProxyAuthenticationAPI.md#GetConfiguration5) | **Get** /api/v2/config/reverseProxyAuthentication | 
+[**SetConfiguration5**](ConfigReverseProxyAuthenticationAPI.md#SetConfiguration5) | **Put** /api/v2/config/reverseProxyAuthentication | 
 
 
 
-## DeleteConfiguration4
+## DeleteConfiguration5
 
-> DeleteConfiguration4(ctx).Execute()
+> DeleteConfiguration5(ctx).Execute()
 
 
 
@@ -34,9 +34,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigReverseProxyAuthenticationAPI.DeleteConfiguration4(context.Background()).Execute()
+	r, err := apiClient.ConfigReverseProxyAuthenticationAPI.DeleteConfiguration5(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.DeleteConfiguration4``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.DeleteConfiguration5``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -48,7 +48,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteConfiguration4Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteConfiguration5Request struct via the builder pattern
 
 
 ### Return type
@@ -69,9 +69,9 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration4Reques
 [[Back to README]](../README.md)
 
 
-## GetConfiguration4
+## GetConfiguration5
 
-> ApiReverseProxyAuthenticationConfigurationDTO GetConfiguration4(ctx).Execute()
+> ApiReverseProxyAuthenticationConfigurationDTO GetConfiguration5(ctx).Execute()
 
 
 
@@ -93,13 +93,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigReverseProxyAuthenticationAPI.GetConfiguration4(context.Background()).Execute()
+	resp, r, err := apiClient.ConfigReverseProxyAuthenticationAPI.GetConfiguration5(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.GetConfiguration4``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.GetConfiguration5``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfiguration4`: ApiReverseProxyAuthenticationConfigurationDTO
-	fmt.Fprintf(os.Stdout, "Response from `ConfigReverseProxyAuthenticationAPI.GetConfiguration4`: %v\n", resp)
+	// response from `GetConfiguration5`: ApiReverseProxyAuthenticationConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigReverseProxyAuthenticationAPI.GetConfiguration5`: %v\n", resp)
 }
 ```
 
@@ -109,7 +109,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfiguration4Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfiguration5Request struct via the builder pattern
 
 
 ### Return type
@@ -130,9 +130,9 @@ Other parameters are passed through a pointer to a apiGetConfiguration4Request s
 [[Back to README]](../README.md)
 
 
-## SetConfiguration4
+## SetConfiguration5
 
-> SetConfiguration4(ctx).ApiReverseProxyAuthenticationConfigurationDTO(apiReverseProxyAuthenticationConfigurationDTO).Execute()
+> SetConfiguration5(ctx).ApiReverseProxyAuthenticationConfigurationDTO(apiReverseProxyAuthenticationConfigurationDTO).Execute()
 
 
 
@@ -155,9 +155,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigReverseProxyAuthenticationAPI.SetConfiguration4(context.Background()).ApiReverseProxyAuthenticationConfigurationDTO(apiReverseProxyAuthenticationConfigurationDTO).Execute()
+	r, err := apiClient.ConfigReverseProxyAuthenticationAPI.SetConfiguration5(context.Background()).ApiReverseProxyAuthenticationConfigurationDTO(apiReverseProxyAuthenticationConfigurationDTO).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.SetConfiguration4``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigReverseProxyAuthenticationAPI.SetConfiguration5``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -169,7 +169,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSetConfiguration4Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetConfiguration5Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

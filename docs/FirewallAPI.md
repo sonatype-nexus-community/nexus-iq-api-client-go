@@ -31,6 +31,7 @@ Method | HTTP request | Description
 [**RemoveProprietaryComponentNames**](FirewallAPI.md#RemoveProprietaryComponentNames) | **Delete** /api/v2/firewall/namespace_confusion/{format} | 
 [**SetFirewallAutoUnquarantineConfig**](FirewallAPI.md#SetFirewallAutoUnquarantineConfig) | **Put** /api/v2/firewall/releaseQuarantine/configuration | 
 [**SetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#SetQuarantinedComponentViewAnonymousAccess) | **Put** /api/v2/firewall/quarantinedComponentView/configuration/anonymousAccess/{enabled} | 
+[**VerifyConnectionAndGetApplications**](FirewallAPI.md#VerifyConnectionAndGetApplications) | **Get** /api/v2/firewall/connection/verify | 
 
 
 
@@ -469,7 +470,7 @@ import (
 func main() {
 	repositoryManagerId := "repositoryManagerId_example" // string | Enter the repository manager ID.
 	repositoryId := "repositoryId_example" // string | Enter the repository ID.
-	apiRepositoryComponentEvaluationRequestList := *sonatypeiq.NewApiRepositoryComponentEvaluationRequestList() // ApiRepositoryComponentEvaluationRequestList | Provide the array of the component identifiers to be evaluated, using the component hash and the (packageUrl or pathname). A maximum of 100 components can be evaluated in one request.
+	apiRepositoryComponentEvaluationRequestList := *sonatypeiq.NewApiRepositoryComponentEvaluationRequestList() // ApiRepositoryComponentEvaluationRequestList | Provide the array of component identifiers to be evaluated. Each component requires **one of the following combinations**:  **For Coordinate-Based Formats (golang, conan, cargo, cocoapods, cran, conda, composer, hf-model):** - **packageUrl only** - Hash is optional - **packageUrl + hash** - Hash is optional, will be used if provided - **pathname + hash** - Hash required (pathname approach always requires hash)  **For Hash-Based Formats (maven, npm, pypi, nuget, docker, rubygems, etc.):** - **packageUrl + hash** - Hash REQUIRED to identify exact file content - **pathname + hash** - Hash REQUIRED - Providing packageUrl without hash for these formats will result in incorrect identification  A maximum of 100 components can be evaluated in one request.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -501,7 +502,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **apiRepositoryComponentEvaluationRequestList** | [**ApiRepositoryComponentEvaluationRequestList**](ApiRepositoryComponentEvaluationRequestList.md) | Provide the array of the component identifiers to be evaluated, using the component hash and the (packageUrl or pathname). A maximum of 100 components can be evaluated in one request. | 
+ **apiRepositoryComponentEvaluationRequestList** | [**ApiRepositoryComponentEvaluationRequestList**](ApiRepositoryComponentEvaluationRequestList.md) | Provide the array of component identifiers to be evaluated. Each component requires **one of the following combinations**:  **For Coordinate-Based Formats (golang, conan, cargo, cocoapods, cran, conda, composer, hf-model):** - **packageUrl only** - Hash is optional - **packageUrl + hash** - Hash is optional, will be used if provided - **pathname + hash** - Hash required (pathname approach always requires hash)  **For Hash-Based Formats (maven, npm, pypi, nuget, docker, rubygems, etc.):** - **packageUrl + hash** - Hash REQUIRED to identify exact file content - **pathname + hash** - Hash REQUIRED - Providing packageUrl without hash for these formats will result in incorrect identification  A maximum of 100 components can be evaluated in one request. | 
 
 ### Return type
 
@@ -1845,6 +1846,67 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## VerifyConnectionAndGetApplications
+
+> ApplicationSummaryList VerifyConnectionAndGetApplications(ctx).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.FirewallAPI.VerifyConnectionAndGetApplications(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.VerifyConnectionAndGetApplications``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `VerifyConnectionAndGetApplications`: ApplicationSummaryList
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.VerifyConnectionAndGetApplications`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiVerifyConnectionAndGetApplicationsRequest struct via the builder pattern
+
+
+### Return type
+
+[**ApplicationSummaryList**](ApplicationSummaryList.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

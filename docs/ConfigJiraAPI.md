@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteConfiguration1**](ConfigJiraAPI.md#DeleteConfiguration1) | **Delete** /api/v2/config/jira | 
-[**GetConfiguration1**](ConfigJiraAPI.md#GetConfiguration1) | **Get** /api/v2/config/jira | 
-[**SetConfiguration1**](ConfigJiraAPI.md#SetConfiguration1) | **Put** /api/v2/config/jira | 
+[**DeleteConfiguration2**](ConfigJiraAPI.md#DeleteConfiguration2) | **Delete** /api/v2/config/jira | 
+[**GetConfiguration2**](ConfigJiraAPI.md#GetConfiguration2) | **Get** /api/v2/config/jira | 
+[**SetConfiguration2**](ConfigJiraAPI.md#SetConfiguration2) | **Put** /api/v2/config/jira | 
 
 
 
-## DeleteConfiguration1
+## DeleteConfiguration2
 
-> DeleteConfiguration1(ctx).Execute()
+> DeleteConfiguration2(ctx).Execute()
 
 
 
@@ -34,9 +34,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigJiraAPI.DeleteConfiguration1(context.Background()).Execute()
+	r, err := apiClient.ConfigJiraAPI.DeleteConfiguration2(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigJiraAPI.DeleteConfiguration1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigJiraAPI.DeleteConfiguration2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -48,7 +48,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteConfiguration1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteConfiguration2Request struct via the builder pattern
 
 
 ### Return type
@@ -69,9 +69,9 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration1Reques
 [[Back to README]](../README.md)
 
 
-## GetConfiguration1
+## GetConfiguration2
 
-> ApiJiraConfigurationDTO GetConfiguration1(ctx).Execute()
+> ApiJiraConfigurationDTO GetConfiguration2(ctx).Execute()
 
 
 
@@ -93,13 +93,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigJiraAPI.GetConfiguration1(context.Background()).Execute()
+	resp, r, err := apiClient.ConfigJiraAPI.GetConfiguration2(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigJiraAPI.GetConfiguration1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigJiraAPI.GetConfiguration2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfiguration1`: ApiJiraConfigurationDTO
-	fmt.Fprintf(os.Stdout, "Response from `ConfigJiraAPI.GetConfiguration1`: %v\n", resp)
+	// response from `GetConfiguration2`: ApiJiraConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigJiraAPI.GetConfiguration2`: %v\n", resp)
 }
 ```
 
@@ -109,7 +109,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfiguration1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfiguration2Request struct via the builder pattern
 
 
 ### Return type
@@ -130,9 +130,9 @@ Other parameters are passed through a pointer to a apiGetConfiguration1Request s
 [[Back to README]](../README.md)
 
 
-## SetConfiguration1
+## SetConfiguration2
 
-> SetConfiguration1(ctx).ApiJiraConfigurationDTO(apiJiraConfigurationDTO).Execute()
+> SetConfiguration2(ctx).ApiJiraConfigurationDTO(apiJiraConfigurationDTO).Execute()
 
 
 
@@ -155,9 +155,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigJiraAPI.SetConfiguration1(context.Background()).ApiJiraConfigurationDTO(apiJiraConfigurationDTO).Execute()
+	r, err := apiClient.ConfigJiraAPI.SetConfiguration2(context.Background()).ApiJiraConfigurationDTO(apiJiraConfigurationDTO).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigJiraAPI.SetConfiguration1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigJiraAPI.SetConfiguration2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -169,7 +169,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSetConfiguration1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetConfiguration2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

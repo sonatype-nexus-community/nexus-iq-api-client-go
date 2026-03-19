@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.200.0-01
+  version: 1.201.0-02
 servers:
 - url: /
 security:
@@ -28,6 +28,10 @@ tags:
   name: Auto Policy Waiver Exclusions
 - description: "Use this REST API to create, modify and retrieve auto policy waivers."
   name: Auto Policy Waivers
+- description: Use this REST API to manage CI integration configuration. Configurations
+    can be set at organization or application level and are merged from the organization
+    hierarchy with lower levels taking precedence.
+  name: CI Configuration
 - description: |-
     Use this REST API to manage components that are developed in-house and are not open-source.
 
@@ -113,6 +117,9 @@ tags:
     \ metrics, repository management, quarantine operations, and namespace confusion\
     \ prevention."
   name: Firewall
+- name: GitHub App
+- description: GitHub App configuration operations
+  name: GitHub App Configuration
 - description: Use this REST API to retrieve license legal metadata in raw or HTML
     format.
   name: License Legal Metadata Report
@@ -2057,7 +2064,7 @@ paths:
         Use this method to disable one or more IQ Server system properties. The property names are case-sensitive.
 
         Permissions required: Edit System Configuration and Users
-      operationId: deleteConfiguration
+      operationId: deleteConfiguration_1
       parameters:
       - description: Enter the names of the system properties. Values provided for
           name are case-sensitive.
@@ -2082,7 +2089,7 @@ paths:
         Use this method to retrieve the configured value for an IQ Server system property.
 
         Permissions required: Edit System Configuration and Users or system property dependent
-      operationId: getConfiguration
+      operationId: getConfiguration_1
       parameters:
       - description: Enter the names of the system properties. Values provided for
           name are case-sensitive.
@@ -2110,7 +2117,7 @@ paths:
         Use this method to configure one or more IQ Server system properties. The property names are case-sensitive.
 
         Permissions required: Edit System Configuration and Users
-      operationId: setConfiguration
+      operationId: setConfiguration_1
       requestBody:
         content:
           application/json:
@@ -2486,6 +2493,145 @@ paths:
             status of the connection.
       tags:
       - Configure Artifactory Connection
+  /api/v2/config/ci/{ownerType}/{ownerId}:
+    delete:
+      description: |-
+        Use this method to delete CI integration configuration for the specified owner.
+
+        Permissions required: Edit IQ Elements
+      operationId: deleteConfiguration
+      parameters:
+      - description: The owner type (application or organization)
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: The internal ID of the owner
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: CI configuration was deleted successfully.
+        "404":
+          description: CI configuration not found for the specified owner.
+      tags:
+      - CI Configuration
+    get:
+      description: |-
+        Use this method to retrieve CI integration configuration for the specified owner.
+
+        Set the `direct` query parameter to `true` to retrieve only the configuration directly associated with the specified owner. Set it to `false` (default) to retrieve the merged configuration from the organization hierarchy, where configurations from parent organizations are combined with lower levels taking precedence.
+
+        The response includes a `source` map that indicates which owner (organization or application) contributed each configuration field when using merged mode.
+
+        Permissions required: View IQ Elements
+      operationId: getConfiguration
+      parameters:
+      - description: The owner type (application or organization)
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: The internal ID of the owner
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Set to true to retrieve only direct configuration, false (default)\
+          \ to retrieve merged configuration from hierarchy"
+        explode: true
+        in: query
+        name: direct
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiCiConfigurationResponseDto"
+          description: |-
+            The response contains:
+            <ul>
+            <li>`configuration` - the CI integration configuration as a JSON object</li>
+            <li>`source` - a map of field names to owner IDs indicating provenance (empty for direct queries)</li>
+            </ul>
+        "404":
+          description: No CI configuration found for the specified owner or its hierarchy.
+      tags:
+      - CI Configuration
+    put:
+      description: |-
+        Use this method to create or update CI integration configuration for the specified owner.
+
+        The configuration is stored as a JSON object to support various CI systems (GitHub Actions, GitLab CI, etc.). String values must be non-empty.
+
+        Permissions required: Edit IQ Elements
+      operationId: setConfiguration
+      parameters:
+      - description: The owner type (application or organization)
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: The internal ID of the owner
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiCiConfigurationDto"
+        description: Provide the CI integration configuration as a JSON object. The
+          structure supports different CI systems.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiCiConfigurationDto"
+          description: CI configuration was saved successfully.
+        "400":
+          description: "Invalid configuration provided (e.g., empty strings)."
+      tags:
+      - CI Configuration
   /api/v2/config/crowd:
     delete:
       description: |-
@@ -2608,7 +2754,7 @@ paths:
         Use this method to remove an existing HTTP proxy server configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: deleteConfiguration_3
+      operationId: deleteConfiguration_4
       responses:
         "204":
           description: HTTP proxy server configuration deleted successfully.
@@ -2621,7 +2767,7 @@ paths:
         Use this method to inspect an existing HTTP proxy server configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: getConfiguration_3
+      operationId: getConfiguration_4
       responses:
         "200":
           content:
@@ -2644,7 +2790,7 @@ paths:
         Use this method to create or update an existing HTTP proxy server configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: setConfiguration_3
+      operationId: setConfiguration_4
       requestBody:
         content:
           application/json:
@@ -2691,7 +2837,7 @@ paths:
         Use this method to delete a Jira configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: deleteConfiguration_1
+      operationId: deleteConfiguration_2
       responses:
         "204":
           description: Jira configuration deleted.
@@ -2702,7 +2848,7 @@ paths:
         Use this method to retrieve an existing configuration for Jira.
 
         Permissions required: Edit System Configuration and Users
-      operationId: getConfiguration_1
+      operationId: getConfiguration_2
       responses:
         "200":
           content:
@@ -2722,7 +2868,7 @@ paths:
         Use this method to set a Jira configuration. If a Jira configuration already exists, the values will be updated with the ones provided here. If the server URL is being changed, then the password (if any) will be required.
 
         Permissions required: Edit System Configuration and Users
-      operationId: setConfiguration_1
+      operationId: setConfiguration_2
       requestBody:
         content:
           application/json:
@@ -2740,7 +2886,7 @@ paths:
         Use this method to disable or remove an SMTP configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: deleteConfiguration_2
+      operationId: deleteConfiguration_3
       responses:
         "204":
           description: SMTP configuration was removed successfully.
@@ -2753,7 +2899,7 @@ paths:
         Use this method to review the configuration for an SMTP server.
 
         Permissions required: Edit System Configuration and Users
-      operationId: getConfiguration_2
+      operationId: getConfiguration_3
       responses:
         "200":
           content:
@@ -2780,7 +2926,7 @@ paths:
         Use this method to configure or update an existing SMTP server configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: setConfiguration_2
+      operationId: setConfiguration_3
       requestBody:
         content:
           application/json:
@@ -2900,7 +3046,7 @@ paths:
         Use this method to remove an existing reverse proxy server configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: deleteConfiguration_4
+      operationId: deleteConfiguration_5
       responses:
         "204":
           description: Reverse proxy server configuration deleted successfully.
@@ -2911,7 +3057,7 @@ paths:
         Use this method to inspect an existing reverse proxy server configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: getConfiguration_4
+      operationId: getConfiguration_5
       responses:
         "200":
           content:
@@ -2934,7 +3080,7 @@ paths:
         Use this method to configure the reverse proxy server.
 
         Permissions required: Edit System Configuration and Users
-      operationId: setConfiguration_4
+      operationId: setConfiguration_5
       requestBody:
         content:
           application/json:
@@ -3050,7 +3196,7 @@ paths:
         Use this method to delete an existing SCM configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: deleteConfiguration_5
+      operationId: deleteConfiguration_6
       responses:
         "204":
           description: SCM configuration deleted successfully.
@@ -3061,7 +3207,7 @@ paths:
         Use this method to retrieve an existing SCM configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: getConfiguration_5
+      operationId: getConfiguration_6
       responses:
         "200":
           content:
@@ -3101,7 +3247,7 @@ paths:
         Use this method to set an SCM Configuration with the IQ Server.
 
         Permissions required: Edit System Configuration and Users
-      operationId: setConfiguration_5
+      operationId: setConfiguration_6
       requestBody:
         content:
           application/json:
@@ -3175,7 +3321,7 @@ paths:
         Use this method to retrieve user token configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: getConfiguration_6
+      operationId: getConfiguration_7
       responses:
         "200":
           content:
@@ -3221,7 +3367,7 @@ paths:
         Use this method to disable or remove the Zscaler configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: deleteConfiguration_6
+      operationId: deleteConfiguration_7
       responses:
         "204":
           description: Zscaler configuration was removed successfully.
@@ -3234,7 +3380,7 @@ paths:
         Use this method to review the configuration for a Zscaler server.
 
         Permissions required: Edit System Configuration and Users
-      operationId: getConfiguration_7
+      operationId: getConfiguration_8
       responses:
         "200":
           content:
@@ -3255,7 +3401,7 @@ paths:
         Use this method to configure or update an existing Zscaler server configuration.
 
         Permissions required: Edit System Configuration and Users
-      operationId: setConfiguration_6
+      operationId: setConfiguration_7
       requestBody:
         content:
           application/json:
@@ -4156,6 +4302,20 @@ paths:
       description: |-
         Use this method to evaluate components (max. 100).
 
+        **Hash Requirements by Format Type:**
+
+        **Coordinate-Based Formats** (hash NOT required when using packageUrl):
+        - golang, conan, cargo, cocoapods, cran, conda, composer, hf-model
+        - These formats identify components by coordinates (name+version) rather than file hash
+        - When using packageUrl, hash is optional
+        - If hash is provided, it will be used
+
+        **Hash-Based Formats** (hash REQUIRED):
+        - maven, npm, pypi, nuget, docker, rubygems, and others
+        - Hash must ALWAYS be provided to identify the exact file content
+        - Hash is required regardless of whether pathname or packageUrl is used
+        - Missing hash for these formats will result in incorrect component identification
+
         Permissions required: Evaluate Individual Components
       operationId: evaluateComponents_1
       parameters:
@@ -4180,9 +4340,20 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ApiRepositoryComponentEvaluationRequestList"
-        description: "Provide the array of the component identifiers to be evaluated,\
-          \ using the component hash and the (packageUrl or pathname). A maximum of\
-          \ 100 components can be evaluated in one request."
+        description: |-
+          Provide the array of component identifiers to be evaluated. Each component requires **one of the following combinations**:
+
+          **For Coordinate-Based Formats (golang, conan, cargo, cocoapods, cran, conda, composer, hf-model):**
+          - **packageUrl only** - Hash is optional
+          - **packageUrl + hash** - Hash is optional, will be used if provided
+          - **pathname + hash** - Hash required (pathname approach always requires hash)
+
+          **For Hash-Based Formats (maven, npm, pypi, nuget, docker, rubygems, etc.):**
+          - **packageUrl + hash** - Hash REQUIRED to identify exact file content
+          - **pathname + hash** - Hash REQUIRED
+          - Providing packageUrl without hash for these formats will result in incorrect identification
+
+          A maximum of 100 components can be evaluated in one request.
         required: true
       responses:
         "200":
@@ -4191,6 +4362,28 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiRepositoryComponentEvaluationResultList"
           description: The response contains the evaluation results.
+      tags:
+      - Firewall
+  /api/v2/firewall/connection/verify:
+    get:
+      description: |-
+        Use this method to verify that the authenticated user has required permissions for firewall operations and retrieve accessible applications.
+
+        Permissions required: Evaluate Individual Components
+      operationId: verifyConnectionAndGetApplications
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApplicationSummaryList"
+          description: Connection verified successfully. Returns list of applications
+            accessible to the user.
+        "401":
+          description: Authentication required. User is not authenticated.
+        "403":
+          description: User is authenticated but does not have 'Evaluate Individual
+            Components' permission.
       tags:
       - Firewall
   /api/v2/firewall/container-image/policyViolations/quarantined:
@@ -4755,6 +4948,126 @@ paths:
             requested.
       tags:
       - Firewall
+  /api/v2/githubApp/manifest:
+    post:
+      description: "Generate a GitHub App manifest for registration. Returns manifest\
+        \ JSON with a state token for CSRF protection. The state token is cryptographically\
+        \ secure, single-use, and expires after 10 minutes. Submit the manifest to\
+        \ GitHub's app creation flow, which will redirect back to IQ Server with the\
+        \ state token for validation. \n\n**Permissions Required:** Configure System\
+        \ Configuration and Users"
+      operationId: generateManifest
+      parameters:
+      - description: Owner (organization/application) ID
+        explode: true
+        in: query
+        name: ownerId
+        required: true
+        schema:
+          minLength: 1
+          type: string
+        style: form
+      - description: GitHub organization name
+        explode: true
+        in: query
+        name: organizationName
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Manifest generated successfully
+        "400":
+          description: Missing owner id or organization name
+        "500":
+          description: Base URL not configured or invalid request
+      summary: Generate GitHub App manifest
+      tags:
+      - GitHub App Configuration
+  /api/v2/githubApp/redirect:
+    get:
+      description: Handles redirect from GitHub after manifest submission. Exchanges
+        temporary code for permanent app credentials. The user's browser is automatically
+        redirected here by GitHub - not intended for direct use. **Permissions Required:**
+        Configure System Configuration and Users
+      operationId: handleRedirect
+      parameters:
+      - description: Temporary manifest conversion code from GitHub
+        explode: true
+        in: query
+        name: code
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: OAuth state token for CSRF protection
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "303":
+          description: "Successfully registered GitHub App, redirecting to settings\
+            \ page"
+        "400":
+          description: Invalid or expired code
+        "401":
+          description: Authentication required
+        "403":
+          description: Insufficient permissions
+      summary: GitHub App registration redirect callback
+      tags:
+      - GitHub App Configuration
+  /api/v2/githubApp/setupInstallation:
+    get:
+      description: "Process the redirect from GitHub after OAuth authorization, validate\
+        \ state token, exchange OAuth code with PKCE verification, verify user ownership,\
+        \ configure the installation for the specified organization/application, and\
+        \ redirect to the configuration page"
+      operationId: handleInstallationSetup
+      parameters:
+      - description: GitHub App installation ID
+        explode: true
+        in: query
+        name: installation_id
+        required: true
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+        style: form
+      - description: State token for CSRF protection
+        explode: true
+        in: query
+        name: state
+        required: true
+        schema:
+          minLength: 1
+          type: string
+        style: form
+      - description: OAuth authorization code
+        explode: true
+        in: query
+        name: code
+        required: true
+        schema:
+          minLength: 1
+          type: string
+        style: form
+      responses:
+        "302":
+          description: Redirect to source control configuration page
+        "400":
+          description: Invalid or missing parameters
+        "500":
+          description: Failed to configure GitHub App installation
+      summary: Handle GitHub App installation setup callback with OAuth + PKCE
+      tags:
+      - GitHub App Configuration
   /api/v2/labels/{ownerType}/{ownerId}:
     get:
       description: |-
@@ -5809,6 +6122,36 @@ paths:
                 $ref: "#/components/schemas/ApiOrganizationDTO"
           description: The response contains the assigned organization id and all
             other organization details specified.
+      tags:
+      - Organizations
+  /api/v2/organizations/byid:
+    get:
+      description: |-
+        Use this method to retrieve organizations by their internal IDs.
+
+        Permissions required: View IQ Elements
+      operationId: getOrganizationsByIds
+      parameters:
+      - description: Enter the internal organization IDs.
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiOrganizationListDTO"
+          description: "The response contains a list of organizations. For each organization\
+            \ the response contains organization id, organization name, and parent\
+            \ organization id."
       tags:
       - Organizations
   /api/v2/organizations/{organizationId}:
@@ -8337,7 +8680,9 @@ paths:
             \ and values \n11. resultIndex: indicating the relevance of the search\
             \ result w.r.t. the query"
         "409":
-          description: Search index does not exist or is unreadable.
+          description: Search index not found. The Advanced Search index is unavailable
+            or has not been created yet. Re-indexing is required before results can
+            be returned.
       tags:
       - Advanced Search
   /api/v2/search/advanced/export/csv:
@@ -11551,6 +11896,141 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ApiCiConfigurationDto:
+      example:
+        failBuildOnPolicyWarnings: true
+        parameterPriority: parameterPriority
+        failBuildOnReachabilityErrors: true
+        unstableBuildOnPolicyWarnings: true
+        failBuildOnNetworkError: true
+        advancedProperties:
+        - advancedProperties
+        - advancedProperties
+        proxy:
+          host: host
+        download:
+          iqCliVersion: iqCliVersion
+          iqCliUrl: iqCliUrl
+        enableDebugLogging: true
+        scanPatterns:
+        - scanPatterns
+        - scanPatterns
+        resultFile: resultFile
+        reachability:
+          javaAnalysis:
+            enabled: true
+            entrypointStrategy: entrypointStrategy
+            namespaces:
+            - namespaces
+            - namespaces
+          javaScriptAnalysis:
+            projectRoot: projectRoot
+            nodeJsExecutable: nodeJsExecutable
+            jsExcludes:
+            - jsExcludes
+            - jsExcludes
+            jsSources:
+            - jsSources
+            - jsSources
+            enabled: true
+          failOnError: true
+        failBuildOnScanningErrors: true
+        moduleExcludes:
+        - moduleExcludes
+        - moduleExcludes
+        sarifFile: sarifFile
+      properties:
+        advancedProperties:
+          items:
+            type: string
+          type: array
+        download:
+          $ref: "#/components/schemas/DownloadConfig"
+        enableDebugLogging:
+          type: boolean
+        failBuildOnNetworkError:
+          type: boolean
+        failBuildOnPolicyWarnings:
+          type: boolean
+        failBuildOnReachabilityErrors:
+          type: boolean
+        failBuildOnScanningErrors:
+          type: boolean
+        moduleExcludes:
+          items:
+            type: string
+          type: array
+        parameterPriority:
+          type: string
+        proxy:
+          $ref: "#/components/schemas/ProxyConfig"
+        reachability:
+          $ref: "#/components/schemas/ReachabilityConfig"
+        resultFile:
+          type: string
+        sarifFile:
+          type: string
+        scanPatterns:
+          items:
+            type: string
+          type: array
+        unstableBuildOnPolicyWarnings:
+          type: boolean
+      type: object
+    ApiCiConfigurationResponseDto:
+      example:
+        data:
+          failBuildOnPolicyWarnings: true
+          parameterPriority: parameterPriority
+          failBuildOnReachabilityErrors: true
+          unstableBuildOnPolicyWarnings: true
+          failBuildOnNetworkError: true
+          advancedProperties:
+          - advancedProperties
+          - advancedProperties
+          proxy:
+            host: host
+          download:
+            iqCliVersion: iqCliVersion
+            iqCliUrl: iqCliUrl
+          enableDebugLogging: true
+          scanPatterns:
+          - scanPatterns
+          - scanPatterns
+          resultFile: resultFile
+          reachability:
+            javaAnalysis:
+              enabled: true
+              entrypointStrategy: entrypointStrategy
+              namespaces:
+              - namespaces
+              - namespaces
+            javaScriptAnalysis:
+              projectRoot: projectRoot
+              nodeJsExecutable: nodeJsExecutable
+              jsExcludes:
+              - jsExcludes
+              - jsExcludes
+              jsSources:
+              - jsSources
+              - jsSources
+              enabled: true
+            failOnError: true
+          failBuildOnScanningErrors: true
+          moduleExcludes:
+          - moduleExcludes
+          - moduleExcludes
+          sarifFile: sarifFile
+        source:
+          key: source
+      properties:
+        data:
+          $ref: "#/components/schemas/ApiCiConfigurationDto"
+        source:
+          additionalProperties:
+            type: string
+          type: object
       type: object
     ApiComponentChangeActionDTO:
       example:
@@ -18610,6 +19090,20 @@ components:
           parentName: parentName
           parentValue: parentValue
           value: value
+        githubApp:
+          parentName: parentName
+          parentValue:
+            configurationDate: configurationDate
+            accountName: accountName
+            name: name
+            id: id
+            installationId: 1
+          value:
+            configurationDate: configurationDate
+            accountName: accountName
+            name: name
+            id: id
+            installationId: 1
         closePrAfterDays:
           parentName: parentName
           parentValue: 0
@@ -18630,6 +19124,10 @@ components:
           parentName: parentName
           parentValue: true
           value: true
+        authenticationType:
+          parentName: parentName
+          parentValue: parentValue
+          value: value
         id: id
         sourceControlScanTarget:
           parentName: parentName
@@ -18640,6 +19138,8 @@ components:
           parentValue: parentValue
           value: value
       properties:
+        authenticationType:
+          $ref: "#/components/schemas/ApiCompositeValueDTOString"
         baseBranch:
           $ref: "#/components/schemas/ApiCompositeValueDTOString"
         closePrAfterDays:
@@ -18650,6 +19150,8 @@ components:
           $ref: "#/components/schemas/ApiCompositeValueDTOBoolean"
         commitStatusEnabled:
           $ref: "#/components/schemas/ApiCompositeValueDTOBoolean"
+        githubApp:
+          $ref: "#/components/schemas/ApiCompositeValueDTOGitHubAppInfo"
         id:
           type: string
         innerSourceAutomatedUpdatesEnabled:
@@ -18691,6 +19193,29 @@ components:
           type: boolean
         value:
           type: boolean
+      type: object
+    ApiCompositeValueDTOGitHubAppInfo:
+      example:
+        parentName: parentName
+        parentValue:
+          configurationDate: configurationDate
+          accountName: accountName
+          name: name
+          id: id
+          installationId: 1
+        value:
+          configurationDate: configurationDate
+          accountName: accountName
+          name: name
+          id: id
+          installationId: 1
+      properties:
+        parentName:
+          type: string
+        parentValue:
+          $ref: "#/components/schemas/GitHubAppInfo"
+        value:
+          $ref: "#/components/schemas/GitHubAppInfo"
       type: object
     ApiCompositeValueDTOInteger:
       example:
@@ -29012,10 +29537,13 @@ components:
         pullRequestCommentingEnabled: true
         manualPullRequestsEnabled: true
         sourceControlEvaluationsEnabled: true
+        authenticationType: authenticationType
         id: id
         sourceControlScanTarget: sourceControlScanTarget
         username: username
       properties:
+        authenticationType:
+          type: string
         baseBranch:
           type: string
         closePrAfterDays:
@@ -30155,6 +30683,34 @@ components:
             $ref: "#/components/schemas/TagsByOwnerDTO"
           type: array
       type: object
+    ApplicationSummary:
+      example:
+        name: name
+        id: id
+        publicId: publicId
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        publicId:
+          type: string
+      type: object
+    ApplicationSummaryList:
+      example:
+        applicationSummaries:
+        - name: name
+          id: id
+          publicId: publicId
+        - name: name
+          id: id
+          publicId: publicId
+      properties:
+        applicationSummaries:
+          items:
+            $ref: "#/components/schemas/ApplicationSummary"
+          type: array
+      type: object
     ApplicationTag:
       example:
         tagId: tagId
@@ -30857,6 +31413,16 @@ components:
         scanIdFromLatestBuildStageEvaluation:
           type: string
       type: object
+    DownloadConfig:
+      example:
+        iqCliVersion: iqCliVersion
+        iqCliUrl: iqCliUrl
+      properties:
+        iqCliUrl:
+          type: string
+        iqCliVersion:
+          type: string
+      type: object
     EpssData:
       example:
         currentScore: 6.027456183070403
@@ -30864,6 +31430,26 @@ components:
         currentScore:
           format: double
           type: number
+    GitHubAppInfo:
+      example:
+        configurationDate: configurationDate
+        accountName: accountName
+        name: name
+        id: id
+        installationId: 1
+      properties:
+        accountName:
+          type: string
+        configurationDate:
+          type: string
+        id:
+          type: string
+        installationId:
+          format: int64
+          type: integer
+        name:
+          type: string
+      type: object
     GroupingByDTO:
       example:
         additionalInfo: additionalInfo
@@ -30990,6 +31576,50 @@ components:
         ownerApplicationId:
           type: string
         ownerApplicationName:
+          type: string
+      type: object
+    JavaAnalysisConfig:
+      example:
+        enabled: true
+        entrypointStrategy: entrypointStrategy
+        namespaces:
+        - namespaces
+        - namespaces
+      properties:
+        enabled:
+          type: boolean
+        entrypointStrategy:
+          type: string
+        namespaces:
+          items:
+            type: string
+          type: array
+      type: object
+    JavaScriptAnalysisConfig:
+      example:
+        projectRoot: projectRoot
+        nodeJsExecutable: nodeJsExecutable
+        jsExcludes:
+        - jsExcludes
+        - jsExcludes
+        jsSources:
+        - jsSources
+        - jsSources
+        enabled: true
+      properties:
+        enabled:
+          type: boolean
+        jsExcludes:
+          items:
+            type: string
+          type: array
+        jsSources:
+          items:
+            type: string
+          type: array
+        nodeJsExecutable:
+          type: string
+        projectRoot:
           type: string
       type: object
     KevData:
@@ -32341,6 +32971,40 @@ components:
           type: integer
         waiverExpirationDetails:
           type: string
+      type: object
+    ProxyConfig:
+      example:
+        host: host
+      properties:
+        host:
+          type: string
+      type: object
+    ReachabilityConfig:
+      example:
+        javaAnalysis:
+          enabled: true
+          entrypointStrategy: entrypointStrategy
+          namespaces:
+          - namespaces
+          - namespaces
+        javaScriptAnalysis:
+          projectRoot: projectRoot
+          nodeJsExecutable: nodeJsExecutable
+          jsExcludes:
+          - jsExcludes
+          - jsExcludes
+          jsSources:
+          - jsSources
+          - jsSources
+          enabled: true
+        failOnError: true
+      properties:
+        failOnError:
+          type: boolean
+        javaAnalysis:
+          $ref: "#/components/schemas/JavaAnalysisConfig"
+        javaScriptAnalysis:
+          $ref: "#/components/schemas/JavaScriptAnalysisConfig"
       type: object
     ReferenceLink:
       example:

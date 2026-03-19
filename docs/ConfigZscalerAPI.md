@@ -6,10 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteAllCategories**](ConfigZscalerAPI.md#DeleteAllCategories) | **Delete** /api/v2/config/zscaler/update | 
 [**DeleteCategory**](ConfigZscalerAPI.md#DeleteCategory) | **Delete** /api/v2/config/zscaler/update/{format} | 
-[**DeleteConfiguration6**](ConfigZscalerAPI.md#DeleteConfiguration6) | **Delete** /api/v2/config/zscaler | 
-[**GetConfiguration7**](ConfigZscalerAPI.md#GetConfiguration7) | **Get** /api/v2/config/zscaler | 
+[**DeleteConfiguration7**](ConfigZscalerAPI.md#DeleteConfiguration7) | **Delete** /api/v2/config/zscaler | 
+[**GetConfiguration8**](ConfigZscalerAPI.md#GetConfiguration8) | **Get** /api/v2/config/zscaler | 
 [**GetQuota**](ConfigZscalerAPI.md#GetQuota) | **Get** /api/v2/config/zscaler/zscalerLimits | 
-[**SetConfiguration6**](ConfigZscalerAPI.md#SetConfiguration6) | **Put** /api/v2/config/zscaler | 
+[**SetConfiguration7**](ConfigZscalerAPI.md#SetConfiguration7) | **Put** /api/v2/config/zscaler | 
 [**TestConfiguration1**](ConfigZscalerAPI.md#TestConfiguration1) | **Post** /api/v2/config/zscaler/testConfig | 
 [**TriggerUpdate**](ConfigZscalerAPI.md#TriggerUpdate) | **Post** /api/v2/config/zscaler/update/{format} | 
 [**TriggerUpdateAll**](ConfigZscalerAPI.md#TriggerUpdateAll) | **Post** /api/v2/config/zscaler/update | 
@@ -143,9 +143,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteConfiguration6
+## DeleteConfiguration7
 
-> DeleteConfiguration6(ctx).Execute()
+> DeleteConfiguration7(ctx).Execute()
 
 
 
@@ -167,9 +167,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigZscalerAPI.DeleteConfiguration6(context.Background()).Execute()
+	r, err := apiClient.ConfigZscalerAPI.DeleteConfiguration7(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigZscalerAPI.DeleteConfiguration6``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigZscalerAPI.DeleteConfiguration7``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -181,7 +181,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteConfiguration6Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteConfiguration7Request struct via the builder pattern
 
 
 ### Return type
@@ -202,9 +202,9 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration6Reques
 [[Back to README]](../README.md)
 
 
-## GetConfiguration7
+## GetConfiguration8
 
-> ApiZScalerConfigurationDTO GetConfiguration7(ctx).Execute()
+> ApiZScalerConfigurationDTO GetConfiguration8(ctx).Execute()
 
 
 
@@ -226,13 +226,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigZscalerAPI.GetConfiguration7(context.Background()).Execute()
+	resp, r, err := apiClient.ConfigZscalerAPI.GetConfiguration8(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigZscalerAPI.GetConfiguration7``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigZscalerAPI.GetConfiguration8``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfiguration7`: ApiZScalerConfigurationDTO
-	fmt.Fprintf(os.Stdout, "Response from `ConfigZscalerAPI.GetConfiguration7`: %v\n", resp)
+	// response from `GetConfiguration8`: ApiZScalerConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigZscalerAPI.GetConfiguration8`: %v\n", resp)
 }
 ```
 
@@ -242,7 +242,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfiguration7Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfiguration8Request struct via the builder pattern
 
 
 ### Return type
@@ -324,9 +324,9 @@ Other parameters are passed through a pointer to a apiGetQuotaRequest struct via
 [[Back to README]](../README.md)
 
 
-## SetConfiguration6
+## SetConfiguration7
 
-> string SetConfiguration6(ctx).ApiZScalerConfigurationDTO(apiZScalerConfigurationDTO).Execute()
+> string SetConfiguration7(ctx).ApiZScalerConfigurationDTO(apiZScalerConfigurationDTO).Execute()
 
 
 
@@ -349,13 +349,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigZscalerAPI.SetConfiguration6(context.Background()).ApiZScalerConfigurationDTO(apiZScalerConfigurationDTO).Execute()
+	resp, r, err := apiClient.ConfigZscalerAPI.SetConfiguration7(context.Background()).ApiZScalerConfigurationDTO(apiZScalerConfigurationDTO).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigZscalerAPI.SetConfiguration6``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigZscalerAPI.SetConfiguration7``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SetConfiguration6`: string
-	fmt.Fprintf(os.Stdout, "Response from `ConfigZscalerAPI.SetConfiguration6`: %v\n", resp)
+	// response from `SetConfiguration7`: string
+	fmt.Fprintf(os.Stdout, "Response from `ConfigZscalerAPI.SetConfiguration7`: %v\n", resp)
 }
 ```
 
@@ -365,7 +365,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSetConfiguration6Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetConfiguration7Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

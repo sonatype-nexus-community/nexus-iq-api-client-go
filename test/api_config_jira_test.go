@@ -22,22 +22,22 @@ func Test_sonatypeiq_ConfigJiraAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test ConfigJiraAPIService DeleteConfiguration1", func(t *testing.T) {
+	t.Run("Test ConfigJiraAPIService DeleteConfiguration2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigJiraAPI.DeleteConfiguration1(context.Background()).Execute()
+		httpRes, err := apiClient.ConfigJiraAPI.DeleteConfiguration2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ConfigJiraAPIService GetConfiguration1", func(t *testing.T) {
+	t.Run("Test ConfigJiraAPIService GetConfiguration2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ConfigJiraAPI.GetConfiguration1(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigJiraAPI.GetConfiguration2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -45,11 +45,11 @@ func Test_sonatypeiq_ConfigJiraAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigJiraAPIService SetConfiguration1", func(t *testing.T) {
+	t.Run("Test ConfigJiraAPIService SetConfiguration2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigJiraAPI.SetConfiguration1(context.Background()).Execute()
+		httpRes, err := apiClient.ConfigJiraAPI.SetConfiguration2(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

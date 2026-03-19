@@ -22,22 +22,22 @@ func Test_sonatypeiq_ConfigMailAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test ConfigMailAPIService DeleteConfiguration2", func(t *testing.T) {
+	t.Run("Test ConfigMailAPIService DeleteConfiguration3", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigMailAPI.DeleteConfiguration2(context.Background()).Execute()
+		httpRes, err := apiClient.ConfigMailAPI.DeleteConfiguration3(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ConfigMailAPIService GetConfiguration2", func(t *testing.T) {
+	t.Run("Test ConfigMailAPIService GetConfiguration3", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ConfigMailAPI.GetConfiguration2(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigMailAPI.GetConfiguration3(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -45,11 +45,11 @@ func Test_sonatypeiq_ConfigMailAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigMailAPIService SetConfiguration2", func(t *testing.T) {
+	t.Run("Test ConfigMailAPIService SetConfiguration3", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigMailAPI.SetConfiguration2(context.Background()).Execute()
+		httpRes, err := apiClient.ConfigMailAPI.SetConfiguration3(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

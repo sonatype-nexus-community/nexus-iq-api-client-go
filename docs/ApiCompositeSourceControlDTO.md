@@ -4,11 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AuthenticationType** | Pointer to [**ApiCompositeValueDTOString**](ApiCompositeValueDTOString.md) |  | [optional] 
 **BaseBranch** | Pointer to [**ApiCompositeValueDTOString**](ApiCompositeValueDTOString.md) |  | [optional] 
 **ClosePrAfterDays** | Pointer to [**ApiCompositeValueDTOInteger**](ApiCompositeValueDTOInteger.md) |  | [optional] 
 **ClosePrAfterDaysOpenEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **ClosePrOnFailedChecksEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **CommitStatusEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
+**GithubApp** | Pointer to [**ApiCompositeValueDTOGitHubAppInfo**](ApiCompositeValueDTOGitHubAppInfo.md) |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **InnerSourceAutomatedUpdatesEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **ManualPullRequestsEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
@@ -42,6 +44,31 @@ will change when the set of required properties is changed
 NewApiCompositeSourceControlDTOWithDefaults instantiates a new ApiCompositeSourceControlDTO object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAuthenticationType
+
+`func (o *ApiCompositeSourceControlDTO) GetAuthenticationType() ApiCompositeValueDTOString`
+
+GetAuthenticationType returns the AuthenticationType field if non-nil, zero value otherwise.
+
+### GetAuthenticationTypeOk
+
+`func (o *ApiCompositeSourceControlDTO) GetAuthenticationTypeOk() (*ApiCompositeValueDTOString, bool)`
+
+GetAuthenticationTypeOk returns a tuple with the AuthenticationType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthenticationType
+
+`func (o *ApiCompositeSourceControlDTO) SetAuthenticationType(v ApiCompositeValueDTOString)`
+
+SetAuthenticationType sets AuthenticationType field to given value.
+
+### HasAuthenticationType
+
+`func (o *ApiCompositeSourceControlDTO) HasAuthenticationType() bool`
+
+HasAuthenticationType returns a boolean if a field has been set.
 
 ### GetBaseBranch
 
@@ -167,6 +194,31 @@ SetCommitStatusEnabled sets CommitStatusEnabled field to given value.
 `func (o *ApiCompositeSourceControlDTO) HasCommitStatusEnabled() bool`
 
 HasCommitStatusEnabled returns a boolean if a field has been set.
+
+### GetGithubApp
+
+`func (o *ApiCompositeSourceControlDTO) GetGithubApp() ApiCompositeValueDTOGitHubAppInfo`
+
+GetGithubApp returns the GithubApp field if non-nil, zero value otherwise.
+
+### GetGithubAppOk
+
+`func (o *ApiCompositeSourceControlDTO) GetGithubAppOk() (*ApiCompositeValueDTOGitHubAppInfo, bool)`
+
+GetGithubAppOk returns a tuple with the GithubApp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGithubApp
+
+`func (o *ApiCompositeSourceControlDTO) SetGithubApp(v ApiCompositeValueDTOGitHubAppInfo)`
+
+SetGithubApp sets GithubApp field to given value.
+
+### HasGithubApp
+
+`func (o *ApiCompositeSourceControlDTO) HasGithubApp() bool`
+
+HasGithubApp returns a boolean if a field has been set.
 
 ### GetId
 

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AuthenticationType** | Pointer to **string** |  | [optional] 
 **BaseBranch** | Pointer to **string** |  | [optional] 
 **ClosePrAfterDays** | Pointer to **int32** |  | [optional] 
 **ClosePrAfterDaysOpenEnabled** | Pointer to **bool** |  | [optional] 
@@ -44,6 +45,31 @@ will change when the set of required properties is changed
 NewApiSourceControlDTOWithDefaults instantiates a new ApiSourceControlDTO object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAuthenticationType
+
+`func (o *ApiSourceControlDTO) GetAuthenticationType() string`
+
+GetAuthenticationType returns the AuthenticationType field if non-nil, zero value otherwise.
+
+### GetAuthenticationTypeOk
+
+`func (o *ApiSourceControlDTO) GetAuthenticationTypeOk() (*string, bool)`
+
+GetAuthenticationTypeOk returns a tuple with the AuthenticationType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthenticationType
+
+`func (o *ApiSourceControlDTO) SetAuthenticationType(v string)`
+
+SetAuthenticationType sets AuthenticationType field to given value.
+
+### HasAuthenticationType
+
+`func (o *ApiSourceControlDTO) HasAuthenticationType() bool`
+
+HasAuthenticationType returns a boolean if a field has been set.
 
 ### GetBaseBranch
 

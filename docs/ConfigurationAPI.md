@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteConfiguration**](ConfigurationAPI.md#DeleteConfiguration) | **Delete** /api/v2/config | 
-[**GetConfiguration**](ConfigurationAPI.md#GetConfiguration) | **Get** /api/v2/config | 
+[**DeleteConfiguration1**](ConfigurationAPI.md#DeleteConfiguration1) | **Delete** /api/v2/config | 
+[**GetConfiguration1**](ConfigurationAPI.md#GetConfiguration1) | **Get** /api/v2/config | 
 [**InvalidateCache**](ConfigurationAPI.md#InvalidateCache) | **Delete** /api/v2/config/integrationVersions/cache | 
-[**SetConfiguration**](ConfigurationAPI.md#SetConfiguration) | **Put** /api/v2/config | 
+[**SetConfiguration1**](ConfigurationAPI.md#SetConfiguration1) | **Put** /api/v2/config | 
 
 
 
-## DeleteConfiguration
+## DeleteConfiguration1
 
-> DeleteConfiguration(ctx).Property(property).Execute()
+> DeleteConfiguration1(ctx).Property(property).Execute()
 
 
 
@@ -36,9 +36,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigurationAPI.DeleteConfiguration(context.Background()).Property(property).Execute()
+	r, err := apiClient.ConfigurationAPI.DeleteConfiguration1(context.Background()).Property(property).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigurationAPI.DeleteConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigurationAPI.DeleteConfiguration1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -50,7 +50,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteConfigurationRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteConfiguration1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -75,9 +75,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetConfiguration
+## GetConfiguration1
 
-> SystemConfig GetConfiguration(ctx).Property(property).Execute()
+> SystemConfig GetConfiguration1(ctx).Property(property).Execute()
 
 
 
@@ -100,13 +100,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigurationAPI.GetConfiguration(context.Background()).Property(property).Execute()
+	resp, r, err := apiClient.ConfigurationAPI.GetConfiguration1(context.Background()).Property(property).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigurationAPI.GetConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigurationAPI.GetConfiguration1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfiguration`: SystemConfig
-	fmt.Fprintf(os.Stdout, "Response from `ConfigurationAPI.GetConfiguration`: %v\n", resp)
+	// response from `GetConfiguration1`: SystemConfig
+	fmt.Fprintf(os.Stdout, "Response from `ConfigurationAPI.GetConfiguration1`: %v\n", resp)
 }
 ```
 
@@ -116,7 +116,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfigurationRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfiguration1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -202,9 +202,9 @@ Other parameters are passed through a pointer to a apiInvalidateCacheRequest str
 [[Back to README]](../README.md)
 
 
-## SetConfiguration
+## SetConfiguration1
 
-> SetConfiguration(ctx).SystemConfig(systemConfig).Execute()
+> SetConfiguration1(ctx).SystemConfig(systemConfig).Execute()
 
 
 
@@ -227,9 +227,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigurationAPI.SetConfiguration(context.Background()).SystemConfig(systemConfig).Execute()
+	r, err := apiClient.ConfigurationAPI.SetConfiguration1(context.Background()).SystemConfig(systemConfig).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigurationAPI.SetConfiguration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigurationAPI.SetConfiguration1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -241,7 +241,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSetConfigurationRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiSetConfiguration1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

@@ -46,22 +46,22 @@ func Test_sonatypeiq_ConfigZscalerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigZscalerAPIService DeleteConfiguration6", func(t *testing.T) {
+	t.Run("Test ConfigZscalerAPIService DeleteConfiguration7", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigZscalerAPI.DeleteConfiguration6(context.Background()).Execute()
+		httpRes, err := apiClient.ConfigZscalerAPI.DeleteConfiguration7(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ConfigZscalerAPIService GetConfiguration7", func(t *testing.T) {
+	t.Run("Test ConfigZscalerAPIService GetConfiguration8", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ConfigZscalerAPI.GetConfiguration7(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigZscalerAPI.GetConfiguration8(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -81,11 +81,11 @@ func Test_sonatypeiq_ConfigZscalerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigZscalerAPIService SetConfiguration6", func(t *testing.T) {
+	t.Run("Test ConfigZscalerAPIService SetConfiguration7", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ConfigZscalerAPI.SetConfiguration6(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigZscalerAPI.SetConfiguration7(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
