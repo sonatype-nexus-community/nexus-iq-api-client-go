@@ -32,7 +32,7 @@ import (
 
 func main() {
 	ownerId := "ownerId_example" // string | Owner (organization/application) ID
-	organizationName := "organizationName_example" // string | GitHub organization name
+	organizationName := "organizationName_example" // string | GitHub organization name (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)

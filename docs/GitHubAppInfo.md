@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ConfigurationDate** | Pointer to **string** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **InstallationId** | Pointer to **int64** |  | [optional] 
+**IsActive** | Pointer to **bool** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -128,6 +129,31 @@ SetInstallationId sets InstallationId field to given value.
 `func (o *GitHubAppInfo) HasInstallationId() bool`
 
 HasInstallationId returns a boolean if a field has been set.
+
+### GetIsActive
+
+`func (o *GitHubAppInfo) GetIsActive() bool`
+
+GetIsActive returns the IsActive field if non-nil, zero value otherwise.
+
+### GetIsActiveOk
+
+`func (o *GitHubAppInfo) GetIsActiveOk() (*bool, bool)`
+
+GetIsActiveOk returns a tuple with the IsActive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsActive
+
+`func (o *GitHubAppInfo) SetIsActive(v bool)`
+
+SetIsActive sets IsActive field to given value.
+
+### HasIsActive
+
+`func (o *GitHubAppInfo) HasIsActive() bool`
+
+HasIsActive returns a boolean if a field has been set.
 
 ### GetName
 

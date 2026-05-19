@@ -22,6 +22,20 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test FirewallAPIService AddBulkWaivers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var ownerId string
+
+		httpRes, err := apiClient.FirewallAPI.AddBulkWaivers(context.Background(), ownerType, ownerId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService AddProprietaryComponentNames", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

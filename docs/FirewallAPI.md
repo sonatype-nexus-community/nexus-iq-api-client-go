@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddBulkWaivers**](FirewallAPI.md#AddBulkWaivers) | **Post** /api/v2/firewall/repositories/{ownerType}/{ownerId}/waivers/bulk | 
 [**AddProprietaryComponentNames**](FirewallAPI.md#AddProprietaryComponentNames) | **Post** /api/v2/firewall/namespace_confusion/{format} | 
 [**AddRepositoryManager**](FirewallAPI.md#AddRepositoryManager) | **Post** /api/v2/firewall/repositoryManagers | 
 [**AddWaiver**](FirewallAPI.md#AddWaiver) | **Post** /api/v2/firewall/container-image/{containerImageId}/policyWaiver | 
@@ -33,6 +34,79 @@ Method | HTTP request | Description
 [**SetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#SetQuarantinedComponentViewAnonymousAccess) | **Put** /api/v2/firewall/quarantinedComponentView/configuration/anonymousAccess/{enabled} | 
 [**VerifyConnectionAndGetApplications**](FirewallAPI.md#VerifyConnectionAndGetApplications) | **Get** /api/v2/firewall/connection/verify | 
 
+
+
+## AddBulkWaivers
+
+> AddBulkWaivers(ctx, ownerType, ownerId).ApiBulkWaiversDTO(apiBulkWaiversDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "repository" // string | Owner type scope for the waiver. Must be one of: organization, repository, repository_manager, repository_container. Use 'organization' with ownerId 'ROOT_ORGANIZATION_ID' to apply waiver across all repositories.
+	ownerId := "repo-12345" // string | Owner ID corresponding to the owner type. All violations must belong to this owner's tenant hierarchy.
+	apiBulkWaiversDTO := *sonatypeiq.NewApiBulkWaiversDTO(*sonatypeiq.NewApiWaiverOptionsDTO("False positive - internal tool approved by security team", "EXACT_COMPONENT"), []string{"["violation-id-1","violation-id-2","violation-id-3"]"}) // ApiBulkWaiversDTO | Bulk waiver request containing: - **violationIds** (required, 1-1000 items): List of repository policy violation IDs to waive. Duplicate IDs are automatically deduplicated. Supports both quarantine (FAIL) and non-quarantine (WARN) violations. Already-waived violations are skipped without error. - **apiWaiverOptionsDTO** (required): Waiver options including:   - **comment** (required, non-blank): Reason for waiving these violations   - **matcherStrategy** (required): EXACT_COMPONENT or ALL_VERSIONS   - **expiryTime** (optional): Must be in the future if provided   - **waiverReasonId** (optional): Reference to a pre-defined waiver reason   - **expireWhenRemediationAvailable** (optional): If true, matcherStrategy must be EXACT_COMPONENT
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.FirewallAPI.AddBulkWaivers(context.Background(), ownerType, ownerId).ApiBulkWaiversDTO(apiBulkWaiversDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.AddBulkWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Owner type scope for the waiver. Must be one of: organization, repository, repository_manager, repository_container. Use &#39;organization&#39; with ownerId &#39;ROOT_ORGANIZATION_ID&#39; to apply waiver across all repositories. | 
+**ownerId** | **string** | Owner ID corresponding to the owner type. All violations must belong to this owner&#39;s tenant hierarchy. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddBulkWaiversRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **apiBulkWaiversDTO** | [**ApiBulkWaiversDTO**](ApiBulkWaiversDTO.md) | Bulk waiver request containing: - **violationIds** (required, 1-1000 items): List of repository policy violation IDs to waive. Duplicate IDs are automatically deduplicated. Supports both quarantine (FAIL) and non-quarantine (WARN) violations. Already-waived violations are skipped without error. - **apiWaiverOptionsDTO** (required): Waiver options including:   - **comment** (required, non-blank): Reason for waiving these violations   - **matcherStrategy** (required): EXACT_COMPONENT or ALL_VERSIONS   - **expiryTime** (optional): Must be in the future if provided   - **waiverReasonId** (optional): Reference to a pre-defined waiver reason   - **expireWhenRemediationAvailable** (optional): If true, matcherStrategy must be EXACT_COMPONENT | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## AddProprietaryComponentNames

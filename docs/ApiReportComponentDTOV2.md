@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AiModelData** | Pointer to [**ApiAiModelDataDTO**](ApiAiModelDataDTO.md) |  | [optional] 
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
 **Cpe** | Pointer to **string** |  | [optional] 
 **DependencyData** | Pointer to [**ApiDependencyDataDTO**](ApiDependencyDataDTO.md) |  | [optional] 
@@ -40,6 +41,31 @@ will change when the set of required properties is changed
 NewApiReportComponentDTOV2WithDefaults instantiates a new ApiReportComponentDTOV2 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAiModelData
+
+`func (o *ApiReportComponentDTOV2) GetAiModelData() ApiAiModelDataDTO`
+
+GetAiModelData returns the AiModelData field if non-nil, zero value otherwise.
+
+### GetAiModelDataOk
+
+`func (o *ApiReportComponentDTOV2) GetAiModelDataOk() (*ApiAiModelDataDTO, bool)`
+
+GetAiModelDataOk returns a tuple with the AiModelData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAiModelData
+
+`func (o *ApiReportComponentDTOV2) SetAiModelData(v ApiAiModelDataDTO)`
+
+SetAiModelData sets AiModelData field to given value.
+
+### HasAiModelData
+
+`func (o *ApiReportComponentDTOV2) HasAiModelData() bool`
+
+HasAiModelData returns a boolean if a field has been set.
 
 ### GetComponentIdentifier
 

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApiWaiverOptionsDTO** | Pointer to [**ApiWaiverOptionsDTO**](ApiWaiverOptionsDTO.md) |  | [optional] 
-**ViolationIds** | Pointer to **[]string** |  | [optional] 
+**ApiWaiverOptionsDTO** | [**ApiWaiverOptionsDTO**](ApiWaiverOptionsDTO.md) |  | 
+**ViolationIds** | **[]string** | List of repository policy violation IDs to waive. Maximum 1000 violations per request. Duplicate IDs are automatically deduplicated. Supports both quarantine (FAIL) and non-quarantine (WARN) violations. Already-waived violations are skipped without error. | 
 
 ## Methods
 
 ### NewApiBulkWaiversDTO
 
-`func NewApiBulkWaiversDTO() *ApiBulkWaiversDTO`
+`func NewApiBulkWaiversDTO(apiWaiverOptionsDTO ApiWaiverOptionsDTO, violationIds []string, ) *ApiBulkWaiversDTO`
 
 NewApiBulkWaiversDTO instantiates a new ApiBulkWaiversDTO object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetApiWaiverOptionsDTO sets ApiWaiverOptionsDTO field to given value.
 
-### HasApiWaiverOptionsDTO
-
-`func (o *ApiBulkWaiversDTO) HasApiWaiverOptionsDTO() bool`
-
-HasApiWaiverOptionsDTO returns a boolean if a field has been set.
 
 ### GetViolationIds
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetViolationIds sets ViolationIds field to given value.
 
-### HasViolationIds
-
-`func (o *ApiBulkWaiversDTO) HasViolationIds() bool`
-
-HasViolationIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

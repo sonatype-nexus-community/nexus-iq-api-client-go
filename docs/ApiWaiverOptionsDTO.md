@@ -4,18 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApplyToAllComponents** | Pointer to **bool** |  | [optional] 
-**Comment** | Pointer to **string** |  | [optional] 
-**ExpireWhenRemediationAvailable** | Pointer to **bool** |  | [optional] 
-**ExpiryTime** | Pointer to **time.Time** |  | [optional] 
-**MatcherStrategy** | Pointer to **string** |  | [optional] 
-**WaiverReasonId** | Pointer to **string** |  | [optional] 
+**Comment** | **string** | Reason for waiving the violation(s). Must be non-blank. | 
+**ExpireWhenRemediationAvailable** | Pointer to **bool** | If true, the waiver will automatically expire when a remediation becomes available. Can only be set to true when matcherStrategy is EXACT_COMPONENT. | [optional] 
+**ExpiryTime** | Pointer to **time.Time** | Optional expiration date/time for the waiver in ISO 8601 format. Must be in the future if provided. | [optional] 
+**MatcherStrategy** | **string** | Component matching strategy. For Firewall bulk waivers, only EXACT_COMPONENT and ALL_VERSIONS are supported. | 
+**WaiverReasonId** | Pointer to **string** | Optional reference to a pre-defined waiver reason ID | [optional] 
 
 ## Methods
 
 ### NewApiWaiverOptionsDTO
 
-`func NewApiWaiverOptionsDTO() *ApiWaiverOptionsDTO`
+`func NewApiWaiverOptionsDTO(comment string, matcherStrategy string, ) *ApiWaiverOptionsDTO`
 
 NewApiWaiverOptionsDTO instantiates a new ApiWaiverOptionsDTO object
 This constructor will assign default values to properties that have it defined,
@@ -29,31 +28,6 @@ will change when the set of required properties is changed
 NewApiWaiverOptionsDTOWithDefaults instantiates a new ApiWaiverOptionsDTO object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetApplyToAllComponents
-
-`func (o *ApiWaiverOptionsDTO) GetApplyToAllComponents() bool`
-
-GetApplyToAllComponents returns the ApplyToAllComponents field if non-nil, zero value otherwise.
-
-### GetApplyToAllComponentsOk
-
-`func (o *ApiWaiverOptionsDTO) GetApplyToAllComponentsOk() (*bool, bool)`
-
-GetApplyToAllComponentsOk returns a tuple with the ApplyToAllComponents field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApplyToAllComponents
-
-`func (o *ApiWaiverOptionsDTO) SetApplyToAllComponents(v bool)`
-
-SetApplyToAllComponents sets ApplyToAllComponents field to given value.
-
-### HasApplyToAllComponents
-
-`func (o *ApiWaiverOptionsDTO) HasApplyToAllComponents() bool`
-
-HasApplyToAllComponents returns a boolean if a field has been set.
 
 ### GetComment
 
@@ -74,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetComment sets Comment field to given value.
 
-### HasComment
-
-`func (o *ApiWaiverOptionsDTO) HasComment() bool`
-
-HasComment returns a boolean if a field has been set.
 
 ### GetExpireWhenRemediationAvailable
 
@@ -149,11 +118,6 @@ and a boolean to check if the value has been set.
 
 SetMatcherStrategy sets MatcherStrategy field to given value.
 
-### HasMatcherStrategy
-
-`func (o *ApiWaiverOptionsDTO) HasMatcherStrategy() bool`
-
-HasMatcherStrategy returns a boolean if a field has been set.
 
 ### GetWaiverReasonId
 

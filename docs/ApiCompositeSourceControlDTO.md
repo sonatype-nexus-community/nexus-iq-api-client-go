@@ -10,10 +10,11 @@ Name | Type | Description | Notes
 **ClosePrAfterDaysOpenEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **ClosePrOnFailedChecksEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **CommitStatusEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
-**GithubApp** | Pointer to [**ApiCompositeValueDTOGitHubAppInfo**](ApiCompositeValueDTOGitHubAppInfo.md) |  | [optional] 
+**GithubApps** | Pointer to [**[]ApiCompositeValueDTOGitHubAppInfo**](ApiCompositeValueDTOGitHubAppInfo.md) |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **InnerSourceAutomatedUpdatesEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **ManualPullRequestsEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
+**NonGoldenPullRequestsEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to [**ApiCompositeValueDTOString**](ApiCompositeValueDTOString.md) |  | [optional] 
 **PullRequestCommentingEnabled** | Pointer to [**ApiCompositeValueDTOBoolean**](ApiCompositeValueDTOBoolean.md) |  | [optional] 
@@ -195,30 +196,30 @@ SetCommitStatusEnabled sets CommitStatusEnabled field to given value.
 
 HasCommitStatusEnabled returns a boolean if a field has been set.
 
-### GetGithubApp
+### GetGithubApps
 
-`func (o *ApiCompositeSourceControlDTO) GetGithubApp() ApiCompositeValueDTOGitHubAppInfo`
+`func (o *ApiCompositeSourceControlDTO) GetGithubApps() []ApiCompositeValueDTOGitHubAppInfo`
 
-GetGithubApp returns the GithubApp field if non-nil, zero value otherwise.
+GetGithubApps returns the GithubApps field if non-nil, zero value otherwise.
 
-### GetGithubAppOk
+### GetGithubAppsOk
 
-`func (o *ApiCompositeSourceControlDTO) GetGithubAppOk() (*ApiCompositeValueDTOGitHubAppInfo, bool)`
+`func (o *ApiCompositeSourceControlDTO) GetGithubAppsOk() (*[]ApiCompositeValueDTOGitHubAppInfo, bool)`
 
-GetGithubAppOk returns a tuple with the GithubApp field if it's non-nil, zero value otherwise
+GetGithubAppsOk returns a tuple with the GithubApps field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetGithubApp
+### SetGithubApps
 
-`func (o *ApiCompositeSourceControlDTO) SetGithubApp(v ApiCompositeValueDTOGitHubAppInfo)`
+`func (o *ApiCompositeSourceControlDTO) SetGithubApps(v []ApiCompositeValueDTOGitHubAppInfo)`
 
-SetGithubApp sets GithubApp field to given value.
+SetGithubApps sets GithubApps field to given value.
 
-### HasGithubApp
+### HasGithubApps
 
-`func (o *ApiCompositeSourceControlDTO) HasGithubApp() bool`
+`func (o *ApiCompositeSourceControlDTO) HasGithubApps() bool`
 
-HasGithubApp returns a boolean if a field has been set.
+HasGithubApps returns a boolean if a field has been set.
 
 ### GetId
 
@@ -294,6 +295,31 @@ SetManualPullRequestsEnabled sets ManualPullRequestsEnabled field to given value
 `func (o *ApiCompositeSourceControlDTO) HasManualPullRequestsEnabled() bool`
 
 HasManualPullRequestsEnabled returns a boolean if a field has been set.
+
+### GetNonGoldenPullRequestsEnabled
+
+`func (o *ApiCompositeSourceControlDTO) GetNonGoldenPullRequestsEnabled() ApiCompositeValueDTOBoolean`
+
+GetNonGoldenPullRequestsEnabled returns the NonGoldenPullRequestsEnabled field if non-nil, zero value otherwise.
+
+### GetNonGoldenPullRequestsEnabledOk
+
+`func (o *ApiCompositeSourceControlDTO) GetNonGoldenPullRequestsEnabledOk() (*ApiCompositeValueDTOBoolean, bool)`
+
+GetNonGoldenPullRequestsEnabledOk returns a tuple with the NonGoldenPullRequestsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNonGoldenPullRequestsEnabled
+
+`func (o *ApiCompositeSourceControlDTO) SetNonGoldenPullRequestsEnabled(v ApiCompositeValueDTOBoolean)`
+
+SetNonGoldenPullRequestsEnabled sets NonGoldenPullRequestsEnabled field to given value.
+
+### HasNonGoldenPullRequestsEnabled
+
+`func (o *ApiCompositeSourceControlDTO) HasNonGoldenPullRequestsEnabled() bool`
+
+HasNonGoldenPullRequestsEnabled returns a boolean if a field has been set.
 
 ### GetOwnerId
 

@@ -12,9 +12,11 @@ Name | Type | Description | Notes
 **CommitStatusEnabled** | Pointer to **bool** |  | [optional] 
 **EnablePullRequests** | Pointer to **bool** |  | [optional] 
 **EnableStatusChecks** | Pointer to **bool** |  | [optional] 
+**GithubAppId** | Pointer to **string** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **InnerSourceAutomatedUpdatesEnabled** | Pointer to **bool** |  | [optional] 
 **ManualPullRequestsEnabled** | Pointer to **bool** |  | [optional] 
+**NonGoldenPullRequestsEnabled** | Pointer to **bool** |  | [optional] 
 **OwnerId** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
 **PullRequestCommentingEnabled** | Pointer to **bool** |  | [optional] 
@@ -246,6 +248,31 @@ SetEnableStatusChecks sets EnableStatusChecks field to given value.
 
 HasEnableStatusChecks returns a boolean if a field has been set.
 
+### GetGithubAppId
+
+`func (o *ApiSourceControlDTO) GetGithubAppId() string`
+
+GetGithubAppId returns the GithubAppId field if non-nil, zero value otherwise.
+
+### GetGithubAppIdOk
+
+`func (o *ApiSourceControlDTO) GetGithubAppIdOk() (*string, bool)`
+
+GetGithubAppIdOk returns a tuple with the GithubAppId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGithubAppId
+
+`func (o *ApiSourceControlDTO) SetGithubAppId(v string)`
+
+SetGithubAppId sets GithubAppId field to given value.
+
+### HasGithubAppId
+
+`func (o *ApiSourceControlDTO) HasGithubAppId() bool`
+
+HasGithubAppId returns a boolean if a field has been set.
+
 ### GetId
 
 `func (o *ApiSourceControlDTO) GetId() string`
@@ -320,6 +347,31 @@ SetManualPullRequestsEnabled sets ManualPullRequestsEnabled field to given value
 `func (o *ApiSourceControlDTO) HasManualPullRequestsEnabled() bool`
 
 HasManualPullRequestsEnabled returns a boolean if a field has been set.
+
+### GetNonGoldenPullRequestsEnabled
+
+`func (o *ApiSourceControlDTO) GetNonGoldenPullRequestsEnabled() bool`
+
+GetNonGoldenPullRequestsEnabled returns the NonGoldenPullRequestsEnabled field if non-nil, zero value otherwise.
+
+### GetNonGoldenPullRequestsEnabledOk
+
+`func (o *ApiSourceControlDTO) GetNonGoldenPullRequestsEnabledOk() (*bool, bool)`
+
+GetNonGoldenPullRequestsEnabledOk returns a tuple with the NonGoldenPullRequestsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNonGoldenPullRequestsEnabled
+
+`func (o *ApiSourceControlDTO) SetNonGoldenPullRequestsEnabled(v bool)`
+
+SetNonGoldenPullRequestsEnabled sets NonGoldenPullRequestsEnabled field to given value.
+
+### HasNonGoldenPullRequestsEnabled
+
+`func (o *ApiSourceControlDTO) HasNonGoldenPullRequestsEnabled() bool`
+
+HasNonGoldenPullRequestsEnabled returns a boolean if a field has been set.
 
 ### GetOwnerId
 
