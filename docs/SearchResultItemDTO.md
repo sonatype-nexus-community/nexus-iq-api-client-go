@@ -12,12 +12,16 @@ Name | Type | Description | Notes
 **ApplicationName** | Pointer to **string** |  | [optional] 
 **ApplicationPublicId** | Pointer to **string** |  | [optional] 
 **ApplicationVersion** | Pointer to **string** |  | [optional] 
+**ComponentEffectiveLicenseId** | Pointer to **string** |  | [optional] 
+**ComponentEffectiveLicenseName** | Pointer to **string** |  | [optional] 
 **ComponentHash** | Pointer to **string** |  | [optional] 
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
 **ComponentLabelColor** | Pointer to **string** |  | [optional] 
 **ComponentLabelDescription** | Pointer to **string** |  | [optional] 
 **ComponentLabelId** | Pointer to **string** |  | [optional] 
 **ComponentLabelName** | Pointer to **string** |  | [optional] 
+**ComponentLicenseThreatGroupName** | Pointer to **string** |  | [optional] 
+**ComponentLicenseThreatLevel** | Pointer to **int32** |  | [optional] 
 **ComponentName** | Pointer to **string** |  | [optional] 
 **ItemType** | Pointer to **string** |  | [optional] 
 **OrganizationId** | Pointer to **string** |  | [optional] 
@@ -27,6 +31,13 @@ Name | Type | Description | Notes
 **PolicyName** | Pointer to **string** |  | [optional] 
 **PolicyThreatCategory** | Pointer to **string** |  | [optional] 
 **PolicyThreatLevel** | Pointer to **int32** |  | [optional] 
+**PolicyViolationConstraintName** | Pointer to **string** |  | [optional] 
+**PolicyViolationId** | Pointer to **string** |  | [optional] 
+**PolicyViolationPolicyId** | Pointer to **string** |  | [optional] 
+**PolicyViolationPolicyName** | Pointer to **string** |  | [optional] 
+**PolicyViolationThreatCategory** | Pointer to **string** |  | [optional] 
+**PolicyViolationThreatLevel** | Pointer to **int32** |  | [optional] 
+**PolicyViolationWaiverStatus** | Pointer to **string** |  | [optional] 
 **ReportId** | Pointer to **string** |  | [optional] 
 **ResultIndex** | Pointer to **int32** |  | [optional] 
 **SbomSpecification** | Pointer to **string** |  | [optional] 
@@ -253,6 +264,56 @@ SetApplicationVersion sets ApplicationVersion field to given value.
 
 HasApplicationVersion returns a boolean if a field has been set.
 
+### GetComponentEffectiveLicenseId
+
+`func (o *SearchResultItemDTO) GetComponentEffectiveLicenseId() string`
+
+GetComponentEffectiveLicenseId returns the ComponentEffectiveLicenseId field if non-nil, zero value otherwise.
+
+### GetComponentEffectiveLicenseIdOk
+
+`func (o *SearchResultItemDTO) GetComponentEffectiveLicenseIdOk() (*string, bool)`
+
+GetComponentEffectiveLicenseIdOk returns a tuple with the ComponentEffectiveLicenseId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComponentEffectiveLicenseId
+
+`func (o *SearchResultItemDTO) SetComponentEffectiveLicenseId(v string)`
+
+SetComponentEffectiveLicenseId sets ComponentEffectiveLicenseId field to given value.
+
+### HasComponentEffectiveLicenseId
+
+`func (o *SearchResultItemDTO) HasComponentEffectiveLicenseId() bool`
+
+HasComponentEffectiveLicenseId returns a boolean if a field has been set.
+
+### GetComponentEffectiveLicenseName
+
+`func (o *SearchResultItemDTO) GetComponentEffectiveLicenseName() string`
+
+GetComponentEffectiveLicenseName returns the ComponentEffectiveLicenseName field if non-nil, zero value otherwise.
+
+### GetComponentEffectiveLicenseNameOk
+
+`func (o *SearchResultItemDTO) GetComponentEffectiveLicenseNameOk() (*string, bool)`
+
+GetComponentEffectiveLicenseNameOk returns a tuple with the ComponentEffectiveLicenseName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComponentEffectiveLicenseName
+
+`func (o *SearchResultItemDTO) SetComponentEffectiveLicenseName(v string)`
+
+SetComponentEffectiveLicenseName sets ComponentEffectiveLicenseName field to given value.
+
+### HasComponentEffectiveLicenseName
+
+`func (o *SearchResultItemDTO) HasComponentEffectiveLicenseName() bool`
+
+HasComponentEffectiveLicenseName returns a boolean if a field has been set.
+
 ### GetComponentHash
 
 `func (o *SearchResultItemDTO) GetComponentHash() string`
@@ -402,6 +463,56 @@ SetComponentLabelName sets ComponentLabelName field to given value.
 `func (o *SearchResultItemDTO) HasComponentLabelName() bool`
 
 HasComponentLabelName returns a boolean if a field has been set.
+
+### GetComponentLicenseThreatGroupName
+
+`func (o *SearchResultItemDTO) GetComponentLicenseThreatGroupName() string`
+
+GetComponentLicenseThreatGroupName returns the ComponentLicenseThreatGroupName field if non-nil, zero value otherwise.
+
+### GetComponentLicenseThreatGroupNameOk
+
+`func (o *SearchResultItemDTO) GetComponentLicenseThreatGroupNameOk() (*string, bool)`
+
+GetComponentLicenseThreatGroupNameOk returns a tuple with the ComponentLicenseThreatGroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComponentLicenseThreatGroupName
+
+`func (o *SearchResultItemDTO) SetComponentLicenseThreatGroupName(v string)`
+
+SetComponentLicenseThreatGroupName sets ComponentLicenseThreatGroupName field to given value.
+
+### HasComponentLicenseThreatGroupName
+
+`func (o *SearchResultItemDTO) HasComponentLicenseThreatGroupName() bool`
+
+HasComponentLicenseThreatGroupName returns a boolean if a field has been set.
+
+### GetComponentLicenseThreatLevel
+
+`func (o *SearchResultItemDTO) GetComponentLicenseThreatLevel() int32`
+
+GetComponentLicenseThreatLevel returns the ComponentLicenseThreatLevel field if non-nil, zero value otherwise.
+
+### GetComponentLicenseThreatLevelOk
+
+`func (o *SearchResultItemDTO) GetComponentLicenseThreatLevelOk() (*int32, bool)`
+
+GetComponentLicenseThreatLevelOk returns a tuple with the ComponentLicenseThreatLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComponentLicenseThreatLevel
+
+`func (o *SearchResultItemDTO) SetComponentLicenseThreatLevel(v int32)`
+
+SetComponentLicenseThreatLevel sets ComponentLicenseThreatLevel field to given value.
+
+### HasComponentLicenseThreatLevel
+
+`func (o *SearchResultItemDTO) HasComponentLicenseThreatLevel() bool`
+
+HasComponentLicenseThreatLevel returns a boolean if a field has been set.
 
 ### GetComponentName
 
@@ -627,6 +738,181 @@ SetPolicyThreatLevel sets PolicyThreatLevel field to given value.
 `func (o *SearchResultItemDTO) HasPolicyThreatLevel() bool`
 
 HasPolicyThreatLevel returns a boolean if a field has been set.
+
+### GetPolicyViolationConstraintName
+
+`func (o *SearchResultItemDTO) GetPolicyViolationConstraintName() string`
+
+GetPolicyViolationConstraintName returns the PolicyViolationConstraintName field if non-nil, zero value otherwise.
+
+### GetPolicyViolationConstraintNameOk
+
+`func (o *SearchResultItemDTO) GetPolicyViolationConstraintNameOk() (*string, bool)`
+
+GetPolicyViolationConstraintNameOk returns a tuple with the PolicyViolationConstraintName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolationConstraintName
+
+`func (o *SearchResultItemDTO) SetPolicyViolationConstraintName(v string)`
+
+SetPolicyViolationConstraintName sets PolicyViolationConstraintName field to given value.
+
+### HasPolicyViolationConstraintName
+
+`func (o *SearchResultItemDTO) HasPolicyViolationConstraintName() bool`
+
+HasPolicyViolationConstraintName returns a boolean if a field has been set.
+
+### GetPolicyViolationId
+
+`func (o *SearchResultItemDTO) GetPolicyViolationId() string`
+
+GetPolicyViolationId returns the PolicyViolationId field if non-nil, zero value otherwise.
+
+### GetPolicyViolationIdOk
+
+`func (o *SearchResultItemDTO) GetPolicyViolationIdOk() (*string, bool)`
+
+GetPolicyViolationIdOk returns a tuple with the PolicyViolationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolationId
+
+`func (o *SearchResultItemDTO) SetPolicyViolationId(v string)`
+
+SetPolicyViolationId sets PolicyViolationId field to given value.
+
+### HasPolicyViolationId
+
+`func (o *SearchResultItemDTO) HasPolicyViolationId() bool`
+
+HasPolicyViolationId returns a boolean if a field has been set.
+
+### GetPolicyViolationPolicyId
+
+`func (o *SearchResultItemDTO) GetPolicyViolationPolicyId() string`
+
+GetPolicyViolationPolicyId returns the PolicyViolationPolicyId field if non-nil, zero value otherwise.
+
+### GetPolicyViolationPolicyIdOk
+
+`func (o *SearchResultItemDTO) GetPolicyViolationPolicyIdOk() (*string, bool)`
+
+GetPolicyViolationPolicyIdOk returns a tuple with the PolicyViolationPolicyId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolationPolicyId
+
+`func (o *SearchResultItemDTO) SetPolicyViolationPolicyId(v string)`
+
+SetPolicyViolationPolicyId sets PolicyViolationPolicyId field to given value.
+
+### HasPolicyViolationPolicyId
+
+`func (o *SearchResultItemDTO) HasPolicyViolationPolicyId() bool`
+
+HasPolicyViolationPolicyId returns a boolean if a field has been set.
+
+### GetPolicyViolationPolicyName
+
+`func (o *SearchResultItemDTO) GetPolicyViolationPolicyName() string`
+
+GetPolicyViolationPolicyName returns the PolicyViolationPolicyName field if non-nil, zero value otherwise.
+
+### GetPolicyViolationPolicyNameOk
+
+`func (o *SearchResultItemDTO) GetPolicyViolationPolicyNameOk() (*string, bool)`
+
+GetPolicyViolationPolicyNameOk returns a tuple with the PolicyViolationPolicyName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolationPolicyName
+
+`func (o *SearchResultItemDTO) SetPolicyViolationPolicyName(v string)`
+
+SetPolicyViolationPolicyName sets PolicyViolationPolicyName field to given value.
+
+### HasPolicyViolationPolicyName
+
+`func (o *SearchResultItemDTO) HasPolicyViolationPolicyName() bool`
+
+HasPolicyViolationPolicyName returns a boolean if a field has been set.
+
+### GetPolicyViolationThreatCategory
+
+`func (o *SearchResultItemDTO) GetPolicyViolationThreatCategory() string`
+
+GetPolicyViolationThreatCategory returns the PolicyViolationThreatCategory field if non-nil, zero value otherwise.
+
+### GetPolicyViolationThreatCategoryOk
+
+`func (o *SearchResultItemDTO) GetPolicyViolationThreatCategoryOk() (*string, bool)`
+
+GetPolicyViolationThreatCategoryOk returns a tuple with the PolicyViolationThreatCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolationThreatCategory
+
+`func (o *SearchResultItemDTO) SetPolicyViolationThreatCategory(v string)`
+
+SetPolicyViolationThreatCategory sets PolicyViolationThreatCategory field to given value.
+
+### HasPolicyViolationThreatCategory
+
+`func (o *SearchResultItemDTO) HasPolicyViolationThreatCategory() bool`
+
+HasPolicyViolationThreatCategory returns a boolean if a field has been set.
+
+### GetPolicyViolationThreatLevel
+
+`func (o *SearchResultItemDTO) GetPolicyViolationThreatLevel() int32`
+
+GetPolicyViolationThreatLevel returns the PolicyViolationThreatLevel field if non-nil, zero value otherwise.
+
+### GetPolicyViolationThreatLevelOk
+
+`func (o *SearchResultItemDTO) GetPolicyViolationThreatLevelOk() (*int32, bool)`
+
+GetPolicyViolationThreatLevelOk returns a tuple with the PolicyViolationThreatLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolationThreatLevel
+
+`func (o *SearchResultItemDTO) SetPolicyViolationThreatLevel(v int32)`
+
+SetPolicyViolationThreatLevel sets PolicyViolationThreatLevel field to given value.
+
+### HasPolicyViolationThreatLevel
+
+`func (o *SearchResultItemDTO) HasPolicyViolationThreatLevel() bool`
+
+HasPolicyViolationThreatLevel returns a boolean if a field has been set.
+
+### GetPolicyViolationWaiverStatus
+
+`func (o *SearchResultItemDTO) GetPolicyViolationWaiverStatus() string`
+
+GetPolicyViolationWaiverStatus returns the PolicyViolationWaiverStatus field if non-nil, zero value otherwise.
+
+### GetPolicyViolationWaiverStatusOk
+
+`func (o *SearchResultItemDTO) GetPolicyViolationWaiverStatusOk() (*string, bool)`
+
+GetPolicyViolationWaiverStatusOk returns a tuple with the PolicyViolationWaiverStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolationWaiverStatus
+
+`func (o *SearchResultItemDTO) SetPolicyViolationWaiverStatus(v string)`
+
+SetPolicyViolationWaiverStatus sets PolicyViolationWaiverStatus field to given value.
+
+### HasPolicyViolationWaiverStatus
+
+`func (o *SearchResultItemDTO) HasPolicyViolationWaiverStatus() bool`
+
+HasPolicyViolationWaiverStatus returns a boolean if a field has been set.
 
 ### GetReportId
 

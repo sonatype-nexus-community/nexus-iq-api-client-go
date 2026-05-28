@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.203.0-01
+  version: 1.203.2-01
 servers:
 - url: /
 security:
@@ -31673,12 +31673,17 @@ components:
         groupBy: groupBy
         groupIdentifier: itemType
         searchResultItemDTOS:
-        - policyThreatLevel: 0
+        - policyThreatLevel: 6
           itemType: itemType
+          policyViolationConstraintName: policyViolationConstraintName
           componentLabelId: componentLabelId
           policyThreatCategory: policyThreatCategory
+          policyViolationThreatLevel: 1
+          policyViolationId: policyViolationId
+          policyViolationPolicyId: policyViolationPolicyId
           applicationCategoryDescription: applicationCategoryDescription
           organizationId: organizationId
+          componentEffectiveLicenseName: componentEffectiveLicenseName
           vulnerabilityId: vulnerabilityId
           componentLabelDescription: componentLabelDescription
           sbomSpecification: sbomSpecification
@@ -31686,17 +31691,23 @@ components:
           applicationCategoryId: applicationCategoryId
           componentHash: componentHash
           componentName: componentName
+          policyViolationWaiverStatus: policyViolationWaiverStatus
           applicationName: applicationName
           applicationVersion: applicationVersion
           vulnerabilityStatus: vulnerabilityStatus
+          policyViolationPolicyName: policyViolationPolicyName
           organizationName: organizationName
           reportId: reportId
           policyName: policyName
+          componentLicenseThreatGroupName: componentLicenseThreatGroupName
           applicationPublicId: applicationPublicId
+          componentLicenseThreatLevel: 0
+          policyViolationThreatCategory: policyViolationThreatCategory
           policyId: policyId
           applicationCategoryColor: applicationCategoryColor
-          resultIndex: 6
+          resultIndex: 5
           componentLabelColor: componentLabelColor
+          componentEffectiveLicenseId: componentEffectiveLicenseId
           applicationId: applicationId
           componentIdentifier:
             coordinates:
@@ -31705,12 +31716,17 @@ components:
           policyEvaluationStage: policyEvaluationStage
           applicationCategoryName: applicationCategoryName
           vulnerabilityDescription: vulnerabilityDescription
-        - policyThreatLevel: 0
+        - policyThreatLevel: 6
           itemType: itemType
+          policyViolationConstraintName: policyViolationConstraintName
           componentLabelId: componentLabelId
           policyThreatCategory: policyThreatCategory
+          policyViolationThreatLevel: 1
+          policyViolationId: policyViolationId
+          policyViolationPolicyId: policyViolationPolicyId
           applicationCategoryDescription: applicationCategoryDescription
           organizationId: organizationId
+          componentEffectiveLicenseName: componentEffectiveLicenseName
           vulnerabilityId: vulnerabilityId
           componentLabelDescription: componentLabelDescription
           sbomSpecification: sbomSpecification
@@ -31718,17 +31734,23 @@ components:
           applicationCategoryId: applicationCategoryId
           componentHash: componentHash
           componentName: componentName
+          policyViolationWaiverStatus: policyViolationWaiverStatus
           applicationName: applicationName
           applicationVersion: applicationVersion
           vulnerabilityStatus: vulnerabilityStatus
+          policyViolationPolicyName: policyViolationPolicyName
           organizationName: organizationName
           reportId: reportId
           policyName: policyName
+          componentLicenseThreatGroupName: componentLicenseThreatGroupName
           applicationPublicId: applicationPublicId
+          componentLicenseThreatLevel: 0
+          policyViolationThreatCategory: policyViolationThreatCategory
           policyId: policyId
           applicationCategoryColor: applicationCategoryColor
-          resultIndex: 6
+          resultIndex: 5
           componentLabelColor: componentLabelColor
+          componentEffectiveLicenseId: componentEffectiveLicenseId
           applicationId: applicationId
           componentIdentifier:
             coordinates:
@@ -31776,6 +31798,17 @@ components:
           - parentOrganizationName
           - parentOrganizationId
           - sbomSpecification
+          - policyViolationId
+          - policyViolationThreatCategory
+          - policyViolationThreatLevel
+          - policyViolationPolicyName
+          - policyViolationPolicyId
+          - policyViolationWaiverStatus
+          - policyViolationConstraintName
+          - componentEffectiveLicenseId
+          - componentEffectiveLicenseName
+          - componentLicenseThreatGroupName
+          - componentLicenseThreatLevel
           type: string
         searchResultItemDTOS:
           items:
@@ -33327,23 +33360,28 @@ components:
       example:
         isExactTotalNumberOfHits: true
         searchQuery: searchQuery
-        pageSize: 5
-        totalNumberOfHits: 5
+        pageSize: 2
+        totalNumberOfHits: 7
         searchAfter:
         - searchAfter
         - searchAfter
-        page: 1
+        page: 5
         groupingByDTOS:
         - additionalInfo: additionalInfo
           groupBy: groupBy
           groupIdentifier: itemType
           searchResultItemDTOS:
-          - policyThreatLevel: 0
+          - policyThreatLevel: 6
             itemType: itemType
+            policyViolationConstraintName: policyViolationConstraintName
             componentLabelId: componentLabelId
             policyThreatCategory: policyThreatCategory
+            policyViolationThreatLevel: 1
+            policyViolationId: policyViolationId
+            policyViolationPolicyId: policyViolationPolicyId
             applicationCategoryDescription: applicationCategoryDescription
             organizationId: organizationId
+            componentEffectiveLicenseName: componentEffectiveLicenseName
             vulnerabilityId: vulnerabilityId
             componentLabelDescription: componentLabelDescription
             sbomSpecification: sbomSpecification
@@ -33351,17 +33389,23 @@ components:
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
+            policyViolationWaiverStatus: policyViolationWaiverStatus
             applicationName: applicationName
             applicationVersion: applicationVersion
             vulnerabilityStatus: vulnerabilityStatus
+            policyViolationPolicyName: policyViolationPolicyName
             organizationName: organizationName
             reportId: reportId
             policyName: policyName
+            componentLicenseThreatGroupName: componentLicenseThreatGroupName
             applicationPublicId: applicationPublicId
+            componentLicenseThreatLevel: 0
+            policyViolationThreatCategory: policyViolationThreatCategory
             policyId: policyId
             applicationCategoryColor: applicationCategoryColor
-            resultIndex: 6
+            resultIndex: 5
             componentLabelColor: componentLabelColor
+            componentEffectiveLicenseId: componentEffectiveLicenseId
             applicationId: applicationId
             componentIdentifier:
               coordinates:
@@ -33370,12 +33414,17 @@ components:
             policyEvaluationStage: policyEvaluationStage
             applicationCategoryName: applicationCategoryName
             vulnerabilityDescription: vulnerabilityDescription
-          - policyThreatLevel: 0
+          - policyThreatLevel: 6
             itemType: itemType
+            policyViolationConstraintName: policyViolationConstraintName
             componentLabelId: componentLabelId
             policyThreatCategory: policyThreatCategory
+            policyViolationThreatLevel: 1
+            policyViolationId: policyViolationId
+            policyViolationPolicyId: policyViolationPolicyId
             applicationCategoryDescription: applicationCategoryDescription
             organizationId: organizationId
+            componentEffectiveLicenseName: componentEffectiveLicenseName
             vulnerabilityId: vulnerabilityId
             componentLabelDescription: componentLabelDescription
             sbomSpecification: sbomSpecification
@@ -33383,17 +33432,23 @@ components:
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
+            policyViolationWaiverStatus: policyViolationWaiverStatus
             applicationName: applicationName
             applicationVersion: applicationVersion
             vulnerabilityStatus: vulnerabilityStatus
+            policyViolationPolicyName: policyViolationPolicyName
             organizationName: organizationName
             reportId: reportId
             policyName: policyName
+            componentLicenseThreatGroupName: componentLicenseThreatGroupName
             applicationPublicId: applicationPublicId
+            componentLicenseThreatLevel: 0
+            policyViolationThreatCategory: policyViolationThreatCategory
             policyId: policyId
             applicationCategoryColor: applicationCategoryColor
-            resultIndex: 6
+            resultIndex: 5
             componentLabelColor: componentLabelColor
+            componentEffectiveLicenseId: componentEffectiveLicenseId
             applicationId: applicationId
             componentIdentifier:
               coordinates:
@@ -33406,12 +33461,17 @@ components:
           groupBy: groupBy
           groupIdentifier: itemType
           searchResultItemDTOS:
-          - policyThreatLevel: 0
+          - policyThreatLevel: 6
             itemType: itemType
+            policyViolationConstraintName: policyViolationConstraintName
             componentLabelId: componentLabelId
             policyThreatCategory: policyThreatCategory
+            policyViolationThreatLevel: 1
+            policyViolationId: policyViolationId
+            policyViolationPolicyId: policyViolationPolicyId
             applicationCategoryDescription: applicationCategoryDescription
             organizationId: organizationId
+            componentEffectiveLicenseName: componentEffectiveLicenseName
             vulnerabilityId: vulnerabilityId
             componentLabelDescription: componentLabelDescription
             sbomSpecification: sbomSpecification
@@ -33419,17 +33479,23 @@ components:
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
+            policyViolationWaiverStatus: policyViolationWaiverStatus
             applicationName: applicationName
             applicationVersion: applicationVersion
             vulnerabilityStatus: vulnerabilityStatus
+            policyViolationPolicyName: policyViolationPolicyName
             organizationName: organizationName
             reportId: reportId
             policyName: policyName
+            componentLicenseThreatGroupName: componentLicenseThreatGroupName
             applicationPublicId: applicationPublicId
+            componentLicenseThreatLevel: 0
+            policyViolationThreatCategory: policyViolationThreatCategory
             policyId: policyId
             applicationCategoryColor: applicationCategoryColor
-            resultIndex: 6
+            resultIndex: 5
             componentLabelColor: componentLabelColor
+            componentEffectiveLicenseId: componentEffectiveLicenseId
             applicationId: applicationId
             componentIdentifier:
               coordinates:
@@ -33438,12 +33504,17 @@ components:
             policyEvaluationStage: policyEvaluationStage
             applicationCategoryName: applicationCategoryName
             vulnerabilityDescription: vulnerabilityDescription
-          - policyThreatLevel: 0
+          - policyThreatLevel: 6
             itemType: itemType
+            policyViolationConstraintName: policyViolationConstraintName
             componentLabelId: componentLabelId
             policyThreatCategory: policyThreatCategory
+            policyViolationThreatLevel: 1
+            policyViolationId: policyViolationId
+            policyViolationPolicyId: policyViolationPolicyId
             applicationCategoryDescription: applicationCategoryDescription
             organizationId: organizationId
+            componentEffectiveLicenseName: componentEffectiveLicenseName
             vulnerabilityId: vulnerabilityId
             componentLabelDescription: componentLabelDescription
             sbomSpecification: sbomSpecification
@@ -33451,17 +33522,23 @@ components:
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
+            policyViolationWaiverStatus: policyViolationWaiverStatus
             applicationName: applicationName
             applicationVersion: applicationVersion
             vulnerabilityStatus: vulnerabilityStatus
+            policyViolationPolicyName: policyViolationPolicyName
             organizationName: organizationName
             reportId: reportId
             policyName: policyName
+            componentLicenseThreatGroupName: componentLicenseThreatGroupName
             applicationPublicId: applicationPublicId
+            componentLicenseThreatLevel: 0
+            policyViolationThreatCategory: policyViolationThreatCategory
             policyId: policyId
             applicationCategoryColor: applicationCategoryColor
-            resultIndex: 6
+            resultIndex: 5
             componentLabelColor: componentLabelColor
+            componentEffectiveLicenseId: componentEffectiveLicenseId
             applicationId: applicationId
             componentIdentifier:
               coordinates:
@@ -33495,12 +33572,17 @@ components:
       type: object
     SearchResultItemDTO:
       example:
-        policyThreatLevel: 0
+        policyThreatLevel: 6
         itemType: itemType
+        policyViolationConstraintName: policyViolationConstraintName
         componentLabelId: componentLabelId
         policyThreatCategory: policyThreatCategory
+        policyViolationThreatLevel: 1
+        policyViolationId: policyViolationId
+        policyViolationPolicyId: policyViolationPolicyId
         applicationCategoryDescription: applicationCategoryDescription
         organizationId: organizationId
+        componentEffectiveLicenseName: componentEffectiveLicenseName
         vulnerabilityId: vulnerabilityId
         componentLabelDescription: componentLabelDescription
         sbomSpecification: sbomSpecification
@@ -33508,17 +33590,23 @@ components:
         applicationCategoryId: applicationCategoryId
         componentHash: componentHash
         componentName: componentName
+        policyViolationWaiverStatus: policyViolationWaiverStatus
         applicationName: applicationName
         applicationVersion: applicationVersion
         vulnerabilityStatus: vulnerabilityStatus
+        policyViolationPolicyName: policyViolationPolicyName
         organizationName: organizationName
         reportId: reportId
         policyName: policyName
+        componentLicenseThreatGroupName: componentLicenseThreatGroupName
         applicationPublicId: applicationPublicId
+        componentLicenseThreatLevel: 0
+        policyViolationThreatCategory: policyViolationThreatCategory
         policyId: policyId
         applicationCategoryColor: applicationCategoryColor
-        resultIndex: 6
+        resultIndex: 5
         componentLabelColor: componentLabelColor
+        componentEffectiveLicenseId: componentEffectiveLicenseId
         applicationId: applicationId
         componentIdentifier:
           coordinates:
@@ -33544,6 +33632,10 @@ components:
           type: string
         applicationVersion:
           type: string
+        componentEffectiveLicenseId:
+          type: string
+        componentEffectiveLicenseName:
+          type: string
         componentHash:
           type: string
         componentIdentifier:
@@ -33556,6 +33648,11 @@ components:
           type: string
         componentLabelName:
           type: string
+        componentLicenseThreatGroupName:
+          type: string
+        componentLicenseThreatLevel:
+          format: int32
+          type: integer
         componentName:
           type: string
         itemType:
@@ -33575,6 +33672,21 @@ components:
         policyThreatLevel:
           format: int32
           type: integer
+        policyViolationConstraintName:
+          type: string
+        policyViolationId:
+          type: string
+        policyViolationPolicyId:
+          type: string
+        policyViolationPolicyName:
+          type: string
+        policyViolationThreatCategory:
+          type: string
+        policyViolationThreatLevel:
+          format: int32
+          type: integer
+        policyViolationWaiverStatus:
+          type: string
         reportId:
           type: string
         resultIndex:
