@@ -22,22 +22,22 @@ func Test_sonatypeiq_ConfigSourceControlAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test ConfigSourceControlAPIService DeleteConfiguration6", func(t *testing.T) {
+	t.Run("Test ConfigSourceControlAPIService DeleteConfiguration7", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.ConfigSourceControlAPI.DeleteConfiguration6(context.Background()).Execute()
+		httpRes, err := apiClient.ConfigSourceControlAPI.DeleteConfiguration7(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ConfigSourceControlAPIService GetConfiguration6", func(t *testing.T) {
+	t.Run("Test ConfigSourceControlAPIService GetConfiguration7", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ConfigSourceControlAPI.GetConfiguration6(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigSourceControlAPI.GetConfiguration7(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

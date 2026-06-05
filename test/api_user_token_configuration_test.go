@@ -22,11 +22,11 @@ func Test_sonatypeiq_UserTokenConfigurationAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test UserTokenConfigurationAPIService GetConfiguration7", func(t *testing.T) {
+	t.Run("Test UserTokenConfigurationAPIService GetConfiguration8", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.UserTokenConfigurationAPI.GetConfiguration7(context.Background()).Execute()
+		resp, httpRes, err := apiClient.UserTokenConfigurationAPI.GetConfiguration8(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

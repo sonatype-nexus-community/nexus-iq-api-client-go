@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteConfiguration6**](ConfigSourceControlAPI.md#DeleteConfiguration6) | **Delete** /api/v2/config/sourceControl | 
-[**GetConfiguration6**](ConfigSourceControlAPI.md#GetConfiguration6) | **Get** /api/v2/config/sourceControl | 
+[**DeleteConfiguration7**](ConfigSourceControlAPI.md#DeleteConfiguration7) | **Delete** /api/v2/config/sourceControl | 
+[**GetConfiguration7**](ConfigSourceControlAPI.md#GetConfiguration7) | **Get** /api/v2/config/sourceControl | 
 [**SetConfiguration6**](ConfigSourceControlAPI.md#SetConfiguration6) | **Put** /api/v2/config/sourceControl | 
 
 
 
-## DeleteConfiguration6
+## DeleteConfiguration7
 
-> DeleteConfiguration6(ctx).Execute()
+> DeleteConfiguration7(ctx).Execute()
 
 
 
@@ -34,9 +34,9 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConfigSourceControlAPI.DeleteConfiguration6(context.Background()).Execute()
+	r, err := apiClient.ConfigSourceControlAPI.DeleteConfiguration7(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigSourceControlAPI.DeleteConfiguration6``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigSourceControlAPI.DeleteConfiguration7``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -48,7 +48,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteConfiguration6Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteConfiguration7Request struct via the builder pattern
 
 
 ### Return type
@@ -69,9 +69,9 @@ Other parameters are passed through a pointer to a apiDeleteConfiguration6Reques
 [[Back to README]](../README.md)
 
 
-## GetConfiguration6
+## GetConfiguration7
 
-> ApiSourceControlConfigurationDTO GetConfiguration6(ctx).Execute()
+> ApiSourceControlConfigurationDTO GetConfiguration7(ctx).Execute()
 
 
 
@@ -93,13 +93,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigSourceControlAPI.GetConfiguration6(context.Background()).Execute()
+	resp, r, err := apiClient.ConfigSourceControlAPI.GetConfiguration7(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigSourceControlAPI.GetConfiguration6``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigSourceControlAPI.GetConfiguration7``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfiguration6`: ApiSourceControlConfigurationDTO
-	fmt.Fprintf(os.Stdout, "Response from `ConfigSourceControlAPI.GetConfiguration6`: %v\n", resp)
+	// response from `GetConfiguration7`: ApiSourceControlConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ConfigSourceControlAPI.GetConfiguration7`: %v\n", resp)
 }
 ```
 
@@ -109,7 +109,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfiguration6Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfiguration7Request struct via the builder pattern
 
 
 ### Return type

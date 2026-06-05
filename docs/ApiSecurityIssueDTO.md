@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Analysis** | Pointer to [**ApiSecurityIssueAnalysisDTO**](ApiSecurityIssueAnalysisDTO.md) |  | [optional] 
+**CustomData** | Pointer to [**SecurityVulnerabilityCustomDataDTO**](SecurityVulnerabilityCustomDataDTO.md) |  | [optional] 
 **CvssVector** | Pointer to **string** |  | [optional] 
 **CvssVectorSource** | Pointer to **string** |  | [optional] 
 **Cwe** | Pointer to **string** |  | [optional] 
@@ -58,6 +59,31 @@ SetAnalysis sets Analysis field to given value.
 `func (o *ApiSecurityIssueDTO) HasAnalysis() bool`
 
 HasAnalysis returns a boolean if a field has been set.
+
+### GetCustomData
+
+`func (o *ApiSecurityIssueDTO) GetCustomData() SecurityVulnerabilityCustomDataDTO`
+
+GetCustomData returns the CustomData field if non-nil, zero value otherwise.
+
+### GetCustomDataOk
+
+`func (o *ApiSecurityIssueDTO) GetCustomDataOk() (*SecurityVulnerabilityCustomDataDTO, bool)`
+
+GetCustomDataOk returns a tuple with the CustomData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomData
+
+`func (o *ApiSecurityIssueDTO) SetCustomData(v SecurityVulnerabilityCustomDataDTO)`
+
+SetCustomData sets CustomData field to given value.
+
+### HasCustomData
+
+`func (o *ApiSecurityIssueDTO) HasCustomData() bool`
+
+HasCustomData returns a boolean if a field has been set.
 
 ### GetCvssVector
 

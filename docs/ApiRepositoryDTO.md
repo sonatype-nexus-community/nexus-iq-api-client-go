@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AuditEnabled** | Pointer to **bool** |  | [optional] 
 **Format** | Pointer to **string** |  | [optional] 
+**MonitoringEnabled** | Pointer to **bool** |  | [optional] 
 **NamespaceConfusionProtectionEnabled** | Pointer to **bool** |  | [optional] 
 **PolicyCompliantComponentSelectionEnabled** | Pointer to **bool** |  | [optional] 
 **PublicId** | Pointer to **string** |  | [optional] 
@@ -81,6 +82,31 @@ SetFormat sets Format field to given value.
 `func (o *ApiRepositoryDTO) HasFormat() bool`
 
 HasFormat returns a boolean if a field has been set.
+
+### GetMonitoringEnabled
+
+`func (o *ApiRepositoryDTO) GetMonitoringEnabled() bool`
+
+GetMonitoringEnabled returns the MonitoringEnabled field if non-nil, zero value otherwise.
+
+### GetMonitoringEnabledOk
+
+`func (o *ApiRepositoryDTO) GetMonitoringEnabledOk() (*bool, bool)`
+
+GetMonitoringEnabledOk returns a tuple with the MonitoringEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMonitoringEnabled
+
+`func (o *ApiRepositoryDTO) SetMonitoringEnabled(v bool)`
+
+SetMonitoringEnabled sets MonitoringEnabled field to given value.
+
+### HasMonitoringEnabled
+
+`func (o *ApiRepositoryDTO) HasMonitoringEnabled() bool`
+
+HasMonitoringEnabled returns a boolean if a field has been set.
 
 ### GetNamespaceConfusionProtectionEnabled
 

@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 ## GetRawData
 
-> ApiReportRawDataDTOV2 GetRawData(ctx, applicationPublicId, scanId).Execute()
+> ApiReportRawDataDTOV2 GetRawData(ctx, applicationPublicId, scanId).IncludeCustomSecurityVulnerabilityData(includeCustomSecurityVulnerabilityData).Execute()
 
 
 
@@ -333,11 +333,12 @@ import (
 
 func main() {
 	applicationPublicId := "applicationPublicId_example" // string | Enter the applicationPublicId (assigned at the time of creating a new application.) 
-	scanId := "scanId_example" // string | Enter the reportId (scanId) created at the time of evaluating the application. application.
+	scanId := "scanId_example" // string | Enter the reportId (scanId) created at the time of evaluating the application.
+	includeCustomSecurityVulnerabilityData := true // bool | Set to true to include security vulnerability custom data (remediation, cweId, cvssVector, cvssSeverity) for each securityIssue. Defaults to false. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ApplicationReportDataAPI.GetRawData(context.Background(), applicationPublicId, scanId).Execute()
+	resp, r, err := apiClient.ApplicationReportDataAPI.GetRawData(context.Background(), applicationPublicId, scanId).IncludeCustomSecurityVulnerabilityData(includeCustomSecurityVulnerabilityData).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetRawData``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -354,7 +355,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **applicationPublicId** | **string** | Enter the applicationPublicId (assigned at the time of creating a new application.)  | 
-**scanId** | **string** | Enter the reportId (scanId) created at the time of evaluating the application. application. | 
+**scanId** | **string** | Enter the reportId (scanId) created at the time of evaluating the application. | 
 
 ### Other Parameters
 
@@ -365,6 +366,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **includeCustomSecurityVulnerabilityData** | **bool** | Set to true to include security vulnerability custom data (remediation, cweId, cvssVector, cvssSeverity) for each securityIssue. Defaults to false. | [default to false]
 
 ### Return type
 

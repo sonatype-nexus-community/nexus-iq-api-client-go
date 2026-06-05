@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetQuarantinedByPath**](RepositoriesAPI.md#GetQuarantinedByPath) | **Post** /api/v2/repositories/{repositoryManagerInstanceId}/{repositoryPublicId}/components/quarantined/pathnames | 
 [**ReleaseQuarantineWithoutReEval**](RepositoriesAPI.md#ReleaseQuarantineWithoutReEval) | **Post** /api/v2/repositories/quarantine/{quarantineId}/release | 
+[**UploadScan**](RepositoriesAPI.md#UploadScan) | **Post** /api/v2/repositories/{repositoryManagerId}/{repositoryId}/components | 
 
 
 
@@ -149,6 +150,83 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: text/plain
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UploadScan
+
+> UploadScan(ctx, repositoryManagerId, repositoryId).ComponentId(componentId).PolicyEvaluationStage(policyEvaluationStage).Purl(purl).ScanFile(scanFile).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	repositoryManagerId := "repositoryManagerId_example" // string | 
+	repositoryId := "repositoryId_example" // string | 
+	componentId := "componentId_example" // string |  (optional)
+	policyEvaluationStage := "policyEvaluationStage_example" // string |  (optional)
+	purl := "purl_example" // string |  (optional)
+	scanFile := os.NewFile(1234, "some_file") // *os.File |  (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.RepositoriesAPI.UploadScan(context.Background(), repositoryManagerId, repositoryId).ComponentId(componentId).PolicyEvaluationStage(policyEvaluationStage).Purl(purl).ScanFile(scanFile).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.UploadScan``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**repositoryManagerId** | **string** |  | 
+**repositoryId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUploadScanRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **componentId** | **string** |  | 
+ **policyEvaluationStage** | **string** |  | 
+ **purl** | **string** |  | 
+ **scanFile** | ***os.File** |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

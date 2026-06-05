@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetConfiguration7**](UserTokenConfigurationAPI.md#GetConfiguration7) | **Get** /api/v2/config/userTokens | 
+[**GetConfiguration8**](UserTokenConfigurationAPI.md#GetConfiguration8) | **Get** /api/v2/config/userTokens | 
 [**ResetConfiguration**](UserTokenConfigurationAPI.md#ResetConfiguration) | **Delete** /api/v2/config/userTokens | 
 [**UpdateConfiguration**](UserTokenConfigurationAPI.md#UpdateConfiguration) | **Put** /api/v2/config/userTokens | 
 
 
 
-## GetConfiguration7
+## GetConfiguration8
 
-> ApiUserTokenConfigurationDTO GetConfiguration7(ctx).Execute()
+> ApiUserTokenConfigurationDTO GetConfiguration8(ctx).Execute()
 
 
 
@@ -34,13 +34,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.UserTokenConfigurationAPI.GetConfiguration7(context.Background()).Execute()
+	resp, r, err := apiClient.UserTokenConfigurationAPI.GetConfiguration8(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `UserTokenConfigurationAPI.GetConfiguration7``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `UserTokenConfigurationAPI.GetConfiguration8``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetConfiguration7`: ApiUserTokenConfigurationDTO
-	fmt.Fprintf(os.Stdout, "Response from `UserTokenConfigurationAPI.GetConfiguration7`: %v\n", resp)
+	// response from `GetConfiguration8`: ApiUserTokenConfigurationDTO
+	fmt.Fprintf(os.Stdout, "Response from `UserTokenConfigurationAPI.GetConfiguration8`: %v\n", resp)
 }
 ```
 
@@ -50,7 +50,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetConfiguration7Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetConfiguration8Request struct via the builder pattern
 
 
 ### Return type

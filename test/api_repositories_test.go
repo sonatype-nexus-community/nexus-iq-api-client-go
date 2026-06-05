@@ -51,4 +51,18 @@ func Test_sonatypeiq_RepositoriesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test RepositoriesAPIService UploadScan", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var repositoryManagerId string
+		var repositoryId string
+
+		httpRes, err := apiClient.RepositoriesAPI.UploadScan(context.Background(), repositoryManagerId, repositoryId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }
