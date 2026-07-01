@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.204.0-01
+  version: 1.204.1-01
 servers:
 - url: /
 security:
