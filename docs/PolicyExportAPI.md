@@ -31,7 +31,7 @@ import (
 func main() {
 	ownerType := "ownerType_example" // string | Type of owner (organization, application, or repository)
 	ownerId := "ownerId_example" // string | Internal ID of the owner
-	includeInherited := true // bool | If true, include policies from parent levels in the hierarchy. For repositories, includes policies from the repository and parent organization (RepositoryManager and RepositoryContainer levels are skipped as they do not define policies). For applications, includes policies from the application and parent organization(s). For organizations, includes policies from the organization and any parent organizations. Default: false (direct policies only) (optional) (default to false)
+	includeInherited := true // bool | If true, include policies from parent levels in the hierarchy. For repositories, includes policies from the repository, RepositoryManager, RepositoryContainer, and parent organization. For applications, includes policies from the application and parent organization(s). For organizations, includes policies from the organization and any parent organizations. Default: false (direct policies only) (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **includeInherited** | **bool** | If true, include policies from parent levels in the hierarchy. For repositories, includes policies from the repository and parent organization (RepositoryManager and RepositoryContainer levels are skipped as they do not define policies). For applications, includes policies from the application and parent organization(s). For organizations, includes policies from the organization and any parent organizations. Default: false (direct policies only) | [default to false]
+ **includeInherited** | **bool** | If true, include policies from parent levels in the hierarchy. For repositories, includes policies from the repository, RepositoryManager, RepositoryContainer, and parent organization. For applications, includes policies from the application and parent organization(s). For organizations, includes policies from the organization and any parent organizations. Default: false (direct policies only) | [default to false]
 
 ### Return type
 

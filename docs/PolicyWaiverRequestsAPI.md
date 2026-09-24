@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddPolicyWaiverRequestByPolicyViolationId**](PolicyWaiverRequestsAPI.md#AddPolicyWaiverRequestByPolicyViolationId) | **Post** /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/policyViolation/{policyViolationId} | 
 [**GetPolicyWaiverRequest**](PolicyWaiverRequestsAPI.md#GetPolicyWaiverRequest) | **Get** /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/{policyWaiverRequestId} | 
+[**GetPolicyWaiverRequests**](PolicyWaiverRequestsAPI.md#GetPolicyWaiverRequests) | **Get** /api/v2/policyWaiverRequests/{ownerType}/{ownerId} | 
 [**ReviewPolicyWaiverRequest**](PolicyWaiverRequestsAPI.md#ReviewPolicyWaiverRequest) | **Post** /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/review/{policyWaiverRequestId} | 
 [**UpdatePolicyWaiverRequest**](PolicyWaiverRequestsAPI.md#UpdatePolicyWaiverRequest) | **Put** /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/{policyWaiverRequestId} | 
 
@@ -150,6 +151,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ApiPolicyWaiverRequestDTO**](ApiPolicyWaiverRequestDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPolicyWaiverRequests
+
+> []ApiPolicyWaiverRequestDTO GetPolicyWaiverRequests(ctx, ownerType, ownerId).RepositoryFormat(repositoryFormat).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | The owner type. Possible values are application, organization, repository, repository_manager, repository_container.
+	ownerId := "ownerId_example" // string | The id for the ownerType.
+	repositoryFormat := "repositoryFormat_example" // string | Optional filter for repository format. Use 'docker' to return only container repository waiver requests, or 'component' to return only non-container repository waiver requests. Omit to return all. (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.PolicyWaiverRequestsAPI.GetPolicyWaiverRequests(context.Background(), ownerType, ownerId).RepositoryFormat(repositoryFormat).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiverRequestsAPI.GetPolicyWaiverRequests``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPolicyWaiverRequests`: []ApiPolicyWaiverRequestDTO
+	fmt.Fprintf(os.Stdout, "Response from `PolicyWaiverRequestsAPI.GetPolicyWaiverRequests`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | The owner type. Possible values are application, organization, repository, repository_manager, repository_container. | 
+**ownerId** | **string** | The id for the ownerType. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPolicyWaiverRequestsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **repositoryFormat** | **string** | Optional filter for repository format. Use &#39;docker&#39; to return only container repository waiver requests, or &#39;component&#39; to return only non-container repository waiver requests. Omit to return all. | 
+
+### Return type
+
+[**[]ApiPolicyWaiverRequestDTO**](ApiPolicyWaiverRequestDTO.md)
 
 ### Authorization
 

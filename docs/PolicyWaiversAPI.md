@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**AddWaiverToTransitivePolicyViolationsByAppScanComponent**](PolicyWaiversAPI.md#AddWaiverToTransitivePolicyViolationsByAppScanComponent) | **Post** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/{scanId} | 
 [**AddWaiverToTransitivePolicyViolationsByOwnerStageComponent**](PolicyWaiversAPI.md#AddWaiverToTransitivePolicyViolationsByOwnerStageComponent) | **Post** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/stages/{stageId} | 
 [**DeletePolicyWaiver**](PolicyWaiversAPI.md#DeletePolicyWaiver) | **Delete** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
-[**GetPolicyWaiver**](PolicyWaiversAPI.md#GetPolicyWaiver) | **Get** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
+[**GetPolicyWaiver1**](PolicyWaiversAPI.md#GetPolicyWaiver1) | **Get** /api/v2/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
 [**GetPolicyWaivers**](PolicyWaiversAPI.md#GetPolicyWaivers) | **Get** /api/v2/policyWaivers/{ownerType}/{ownerId} | 
 [**GetTransitivePolicyWaiversByAppScanComponent**](PolicyWaiversAPI.md#GetTransitivePolicyWaiversByAppScanComponent) | **Get** /api/v2/policyWaivers/transitive/{ownerType}/{ownerId}/{scanId} | 
 [**RequestPolicyWaiver**](PolicyWaiversAPI.md#RequestPolicyWaiver) | **Post** /api/v2/policyWaivers/waiverRequests/{policyViolationId} | 
@@ -404,9 +404,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetPolicyWaiver
+## GetPolicyWaiver1
 
-> ApiPolicyWaiverDTO GetPolicyWaiver(ctx, ownerType, ownerId, policyWaiverId).Execute()
+> ApiPolicyWaiverDTO GetPolicyWaiver1(ctx, ownerType, ownerId, policyWaiverId).Execute()
 
 
 
@@ -431,13 +431,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.PolicyWaiversAPI.GetPolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
+	resp, r, err := apiClient.PolicyWaiversAPI.GetPolicyWaiver1(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetPolicyWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetPolicyWaiver1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPolicyWaiver`: ApiPolicyWaiverDTO
-	fmt.Fprintf(os.Stdout, "Response from `PolicyWaiversAPI.GetPolicyWaiver`: %v\n", resp)
+	// response from `GetPolicyWaiver1`: ApiPolicyWaiverDTO
+	fmt.Fprintf(os.Stdout, "Response from `PolicyWaiversAPI.GetPolicyWaiver1`: %v\n", resp)
 }
 ```
 
@@ -453,7 +453,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetPolicyWaiverRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetPolicyWaiver1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -482,7 +482,7 @@ Name | Type | Description  | Notes
 
 ## GetPolicyWaivers
 
-> []ApiPolicyWaiverDTO GetPolicyWaivers(ctx, ownerType, ownerId).Execute()
+> []ApiPolicyWaiverDTO GetPolicyWaivers(ctx, ownerType, ownerId).ExpiringWithin(expiringWithin).Execute()
 
 
 
@@ -503,10 +503,11 @@ import (
 func main() {
 	ownerType := "ownerType_example" // string | Enter the ownerType to specify the scope. The response will contain waivers that are within the scope specified.
 	ownerId := "ownerId_example" // string | Enter the corresponding id for the ownerType specified above.
+	expiringWithin := int32(56) // int32 | When specified, only returns active waivers expiring within this many days from now. Must be a positive integer. For example, expiringWithin=7 returns waivers expiring in the next 7 days. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.PolicyWaiversAPI.GetPolicyWaivers(context.Background(), ownerType, ownerId).Execute()
+	resp, r, err := apiClient.PolicyWaiversAPI.GetPolicyWaivers(context.Background(), ownerType, ownerId).ExpiringWithin(expiringWithin).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiversAPI.GetPolicyWaivers``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -534,6 +535,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **expiringWithin** | **int32** | When specified, only returns active waivers expiring within this many days from now. Must be a positive integer. For example, expiringWithin&#x3D;7 returns waivers expiring in the next 7 days. | 
 
 ### Return type
 

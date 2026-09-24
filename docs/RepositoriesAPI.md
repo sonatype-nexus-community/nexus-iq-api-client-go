@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## UploadScan
 
-> UploadScan(ctx, repositoryManagerId, repositoryId).ComponentId(componentId).PolicyEvaluationStage(policyEvaluationStage).Purl(purl).ScanFile(scanFile).Execute()
+> UploadScan(ctx, repositoryManagerId, repositoryId).Client(client).ComponentId(componentId).CorrelationId(correlationId).EvaluationMode(evaluationMode).PolicyEvaluationStage(policyEvaluationStage).Purl(purl).RequestedBy(requestedBy).ScanFile(scanFile).Execute()
 
 
 
@@ -178,14 +178,18 @@ import (
 func main() {
 	repositoryManagerId := "repositoryManagerId_example" // string | 
 	repositoryId := "repositoryId_example" // string | 
+	client := "client_example" // string |  (optional)
 	componentId := "componentId_example" // string |  (optional)
+	correlationId := "correlationId_example" // string |  (optional)
+	evaluationMode := "evaluationMode_example" // string |  (optional)
 	policyEvaluationStage := "policyEvaluationStage_example" // string |  (optional)
 	purl := "purl_example" // string |  (optional)
+	requestedBy := "requestedBy_example" // string |  (optional)
 	scanFile := os.NewFile(1234, "some_file") // *os.File |  (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.RepositoriesAPI.UploadScan(context.Background(), repositoryManagerId, repositoryId).ComponentId(componentId).PolicyEvaluationStage(policyEvaluationStage).Purl(purl).ScanFile(scanFile).Execute()
+	r, err := apiClient.RepositoriesAPI.UploadScan(context.Background(), repositoryManagerId, repositoryId).Client(client).ComponentId(componentId).CorrelationId(correlationId).EvaluationMode(evaluationMode).PolicyEvaluationStage(policyEvaluationStage).Purl(purl).RequestedBy(requestedBy).ScanFile(scanFile).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.UploadScan``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -211,9 +215,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **client** | **string** |  | 
  **componentId** | **string** |  | 
+ **correlationId** | **string** |  | 
+ **evaluationMode** | **string** |  | 
  **policyEvaluationStage** | **string** |  | 
  **purl** | **string** |  | 
+ **requestedBy** | **string** |  | 
  **scanFile** | ***os.File** |  | 
 
 ### Return type

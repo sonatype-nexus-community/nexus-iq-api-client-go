@@ -6,7 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddBulkWaivers**](FirewallAPI.md#AddBulkWaivers) | **Post** /api/v2/firewall/repositories/{ownerType}/{ownerId}/waivers/bulk | 
 [**AddProprietaryComponentNames**](FirewallAPI.md#AddProprietaryComponentNames) | **Post** /api/v2/firewall/namespace_confusion/{format} | 
+[**AddRepository**](FirewallAPI.md#AddRepository) | **Post** /api/v2/firewall/repositoryManagers/{repositoryManagerId}/repositories | 
 [**AddRepositoryManager**](FirewallAPI.md#AddRepositoryManager) | **Post** /api/v2/firewall/repositoryManagers | 
+[**AddVirtualRepositoryManager**](FirewallAPI.md#AddVirtualRepositoryManager) | **Post** /api/v2/firewall/virtualManagers | 
 [**AddWaiver**](FirewallAPI.md#AddWaiver) | **Post** /api/v2/firewall/container-image/{containerImageId}/policyWaiver | 
 [**ConfigureRepositories**](FirewallAPI.md#ConfigureRepositories) | **Post** /api/v2/firewall/repositories/configuration/{repositoryManagerId} | 
 [**DeleteContainerImagePolicyWaiver**](FirewallAPI.md#DeleteContainerImagePolicyWaiver) | **Delete** /api/v2/firewall/container-image/{containerImageId}/policyWaiver | 
@@ -20,6 +22,7 @@ Method | HTTP request | Description
 [**GetFirewallMetrics**](FirewallAPI.md#GetFirewallMetrics) | **Get** /api/v2/firewall/metrics/embedded | 
 [**GetFirewallUnquarantineSummary**](FirewallAPI.md#GetFirewallUnquarantineSummary) | **Get** /api/v2/firewall/releaseQuarantine/summary | 
 [**GetMalwareDefenseMetrics**](FirewallAPI.md#GetMalwareDefenseMetrics) | **Get** /api/v2/malware-defense/metrics | 
+[**GetPolicyWaiver**](FirewallAPI.md#GetPolicyWaiver) | **Get** /api/v2/firewall/policyWaivers/{ownerType}/{ownerId}/{policyWaiverId} | 
 [**GetQuarantineList**](FirewallAPI.md#GetQuarantineList) | **Get** /api/v2/firewall/components/quarantined | 
 [**GetQuarantineSummary**](FirewallAPI.md#GetQuarantineSummary) | **Get** /api/v2/firewall/quarantine/summary | 
 [**GetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#GetQuarantinedComponentViewAnonymousAccess) | **Get** /api/v2/firewall/quarantinedComponentView/configuration/anonymousAccess | 
@@ -30,6 +33,8 @@ Method | HTTP request | Description
 [**GetWaivers**](FirewallAPI.md#GetWaivers) | **Get** /api/v2/firewall/container-image/policyWaiver | 
 [**InitiateCascadeReevaluation**](FirewallAPI.md#InitiateCascadeReevaluation) | **Post** /api/v2/firewall/repositories/cascade-reevaluate/componentHash/{componentHash} | 
 [**RemoveProprietaryComponentNames**](FirewallAPI.md#RemoveProprietaryComponentNames) | **Delete** /api/v2/firewall/namespace_confusion/{format} | 
+[**RenewWaivers**](FirewallAPI.md#RenewWaivers) | **Post** /api/v2/firewall/waivers/renew | 
+[**RequestWaiver**](FirewallAPI.md#RequestWaiver) | **Post** /api/v2/firewall/container-image/{containerImageId}/policyWaiverRequest | 
 [**SetFirewallAutoUnquarantineConfig**](FirewallAPI.md#SetFirewallAutoUnquarantineConfig) | **Put** /api/v2/firewall/releaseQuarantine/configuration | 
 [**SetQuarantinedComponentViewAnonymousAccess**](FirewallAPI.md#SetQuarantinedComponentViewAnonymousAccess) | **Put** /api/v2/firewall/quarantinedComponentView/configuration/anonymousAccess/{enabled} | 
 [**VerifyConnectionAndGetApplications**](FirewallAPI.md#VerifyConnectionAndGetApplications) | **Get** /api/v2/firewall/connection/verify | 
@@ -179,6 +184,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## AddRepository
+
+> ApiRepositoryDTO AddRepository(ctx, repositoryManagerId).ApiRepositoryDTO(apiRepositoryDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	repositoryManagerId := "repositoryManagerId_example" // string | Enter the repository manager ID.
+	apiRepositoryDTO := *sonatypeiq.NewApiRepositoryDTO() // ApiRepositoryDTO | Enter values for the new repository.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.FirewallAPI.AddRepository(context.Background(), repositoryManagerId).ApiRepositoryDTO(apiRepositoryDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.AddRepository``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddRepository`: ApiRepositoryDTO
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.AddRepository`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**repositoryManagerId** | **string** | Enter the repository manager ID. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddRepositoryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **apiRepositoryDTO** | [**ApiRepositoryDTO**](ApiRepositoryDTO.md) | Enter values for the new repository. | 
+
+### Return type
+
+[**ApiRepositoryDTO**](ApiRepositoryDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## AddRepositoryManager
 
 > ApiRepositoryManagerDTO AddRepositoryManager(ctx).ApiRepositoryManagerDTO(apiRepositoryManagerDTO).Execute()
@@ -221,6 +298,72 @@ func main() {
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAddRepositoryManagerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **apiRepositoryManagerDTO** | [**ApiRepositoryManagerDTO**](ApiRepositoryManagerDTO.md) | Enter values for the new repository manager. | 
+
+### Return type
+
+[**ApiRepositoryManagerDTO**](ApiRepositoryManagerDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AddVirtualRepositoryManager
+
+> ApiRepositoryManagerDTO AddVirtualRepositoryManager(ctx).ApiRepositoryManagerDTO(apiRepositoryManagerDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	apiRepositoryManagerDTO := *sonatypeiq.NewApiRepositoryManagerDTO() // ApiRepositoryManagerDTO | Enter values for the new repository manager.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.FirewallAPI.AddVirtualRepositoryManager(context.Background()).ApiRepositoryManagerDTO(apiRepositoryManagerDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.AddVirtualRepositoryManager``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddVirtualRepositoryManager`: ApiRepositoryManagerDTO
+	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.AddVirtualRepositoryManager`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddVirtualRepositoryManagerRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1116,6 +1259,80 @@ Other parameters are passed through a pointer to a apiGetMalwareDefenseMetricsRe
 [[Back to README]](../README.md)
 
 
+## GetPolicyWaiver
+
+> GetPolicyWaiver(ctx, ownerType, ownerId, policyWaiverId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | Owner type (application, organization, repository, repository_manager, or repository_container)
+	ownerId := "ownerId_example" // string | Owner ID
+	policyWaiverId := "policyWaiverId_example" // string | Policy waiver ID
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.FirewallAPI.GetPolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetPolicyWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Owner type (application, organization, repository, repository_manager, or repository_container) | 
+**ownerId** | **string** | Owner ID | 
+**policyWaiverId** | **string** | Policy waiver ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPolicyWaiverRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetQuarantineList
 
 > ApiFirewallQuarantinedComponentDtoResult GetQuarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).SortBy(sortBy).Asc(asc).Execute()
@@ -1785,6 +2002,140 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RenewWaivers
+
+> RenewWaivers(ctx).RenewWaiversRequestDTO(renewWaiversRequestDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	renewWaiversRequestDTO := *sonatypeiq.NewRenewWaiversRequestDTO() // RenewWaiversRequestDTO | Renewal request containing:\\n- **waiverIds** (required): List of waiver IDs to renew\\n- **newExpiryTime** (optional): New expiry time as ISO 8601 timestamp. Null means the waiver never expires.\\n- **comment** (optional): Comment explaining the renewal\\n- **reasonId** (optional): ID of a pre-defined waiver reason
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.FirewallAPI.RenewWaivers(context.Background()).RenewWaiversRequestDTO(renewWaiversRequestDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.RenewWaivers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRenewWaiversRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **renewWaiversRequestDTO** | [**RenewWaiversRequestDTO**](RenewWaiversRequestDTO.md) | Renewal request containing:\\n- **waiverIds** (required): List of waiver IDs to renew\\n- **newExpiryTime** (optional): New expiry time as ISO 8601 timestamp. Null means the waiver never expires.\\n- **comment** (optional): Comment explaining the renewal\\n- **reasonId** (optional): ID of a pre-defined waiver reason | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RequestWaiver
+
+> RequestWaiver(ctx, containerImageId).ApiContainerImageWaiverRequestDTO(apiContainerImageWaiverRequestDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	containerImageId := "containerImageId_example" // string | The container image id.
+	apiContainerImageWaiverRequestDTO := *sonatypeiq.NewApiContainerImageWaiverRequestDTO() // ApiContainerImageWaiverRequestDTO | Fields: comment, noteToReviewer, expiryTime, waiverReasonId (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.FirewallAPI.RequestWaiver(context.Background(), containerImageId).ApiContainerImageWaiverRequestDTO(apiContainerImageWaiverRequestDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.RequestWaiver``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**containerImageId** | **string** | The container image id. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRequestWaiverRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **apiContainerImageWaiverRequestDTO** | [**ApiContainerImageWaiverRequestDTO**](ApiContainerImageWaiverRequestDTO.md) | Fields: comment, noteToReviewer, expiryTime, waiverReasonId | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

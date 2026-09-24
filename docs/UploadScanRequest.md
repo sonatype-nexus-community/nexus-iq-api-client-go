@@ -4,9 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Client** | Pointer to **string** |  | [optional] 
 **ComponentId** | Pointer to **string** |  | [optional] 
+**CorrelationId** | Pointer to **string** |  | [optional] 
+**EvaluationMode** | Pointer to **string** |  | [optional] 
 **PolicyEvaluationStage** | Pointer to **string** |  | [optional] 
 **Purl** | Pointer to **string** |  | [optional] 
+**RequestedBy** | Pointer to **string** |  | [optional] 
 **ScanFile** | Pointer to ***os.File** |  | [optional] 
 
 ## Methods
@@ -27,6 +31,31 @@ will change when the set of required properties is changed
 NewUploadScanRequestWithDefaults instantiates a new UploadScanRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClient
+
+`func (o *UploadScanRequest) GetClient() string`
+
+GetClient returns the Client field if non-nil, zero value otherwise.
+
+### GetClientOk
+
+`func (o *UploadScanRequest) GetClientOk() (*string, bool)`
+
+GetClientOk returns a tuple with the Client field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClient
+
+`func (o *UploadScanRequest) SetClient(v string)`
+
+SetClient sets Client field to given value.
+
+### HasClient
+
+`func (o *UploadScanRequest) HasClient() bool`
+
+HasClient returns a boolean if a field has been set.
 
 ### GetComponentId
 
@@ -52,6 +81,56 @@ SetComponentId sets ComponentId field to given value.
 `func (o *UploadScanRequest) HasComponentId() bool`
 
 HasComponentId returns a boolean if a field has been set.
+
+### GetCorrelationId
+
+`func (o *UploadScanRequest) GetCorrelationId() string`
+
+GetCorrelationId returns the CorrelationId field if non-nil, zero value otherwise.
+
+### GetCorrelationIdOk
+
+`func (o *UploadScanRequest) GetCorrelationIdOk() (*string, bool)`
+
+GetCorrelationIdOk returns a tuple with the CorrelationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCorrelationId
+
+`func (o *UploadScanRequest) SetCorrelationId(v string)`
+
+SetCorrelationId sets CorrelationId field to given value.
+
+### HasCorrelationId
+
+`func (o *UploadScanRequest) HasCorrelationId() bool`
+
+HasCorrelationId returns a boolean if a field has been set.
+
+### GetEvaluationMode
+
+`func (o *UploadScanRequest) GetEvaluationMode() string`
+
+GetEvaluationMode returns the EvaluationMode field if non-nil, zero value otherwise.
+
+### GetEvaluationModeOk
+
+`func (o *UploadScanRequest) GetEvaluationModeOk() (*string, bool)`
+
+GetEvaluationModeOk returns a tuple with the EvaluationMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvaluationMode
+
+`func (o *UploadScanRequest) SetEvaluationMode(v string)`
+
+SetEvaluationMode sets EvaluationMode field to given value.
+
+### HasEvaluationMode
+
+`func (o *UploadScanRequest) HasEvaluationMode() bool`
+
+HasEvaluationMode returns a boolean if a field has been set.
 
 ### GetPolicyEvaluationStage
 
@@ -102,6 +181,31 @@ SetPurl sets Purl field to given value.
 `func (o *UploadScanRequest) HasPurl() bool`
 
 HasPurl returns a boolean if a field has been set.
+
+### GetRequestedBy
+
+`func (o *UploadScanRequest) GetRequestedBy() string`
+
+GetRequestedBy returns the RequestedBy field if non-nil, zero value otherwise.
+
+### GetRequestedByOk
+
+`func (o *UploadScanRequest) GetRequestedByOk() (*string, bool)`
+
+GetRequestedByOk returns a tuple with the RequestedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestedBy
+
+`func (o *UploadScanRequest) SetRequestedBy(v string)`
+
+SetRequestedBy sets RequestedBy field to given value.
+
+### HasRequestedBy
+
+`func (o *UploadScanRequest) HasRequestedBy() bool`
+
+HasRequestedBy returns a boolean if a field has been set.
 
 ### GetScanFile
 

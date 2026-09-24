@@ -21,6 +21,10 @@ Name | Type | Description | Notes
 **ForContainerImageComponent** | Pointer to **bool** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
 **IsObsolete** | Pointer to **bool** |  | [optional] 
+**LastRenewalComment** | Pointer to **string** |  | [optional] 
+**LastRenewalReasonText** | Pointer to **string** |  | [optional] 
+**LastRenewedAt** | Pointer to **time.Time** |  | [optional] 
+**LastRenewedBy** | Pointer to **string** |  | [optional] 
 **MatcherStrategy** | Pointer to **string** |  | [optional] 
 **PolicyId** | Pointer to **string** |  | [optional] 
 **PolicyName** | Pointer to **string** |  | [optional] 
@@ -477,6 +481,106 @@ SetIsObsolete sets IsObsolete field to given value.
 `func (o *ApiPolicyWaiverDTO) HasIsObsolete() bool`
 
 HasIsObsolete returns a boolean if a field has been set.
+
+### GetLastRenewalComment
+
+`func (o *ApiPolicyWaiverDTO) GetLastRenewalComment() string`
+
+GetLastRenewalComment returns the LastRenewalComment field if non-nil, zero value otherwise.
+
+### GetLastRenewalCommentOk
+
+`func (o *ApiPolicyWaiverDTO) GetLastRenewalCommentOk() (*string, bool)`
+
+GetLastRenewalCommentOk returns a tuple with the LastRenewalComment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastRenewalComment
+
+`func (o *ApiPolicyWaiverDTO) SetLastRenewalComment(v string)`
+
+SetLastRenewalComment sets LastRenewalComment field to given value.
+
+### HasLastRenewalComment
+
+`func (o *ApiPolicyWaiverDTO) HasLastRenewalComment() bool`
+
+HasLastRenewalComment returns a boolean if a field has been set.
+
+### GetLastRenewalReasonText
+
+`func (o *ApiPolicyWaiverDTO) GetLastRenewalReasonText() string`
+
+GetLastRenewalReasonText returns the LastRenewalReasonText field if non-nil, zero value otherwise.
+
+### GetLastRenewalReasonTextOk
+
+`func (o *ApiPolicyWaiverDTO) GetLastRenewalReasonTextOk() (*string, bool)`
+
+GetLastRenewalReasonTextOk returns a tuple with the LastRenewalReasonText field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastRenewalReasonText
+
+`func (o *ApiPolicyWaiverDTO) SetLastRenewalReasonText(v string)`
+
+SetLastRenewalReasonText sets LastRenewalReasonText field to given value.
+
+### HasLastRenewalReasonText
+
+`func (o *ApiPolicyWaiverDTO) HasLastRenewalReasonText() bool`
+
+HasLastRenewalReasonText returns a boolean if a field has been set.
+
+### GetLastRenewedAt
+
+`func (o *ApiPolicyWaiverDTO) GetLastRenewedAt() time.Time`
+
+GetLastRenewedAt returns the LastRenewedAt field if non-nil, zero value otherwise.
+
+### GetLastRenewedAtOk
+
+`func (o *ApiPolicyWaiverDTO) GetLastRenewedAtOk() (*time.Time, bool)`
+
+GetLastRenewedAtOk returns a tuple with the LastRenewedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastRenewedAt
+
+`func (o *ApiPolicyWaiverDTO) SetLastRenewedAt(v time.Time)`
+
+SetLastRenewedAt sets LastRenewedAt field to given value.
+
+### HasLastRenewedAt
+
+`func (o *ApiPolicyWaiverDTO) HasLastRenewedAt() bool`
+
+HasLastRenewedAt returns a boolean if a field has been set.
+
+### GetLastRenewedBy
+
+`func (o *ApiPolicyWaiverDTO) GetLastRenewedBy() string`
+
+GetLastRenewedBy returns the LastRenewedBy field if non-nil, zero value otherwise.
+
+### GetLastRenewedByOk
+
+`func (o *ApiPolicyWaiverDTO) GetLastRenewedByOk() (*string, bool)`
+
+GetLastRenewedByOk returns a tuple with the LastRenewedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastRenewedBy
+
+`func (o *ApiPolicyWaiverDTO) SetLastRenewedBy(v string)`
+
+SetLastRenewedBy sets LastRenewedBy field to given value.
+
+### HasLastRenewedBy
+
+`func (o *ApiPolicyWaiverDTO) HasLastRenewedBy() bool`
+
+HasLastRenewedBy returns a boolean if a field has been set.
 
 ### GetMatcherStrategy
 

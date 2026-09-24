@@ -91,6 +91,50 @@ func Test_sonatypeiq_SourceControlAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test SourceControlAPIService DeregisterFromRelay", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SourceControlAPI.DeregisterFromRelay(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SourceControlAPIService GetGitHubAppWebhookUrl", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SourceControlAPI.GetGitHubAppWebhookUrl(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SourceControlAPIService GetRelayWebhookSecret", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SourceControlAPI.GetRelayWebhookSecret(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SourceControlAPIService GetRelayWebhookUrl", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SourceControlAPI.GetRelayWebhookUrl(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SourceControlAPIService GetSourceControl1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -117,6 +161,39 @@ func Test_sonatypeiq_SourceControlAPIService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SourceControlAPIService RegisterWithRelay", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SourceControlAPI.RegisterWithRelay(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SourceControlAPIService RotateRelayApiKey", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SourceControlAPI.RotateRelayApiKey(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SourceControlAPIService RotateRelayWebhookSecret", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SourceControlAPI.RotateRelayWebhookSecret(context.Background()).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

@@ -96,7 +96,7 @@ func Test_sonatypeiq_PolicyWaiversAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test PolicyWaiversAPIService GetPolicyWaiver", func(t *testing.T) {
+	t.Run("Test PolicyWaiversAPIService GetPolicyWaiver1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -104,7 +104,7 @@ func Test_sonatypeiq_PolicyWaiversAPIService(t *testing.T) {
 		var ownerId string
 		var policyWaiverId string
 
-		resp, httpRes, err := apiClient.PolicyWaiversAPI.GetPolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
+		resp, httpRes, err := apiClient.PolicyWaiversAPI.GetPolicyWaiver1(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

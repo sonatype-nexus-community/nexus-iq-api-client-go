@@ -33,11 +33,11 @@ func Test_sonatypeiq_ConfigSAMLAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigSAMLAPIService GetMetadata", func(t *testing.T) {
+	t.Run("Test ConfigSAMLAPIService GetMetadata1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.ConfigSAMLAPI.GetMetadata(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ConfigSAMLAPI.GetMetadata1(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

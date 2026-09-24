@@ -51,6 +51,20 @@ func Test_sonatypeiq_ApplicationReportDataAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ApplicationReportDataAPIService GetMetadata", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var applicationPublicId string
+		var scanId string
+
+		httpRes, err := apiClient.ApplicationReportDataAPI.GetMetadata(context.Background(), applicationPublicId, scanId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ApplicationReportDataAPIService GetPolicyViolationDiff", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

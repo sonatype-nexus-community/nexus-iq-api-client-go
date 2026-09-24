@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 **MonitoringEnabled** | Pointer to **bool** |  | [optional] 
 **NamespaceConfusionProtectionEnabled** | Pointer to **bool** |  | [optional] 
 **PolicyCompliantComponentSelectionEnabled** | Pointer to **bool** |  | [optional] 
+**ProxyUrl** | Pointer to **string** |  | [optional] 
 **PublicId** | Pointer to **string** |  | [optional] 
 **QuarantineEnabled** | Pointer to **bool** |  | [optional] 
 **RepositoryId** | Pointer to **string** |  | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
+**UpstreamUrl** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -158,6 +160,31 @@ SetPolicyCompliantComponentSelectionEnabled sets PolicyCompliantComponentSelecti
 
 HasPolicyCompliantComponentSelectionEnabled returns a boolean if a field has been set.
 
+### GetProxyUrl
+
+`func (o *ApiRepositoryDTO) GetProxyUrl() string`
+
+GetProxyUrl returns the ProxyUrl field if non-nil, zero value otherwise.
+
+### GetProxyUrlOk
+
+`func (o *ApiRepositoryDTO) GetProxyUrlOk() (*string, bool)`
+
+GetProxyUrlOk returns a tuple with the ProxyUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyUrl
+
+`func (o *ApiRepositoryDTO) SetProxyUrl(v string)`
+
+SetProxyUrl sets ProxyUrl field to given value.
+
+### HasProxyUrl
+
+`func (o *ApiRepositoryDTO) HasProxyUrl() bool`
+
+HasProxyUrl returns a boolean if a field has been set.
+
 ### GetPublicId
 
 `func (o *ApiRepositoryDTO) GetPublicId() string`
@@ -257,6 +284,31 @@ SetType sets Type field to given value.
 `func (o *ApiRepositoryDTO) HasType() bool`
 
 HasType returns a boolean if a field has been set.
+
+### GetUpstreamUrl
+
+`func (o *ApiRepositoryDTO) GetUpstreamUrl() string`
+
+GetUpstreamUrl returns the UpstreamUrl field if non-nil, zero value otherwise.
+
+### GetUpstreamUrlOk
+
+`func (o *ApiRepositoryDTO) GetUpstreamUrlOk() (*string, bool)`
+
+GetUpstreamUrlOk returns a tuple with the UpstreamUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpstreamUrl
+
+`func (o *ApiRepositoryDTO) SetUpstreamUrl(v string)`
+
+SetUpstreamUrl sets UpstreamUrl field to given value.
+
+### HasUpstreamUrl
+
+`func (o *ApiRepositoryDTO) HasUpstreamUrl() bool`
+
+HasUpstreamUrl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

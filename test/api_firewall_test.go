@@ -49,11 +49,37 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirewallAPIService AddRepository", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var repositoryManagerId string
+
+		resp, httpRes, err := apiClient.FirewallAPI.AddRepository(context.Background(), repositoryManagerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService AddRepositoryManager", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.FirewallAPI.AddRepositoryManager(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirewallAPIService AddVirtualRepositoryManager", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.FirewallAPI.AddVirtualRepositoryManager(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -228,6 +254,21 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FirewallAPIService GetPolicyWaiver", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var ownerId string
+		var policyWaiverId string
+
+		httpRes, err := apiClient.FirewallAPI.GetPolicyWaiver(context.Background(), ownerType, ownerId, policyWaiverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FirewallAPIService GetQuarantineList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -347,6 +388,30 @@ func Test_sonatypeiq_FirewallAPIService(t *testing.T) {
 		var format string
 
 		httpRes, err := apiClient.FirewallAPI.RemoveProprietaryComponentNames(context.Background(), format).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirewallAPIService RenewWaivers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.FirewallAPI.RenewWaivers(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FirewallAPIService RequestWaiver", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var containerImageId string
+
+		httpRes, err := apiClient.FirewallAPI.RequestWaiver(context.Background(), containerImageId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

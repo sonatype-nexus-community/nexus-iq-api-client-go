@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteSamlConfiguration**](ConfigSAMLAPI.md#DeleteSamlConfiguration) | **Delete** /api/v2/config/saml | 
-[**GetMetadata**](ConfigSAMLAPI.md#GetMetadata) | **Get** /api/v2/config/saml/metadata | 
+[**GetMetadata1**](ConfigSAMLAPI.md#GetMetadata1) | **Get** /api/v2/config/saml/metadata | 
 [**GetSamlConfiguration**](ConfigSAMLAPI.md#GetSamlConfiguration) | **Get** /api/v2/config/saml | 
 [**InsertOrUpdateSamlConfiguration**](ConfigSAMLAPI.md#InsertOrUpdateSamlConfiguration) | **Put** /api/v2/config/saml | 
 
@@ -70,9 +70,9 @@ Other parameters are passed through a pointer to a apiDeleteSamlConfigurationReq
 [[Back to README]](../README.md)
 
 
-## GetMetadata
+## GetMetadata1
 
-> string GetMetadata(ctx).Execute()
+> string GetMetadata1(ctx).Execute()
 
 
 
@@ -94,13 +94,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConfigSAMLAPI.GetMetadata(context.Background()).Execute()
+	resp, r, err := apiClient.ConfigSAMLAPI.GetMetadata1(context.Background()).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ConfigSAMLAPI.GetMetadata``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigSAMLAPI.GetMetadata1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetMetadata`: string
-	fmt.Fprintf(os.Stdout, "Response from `ConfigSAMLAPI.GetMetadata`: %v\n", resp)
+	// response from `GetMetadata1`: string
+	fmt.Fprintf(os.Stdout, "Response from `ConfigSAMLAPI.GetMetadata1`: %v\n", resp)
 }
 ```
 
@@ -110,7 +110,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetMetadataRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetMetadata1Request struct via the builder pattern
 
 
 ### Return type

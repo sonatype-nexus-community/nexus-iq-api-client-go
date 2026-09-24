@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
 **InstanceId** | Pointer to **string** |  | [optional] 
+**ManagerType** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **ProductName** | Pointer to **string** |  | [optional] 
 **ProductVersion** | Pointer to **string** |  | [optional] 
@@ -78,6 +79,31 @@ SetInstanceId sets InstanceId field to given value.
 `func (o *ApiRepositoryManagerDTO) HasInstanceId() bool`
 
 HasInstanceId returns a boolean if a field has been set.
+
+### GetManagerType
+
+`func (o *ApiRepositoryManagerDTO) GetManagerType() string`
+
+GetManagerType returns the ManagerType field if non-nil, zero value otherwise.
+
+### GetManagerTypeOk
+
+`func (o *ApiRepositoryManagerDTO) GetManagerTypeOk() (*string, bool)`
+
+GetManagerTypeOk returns a tuple with the ManagerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagerType
+
+`func (o *ApiRepositoryManagerDTO) SetManagerType(v string)`
+
+SetManagerType sets ManagerType field to given value.
+
+### HasManagerType
+
+`func (o *ApiRepositoryManagerDTO) HasManagerType() bool`
+
+HasManagerType returns a boolean if a field has been set.
 
 ### GetName
 

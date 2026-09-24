@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DotNetAnalysis** | Pointer to [**DotNetAnalysisConfig**](DotNetAnalysisConfig.md) |  | [optional] 
 **FailOnError** | Pointer to **bool** |  | [optional] 
 **JavaAnalysis** | Pointer to [**JavaAnalysisConfig**](JavaAnalysisConfig.md) |  | [optional] 
 **JavaScriptAnalysis** | Pointer to [**JavaScriptAnalysisConfig**](JavaScriptAnalysisConfig.md) |  | [optional] 
@@ -26,6 +27,31 @@ will change when the set of required properties is changed
 NewReachabilityConfigWithDefaults instantiates a new ReachabilityConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDotNetAnalysis
+
+`func (o *ReachabilityConfig) GetDotNetAnalysis() DotNetAnalysisConfig`
+
+GetDotNetAnalysis returns the DotNetAnalysis field if non-nil, zero value otherwise.
+
+### GetDotNetAnalysisOk
+
+`func (o *ReachabilityConfig) GetDotNetAnalysisOk() (*DotNetAnalysisConfig, bool)`
+
+GetDotNetAnalysisOk returns a tuple with the DotNetAnalysis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDotNetAnalysis
+
+`func (o *ReachabilityConfig) SetDotNetAnalysis(v DotNetAnalysisConfig)`
+
+SetDotNetAnalysis sets DotNetAnalysis field to given value.
+
+### HasDotNetAnalysis
+
+`func (o *ReachabilityConfig) HasDotNetAnalysis() bool`
+
+HasDotNetAnalysis returns a boolean if a field has been set.
 
 ### GetFailOnError
 

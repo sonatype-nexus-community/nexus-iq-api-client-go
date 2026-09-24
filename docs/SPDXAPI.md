@@ -34,7 +34,7 @@ func main() {
 	scanId := "scanId_example" // string | Enter the scanId of the application scan.
 	format := "format_example" // string | Enter the format for the SBOM(s) to be generated. (optional) (default to "json")
 	generateCycloneDx := true // bool | Set to `true` to generate an equivalent CycloneDx SBOM. Both SBOMs will be combined as a tar.gz archive. (optional) (default to false)
-	spdxVersion := "spdxVersion_example" // string | Enter the desired SPDX version, possible values are 2.2|2.3 (optional) (default to "2.3")
+	spdxVersion := "spdxVersion_example" // string | Enter the desired SPDX version, possible values are 2.2|2.3|3.0 (3.0 only supports JSON format) (optional) (default to "2.3")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
  **format** | **string** | Enter the format for the SBOM(s) to be generated. | [default to &quot;json&quot;]
  **generateCycloneDx** | **bool** | Set to &#x60;true&#x60; to generate an equivalent CycloneDx SBOM. Both SBOMs will be combined as a tar.gz archive. | [default to false]
- **spdxVersion** | **string** | Enter the desired SPDX version, possible values are 2.2|2.3 | [default to &quot;2.3&quot;]
+ **spdxVersion** | **string** | Enter the desired SPDX version, possible values are 2.2|2.3|3.0 (3.0 only supports JSON format) | [default to &quot;2.3&quot;]
 
 ### Return type
 
@@ -113,7 +113,7 @@ func main() {
 	stageId := "stageId_example" // string | Specify the stageId for the application evaluation. Allowed values are `develop`, `build`, `stage-release`, `release` and `operate`.
 	format := "format_example" // string | Enter the format for the SBOM(s) to be generated. (optional) (default to "json")
 	generateCycloneDx := true // bool | Set to `true` to generate an equivalent CycloneDx SBOM. Both SBOMs will be combined as a tar.gz archive. (optional) (default to false)
-	spdxVersion := "spdxVersion_example" // string | Enter the desired SPDX version, possible values are 2.2|2.3 (optional) (default to "2.3")
+	spdxVersion := "spdxVersion_example" // string | Enter the desired SPDX version, possible values are 2.2|2.3|3.0 (3.0 only supports JSON format) (optional) (default to "2.3")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
  **format** | **string** | Enter the format for the SBOM(s) to be generated. | [default to &quot;json&quot;]
  **generateCycloneDx** | **bool** | Set to &#x60;true&#x60; to generate an equivalent CycloneDx SBOM. Both SBOMs will be combined as a tar.gz archive. | [default to false]
- **spdxVersion** | **string** | Enter the desired SPDX version, possible values are 2.2|2.3 | [default to &quot;2.3&quot;]
+ **spdxVersion** | **string** | Enter the desired SPDX version, possible values are 2.2|2.3|3.0 (3.0 only supports JSON format) | [default to &quot;2.3&quot;]
 
 ### Return type
 

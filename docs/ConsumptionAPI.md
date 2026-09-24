@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**GetHistory**](ConsumptionAPI.md#GetHistory) | **Get** /api/v2/consumption/history | 
 [**GetHistoryBreakdown**](ConsumptionAPI.md#GetHistoryBreakdown) | **Get** /api/v2/consumption/history/breakdown | 
 [**GetHistoryBySource**](ConsumptionAPI.md#GetHistoryBySource) | **Get** /api/v2/consumption/history/by-source | 
+[**GetHistoryByStage**](ConsumptionAPI.md#GetHistoryByStage) | **Get** /api/v2/consumption/history/by-stage | 
 [**GetSummary**](ConsumptionAPI.md#GetSummary) | **Get** /api/v2/consumption/summary | 
 [**GetTopApps**](ConsumptionAPI.md#GetTopApps) | **Get** /api/v2/consumption/top-apps | 
 
@@ -16,7 +17,7 @@ Method | HTTP request | Description
 
 ## ExportCsv
 
-> ExportCsv(ctx).Execute()
+> ExportCsv(ctx).StartDate(startDate).EndDate(endDate).Execute()
 
 
 
@@ -35,10 +36,12 @@ import (
 )
 
 func main() {
+	startDate := "startDate_example" // string | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. (optional)
+	endDate := "endDate_example" // string | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConsumptionAPI.ExportCsv(context.Background()).Execute()
+	r, err := apiClient.ConsumptionAPI.ExportCsv(context.Background()).StartDate(startDate).EndDate(endDate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConsumptionAPI.ExportCsv``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -48,12 +51,17 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiExportCsvRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startDate** | **string** | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. | 
+ **endDate** | **string** | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. | 
 
 ### Return type
 
@@ -75,7 +83,7 @@ Other parameters are passed through a pointer to a apiExportCsvRequest struct vi
 
 ## GetDailyHistory
 
-> GetDailyHistory(ctx).Execute()
+> GetDailyHistory(ctx).StartDate(startDate).EndDate(endDate).Execute()
 
 
 
@@ -94,10 +102,12 @@ import (
 )
 
 func main() {
+	startDate := "startDate_example" // string | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. (optional)
+	endDate := "endDate_example" // string | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 92-day range inclusive. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConsumptionAPI.GetDailyHistory(context.Background()).Execute()
+	r, err := apiClient.ConsumptionAPI.GetDailyHistory(context.Background()).StartDate(startDate).EndDate(endDate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConsumptionAPI.GetDailyHistory``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -107,12 +117,17 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetDailyHistoryRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startDate** | **string** | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. | 
+ **endDate** | **string** | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 92-day range inclusive. | 
 
 ### Return type
 
@@ -134,7 +149,7 @@ Other parameters are passed through a pointer to a apiGetDailyHistoryRequest str
 
 ## GetHistory
 
-> GetHistory(ctx).Execute()
+> GetHistory(ctx).StartDate(startDate).EndDate(endDate).Execute()
 
 
 
@@ -153,10 +168,12 @@ import (
 )
 
 func main() {
+	startDate := "startDate_example" // string | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. (optional)
+	endDate := "endDate_example" // string | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConsumptionAPI.GetHistory(context.Background()).Execute()
+	r, err := apiClient.ConsumptionAPI.GetHistory(context.Background()).StartDate(startDate).EndDate(endDate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConsumptionAPI.GetHistory``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -166,12 +183,17 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetHistoryRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startDate** | **string** | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. | 
+ **endDate** | **string** | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. | 
 
 ### Return type
 
@@ -193,7 +215,7 @@ Other parameters are passed through a pointer to a apiGetHistoryRequest struct v
 
 ## GetHistoryBreakdown
 
-> GetHistoryBreakdown(ctx).Aggregation(aggregation).Execute()
+> GetHistoryBreakdown(ctx).Aggregation(aggregation).StartDate(startDate).EndDate(endDate).Execute()
 
 
 
@@ -213,10 +235,12 @@ import (
 
 func main() {
 	aggregation := "aggregation_example" // string |  (optional) (default to "monthly")
+	startDate := "startDate_example" // string | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. (optional)
+	endDate := "endDate_example" // string | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConsumptionAPI.GetHistoryBreakdown(context.Background()).Aggregation(aggregation).Execute()
+	r, err := apiClient.ConsumptionAPI.GetHistoryBreakdown(context.Background()).Aggregation(aggregation).StartDate(startDate).EndDate(endDate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConsumptionAPI.GetHistoryBreakdown``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -236,6 +260,8 @@ Other parameters are passed through a pointer to a apiGetHistoryBreakdownRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **aggregation** | **string** |  | [default to &quot;monthly&quot;]
+ **startDate** | **string** | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. | 
+ **endDate** | **string** | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. | 
 
 ### Return type
 
@@ -257,7 +283,7 @@ Name | Type | Description  | Notes
 
 ## GetHistoryBySource
 
-> GetHistoryBySource(ctx).Execute()
+> GetHistoryBySource(ctx).StartDate(startDate).EndDate(endDate).Execute()
 
 
 
@@ -276,10 +302,12 @@ import (
 )
 
 func main() {
+	startDate := "startDate_example" // string | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. (optional)
+	endDate := "endDate_example" // string | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConsumptionAPI.GetHistoryBySource(context.Background()).Execute()
+	r, err := apiClient.ConsumptionAPI.GetHistoryBySource(context.Background()).StartDate(startDate).EndDate(endDate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConsumptionAPI.GetHistoryBySource``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -289,12 +317,83 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetHistoryBySourceRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startDate** | **string** | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. | 
+ **endDate** | **string** | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHistoryByStage
+
+> GetHistoryByStage(ctx).StartDate(startDate).EndDate(endDate).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	startDate := "startDate_example" // string | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. (optional)
+	endDate := "endDate_example" // string | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ConsumptionAPI.GetHistoryByStage(context.Background()).StartDate(startDate).EndDate(endDate).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConsumptionAPI.GetHistoryByStage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHistoryByStageRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startDate** | **string** | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. | 
+ **endDate** | **string** | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. | 
 
 ### Return type
 
@@ -316,7 +415,7 @@ Other parameters are passed through a pointer to a apiGetHistoryBySourceRequest 
 
 ## GetSummary
 
-> GetSummary(ctx).Execute()
+> GetSummary(ctx).StartDate(startDate).EndDate(endDate).Execute()
 
 
 
@@ -335,10 +434,12 @@ import (
 )
 
 func main() {
+	startDate := "startDate_example" // string | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. (optional)
+	endDate := "endDate_example" // string | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConsumptionAPI.GetSummary(context.Background()).Execute()
+	r, err := apiClient.ConsumptionAPI.GetSummary(context.Background()).StartDate(startDate).EndDate(endDate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConsumptionAPI.GetSummary``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -348,12 +449,17 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetSummaryRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startDate** | **string** | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. | 
+ **endDate** | **string** | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. | 
 
 ### Return type
 
@@ -375,7 +481,7 @@ Other parameters are passed through a pointer to a apiGetSummaryRequest struct v
 
 ## GetTopApps
 
-> GetTopApps(ctx).Execute()
+> GetTopApps(ctx).StartDate(startDate).EndDate(endDate).Execute()
 
 
 
@@ -394,10 +500,12 @@ import (
 )
 
 func main() {
+	startDate := "startDate_example" // string | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. (optional)
+	endDate := "endDate_example" // string | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ConsumptionAPI.GetTopApps(context.Background()).Execute()
+	r, err := apiClient.ConsumptionAPI.GetTopApps(context.Background()).StartDate(startDate).EndDate(endDate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConsumptionAPI.GetTopApps``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -407,12 +515,17 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetTopAppsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **startDate** | **string** | Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany endDate. | 
+ **endDate** | **string** | End date in YYYY-MM-DD format, inclusive. Optional. Must accompany startDate. Max 366-day range inclusive. | 
 
 ### Return type
 
