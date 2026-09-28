@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetReachabilityEvidence**](ReachabilityEvidenceAPI.md#GetReachabilityEvidence) | **Get** /api/v2/applications/{applicationPublicId}/reports/{reportId}/vulnerabilities/{vulnerabilityId}/reachability-evidence | 
+[**GetReachabilityEvidence1**](ReachabilityEvidenceAPI.md#GetReachabilityEvidence1) | **Get** /api/v2/applications/{applicationPublicId}/reports/{reportId}/vulnerabilities/{vulnerabilityId}/reachability-evidence | 
 
 
 
-## GetReachabilityEvidence
+## GetReachabilityEvidence1
 
-> ApiReachabilityEvidenceResponse GetReachabilityEvidence(ctx, applicationPublicId, reportId, vulnerabilityId).Execute()
+> ApiReachabilityEvidenceResponse GetReachabilityEvidence1(ctx, applicationPublicId, reportId, vulnerabilityId).Execute()
 
 
 
@@ -35,13 +35,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ReachabilityEvidenceAPI.GetReachabilityEvidence(context.Background(), applicationPublicId, reportId, vulnerabilityId).Execute()
+	resp, r, err := apiClient.ReachabilityEvidenceAPI.GetReachabilityEvidence1(context.Background(), applicationPublicId, reportId, vulnerabilityId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ReachabilityEvidenceAPI.GetReachabilityEvidence``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ReachabilityEvidenceAPI.GetReachabilityEvidence1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetReachabilityEvidence`: ApiReachabilityEvidenceResponse
-	fmt.Fprintf(os.Stdout, "Response from `ReachabilityEvidenceAPI.GetReachabilityEvidence`: %v\n", resp)
+	// response from `GetReachabilityEvidence1`: ApiReachabilityEvidenceResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReachabilityEvidenceAPI.GetReachabilityEvidence1`: %v\n", resp)
 }
 ```
 
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetReachabilityEvidenceRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReachabilityEvidence1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

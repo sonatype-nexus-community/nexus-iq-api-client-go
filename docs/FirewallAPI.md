@@ -6,9 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddBulkWaivers**](FirewallAPI.md#AddBulkWaivers) | **Post** /api/v2/firewall/repositories/{ownerType}/{ownerId}/waivers/bulk | 
 [**AddProprietaryComponentNames**](FirewallAPI.md#AddProprietaryComponentNames) | **Post** /api/v2/firewall/namespace_confusion/{format} | 
-[**AddRepository**](FirewallAPI.md#AddRepository) | **Post** /api/v2/firewall/repositoryManagers/{repositoryManagerId}/repositories | 
 [**AddRepositoryManager**](FirewallAPI.md#AddRepositoryManager) | **Post** /api/v2/firewall/repositoryManagers | 
-[**AddVirtualRepositoryManager**](FirewallAPI.md#AddVirtualRepositoryManager) | **Post** /api/v2/firewall/virtualManagers | 
 [**AddWaiver**](FirewallAPI.md#AddWaiver) | **Post** /api/v2/firewall/container-image/{containerImageId}/policyWaiver | 
 [**ConfigureRepositories**](FirewallAPI.md#ConfigureRepositories) | **Post** /api/v2/firewall/repositories/configuration/{repositoryManagerId} | 
 [**DeleteContainerImagePolicyWaiver**](FirewallAPI.md#DeleteContainerImagePolicyWaiver) | **Delete** /api/v2/firewall/container-image/{containerImageId}/policyWaiver | 
@@ -184,78 +182,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## AddRepository
-
-> ApiRepositoryDTO AddRepository(ctx, repositoryManagerId).ApiRepositoryDTO(apiRepositoryDTO).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-	repositoryManagerId := "repositoryManagerId_example" // string | Enter the repository manager ID.
-	apiRepositoryDTO := *sonatypeiq.NewApiRepositoryDTO() // ApiRepositoryDTO | Enter values for the new repository.
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirewallAPI.AddRepository(context.Background(), repositoryManagerId).ApiRepositoryDTO(apiRepositoryDTO).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.AddRepository``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `AddRepository`: ApiRepositoryDTO
-	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.AddRepository`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**repositoryManagerId** | **string** | Enter the repository manager ID. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddRepositoryRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **apiRepositoryDTO** | [**ApiRepositoryDTO**](ApiRepositoryDTO.md) | Enter values for the new repository. | 
-
-### Return type
-
-[**ApiRepositoryDTO**](ApiRepositoryDTO.md)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## AddRepositoryManager
 
 > ApiRepositoryManagerDTO AddRepositoryManager(ctx).ApiRepositoryManagerDTO(apiRepositoryManagerDTO).Execute()
@@ -298,72 +224,6 @@ func main() {
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAddRepositoryManagerRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **apiRepositoryManagerDTO** | [**ApiRepositoryManagerDTO**](ApiRepositoryManagerDTO.md) | Enter values for the new repository manager. | 
-
-### Return type
-
-[**ApiRepositoryManagerDTO**](ApiRepositoryManagerDTO.md)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## AddVirtualRepositoryManager
-
-> ApiRepositoryManagerDTO AddVirtualRepositoryManager(ctx).ApiRepositoryManagerDTO(apiRepositoryManagerDTO).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-	apiRepositoryManagerDTO := *sonatypeiq.NewApiRepositoryManagerDTO() // ApiRepositoryManagerDTO | Enter values for the new repository manager.
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirewallAPI.AddVirtualRepositoryManager(context.Background()).ApiRepositoryManagerDTO(apiRepositoryManagerDTO).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.AddVirtualRepositoryManager``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `AddVirtualRepositoryManager`: ApiRepositoryManagerDTO
-	fmt.Fprintf(os.Stdout, "Response from `FirewallAPI.AddVirtualRepositoryManager`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddVirtualRepositoryManagerRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

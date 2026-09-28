@@ -8,10 +8,16 @@ Name | Type | Description | Notes
 **ApplicationCategoryDescription** | Pointer to **string** |  | [optional] 
 **ApplicationCategoryId** | Pointer to **string** |  | [optional] 
 **ApplicationCategoryName** | Pointer to **string** |  | [optional] 
+**ApplicationCategoryNames** | Pointer to **[]string** |  | [optional] 
 **ApplicationId** | Pointer to **string** |  | [optional] 
+**ApplicationLastEvaluationTimeEpochMs** | Pointer to **int64** |  | [optional] 
 **ApplicationName** | Pointer to **string** |  | [optional] 
 **ApplicationPublicId** | Pointer to **string** |  | [optional] 
+**ApplicationStageSeverityCounts** | Pointer to **[]string** |  | [optional] 
 **ApplicationVersion** | Pointer to **string** |  | [optional] 
+**ApplicationViolationPolicyTypes** | Pointer to **[]string** |  | [optional] 
+**ApplicationViolationStages** | Pointer to **[]string** |  | [optional] 
+**ApplicationViolationStates** | Pointer to **[]string** |  | [optional] 
 **ComponentEffectiveLicenseId** | Pointer to **string** |  | [optional] 
 **ComponentEffectiveLicenseName** | Pointer to **string** |  | [optional] 
 **ComponentHash** | Pointer to **string** |  | [optional] 
@@ -23,7 +29,10 @@ Name | Type | Description | Notes
 **ComponentLicenseThreatGroupName** | Pointer to **string** |  | [optional] 
 **ComponentLicenseThreatLevel** | Pointer to **int32** |  | [optional] 
 **ComponentName** | Pointer to **string** |  | [optional] 
+**ComponentViolationPolicyTypes** | Pointer to **[]string** |  | [optional] 
+**ComponentViolationStates** | Pointer to **[]string** |  | [optional] 
 **ItemType** | Pointer to **string** |  | [optional] 
+**NoteToReviewer** | Pointer to **string** |  | [optional] 
 **OrganizationId** | Pointer to **string** |  | [optional] 
 **OrganizationName** | Pointer to **string** |  | [optional] 
 **PolicyEvaluationStage** | Pointer to **string** |  | [optional] 
@@ -38,11 +47,34 @@ Name | Type | Description | Notes
 **PolicyViolationThreatCategory** | Pointer to **string** |  | [optional] 
 **PolicyViolationThreatLevel** | Pointer to **int32** |  | [optional] 
 **PolicyViolationWaiverStatus** | Pointer to **string** |  | [optional] 
+**PolicyWaiverAuto** | Pointer to **bool** |  | [optional] 
+**PolicyWaiverComment** | Pointer to **string** |  | [optional] 
+**PolicyWaiverCreatedAt** | Pointer to **string** |  | [optional] 
+**PolicyWaiverExpiresAt** | Pointer to **string** |  | [optional] 
+**PolicyWaiverExpiryStatus** | Pointer to **string** |  | [optional] 
+**PolicyWaiverId** | Pointer to **string** |  | [optional] 
+**PolicyWaiverIsAuto** | Pointer to **bool** |  | [optional] 
+**PolicyWaiverPolicyId** | Pointer to **string** |  | [optional] 
+**PolicyWaiverPolicyName** | Pointer to **string** |  | [optional] 
+**PolicyWaiverPolicyType** | Pointer to **string** |  | [optional] 
+**PolicyWaiverReason** | Pointer to **string** |  | [optional] 
+**PolicyWaiverRequestStatus** | Pointer to **string** |  | [optional] 
+**PolicyWaiverScope** | Pointer to **string** |  | [optional] 
+**PolicyWaiverScopeOwnerId** | Pointer to **string** |  | [optional] 
+**PolicyWaiverScopeOwnerType** | Pointer to **string** |  | [optional] 
+**PolicyWaiverThreatLevel** | Pointer to **int32** |  | [optional] 
+**PolicyWaiverWaivedBy** | Pointer to **string** |  | [optional] 
+**RejectionReason** | Pointer to **string** |  | [optional] 
 **ReportId** | Pointer to **string** |  | [optional] 
+**RequesterName** | Pointer to **string** |  | [optional] 
 **ResultIndex** | Pointer to **int32** |  | [optional] 
+**ReviewTime** | Pointer to **string** |  | [optional] 
+**ReviewerName** | Pointer to **string** |  | [optional] 
 **SbomSpecification** | Pointer to **string** |  | [optional] 
 **VulnerabilityDescription** | Pointer to **string** |  | [optional] 
+**VulnerabilityFirstSeenEpochMs** | Pointer to **int64** |  | [optional] 
 **VulnerabilityId** | Pointer to **string** |  | [optional] 
+**VulnerabilitySeverity** | Pointer to **float32** |  | [optional] 
 **VulnerabilityStatus** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -164,6 +196,31 @@ SetApplicationCategoryName sets ApplicationCategoryName field to given value.
 
 HasApplicationCategoryName returns a boolean if a field has been set.
 
+### GetApplicationCategoryNames
+
+`func (o *SearchResultItemDTO) GetApplicationCategoryNames() []string`
+
+GetApplicationCategoryNames returns the ApplicationCategoryNames field if non-nil, zero value otherwise.
+
+### GetApplicationCategoryNamesOk
+
+`func (o *SearchResultItemDTO) GetApplicationCategoryNamesOk() (*[]string, bool)`
+
+GetApplicationCategoryNamesOk returns a tuple with the ApplicationCategoryNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationCategoryNames
+
+`func (o *SearchResultItemDTO) SetApplicationCategoryNames(v []string)`
+
+SetApplicationCategoryNames sets ApplicationCategoryNames field to given value.
+
+### HasApplicationCategoryNames
+
+`func (o *SearchResultItemDTO) HasApplicationCategoryNames() bool`
+
+HasApplicationCategoryNames returns a boolean if a field has been set.
+
 ### GetApplicationId
 
 `func (o *SearchResultItemDTO) GetApplicationId() string`
@@ -188,6 +245,31 @@ SetApplicationId sets ApplicationId field to given value.
 `func (o *SearchResultItemDTO) HasApplicationId() bool`
 
 HasApplicationId returns a boolean if a field has been set.
+
+### GetApplicationLastEvaluationTimeEpochMs
+
+`func (o *SearchResultItemDTO) GetApplicationLastEvaluationTimeEpochMs() int64`
+
+GetApplicationLastEvaluationTimeEpochMs returns the ApplicationLastEvaluationTimeEpochMs field if non-nil, zero value otherwise.
+
+### GetApplicationLastEvaluationTimeEpochMsOk
+
+`func (o *SearchResultItemDTO) GetApplicationLastEvaluationTimeEpochMsOk() (*int64, bool)`
+
+GetApplicationLastEvaluationTimeEpochMsOk returns a tuple with the ApplicationLastEvaluationTimeEpochMs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationLastEvaluationTimeEpochMs
+
+`func (o *SearchResultItemDTO) SetApplicationLastEvaluationTimeEpochMs(v int64)`
+
+SetApplicationLastEvaluationTimeEpochMs sets ApplicationLastEvaluationTimeEpochMs field to given value.
+
+### HasApplicationLastEvaluationTimeEpochMs
+
+`func (o *SearchResultItemDTO) HasApplicationLastEvaluationTimeEpochMs() bool`
+
+HasApplicationLastEvaluationTimeEpochMs returns a boolean if a field has been set.
 
 ### GetApplicationName
 
@@ -239,6 +321,31 @@ SetApplicationPublicId sets ApplicationPublicId field to given value.
 
 HasApplicationPublicId returns a boolean if a field has been set.
 
+### GetApplicationStageSeverityCounts
+
+`func (o *SearchResultItemDTO) GetApplicationStageSeverityCounts() []string`
+
+GetApplicationStageSeverityCounts returns the ApplicationStageSeverityCounts field if non-nil, zero value otherwise.
+
+### GetApplicationStageSeverityCountsOk
+
+`func (o *SearchResultItemDTO) GetApplicationStageSeverityCountsOk() (*[]string, bool)`
+
+GetApplicationStageSeverityCountsOk returns a tuple with the ApplicationStageSeverityCounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationStageSeverityCounts
+
+`func (o *SearchResultItemDTO) SetApplicationStageSeverityCounts(v []string)`
+
+SetApplicationStageSeverityCounts sets ApplicationStageSeverityCounts field to given value.
+
+### HasApplicationStageSeverityCounts
+
+`func (o *SearchResultItemDTO) HasApplicationStageSeverityCounts() bool`
+
+HasApplicationStageSeverityCounts returns a boolean if a field has been set.
+
 ### GetApplicationVersion
 
 `func (o *SearchResultItemDTO) GetApplicationVersion() string`
@@ -263,6 +370,81 @@ SetApplicationVersion sets ApplicationVersion field to given value.
 `func (o *SearchResultItemDTO) HasApplicationVersion() bool`
 
 HasApplicationVersion returns a boolean if a field has been set.
+
+### GetApplicationViolationPolicyTypes
+
+`func (o *SearchResultItemDTO) GetApplicationViolationPolicyTypes() []string`
+
+GetApplicationViolationPolicyTypes returns the ApplicationViolationPolicyTypes field if non-nil, zero value otherwise.
+
+### GetApplicationViolationPolicyTypesOk
+
+`func (o *SearchResultItemDTO) GetApplicationViolationPolicyTypesOk() (*[]string, bool)`
+
+GetApplicationViolationPolicyTypesOk returns a tuple with the ApplicationViolationPolicyTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationViolationPolicyTypes
+
+`func (o *SearchResultItemDTO) SetApplicationViolationPolicyTypes(v []string)`
+
+SetApplicationViolationPolicyTypes sets ApplicationViolationPolicyTypes field to given value.
+
+### HasApplicationViolationPolicyTypes
+
+`func (o *SearchResultItemDTO) HasApplicationViolationPolicyTypes() bool`
+
+HasApplicationViolationPolicyTypes returns a boolean if a field has been set.
+
+### GetApplicationViolationStages
+
+`func (o *SearchResultItemDTO) GetApplicationViolationStages() []string`
+
+GetApplicationViolationStages returns the ApplicationViolationStages field if non-nil, zero value otherwise.
+
+### GetApplicationViolationStagesOk
+
+`func (o *SearchResultItemDTO) GetApplicationViolationStagesOk() (*[]string, bool)`
+
+GetApplicationViolationStagesOk returns a tuple with the ApplicationViolationStages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationViolationStages
+
+`func (o *SearchResultItemDTO) SetApplicationViolationStages(v []string)`
+
+SetApplicationViolationStages sets ApplicationViolationStages field to given value.
+
+### HasApplicationViolationStages
+
+`func (o *SearchResultItemDTO) HasApplicationViolationStages() bool`
+
+HasApplicationViolationStages returns a boolean if a field has been set.
+
+### GetApplicationViolationStates
+
+`func (o *SearchResultItemDTO) GetApplicationViolationStates() []string`
+
+GetApplicationViolationStates returns the ApplicationViolationStates field if non-nil, zero value otherwise.
+
+### GetApplicationViolationStatesOk
+
+`func (o *SearchResultItemDTO) GetApplicationViolationStatesOk() (*[]string, bool)`
+
+GetApplicationViolationStatesOk returns a tuple with the ApplicationViolationStates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationViolationStates
+
+`func (o *SearchResultItemDTO) SetApplicationViolationStates(v []string)`
+
+SetApplicationViolationStates sets ApplicationViolationStates field to given value.
+
+### HasApplicationViolationStates
+
+`func (o *SearchResultItemDTO) HasApplicationViolationStates() bool`
+
+HasApplicationViolationStates returns a boolean if a field has been set.
 
 ### GetComponentEffectiveLicenseId
 
@@ -539,6 +721,56 @@ SetComponentName sets ComponentName field to given value.
 
 HasComponentName returns a boolean if a field has been set.
 
+### GetComponentViolationPolicyTypes
+
+`func (o *SearchResultItemDTO) GetComponentViolationPolicyTypes() []string`
+
+GetComponentViolationPolicyTypes returns the ComponentViolationPolicyTypes field if non-nil, zero value otherwise.
+
+### GetComponentViolationPolicyTypesOk
+
+`func (o *SearchResultItemDTO) GetComponentViolationPolicyTypesOk() (*[]string, bool)`
+
+GetComponentViolationPolicyTypesOk returns a tuple with the ComponentViolationPolicyTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComponentViolationPolicyTypes
+
+`func (o *SearchResultItemDTO) SetComponentViolationPolicyTypes(v []string)`
+
+SetComponentViolationPolicyTypes sets ComponentViolationPolicyTypes field to given value.
+
+### HasComponentViolationPolicyTypes
+
+`func (o *SearchResultItemDTO) HasComponentViolationPolicyTypes() bool`
+
+HasComponentViolationPolicyTypes returns a boolean if a field has been set.
+
+### GetComponentViolationStates
+
+`func (o *SearchResultItemDTO) GetComponentViolationStates() []string`
+
+GetComponentViolationStates returns the ComponentViolationStates field if non-nil, zero value otherwise.
+
+### GetComponentViolationStatesOk
+
+`func (o *SearchResultItemDTO) GetComponentViolationStatesOk() (*[]string, bool)`
+
+GetComponentViolationStatesOk returns a tuple with the ComponentViolationStates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComponentViolationStates
+
+`func (o *SearchResultItemDTO) SetComponentViolationStates(v []string)`
+
+SetComponentViolationStates sets ComponentViolationStates field to given value.
+
+### HasComponentViolationStates
+
+`func (o *SearchResultItemDTO) HasComponentViolationStates() bool`
+
+HasComponentViolationStates returns a boolean if a field has been set.
+
 ### GetItemType
 
 `func (o *SearchResultItemDTO) GetItemType() string`
@@ -563,6 +795,31 @@ SetItemType sets ItemType field to given value.
 `func (o *SearchResultItemDTO) HasItemType() bool`
 
 HasItemType returns a boolean if a field has been set.
+
+### GetNoteToReviewer
+
+`func (o *SearchResultItemDTO) GetNoteToReviewer() string`
+
+GetNoteToReviewer returns the NoteToReviewer field if non-nil, zero value otherwise.
+
+### GetNoteToReviewerOk
+
+`func (o *SearchResultItemDTO) GetNoteToReviewerOk() (*string, bool)`
+
+GetNoteToReviewerOk returns a tuple with the NoteToReviewer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNoteToReviewer
+
+`func (o *SearchResultItemDTO) SetNoteToReviewer(v string)`
+
+SetNoteToReviewer sets NoteToReviewer field to given value.
+
+### HasNoteToReviewer
+
+`func (o *SearchResultItemDTO) HasNoteToReviewer() bool`
+
+HasNoteToReviewer returns a boolean if a field has been set.
 
 ### GetOrganizationId
 
@@ -914,6 +1171,456 @@ SetPolicyViolationWaiverStatus sets PolicyViolationWaiverStatus field to given v
 
 HasPolicyViolationWaiverStatus returns a boolean if a field has been set.
 
+### GetPolicyWaiverAuto
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverAuto() bool`
+
+GetPolicyWaiverAuto returns the PolicyWaiverAuto field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverAutoOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverAutoOk() (*bool, bool)`
+
+GetPolicyWaiverAutoOk returns a tuple with the PolicyWaiverAuto field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverAuto
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverAuto(v bool)`
+
+SetPolicyWaiverAuto sets PolicyWaiverAuto field to given value.
+
+### HasPolicyWaiverAuto
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverAuto() bool`
+
+HasPolicyWaiverAuto returns a boolean if a field has been set.
+
+### GetPolicyWaiverComment
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverComment() string`
+
+GetPolicyWaiverComment returns the PolicyWaiverComment field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverCommentOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverCommentOk() (*string, bool)`
+
+GetPolicyWaiverCommentOk returns a tuple with the PolicyWaiverComment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverComment
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverComment(v string)`
+
+SetPolicyWaiverComment sets PolicyWaiverComment field to given value.
+
+### HasPolicyWaiverComment
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverComment() bool`
+
+HasPolicyWaiverComment returns a boolean if a field has been set.
+
+### GetPolicyWaiverCreatedAt
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverCreatedAt() string`
+
+GetPolicyWaiverCreatedAt returns the PolicyWaiverCreatedAt field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverCreatedAtOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverCreatedAtOk() (*string, bool)`
+
+GetPolicyWaiverCreatedAtOk returns a tuple with the PolicyWaiverCreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverCreatedAt
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverCreatedAt(v string)`
+
+SetPolicyWaiverCreatedAt sets PolicyWaiverCreatedAt field to given value.
+
+### HasPolicyWaiverCreatedAt
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverCreatedAt() bool`
+
+HasPolicyWaiverCreatedAt returns a boolean if a field has been set.
+
+### GetPolicyWaiverExpiresAt
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverExpiresAt() string`
+
+GetPolicyWaiverExpiresAt returns the PolicyWaiverExpiresAt field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverExpiresAtOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverExpiresAtOk() (*string, bool)`
+
+GetPolicyWaiverExpiresAtOk returns a tuple with the PolicyWaiverExpiresAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverExpiresAt
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverExpiresAt(v string)`
+
+SetPolicyWaiverExpiresAt sets PolicyWaiverExpiresAt field to given value.
+
+### HasPolicyWaiverExpiresAt
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverExpiresAt() bool`
+
+HasPolicyWaiverExpiresAt returns a boolean if a field has been set.
+
+### GetPolicyWaiverExpiryStatus
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverExpiryStatus() string`
+
+GetPolicyWaiverExpiryStatus returns the PolicyWaiverExpiryStatus field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverExpiryStatusOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverExpiryStatusOk() (*string, bool)`
+
+GetPolicyWaiverExpiryStatusOk returns a tuple with the PolicyWaiverExpiryStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverExpiryStatus
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverExpiryStatus(v string)`
+
+SetPolicyWaiverExpiryStatus sets PolicyWaiverExpiryStatus field to given value.
+
+### HasPolicyWaiverExpiryStatus
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverExpiryStatus() bool`
+
+HasPolicyWaiverExpiryStatus returns a boolean if a field has been set.
+
+### GetPolicyWaiverId
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverId() string`
+
+GetPolicyWaiverId returns the PolicyWaiverId field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverIdOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverIdOk() (*string, bool)`
+
+GetPolicyWaiverIdOk returns a tuple with the PolicyWaiverId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverId
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverId(v string)`
+
+SetPolicyWaiverId sets PolicyWaiverId field to given value.
+
+### HasPolicyWaiverId
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverId() bool`
+
+HasPolicyWaiverId returns a boolean if a field has been set.
+
+### GetPolicyWaiverIsAuto
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverIsAuto() bool`
+
+GetPolicyWaiverIsAuto returns the PolicyWaiverIsAuto field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverIsAutoOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverIsAutoOk() (*bool, bool)`
+
+GetPolicyWaiverIsAutoOk returns a tuple with the PolicyWaiverIsAuto field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverIsAuto
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverIsAuto(v bool)`
+
+SetPolicyWaiverIsAuto sets PolicyWaiverIsAuto field to given value.
+
+### HasPolicyWaiverIsAuto
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverIsAuto() bool`
+
+HasPolicyWaiverIsAuto returns a boolean if a field has been set.
+
+### GetPolicyWaiverPolicyId
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverPolicyId() string`
+
+GetPolicyWaiverPolicyId returns the PolicyWaiverPolicyId field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverPolicyIdOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverPolicyIdOk() (*string, bool)`
+
+GetPolicyWaiverPolicyIdOk returns a tuple with the PolicyWaiverPolicyId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverPolicyId
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverPolicyId(v string)`
+
+SetPolicyWaiverPolicyId sets PolicyWaiverPolicyId field to given value.
+
+### HasPolicyWaiverPolicyId
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverPolicyId() bool`
+
+HasPolicyWaiverPolicyId returns a boolean if a field has been set.
+
+### GetPolicyWaiverPolicyName
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverPolicyName() string`
+
+GetPolicyWaiverPolicyName returns the PolicyWaiverPolicyName field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverPolicyNameOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverPolicyNameOk() (*string, bool)`
+
+GetPolicyWaiverPolicyNameOk returns a tuple with the PolicyWaiverPolicyName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverPolicyName
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverPolicyName(v string)`
+
+SetPolicyWaiverPolicyName sets PolicyWaiverPolicyName field to given value.
+
+### HasPolicyWaiverPolicyName
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverPolicyName() bool`
+
+HasPolicyWaiverPolicyName returns a boolean if a field has been set.
+
+### GetPolicyWaiverPolicyType
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverPolicyType() string`
+
+GetPolicyWaiverPolicyType returns the PolicyWaiverPolicyType field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverPolicyTypeOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverPolicyTypeOk() (*string, bool)`
+
+GetPolicyWaiverPolicyTypeOk returns a tuple with the PolicyWaiverPolicyType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverPolicyType
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverPolicyType(v string)`
+
+SetPolicyWaiverPolicyType sets PolicyWaiverPolicyType field to given value.
+
+### HasPolicyWaiverPolicyType
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverPolicyType() bool`
+
+HasPolicyWaiverPolicyType returns a boolean if a field has been set.
+
+### GetPolicyWaiverReason
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverReason() string`
+
+GetPolicyWaiverReason returns the PolicyWaiverReason field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverReasonOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverReasonOk() (*string, bool)`
+
+GetPolicyWaiverReasonOk returns a tuple with the PolicyWaiverReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverReason
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverReason(v string)`
+
+SetPolicyWaiverReason sets PolicyWaiverReason field to given value.
+
+### HasPolicyWaiverReason
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverReason() bool`
+
+HasPolicyWaiverReason returns a boolean if a field has been set.
+
+### GetPolicyWaiverRequestStatus
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverRequestStatus() string`
+
+GetPolicyWaiverRequestStatus returns the PolicyWaiverRequestStatus field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverRequestStatusOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverRequestStatusOk() (*string, bool)`
+
+GetPolicyWaiverRequestStatusOk returns a tuple with the PolicyWaiverRequestStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverRequestStatus
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverRequestStatus(v string)`
+
+SetPolicyWaiverRequestStatus sets PolicyWaiverRequestStatus field to given value.
+
+### HasPolicyWaiverRequestStatus
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverRequestStatus() bool`
+
+HasPolicyWaiverRequestStatus returns a boolean if a field has been set.
+
+### GetPolicyWaiverScope
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverScope() string`
+
+GetPolicyWaiverScope returns the PolicyWaiverScope field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverScopeOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverScopeOk() (*string, bool)`
+
+GetPolicyWaiverScopeOk returns a tuple with the PolicyWaiverScope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverScope
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverScope(v string)`
+
+SetPolicyWaiverScope sets PolicyWaiverScope field to given value.
+
+### HasPolicyWaiverScope
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverScope() bool`
+
+HasPolicyWaiverScope returns a boolean if a field has been set.
+
+### GetPolicyWaiverScopeOwnerId
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverScopeOwnerId() string`
+
+GetPolicyWaiverScopeOwnerId returns the PolicyWaiverScopeOwnerId field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverScopeOwnerIdOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverScopeOwnerIdOk() (*string, bool)`
+
+GetPolicyWaiverScopeOwnerIdOk returns a tuple with the PolicyWaiverScopeOwnerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverScopeOwnerId
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverScopeOwnerId(v string)`
+
+SetPolicyWaiverScopeOwnerId sets PolicyWaiverScopeOwnerId field to given value.
+
+### HasPolicyWaiverScopeOwnerId
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverScopeOwnerId() bool`
+
+HasPolicyWaiverScopeOwnerId returns a boolean if a field has been set.
+
+### GetPolicyWaiverScopeOwnerType
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverScopeOwnerType() string`
+
+GetPolicyWaiverScopeOwnerType returns the PolicyWaiverScopeOwnerType field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverScopeOwnerTypeOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverScopeOwnerTypeOk() (*string, bool)`
+
+GetPolicyWaiverScopeOwnerTypeOk returns a tuple with the PolicyWaiverScopeOwnerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverScopeOwnerType
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverScopeOwnerType(v string)`
+
+SetPolicyWaiverScopeOwnerType sets PolicyWaiverScopeOwnerType field to given value.
+
+### HasPolicyWaiverScopeOwnerType
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverScopeOwnerType() bool`
+
+HasPolicyWaiverScopeOwnerType returns a boolean if a field has been set.
+
+### GetPolicyWaiverThreatLevel
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverThreatLevel() int32`
+
+GetPolicyWaiverThreatLevel returns the PolicyWaiverThreatLevel field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverThreatLevelOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverThreatLevelOk() (*int32, bool)`
+
+GetPolicyWaiverThreatLevelOk returns a tuple with the PolicyWaiverThreatLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverThreatLevel
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverThreatLevel(v int32)`
+
+SetPolicyWaiverThreatLevel sets PolicyWaiverThreatLevel field to given value.
+
+### HasPolicyWaiverThreatLevel
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverThreatLevel() bool`
+
+HasPolicyWaiverThreatLevel returns a boolean if a field has been set.
+
+### GetPolicyWaiverWaivedBy
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverWaivedBy() string`
+
+GetPolicyWaiverWaivedBy returns the PolicyWaiverWaivedBy field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverWaivedByOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverWaivedByOk() (*string, bool)`
+
+GetPolicyWaiverWaivedByOk returns a tuple with the PolicyWaiverWaivedBy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverWaivedBy
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverWaivedBy(v string)`
+
+SetPolicyWaiverWaivedBy sets PolicyWaiverWaivedBy field to given value.
+
+### HasPolicyWaiverWaivedBy
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverWaivedBy() bool`
+
+HasPolicyWaiverWaivedBy returns a boolean if a field has been set.
+
+### GetRejectionReason
+
+`func (o *SearchResultItemDTO) GetRejectionReason() string`
+
+GetRejectionReason returns the RejectionReason field if non-nil, zero value otherwise.
+
+### GetRejectionReasonOk
+
+`func (o *SearchResultItemDTO) GetRejectionReasonOk() (*string, bool)`
+
+GetRejectionReasonOk returns a tuple with the RejectionReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRejectionReason
+
+`func (o *SearchResultItemDTO) SetRejectionReason(v string)`
+
+SetRejectionReason sets RejectionReason field to given value.
+
+### HasRejectionReason
+
+`func (o *SearchResultItemDTO) HasRejectionReason() bool`
+
+HasRejectionReason returns a boolean if a field has been set.
+
 ### GetReportId
 
 `func (o *SearchResultItemDTO) GetReportId() string`
@@ -939,6 +1646,31 @@ SetReportId sets ReportId field to given value.
 
 HasReportId returns a boolean if a field has been set.
 
+### GetRequesterName
+
+`func (o *SearchResultItemDTO) GetRequesterName() string`
+
+GetRequesterName returns the RequesterName field if non-nil, zero value otherwise.
+
+### GetRequesterNameOk
+
+`func (o *SearchResultItemDTO) GetRequesterNameOk() (*string, bool)`
+
+GetRequesterNameOk returns a tuple with the RequesterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequesterName
+
+`func (o *SearchResultItemDTO) SetRequesterName(v string)`
+
+SetRequesterName sets RequesterName field to given value.
+
+### HasRequesterName
+
+`func (o *SearchResultItemDTO) HasRequesterName() bool`
+
+HasRequesterName returns a boolean if a field has been set.
+
 ### GetResultIndex
 
 `func (o *SearchResultItemDTO) GetResultIndex() int32`
@@ -963,6 +1695,56 @@ SetResultIndex sets ResultIndex field to given value.
 `func (o *SearchResultItemDTO) HasResultIndex() bool`
 
 HasResultIndex returns a boolean if a field has been set.
+
+### GetReviewTime
+
+`func (o *SearchResultItemDTO) GetReviewTime() string`
+
+GetReviewTime returns the ReviewTime field if non-nil, zero value otherwise.
+
+### GetReviewTimeOk
+
+`func (o *SearchResultItemDTO) GetReviewTimeOk() (*string, bool)`
+
+GetReviewTimeOk returns a tuple with the ReviewTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReviewTime
+
+`func (o *SearchResultItemDTO) SetReviewTime(v string)`
+
+SetReviewTime sets ReviewTime field to given value.
+
+### HasReviewTime
+
+`func (o *SearchResultItemDTO) HasReviewTime() bool`
+
+HasReviewTime returns a boolean if a field has been set.
+
+### GetReviewerName
+
+`func (o *SearchResultItemDTO) GetReviewerName() string`
+
+GetReviewerName returns the ReviewerName field if non-nil, zero value otherwise.
+
+### GetReviewerNameOk
+
+`func (o *SearchResultItemDTO) GetReviewerNameOk() (*string, bool)`
+
+GetReviewerNameOk returns a tuple with the ReviewerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReviewerName
+
+`func (o *SearchResultItemDTO) SetReviewerName(v string)`
+
+SetReviewerName sets ReviewerName field to given value.
+
+### HasReviewerName
+
+`func (o *SearchResultItemDTO) HasReviewerName() bool`
+
+HasReviewerName returns a boolean if a field has been set.
 
 ### GetSbomSpecification
 
@@ -1014,6 +1796,31 @@ SetVulnerabilityDescription sets VulnerabilityDescription field to given value.
 
 HasVulnerabilityDescription returns a boolean if a field has been set.
 
+### GetVulnerabilityFirstSeenEpochMs
+
+`func (o *SearchResultItemDTO) GetVulnerabilityFirstSeenEpochMs() int64`
+
+GetVulnerabilityFirstSeenEpochMs returns the VulnerabilityFirstSeenEpochMs field if non-nil, zero value otherwise.
+
+### GetVulnerabilityFirstSeenEpochMsOk
+
+`func (o *SearchResultItemDTO) GetVulnerabilityFirstSeenEpochMsOk() (*int64, bool)`
+
+GetVulnerabilityFirstSeenEpochMsOk returns a tuple with the VulnerabilityFirstSeenEpochMs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVulnerabilityFirstSeenEpochMs
+
+`func (o *SearchResultItemDTO) SetVulnerabilityFirstSeenEpochMs(v int64)`
+
+SetVulnerabilityFirstSeenEpochMs sets VulnerabilityFirstSeenEpochMs field to given value.
+
+### HasVulnerabilityFirstSeenEpochMs
+
+`func (o *SearchResultItemDTO) HasVulnerabilityFirstSeenEpochMs() bool`
+
+HasVulnerabilityFirstSeenEpochMs returns a boolean if a field has been set.
+
 ### GetVulnerabilityId
 
 `func (o *SearchResultItemDTO) GetVulnerabilityId() string`
@@ -1038,6 +1845,31 @@ SetVulnerabilityId sets VulnerabilityId field to given value.
 `func (o *SearchResultItemDTO) HasVulnerabilityId() bool`
 
 HasVulnerabilityId returns a boolean if a field has been set.
+
+### GetVulnerabilitySeverity
+
+`func (o *SearchResultItemDTO) GetVulnerabilitySeverity() float32`
+
+GetVulnerabilitySeverity returns the VulnerabilitySeverity field if non-nil, zero value otherwise.
+
+### GetVulnerabilitySeverityOk
+
+`func (o *SearchResultItemDTO) GetVulnerabilitySeverityOk() (*float32, bool)`
+
+GetVulnerabilitySeverityOk returns a tuple with the VulnerabilitySeverity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVulnerabilitySeverity
+
+`func (o *SearchResultItemDTO) SetVulnerabilitySeverity(v float32)`
+
+SetVulnerabilitySeverity sets VulnerabilitySeverity field to given value.
+
+### HasVulnerabilitySeverity
+
+`func (o *SearchResultItemDTO) HasVulnerabilitySeverity() bool`
+
+HasVulnerabilitySeverity returns a boolean if a field has been set.
 
 ### GetVulnerabilityStatus
 

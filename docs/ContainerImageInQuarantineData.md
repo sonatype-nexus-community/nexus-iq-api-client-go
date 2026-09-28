@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApplicationId** | Pointer to **string** |  | [optional] 
 **ApplicationName** | Pointer to **string** |  | [optional] 
 **ApplicationPublicId** | Pointer to **string** |  | [optional] 
 **OpenTime** | Pointer to **float32** |  | [optional] 
+**OwnerId** | Pointer to **string** |  | [optional] 
 **PolicyViolationCount** | Pointer to **int64** |  | [optional] 
 **RepositoryId** | Pointer to **string** |  | [optional] 
 **RepositoryPublicId** | Pointer to **string** |  | [optional] 
@@ -32,31 +32,6 @@ will change when the set of required properties is changed
 NewContainerImageInQuarantineDataWithDefaults instantiates a new ContainerImageInQuarantineData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetApplicationId
-
-`func (o *ContainerImageInQuarantineData) GetApplicationId() string`
-
-GetApplicationId returns the ApplicationId field if non-nil, zero value otherwise.
-
-### GetApplicationIdOk
-
-`func (o *ContainerImageInQuarantineData) GetApplicationIdOk() (*string, bool)`
-
-GetApplicationIdOk returns a tuple with the ApplicationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApplicationId
-
-`func (o *ContainerImageInQuarantineData) SetApplicationId(v string)`
-
-SetApplicationId sets ApplicationId field to given value.
-
-### HasApplicationId
-
-`func (o *ContainerImageInQuarantineData) HasApplicationId() bool`
-
-HasApplicationId returns a boolean if a field has been set.
 
 ### GetApplicationName
 
@@ -132,6 +107,31 @@ SetOpenTime sets OpenTime field to given value.
 `func (o *ContainerImageInQuarantineData) HasOpenTime() bool`
 
 HasOpenTime returns a boolean if a field has been set.
+
+### GetOwnerId
+
+`func (o *ContainerImageInQuarantineData) GetOwnerId() string`
+
+GetOwnerId returns the OwnerId field if non-nil, zero value otherwise.
+
+### GetOwnerIdOk
+
+`func (o *ContainerImageInQuarantineData) GetOwnerIdOk() (*string, bool)`
+
+GetOwnerIdOk returns a tuple with the OwnerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwnerId
+
+`func (o *ContainerImageInQuarantineData) SetOwnerId(v string)`
+
+SetOwnerId sets OwnerId field to given value.
+
+### HasOwnerId
+
+`func (o *ContainerImageInQuarantineData) HasOwnerId() bool`
+
+HasOwnerId returns a boolean if a field has been set.
 
 ### GetPolicyViolationCount
 

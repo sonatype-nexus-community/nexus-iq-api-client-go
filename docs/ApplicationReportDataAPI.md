@@ -5,11 +5,11 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetData**](ApplicationReportDataAPI.md#GetData) | **Get** /api/v2/applications/{applicationPublicId}/reports/{scanId} | 
-[**GetDependencyTree**](ApplicationReportDataAPI.md#GetDependencyTree) | **Get** /api/v2/applications/{applicationPublicId}/reports/{scanId}/dependencyTree | 
+[**GetDependencyTree1**](ApplicationReportDataAPI.md#GetDependencyTree1) | **Get** /api/v2/applications/{applicationPublicId}/reports/{scanId}/dependencyTree | 
 [**GetMetadata**](ApplicationReportDataAPI.md#GetMetadata) | **Get** /api/v2/applications/{applicationPublicId}/reports/{scanId}/metadata | 
 [**GetPolicyViolationDiff**](ApplicationReportDataAPI.md#GetPolicyViolationDiff) | **Get** /api/v2/applications/{applicationPublicId}/reports/policyViolations/diff | 
-[**GetPolicyViolations1**](ApplicationReportDataAPI.md#GetPolicyViolations1) | **Get** /api/v2/applications/{applicationPublicId}/reports/{scanId}/policy | 
-[**GetRawData**](ApplicationReportDataAPI.md#GetRawData) | **Get** /api/v2/applications/{applicationPublicId}/reports/{scanId}/raw | 
+[**GetPolicyViolations2**](ApplicationReportDataAPI.md#GetPolicyViolations2) | **Get** /api/v2/applications/{applicationPublicId}/reports/{scanId}/policy | 
+[**GetRawData1**](ApplicationReportDataAPI.md#GetRawData1) | **Get** /api/v2/applications/{applicationPublicId}/reports/{scanId}/raw | 
 
 
 
@@ -84,9 +84,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetDependencyTree
+## GetDependencyTree1
 
-> ApiDependencyTreeResponseDTO GetDependencyTree(ctx, applicationPublicId, scanId).Execute()
+> ApiDependencyTreeResponseDTO GetDependencyTree1(ctx, applicationPublicId, scanId).Execute()
 
 
 
@@ -110,13 +110,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ApplicationReportDataAPI.GetDependencyTree(context.Background(), applicationPublicId, scanId).Execute()
+	resp, r, err := apiClient.ApplicationReportDataAPI.GetDependencyTree1(context.Background(), applicationPublicId, scanId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetDependencyTree``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetDependencyTree1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetDependencyTree`: ApiDependencyTreeResponseDTO
-	fmt.Fprintf(os.Stdout, "Response from `ApplicationReportDataAPI.GetDependencyTree`: %v\n", resp)
+	// response from `GetDependencyTree1`: ApiDependencyTreeResponseDTO
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationReportDataAPI.GetDependencyTree1`: %v\n", resp)
 }
 ```
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetDependencyTreeRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetDependencyTree1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -308,9 +308,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetPolicyViolations1
+## GetPolicyViolations2
 
-> ApiReportPolicyDataDTOV2 GetPolicyViolations1(ctx, applicationPublicId, scanId).IncludeViolationTimes(includeViolationTimes).Page(page).PageSize(pageSize).Execute()
+> ApiReportPolicyDataDTOV2 GetPolicyViolations2(ctx, applicationPublicId, scanId).IncludeViolationTimes(includeViolationTimes).Page(page).PageSize(pageSize).Execute()
 
 
 
@@ -337,13 +337,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ApplicationReportDataAPI.GetPolicyViolations1(context.Background(), applicationPublicId, scanId).IncludeViolationTimes(includeViolationTimes).Page(page).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.ApplicationReportDataAPI.GetPolicyViolations2(context.Background(), applicationPublicId, scanId).IncludeViolationTimes(includeViolationTimes).Page(page).PageSize(pageSize).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetPolicyViolations1``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetPolicyViolations2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPolicyViolations1`: ApiReportPolicyDataDTOV2
-	fmt.Fprintf(os.Stdout, "Response from `ApplicationReportDataAPI.GetPolicyViolations1`: %v\n", resp)
+	// response from `GetPolicyViolations2`: ApiReportPolicyDataDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationReportDataAPI.GetPolicyViolations2`: %v\n", resp)
 }
 ```
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetPolicyViolations1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetPolicyViolations2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -387,9 +387,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetRawData
+## GetRawData1
 
-> ApiReportRawDataDTOV2 GetRawData(ctx, applicationPublicId, scanId).IncludeCustomSecurityVulnerabilityData(includeCustomSecurityVulnerabilityData).Execute()
+> ApiReportRawDataDTOV2 GetRawData1(ctx, applicationPublicId, scanId).IncludeCustomSecurityVulnerabilityData(includeCustomSecurityVulnerabilityData).Execute()
 
 
 
@@ -414,13 +414,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.ApplicationReportDataAPI.GetRawData(context.Background(), applicationPublicId, scanId).IncludeCustomSecurityVulnerabilityData(includeCustomSecurityVulnerabilityData).Execute()
+	resp, r, err := apiClient.ApplicationReportDataAPI.GetRawData1(context.Background(), applicationPublicId, scanId).IncludeCustomSecurityVulnerabilityData(includeCustomSecurityVulnerabilityData).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetRawData``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationReportDataAPI.GetRawData1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetRawData`: ApiReportRawDataDTOV2
-	fmt.Fprintf(os.Stdout, "Response from `ApplicationReportDataAPI.GetRawData`: %v\n", resp)
+	// response from `GetRawData1`: ApiReportRawDataDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationReportDataAPI.GetRawData1`: %v\n", resp)
 }
 ```
 
@@ -435,7 +435,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetRawDataRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetRawData1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

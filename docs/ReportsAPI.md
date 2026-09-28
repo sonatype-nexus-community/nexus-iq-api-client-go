@@ -361,7 +361,7 @@ import (
 func main() {
 	applicationId := "applicationId_example" // string | Enter the internal application Id. You can use the Applications REST API to get the internal application Id. 
 	stage := "stage_example" // string | Enter the specific stage, for which you want retrieve the scan history, e.g. 'build'  (optional)
-	limit := int32(56) // int32 | Enter the exact no. of most recent reports to retrieve. (optional)
+	limit := int32(56) // int32 | Enter the exact no. of most recent reports to retrieve (maximum 100; larger values are clamped). (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -392,7 +392,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **stage** | **string** | Enter the specific stage, for which you want retrieve the scan history, e.g. &#39;build&#39;  | 
- **limit** | **int32** | Enter the exact no. of most recent reports to retrieve. | 
+ **limit** | **int32** | Enter the exact no. of most recent reports to retrieve (maximum 100; larger values are clamped). | 
 
 ### Return type
 

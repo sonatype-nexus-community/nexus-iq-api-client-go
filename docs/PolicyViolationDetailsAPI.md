@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**GetApplicableWaivers**](PolicyViolationDetailsAPI.md#GetApplicableWaivers) | **Get** /api/v2/policyViolations/{violationId}/applicableWaivers | 
 [**GetCrossStagePolicyViolationByConstituentId**](PolicyViolationDetailsAPI.md#GetCrossStagePolicyViolationByConstituentId) | **Get** /api/v2/policyViolations/crossStage | 
 [**GetCrossStagePolicyViolationById**](PolicyViolationDetailsAPI.md#GetCrossStagePolicyViolationById) | **Get** /api/v2/policyViolations/crossStage/{violationId} | 
-[**GetPolicyViolations**](PolicyViolationDetailsAPI.md#GetPolicyViolations) | **Get** /api/v2/policyViolations | 
+[**GetPolicyViolations1**](PolicyViolationDetailsAPI.md#GetPolicyViolations1) | **Get** /api/v2/policyViolations | 
 [**GetSimilarWaivers**](PolicyViolationDetailsAPI.md#GetSimilarWaivers) | **Get** /api/v2/policyViolations/{violationId}/similarWaivers | 
 [**GetTransitivePolicyViolationsByAppScanComponent**](PolicyViolationDetailsAPI.md#GetTransitivePolicyViolationsByAppScanComponent) | **Get** /api/v2/policyViolations/transitive/{ownerType}/{ownerId}/{scanId} | 
 [**GetTransitivePolicyViolationsByOwnerStageComponent**](PolicyViolationDetailsAPI.md#GetTransitivePolicyViolationsByOwnerStageComponent) | **Get** /api/v2/policyViolations/transitive/{ownerType}/{ownerId}/stages/{stageId} | 
@@ -362,9 +362,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetPolicyViolations
+## GetPolicyViolations1
 
-> ApiApplicationViolationListDTOV2 GetPolicyViolations(ctx).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).Execute()
+> ApiApplicationViolationListDTOV2 GetPolicyViolations1(ctx).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).Execute()
 
 
 
@@ -390,13 +390,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.PolicyViolationDetailsAPI.GetPolicyViolations(context.Background()).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).Execute()
+	resp, r, err := apiClient.PolicyViolationDetailsAPI.GetPolicyViolations1(context.Background()).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationDetailsAPI.GetPolicyViolations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationDetailsAPI.GetPolicyViolations1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetPolicyViolations`: ApiApplicationViolationListDTOV2
-	fmt.Fprintf(os.Stdout, "Response from `PolicyViolationDetailsAPI.GetPolicyViolations`: %v\n", resp)
+	// response from `GetPolicyViolations1`: ApiApplicationViolationListDTOV2
+	fmt.Fprintf(os.Stdout, "Response from `PolicyViolationDetailsAPI.GetPolicyViolations1`: %v\n", resp)
 }
 ```
 
@@ -406,7 +406,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetPolicyViolationsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetPolicyViolations1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

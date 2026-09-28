@@ -22,7 +22,7 @@ func Test_sonatypeiq_ReachabilityEvidenceAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test ReachabilityEvidenceAPIService GetReachabilityEvidence", func(t *testing.T) {
+	t.Run("Test ReachabilityEvidenceAPIService GetReachabilityEvidence1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -30,7 +30,7 @@ func Test_sonatypeiq_ReachabilityEvidenceAPIService(t *testing.T) {
 		var reportId string
 		var vulnerabilityId string
 
-		resp, httpRes, err := apiClient.ReachabilityEvidenceAPI.GetReachabilityEvidence(context.Background(), applicationPublicId, reportId, vulnerabilityId).Execute()
+		resp, httpRes, err := apiClient.ReachabilityEvidenceAPI.GetReachabilityEvidence1(context.Background(), applicationPublicId, reportId, vulnerabilityId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

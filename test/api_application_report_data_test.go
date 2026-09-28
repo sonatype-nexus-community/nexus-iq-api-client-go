@@ -36,14 +36,14 @@ func Test_sonatypeiq_ApplicationReportDataAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ApplicationReportDataAPIService GetDependencyTree", func(t *testing.T) {
+	t.Run("Test ApplicationReportDataAPIService GetDependencyTree1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationPublicId string
 		var scanId string
 
-		resp, httpRes, err := apiClient.ApplicationReportDataAPI.GetDependencyTree(context.Background(), applicationPublicId, scanId).Execute()
+		resp, httpRes, err := apiClient.ApplicationReportDataAPI.GetDependencyTree1(context.Background(), applicationPublicId, scanId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -79,14 +79,14 @@ func Test_sonatypeiq_ApplicationReportDataAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ApplicationReportDataAPIService GetPolicyViolations1", func(t *testing.T) {
+	t.Run("Test ApplicationReportDataAPIService GetPolicyViolations2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationPublicId string
 		var scanId string
 
-		resp, httpRes, err := apiClient.ApplicationReportDataAPI.GetPolicyViolations1(context.Background(), applicationPublicId, scanId).Execute()
+		resp, httpRes, err := apiClient.ApplicationReportDataAPI.GetPolicyViolations2(context.Background(), applicationPublicId, scanId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -94,14 +94,14 @@ func Test_sonatypeiq_ApplicationReportDataAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ApplicationReportDataAPIService GetRawData", func(t *testing.T) {
+	t.Run("Test ApplicationReportDataAPIService GetRawData1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationPublicId string
 		var scanId string
 
-		resp, httpRes, err := apiClient.ApplicationReportDataAPI.GetRawData(context.Background(), applicationPublicId, scanId).Execute()
+		resp, httpRes, err := apiClient.ApplicationReportDataAPI.GetRawData1(context.Background(), applicationPublicId, scanId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

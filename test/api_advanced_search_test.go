@@ -22,6 +22,17 @@ func Test_sonatypeiq_AdvancedSearchAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test AdvancedSearchAPIService CancelSearchIndexRebuild", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.AdvancedSearchAPI.CancelSearchIndexRebuild(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AdvancedSearchAPIService CreateSearchIndexAsync", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

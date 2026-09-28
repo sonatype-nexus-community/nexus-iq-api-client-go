@@ -22,14 +22,14 @@ func Test_sonatypeiq_SPDXAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
-	t.Run("Test SPDXAPIService GetByScanId", func(t *testing.T) {
+	t.Run("Test SPDXAPIService GetByScanId1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var scanId string
 
-		resp, httpRes, err := apiClient.SPDXAPI.GetByScanId(context.Background(), applicationId, scanId).Execute()
+		resp, httpRes, err := apiClient.SPDXAPI.GetByScanId1(context.Background(), applicationId, scanId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -37,14 +37,14 @@ func Test_sonatypeiq_SPDXAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SPDXAPIService GetLatestForStage", func(t *testing.T) {
+	t.Run("Test SPDXAPIService GetLatestForStage1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var applicationId string
 		var stageId string
 
-		resp, httpRes, err := apiClient.SPDXAPI.GetLatestForStage(context.Background(), applicationId, stageId).Execute()
+		resp, httpRes, err := apiClient.SPDXAPI.GetLatestForStage1(context.Background(), applicationId, stageId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Filename** | Pointer to **string** |  | [optional] 
 **FixTime** | Pointer to **time.Time** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
+**HrcId** | Pointer to **string** |  | [optional] 
 **LegacyViolationTime** | Pointer to **time.Time** |  | [optional] 
 **OpenTime** | Pointer to **time.Time** |  | [optional] 
 **OrganizationName** | Pointer to **string** |  | [optional] 
@@ -243,6 +244,31 @@ SetHash sets Hash field to given value.
 `func (o *ApiCrossStageViolationDTOV2) HasHash() bool`
 
 HasHash returns a boolean if a field has been set.
+
+### GetHrcId
+
+`func (o *ApiCrossStageViolationDTOV2) GetHrcId() string`
+
+GetHrcId returns the HrcId field if non-nil, zero value otherwise.
+
+### GetHrcIdOk
+
+`func (o *ApiCrossStageViolationDTOV2) GetHrcIdOk() (*string, bool)`
+
+GetHrcIdOk returns a tuple with the HrcId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHrcId
+
+`func (o *ApiCrossStageViolationDTOV2) SetHrcId(v string)`
+
+SetHrcId sets HrcId field to given value.
+
+### HasHrcId
+
+`func (o *ApiCrossStageViolationDTOV2) HasHrcId() bool`
+
+HasHrcId returns a boolean if a field has been set.
 
 ### GetLegacyViolationTime
 

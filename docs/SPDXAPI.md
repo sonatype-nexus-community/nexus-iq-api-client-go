@@ -4,14 +4,14 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetByScanId**](SPDXAPI.md#GetByScanId) | **Get** /api/v2/spdx/{applicationId}/reports/{scanId} | 
-[**GetLatestForStage**](SPDXAPI.md#GetLatestForStage) | **Get** /api/v2/spdx/{applicationId}/stages/{stageId} | 
+[**GetByScanId1**](SPDXAPI.md#GetByScanId1) | **Get** /api/v2/spdx/{applicationId}/reports/{scanId} | 
+[**GetLatestForStage1**](SPDXAPI.md#GetLatestForStage1) | **Get** /api/v2/spdx/{applicationId}/stages/{stageId} | 
 
 
 
-## GetByScanId
+## GetByScanId1
 
-> string GetByScanId(ctx, applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+> string GetByScanId1(ctx, applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
 
 
 
@@ -38,13 +38,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.SPDXAPI.GetByScanId(context.Background(), applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+	resp, r, err := apiClient.SPDXAPI.GetByScanId1(context.Background(), applicationId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SPDXAPI.GetByScanId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SPDXAPI.GetByScanId1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetByScanId`: string
-	fmt.Fprintf(os.Stdout, "Response from `SPDXAPI.GetByScanId`: %v\n", resp)
+	// response from `GetByScanId1`: string
+	fmt.Fprintf(os.Stdout, "Response from `SPDXAPI.GetByScanId1`: %v\n", resp)
 }
 ```
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetByScanIdRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetByScanId1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -88,9 +88,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetLatestForStage
+## GetLatestForStage1
 
-> string GetLatestForStage(ctx, applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+> string GetLatestForStage1(ctx, applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
 
 
 
@@ -117,13 +117,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.SPDXAPI.GetLatestForStage(context.Background(), applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+	resp, r, err := apiClient.SPDXAPI.GetLatestForStage1(context.Background(), applicationId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SPDXAPI.GetLatestForStage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `SPDXAPI.GetLatestForStage1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLatestForStage`: string
-	fmt.Fprintf(os.Stdout, "Response from `SPDXAPI.GetLatestForStage`: %v\n", resp)
+	// response from `GetLatestForStage1`: string
+	fmt.Fprintf(os.Stdout, "Response from `SPDXAPI.GetLatestForStage1`: %v\n", resp)
 }
 ```
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetLatestForStageRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetLatestForStage1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

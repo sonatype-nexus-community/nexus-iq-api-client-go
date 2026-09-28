@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.206.0-01
+  version: 1.207.0-01
 servers:
 - url: /
 security:
@@ -11,6 +11,9 @@ tags:
 - description: Use the Advanced Search REST API to perform searches on Lifecycle application
     scan reports.
   name: Advanced Search
+- description: Index Analyze status and rebuild/cleanup job control.
+  name: Advanced Search Index Health
+- name: Ai - Developer
 - description: 'Use the Application Categories REST API to manage the application
     categories or tags assigned to the applications in an organization. '
   name: Application Categories
@@ -94,7 +97,6 @@ tags:
 - description: Use this REST API to manage the configuration of Firewall for JFrog
     Artifactory.
   name: Configure Artifactory Connection
-- name: Consumption
 - description: Use the CPE Matching Configuration REST API to add/set/remove cpe matching
     configuration to organizations and applications
   name: CPE Matching Configuration
@@ -164,7 +166,7 @@ tags:
 - description: Use this REST API to manage a product license.
   name: Product License
 - description: Use this REST API to retrieve reachability evidence showing call paths
-    to vulnerable methods.
+    to vulnerable methods for a hosted repository component.
   name: Reachability Evidence
 - description: "Use this REST API to view application scan reports, generate a list\
     \ of stale waivers, view existing policy waivers on components, view quarantined\
@@ -215,6 +217,41 @@ tags:
 - description: Configure when and to whom notifications are sent before waivers expire.
   name: Waiver Expiration Notification Config
 paths:
+  /api/v2/ai-developer/opt-in:
+    get:
+      operationId: getOptIn
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiDeveloperOptInStatus"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiDeveloperOptInStatus"
+          description: default response
+      tags:
+      - Ai - Developer
+    post:
+      operationId: optIn
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiDeveloperOptInStatus"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiDeveloperOptInStatus"
+          description: default response
+      tags:
+      - Ai - Developer
   /api/v2/applicationCategories/application:
     get:
       description: Grouping applications with similar characteristics into categories
@@ -806,7 +843,7 @@ paths:
       description: "Get reachability evidence for a specific vulnerability showing\
         \ call paths from entry points to the vulnerable method.\\n\\nPermissions\
         \ required: View IQ Elements"
-      operationId: getReachabilityEvidence
+      operationId: getReachabilityEvidence_1
       parameters:
       - description: The public ID of the application
         explode: false
@@ -878,7 +915,7 @@ paths:
         Use this method to retrieve the dependencies related to the component identified at the time of application evaluation. This is currently available only for Java (Maven) and NPM applications.
 
         Permissions required: View IQ Elements
-      operationId: getDependencyTree
+      operationId: getDependencyTree_1
       parameters:
       - description: Enter the applicationPublicId created at the time of creating
           the application.
@@ -954,7 +991,7 @@ paths:
       description: "Use this method to retrieve the policy violation data generated\
         \ as a result of an application evaluation, for each component identified\
         \ in the application evaluation./n/nPermissions required: View IQ Elements"
-      operationId: getPolicyViolations_1
+      operationId: getPolicyViolations_2
       parameters:
       - description: Enter the applicationPublicId created at the time of creating
           the application.
@@ -1028,7 +1065,7 @@ paths:
         Use this method to retrieve the 'raw' data generated as a result of an application evaluation. 'raw' data includes: the components identified in the application, and the licenses and vulnerabilities associated with the identified components. Optionally set `includeCustomSecurityVulnerabilityData=true` to include any configured security vulnerability custom data (remediation, cweId, cvssVector, cvssSeverity) for each securityIssue. NOT to be confused with `SecurityVulnerabilityOverride` (hash-based violation-state override).
 
         Permissions required: View IQ Elements
-      operationId: getRawData
+      operationId: getRawData_1
       parameters:
       - description: 'Enter the applicationPublicId (assigned at the time of creating
           a new application.) '
@@ -3966,286 +4003,6 @@ paths:
           description: Successfully retrieved the Zscaler quota.
       tags:
       - Config Zscaler
-  /api/v2/consumption/daily-history:
-    get:
-      description: "Daily history for last 30 days with cumulative totals, daily average,\
-        \ peak day. Requires CONFIGURE_SYSTEM or VIEW_USAGE."
-      operationId: getDailyHistory
-      parameters:
-      - description: "Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ endDate."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "End date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ startDate. Max 92-day range inclusive."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: Retrieved
-        "401":
-          description: Not authenticated
-        "403":
-          description: Missing permission
-      tags:
-      - Consumption
-  /api/v2/consumption/export:
-    get:
-      description: "Export consumption history as CSV. When startDate/endDate are\
-        \ omitted, defaults to 12-month history. Requires CONFIGURE_SYSTEM or VIEW_USAGE."
-      operationId: exportCsv
-      parameters:
-      - description: "Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ endDate."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "End date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ startDate. Max 366-day range inclusive."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: CSV body
-        "400":
-          description: Invalid date range
-        "401":
-          description: Not authenticated
-        "403":
-          description: Missing permission
-      tags:
-      - Consumption
-  /api/v2/consumption/history:
-    get:
-      description: 12-month consumption history. Requires CONFIGURE_SYSTEM or VIEW_USAGE.
-      operationId: getHistory
-      parameters:
-      - description: "Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ endDate."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "End date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ startDate. Max 366-day range inclusive."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: History retrieved
-        "401":
-          description: Not authenticated
-        "403":
-          description: Missing permission
-      tags:
-      - Consumption
-  /api/v2/consumption/history/breakdown:
-    get:
-      description: Consumption history with per-activity breakdown; aggregation=daily|weekly|monthly.
-        Requires CONFIGURE_SYSTEM or VIEW_USAGE.
-      operationId: getHistoryBreakdown
-      parameters:
-      - explode: true
-        in: query
-        name: aggregation
-        required: false
-        schema:
-          default: monthly
-          enum:
-          - DAILY
-          - WEEKLY
-          - MONTHLY
-          type: string
-        style: form
-      - description: "Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ endDate."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "End date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ startDate. Max 366-day range inclusive."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: Breakdown retrieved
-        "400":
-          description: Invalid aggregation
-        "401":
-          description: Not authenticated
-        "403":
-          description: Missing permission
-      tags:
-      - Consumption
-  /api/v2/consumption/history/by-source:
-    get:
-      description: 12-month consumption history grouped by source. Requires CONFIGURE_SYSTEM
-        or VIEW_USAGE.
-      operationId: getHistoryBySource
-      parameters:
-      - description: "Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ endDate."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "End date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ startDate. Max 366-day range inclusive."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: Retrieved
-        "401":
-          description: Not authenticated
-        "403":
-          description: Missing permission
-      tags:
-      - Consumption
-  /api/v2/consumption/history/by-stage:
-    get:
-      description: 12-month consumption history grouped by application stage. Events
-        without a matching policy_evaluation row are bucketed as 'Unknown'. Requires
-        CONFIGURE_SYSTEM or VIEW_USAGE.
-      operationId: getHistoryByStage
-      parameters:
-      - description: "Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ endDate."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "End date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ startDate. Max 366-day range inclusive."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: Retrieved
-        "401":
-          description: Not authenticated
-        "403":
-          description: Missing permission
-      tags:
-      - Consumption
-  /api/v2/consumption/summary:
-    get:
-      description: Current billing window consumption summary with activity breakdown.
-        Requires CONFIGURE_SYSTEM or VIEW_USAGE.
-      operationId: getSummary
-      parameters:
-      - description: "Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ endDate."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "End date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ startDate. Max 366-day range inclusive."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: Summary retrieved
-        "401":
-          description: Not authenticated
-        "403":
-          description: Missing permission
-      tags:
-      - Consumption
-  /api/v2/consumption/top-apps:
-    get:
-      description: Top consuming apps for current billing month. Requires CONFIGURE_SYSTEM
-        or VIEW_USAGE.
-      operationId: getTopApps
-      parameters:
-      - description: "Start date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ endDate."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: "End date in YYYY-MM-DD format, inclusive. Optional. Must accompany\
-          \ startDate. Max 366-day range inclusive."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: Retrieved
-        "401":
-          description: Not authenticated
-        "403":
-          description: Missing permission
-      tags:
-      - Consumption
   /api/v2/cycloneDx/{cdxVersion}/{applicationId}/reports/{reportId}:
     get:
       description: "Use this method to generate a CycloneDX SBOM for an application.<p>Permissions\
@@ -5808,61 +5565,6 @@ paths:
             requested.
       tags:
       - Firewall
-  /api/v2/firewall/repositoryManagers/{repositoryManagerId}/repositories:
-    post:
-      description: |-
-        Use this method to add a new repository to a virtual repository manager.
-
-        Permissions required: Edit IQ Elements
-      operationId: addRepository
-      parameters:
-      - description: Enter the repository manager ID.
-        explode: false
-        in: path
-        name: repositoryManagerId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ApiRepositoryDTO"
-        description: Enter values for the new repository.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiRepositoryDTO"
-          description: The response contains the details of the new repository.
-      tags:
-      - Firewall
-  /api/v2/firewall/virtualManagers:
-    post:
-      description: |-
-        Use this method to add a new repository manager.
-
-        Permissions required: Edit IQ Elements
-      operationId: addVirtualRepositoryManager
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ApiRepositoryManagerDTO"
-        description: Enter values for the new repository manager.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiRepositoryManagerDTO"
-          description: The response contains the details of the new repository manager.
-      tags:
-      - Firewall
   /api/v2/firewall/waivers/renew:
     post:
       description: "Renews Firewall policy waivers with a new expiry date. Records\
@@ -6089,7 +5791,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: "Enter the id of the application, organization or the repository."
@@ -6151,7 +5854,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: Enter the id for the selected ownerType.
@@ -6200,7 +5904,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: Enter the id for the selected ownerType.
@@ -6251,7 +5956,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: "Enter the id for the application, organization or repository"
@@ -6304,7 +6010,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: Enter the ownerId
@@ -6356,7 +6063,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: Enter the id for the selected ownerType.
@@ -6927,7 +6635,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: "Enter the id of the application, organization or the repository."
@@ -6977,7 +6686,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: "Enter the id of the application, organization or the repository."
@@ -7040,7 +6750,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: Enter the id of the owner.
@@ -7089,7 +6800,8 @@ paths:
           - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository|repository_manager|repository_container
+          - hosted_repository_component
+          pattern: application|organization|repository|repository_manager|repository_container|hosted_repository_component
           type: string
         style: simple
       - description: "Enter the id of the application, organization or the repository."
@@ -7446,7 +7158,7 @@ paths:
         Use this method to retrieve policy violation details for a policy/policies. You will need the policyId(s) to retrieve the policy violations details. policyId is available as the response field of the Policies REST API.
 
         Permissions required: View IQ Elements
-      operationId: getPolicyViolations
+      operationId: getPolicyViolations_1
       parameters:
       - description: Enter the policyIds to obtain the corresponding violation details
         explode: true
@@ -8910,7 +8622,8 @@ paths:
         schema:
           type: string
         style: form
-      - description: Enter the exact no. of most recent reports to retrieve.
+      - description: Enter the exact no. of most recent reports to retrieve (maximum
+          100; larger values are clamped).
         explode: true
         in: query
         name: limit
@@ -10080,6 +9793,156 @@ paths:
           description: Index created successfully.
       tags:
       - Advanced Search
+  /api/v2/search/advanced/index/analyze:
+    get:
+      description: "Return current index health (green/yellow/red), recommendation,\
+        \ and estate snapshot. Works on precomputed CURRENT rows in a constant number\
+        \ of round trips, refreshing the stored derived status as it goes."
+      operationId: analyze
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSearchIndexAnalyzeDTO"
+          description: Analyze status
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/cancel:
+    post:
+      description: |-
+        Request cancellation of an in-flight Advanced Search index rebuild. On a Lucene-backed deployment the previous complete index continues to serve search results. Cancellation is not supported on OpenSearch-backed deployments, where the rebuild runs to completion. Use the status method to confirm whether a rebuild is still in progress.
+
+        Permissions required: Edit System Configuration and Users
+      operationId: cancelSearchIndexRebuild
+      responses:
+        "204":
+          description: Cancel requested.
+      tags:
+      - Advanced Search
+  /api/v2/search/advanced/index/jobs:
+    post:
+      description: Start an index job (FULL_REBUILD or FIRST_TIME_INDEX).
+      operationId: startJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiSearchIndexJobRequestDTO"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchIndexJob"
+          description: Created job
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/jobs/active:
+    get:
+      description: "Return the active index job, if any."
+      operationId: getActiveJob
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchIndexJob"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchIndexJob"
+          description: default response
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/jobs/cancel:
+    post:
+      description: Cancel the active job; Lucene keeps serving the blue index.
+      operationId: cancelActiveJob
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchIndexJob"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchIndexJob"
+          description: default response
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/jobs/{jobId}:
+    get:
+      description: Return a job by id.
+      operationId: getJob
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchIndexJob"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchIndexJob"
+          description: default response
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/jobs/{jobId}/events:
+    get:
+      description: Return structured job events (activity log).
+      operationId: getJobEvents
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SearchIndexJobEvent"
+                type: array
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SearchIndexJobEvent"
+                type: array
+          description: default response
+      tags:
+      - Advanced Search Index Health
   /api/v2/search/component:
     get:
       description: |-
@@ -10701,7 +10564,7 @@ paths:
         Use this method to generate SBOM(s) based on a specific application scan.
 
         Permissions required: View IQ Elemets
-      operationId: getByScanId
+      operationId: getByScanId_1
       parameters:
       - description: Enter the applicationId for the application you want to generate
           the SBOM(s).
@@ -10774,7 +10637,7 @@ paths:
         Use this method to generate SBOM(s) based on the latest application evaluation report at the specified stage.
 
         Permissions required: View IQ Elements
-      operationId: getLatestForStage
+      operationId: getLatestForStage_1
       parameters:
       - description: Enter the applicationId for the application you want to generate
           the SBOM(s).
@@ -11283,6 +11146,7 @@ paths:
           - repository_container
           - repository_manager
           - repository
+          - hosted_repository_component
           - global
           type: string
         style: form
@@ -11491,6 +11355,25 @@ components:
         target:
           type: string
         targetType:
+          type: string
+      type: object
+    AiDeveloperOptInStatus:
+      example:
+        optedIn: true
+        externalDatabaseRequired: true
+        optedInAt: optedInAt
+        message: message
+        optedInBy: optedInBy
+      properties:
+        externalDatabaseRequired:
+          type: boolean
+        message:
+          type: string
+        optedIn:
+          type: boolean
+        optedInAt:
+          type: string
+        optedInBy:
           type: string
       type: object
     ApiAiModelContentTypeDTO:
@@ -13192,6 +13075,7 @@ components:
           - repository_container
           - repository_manager
           - repository
+          - hosted_repository_component
           - global
           type: string
         password:
@@ -21328,6 +21212,7 @@ components:
           ownerPublicId: ownerPublicId
           ownerId: ownerId
         waiveTime: 2000-01-23T04:56:07.000+00:00
+        hrcId: hrcId
         openTime: 2000-01-23T04:56:07.000+00:00
         componentIdentifier:
           coordinates:
@@ -21360,6 +21245,8 @@ components:
           format: date-time
           type: string
         hash:
+          type: string
+        hrcId:
           type: string
         legacyViolationTime:
           format: date-time
@@ -23863,7 +23750,6 @@ components:
           - EDIT_ROLES
           - VIEW_ROLES
           - ACCESS_AUDIT_LOG
-          - VIEW_USAGE
           - WAIVE_POLICY_VIOLATIONS
           - CHANGE_LICENSES
           - CHANGE_SECURITY_VULNERABILITIES
@@ -29962,6 +29848,7 @@ components:
           type: string
         upstreamUrl:
           type: string
+          writeOnly: true
       type: object
     ApiRepositoryListDTO:
       example:
@@ -29996,7 +29883,7 @@ components:
       type: object
     ApiRepositoryManagerDTO:
       example:
-        managerType: virtual
+        managerType: traditional
         productVersion: productVersion
         instanceId: instanceId
         name: name
@@ -30009,6 +29896,7 @@ components:
           type: string
         managerType:
           enum:
+          - traditional
           - virtual
           type: string
         name:
@@ -30021,13 +29909,13 @@ components:
     ApiRepositoryManagerListDTO:
       example:
         repositoryManagers:
-        - managerType: virtual
+        - managerType: traditional
           productVersion: productVersion
           instanceId: instanceId
           name: name
           id: id
           productName: productName
-        - managerType: virtual
+        - managerType: traditional
           productVersion: productVersion
           instanceId: instanceId
           name: name
@@ -31390,6 +31278,90 @@ components:
         packageUrl:
           type: string
         stageId:
+          type: string
+      type: object
+    ApiSearchIndexAnalyzeDTO:
+      example:
+        applicationCount: 0
+        lastCleanupAt: 2000-01-23T04:56:07.000+00:00
+        lastSuccessfulCutoverAt: 2000-01-23T04:56:07.000+00:00
+        servingGenerationId: servingGenerationId
+        estateCapturedAt: 2000-01-23T04:56:07.000+00:00
+        nouxUnlockState: nouxUnlockState
+        advancedSearchEnabled: true
+        buildingGenerationId: buildingGenerationId
+        recommendedOp: recommendedOp
+        pendingChangeCount: 2
+        queueLagSeconds: 7
+        componentCount: 6
+        etaLowMinutes: 5
+        violationCount: 9
+        healthStatus: healthStatus
+        activeJobId: activeJobId
+        failedChangeCount: 5
+        etaHighMinutes: 1
+      properties:
+        activeJobId:
+          type: string
+        advancedSearchEnabled:
+          type: boolean
+        applicationCount:
+          format: int64
+          type: integer
+        buildingGenerationId:
+          type: string
+        componentCount:
+          format: int64
+          type: integer
+        estateCapturedAt:
+          format: date-time
+          type: string
+        etaHighMinutes:
+          format: int32
+          type: integer
+        etaLowMinutes:
+          format: int32
+          type: integer
+        failedChangeCount:
+          format: int64
+          type: integer
+        healthStatus:
+          type: string
+        lastCleanupAt:
+          format: date-time
+          type: string
+        lastSuccessfulCutoverAt:
+          format: date-time
+          type: string
+        nouxUnlockState:
+          type: string
+        pendingChangeCount:
+          format: int64
+          type: integer
+        queueLagSeconds:
+          format: int64
+          type: integer
+        recommendedOp:
+          type: string
+        servingGenerationId:
+          type: string
+        violationCount:
+          format: int64
+          type: integer
+      type: object
+    ApiSearchIndexJobRequestDTO:
+      example:
+        trigger: HEALTH_UI
+        jobType: FULL_REBUILD
+      properties:
+        jobType:
+          description: "Job to run: FULL_REBUILD or FIRST_TIME_INDEX."
+          example: FULL_REBUILD
+          type: string
+        trigger:
+          description: "What asked for the job: UNLOCK_WIZARD, HEALTH_UI, SUPPORT\
+            \ or SYSTEM. Defaults to HEALTH_UI."
+          example: HEALTH_UI
           type: string
       type: object
     ApiSearchResultDTOV2:
@@ -32976,6 +32948,7 @@ components:
           - repository_container
           - repository_manager
           - repository
+          - hosted_repository_component
           - global
           type: string
       type: object
@@ -33126,6 +33099,7 @@ components:
           - repository_container
           - repository_manager
           - repository
+          - hosted_repository_component
           - global
           type: string
       type: object
@@ -33660,20 +33634,20 @@ components:
         scanId: scanId
         repositoryPublicId: repositoryPublicId
         repositoryId: repositoryId
-        applicationId: applicationId
         openTime: 5.962133916683182
+        ownerId: ownerId
         applicationName: applicationName
         threatLevel: 2
         policyViolationCount: 5
       properties:
-        applicationId:
-          type: string
         applicationName:
           type: string
         applicationPublicId:
           type: string
         openTime:
           type: number
+        ownerId:
+          type: string
         policyViolationCount:
           format: int64
           type: integer
@@ -33698,8 +33672,8 @@ components:
           scanId: scanId
           repositoryPublicId: repositoryPublicId
           repositoryId: repositoryId
-          applicationId: applicationId
           openTime: 5.962133916683182
+          ownerId: ownerId
           applicationName: applicationName
           threatLevel: 2
           policyViolationCount: 5
@@ -33707,8 +33681,8 @@ components:
           scanId: scanId
           repositoryPublicId: repositoryPublicId
           repositoryId: repositoryId
-          applicationId: applicationId
           openTime: 5.962133916683182
+          ownerId: ownerId
           applicationName: applicationName
           threatLevel: 2
           policyViolationCount: 5
@@ -33910,92 +33884,184 @@ components:
         groupBy: groupBy
         groupIdentifier: itemType
         searchResultItemDTOS:
-        - policyThreatLevel: 6
-          itemType: itemType
+        - policyThreatLevel: 1
           policyViolationConstraintName: policyViolationConstraintName
           componentLabelId: componentLabelId
+          policyWaiverId: policyWaiverId
+          policyWaiverIsAuto: true
           policyThreatCategory: policyThreatCategory
-          policyViolationThreatLevel: 1
+          policyWaiverExpiresAt: policyWaiverExpiresAt
           policyViolationId: policyViolationId
           policyViolationPolicyId: policyViolationPolicyId
-          applicationCategoryDescription: applicationCategoryDescription
+          applicationCategoryNames:
+          - applicationCategoryNames
+          - applicationCategoryNames
           organizationId: organizationId
-          componentEffectiveLicenseName: componentEffectiveLicenseName
-          vulnerabilityId: vulnerabilityId
-          componentLabelDescription: componentLabelDescription
-          sbomSpecification: sbomSpecification
-          componentLabelName: componentLabelName
+          policyWaiverExpiryStatus: policyWaiverExpiryStatus
+          policyWaiverCreatedAt: policyWaiverCreatedAt
+          requesterName: requesterName
           applicationCategoryId: applicationCategoryId
           componentHash: componentHash
           componentName: componentName
-          policyViolationWaiverStatus: policyViolationWaiverStatus
-          applicationName: applicationName
+          policyWaiverPolicyType: policyWaiverPolicyType
           applicationVersion: applicationVersion
-          vulnerabilityStatus: vulnerabilityStatus
           policyViolationPolicyName: policyViolationPolicyName
           organizationName: organizationName
-          reportId: reportId
           policyName: policyName
-          componentLicenseThreatGroupName: componentLicenseThreatGroupName
-          applicationPublicId: applicationPublicId
-          componentLicenseThreatLevel: 0
-          policyViolationThreatCategory: policyViolationThreatCategory
-          policyId: policyId
-          applicationCategoryColor: applicationCategoryColor
-          resultIndex: 5
-          componentLabelColor: componentLabelColor
-          componentEffectiveLicenseId: componentEffectiveLicenseId
+          policyWaiverRequestStatus: policyWaiverRequestStatus
+          policyWaiverScopeOwnerId: policyWaiverScopeOwnerId
+          policyWaiverAuto: true
+          vulnerabilityFirstSeenEpochMs: 7
+          applicationViolationStages:
+          - applicationViolationStages
+          - applicationViolationStages
+          componentLicenseThreatLevel: 6
+          vulnerabilitySeverity: 9.301444
           applicationId: applicationId
+          rejectionReason: rejectionReason
           componentIdentifier:
             coordinates:
               key: coordinates
             format: format
-          policyEvaluationStage: policyEvaluationStage
-          applicationCategoryName: applicationCategoryName
+          reviewTime: reviewTime
           vulnerabilityDescription: vulnerabilityDescription
-        - policyThreatLevel: 6
           itemType: itemType
-          policyViolationConstraintName: policyViolationConstraintName
-          componentLabelId: componentLabelId
-          policyThreatCategory: policyThreatCategory
-          policyViolationThreatLevel: 1
-          policyViolationId: policyViolationId
-          policyViolationPolicyId: policyViolationPolicyId
+          policyWaiverWaivedBy: policyWaiverWaivedBy
+          policyWaiverThreatLevel: 5
+          policyViolationThreatLevel: 5
+          policyWaiverPolicyName: policyWaiverPolicyName
           applicationCategoryDescription: applicationCategoryDescription
-          organizationId: organizationId
           componentEffectiveLicenseName: componentEffectiveLicenseName
+          reviewerName: reviewerName
+          policyWaiverComment: policyWaiverComment
           vulnerabilityId: vulnerabilityId
+          noteToReviewer: noteToReviewer
           componentLabelDescription: componentLabelDescription
           sbomSpecification: sbomSpecification
           componentLabelName: componentLabelName
+          applicationStageSeverityCounts:
+          - applicationStageSeverityCounts
+          - applicationStageSeverityCounts
+          policyViolationWaiverStatus: policyViolationWaiverStatus
+          applicationName: applicationName
+          vulnerabilityStatus: vulnerabilityStatus
+          reportId: reportId
+          componentViolationStates:
+          - componentViolationStates
+          - componentViolationStates
+          applicationViolationPolicyTypes:
+          - applicationViolationPolicyTypes
+          - applicationViolationPolicyTypes
+          applicationLastEvaluationTimeEpochMs: 0
+          componentLicenseThreatGroupName: componentLicenseThreatGroupName
+          componentViolationPolicyTypes:
+          - componentViolationPolicyTypes
+          - componentViolationPolicyTypes
+          applicationViolationStates:
+          - applicationViolationStates
+          - applicationViolationStates
+          applicationPublicId: applicationPublicId
+          policyViolationThreatCategory: policyViolationThreatCategory
+          policyWaiverScopeOwnerType: policyWaiverScopeOwnerType
+          policyId: policyId
+          policyWaiverReason: policyWaiverReason
+          applicationCategoryColor: applicationCategoryColor
+          policyWaiverPolicyId: policyWaiverPolicyId
+          resultIndex: 2
+          componentLabelColor: componentLabelColor
+          componentEffectiveLicenseId: componentEffectiveLicenseId
+          policyWaiverScope: policyWaiverScope
+          policyEvaluationStage: policyEvaluationStage
+          applicationCategoryName: applicationCategoryName
+        - policyThreatLevel: 1
+          policyViolationConstraintName: policyViolationConstraintName
+          componentLabelId: componentLabelId
+          policyWaiverId: policyWaiverId
+          policyWaiverIsAuto: true
+          policyThreatCategory: policyThreatCategory
+          policyWaiverExpiresAt: policyWaiverExpiresAt
+          policyViolationId: policyViolationId
+          policyViolationPolicyId: policyViolationPolicyId
+          applicationCategoryNames:
+          - applicationCategoryNames
+          - applicationCategoryNames
+          organizationId: organizationId
+          policyWaiverExpiryStatus: policyWaiverExpiryStatus
+          policyWaiverCreatedAt: policyWaiverCreatedAt
+          requesterName: requesterName
           applicationCategoryId: applicationCategoryId
           componentHash: componentHash
           componentName: componentName
-          policyViolationWaiverStatus: policyViolationWaiverStatus
-          applicationName: applicationName
+          policyWaiverPolicyType: policyWaiverPolicyType
           applicationVersion: applicationVersion
-          vulnerabilityStatus: vulnerabilityStatus
           policyViolationPolicyName: policyViolationPolicyName
           organizationName: organizationName
-          reportId: reportId
           policyName: policyName
-          componentLicenseThreatGroupName: componentLicenseThreatGroupName
-          applicationPublicId: applicationPublicId
-          componentLicenseThreatLevel: 0
-          policyViolationThreatCategory: policyViolationThreatCategory
-          policyId: policyId
-          applicationCategoryColor: applicationCategoryColor
-          resultIndex: 5
-          componentLabelColor: componentLabelColor
-          componentEffectiveLicenseId: componentEffectiveLicenseId
+          policyWaiverRequestStatus: policyWaiverRequestStatus
+          policyWaiverScopeOwnerId: policyWaiverScopeOwnerId
+          policyWaiverAuto: true
+          vulnerabilityFirstSeenEpochMs: 7
+          applicationViolationStages:
+          - applicationViolationStages
+          - applicationViolationStages
+          componentLicenseThreatLevel: 6
+          vulnerabilitySeverity: 9.301444
           applicationId: applicationId
+          rejectionReason: rejectionReason
           componentIdentifier:
             coordinates:
               key: coordinates
             format: format
+          reviewTime: reviewTime
+          vulnerabilityDescription: vulnerabilityDescription
+          itemType: itemType
+          policyWaiverWaivedBy: policyWaiverWaivedBy
+          policyWaiverThreatLevel: 5
+          policyViolationThreatLevel: 5
+          policyWaiverPolicyName: policyWaiverPolicyName
+          applicationCategoryDescription: applicationCategoryDescription
+          componentEffectiveLicenseName: componentEffectiveLicenseName
+          reviewerName: reviewerName
+          policyWaiverComment: policyWaiverComment
+          vulnerabilityId: vulnerabilityId
+          noteToReviewer: noteToReviewer
+          componentLabelDescription: componentLabelDescription
+          sbomSpecification: sbomSpecification
+          componentLabelName: componentLabelName
+          applicationStageSeverityCounts:
+          - applicationStageSeverityCounts
+          - applicationStageSeverityCounts
+          policyViolationWaiverStatus: policyViolationWaiverStatus
+          applicationName: applicationName
+          vulnerabilityStatus: vulnerabilityStatus
+          reportId: reportId
+          componentViolationStates:
+          - componentViolationStates
+          - componentViolationStates
+          applicationViolationPolicyTypes:
+          - applicationViolationPolicyTypes
+          - applicationViolationPolicyTypes
+          applicationLastEvaluationTimeEpochMs: 0
+          componentLicenseThreatGroupName: componentLicenseThreatGroupName
+          componentViolationPolicyTypes:
+          - componentViolationPolicyTypes
+          - componentViolationPolicyTypes
+          applicationViolationStates:
+          - applicationViolationStates
+          - applicationViolationStates
+          applicationPublicId: applicationPublicId
+          policyViolationThreatCategory: policyViolationThreatCategory
+          policyWaiverScopeOwnerType: policyWaiverScopeOwnerType
+          policyId: policyId
+          policyWaiverReason: policyWaiverReason
+          applicationCategoryColor: applicationCategoryColor
+          policyWaiverPolicyId: policyWaiverPolicyId
+          resultIndex: 2
+          componentLabelColor: componentLabelColor
+          componentEffectiveLicenseId: componentEffectiveLicenseId
+          policyWaiverScope: policyWaiverScope
           policyEvaluationStage: policyEvaluationStage
           applicationCategoryName: applicationCategoryName
-          vulnerabilityDescription: vulnerabilityDescription
       properties:
         additionalInfo:
           type: string
@@ -34064,11 +34130,35 @@ components:
           - policyWaiverReason
           - policyWaiverComment
           - policyWaiverCreatedAt
+          - policyWaiverCreatedAtEpochMs
           - policyWaiverExpiresAt
+          - policyWaiverExpiresAtEpochMs
           - policyWaiverScopeOwnerId
           - policyWaiverScopeOwnerType
           - policyWaiverThreatLevel
           - policyWaiverWaivedBy
+          - policyWaiverAuto
+          - policyWaiverIsAuto
+          - policyWaiverExpiryStatus
+          - policyWaiverPolicyType
+          - policyWaiverScope
+          - policyWaiverRequestStatus
+          - requesterName
+          - reviewerName
+          - reviewTime
+          - rejectionReason
+          - noteToReviewer
+          - applicationLastEvaluationTimeEpochMs
+          - applicationStageSeverityCount
+          - componentViolationPolicyType
+          - componentViolationState
+          - componentMaxPolicyThreatLevel
+          - vulnerabilityFirstSeenEpochMs
+          - applicationMaxPolicyThreatLevel
+          - applicationViolationStage
+          - applicationViolationPolicyType
+          - applicationViolationState
+          - applicationViolationStateSortOrdinal
           type: string
         searchResultItemDTOS:
           items:
@@ -34231,6 +34321,7 @@ components:
           - repository_container
           - repository_manager
           - repository
+          - hosted_repository_component
           - global
           type: string
       type: object
@@ -34335,6 +34426,7 @@ components:
           - repository_container
           - repository_manager
           - repository
+          - hosted_repository_component
           - global
           type: string
       type: object
@@ -36333,197 +36425,479 @@ components:
         failOnZeroComponents:
           type: boolean
       type: object
+    SearchIndexJob:
+      example:
+        phase: phase
+        createdByUserId: createdByUserId
+        cancelRequestedAt: 2000-01-23T04:56:07.000+00:00
+        errorMessage: errorMessage
+        active: true
+        errorCode: errorCode
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        buildingGenerationId: buildingGenerationId
+        recommendedOp: recommendedOp
+        trigger: trigger
+        finishedAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        servingGenerationIdAtStart: servingGenerationIdAtStart
+        activeSlot: activeSlot
+        etaFinishAt: 2000-01-23T04:56:07.000+00:00
+        progressPercent: 0
+        id: id
+        jobType: jobType
+        status: status
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        active:
+          type: boolean
+        activeSlot:
+          type: string
+        buildingGenerationId:
+          type: string
+        cancelRequestedAt:
+          format: date-time
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        createdByUserId:
+          type: string
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        etaFinishAt:
+          format: date-time
+          type: string
+        finishedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        jobType:
+          type: string
+        phase:
+          type: string
+        progressPercent:
+          format: int32
+          type: integer
+        recommendedOp:
+          type: string
+        servingGenerationIdAtStart:
+          type: string
+        startedAt:
+          format: date-time
+          type: string
+        status:
+          type: string
+        trigger:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    SearchIndexJobEvent:
+      example:
+        eventCode: eventCode
+        severity: severity
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        searchIndexJobId: searchIndexJobId
+        message: message
+        seq: 0
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        eventCode:
+          type: string
+        id:
+          type: string
+        message:
+          type: string
+        searchIndexJobId:
+          type: string
+        seq:
+          format: int64
+          type: integer
+        severity:
+          type: string
+      type: object
     SearchResultDTO:
       example:
         isExactTotalNumberOfHits: true
         searchQuery: searchQuery
         pageSize: 2
-        totalNumberOfHits: 7
+        totalNumberOfHits: 4
         searchAfter:
         - searchAfter
         - searchAfter
-        page: 5
+        page: 3
         groupingByDTOS:
         - additionalInfo: additionalInfo
           groupBy: groupBy
           groupIdentifier: itemType
           searchResultItemDTOS:
-          - policyThreatLevel: 6
-            itemType: itemType
+          - policyThreatLevel: 1
             policyViolationConstraintName: policyViolationConstraintName
             componentLabelId: componentLabelId
+            policyWaiverId: policyWaiverId
+            policyWaiverIsAuto: true
             policyThreatCategory: policyThreatCategory
-            policyViolationThreatLevel: 1
+            policyWaiverExpiresAt: policyWaiverExpiresAt
             policyViolationId: policyViolationId
             policyViolationPolicyId: policyViolationPolicyId
-            applicationCategoryDescription: applicationCategoryDescription
+            applicationCategoryNames:
+            - applicationCategoryNames
+            - applicationCategoryNames
             organizationId: organizationId
-            componentEffectiveLicenseName: componentEffectiveLicenseName
-            vulnerabilityId: vulnerabilityId
-            componentLabelDescription: componentLabelDescription
-            sbomSpecification: sbomSpecification
-            componentLabelName: componentLabelName
+            policyWaiverExpiryStatus: policyWaiverExpiryStatus
+            policyWaiverCreatedAt: policyWaiverCreatedAt
+            requesterName: requesterName
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
-            policyViolationWaiverStatus: policyViolationWaiverStatus
-            applicationName: applicationName
+            policyWaiverPolicyType: policyWaiverPolicyType
             applicationVersion: applicationVersion
-            vulnerabilityStatus: vulnerabilityStatus
             policyViolationPolicyName: policyViolationPolicyName
             organizationName: organizationName
-            reportId: reportId
             policyName: policyName
-            componentLicenseThreatGroupName: componentLicenseThreatGroupName
-            applicationPublicId: applicationPublicId
-            componentLicenseThreatLevel: 0
-            policyViolationThreatCategory: policyViolationThreatCategory
-            policyId: policyId
-            applicationCategoryColor: applicationCategoryColor
-            resultIndex: 5
-            componentLabelColor: componentLabelColor
-            componentEffectiveLicenseId: componentEffectiveLicenseId
+            policyWaiverRequestStatus: policyWaiverRequestStatus
+            policyWaiverScopeOwnerId: policyWaiverScopeOwnerId
+            policyWaiverAuto: true
+            vulnerabilityFirstSeenEpochMs: 7
+            applicationViolationStages:
+            - applicationViolationStages
+            - applicationViolationStages
+            componentLicenseThreatLevel: 6
+            vulnerabilitySeverity: 9.301444
             applicationId: applicationId
+            rejectionReason: rejectionReason
             componentIdentifier:
               coordinates:
                 key: coordinates
               format: format
-            policyEvaluationStage: policyEvaluationStage
-            applicationCategoryName: applicationCategoryName
+            reviewTime: reviewTime
             vulnerabilityDescription: vulnerabilityDescription
-          - policyThreatLevel: 6
             itemType: itemType
-            policyViolationConstraintName: policyViolationConstraintName
-            componentLabelId: componentLabelId
-            policyThreatCategory: policyThreatCategory
-            policyViolationThreatLevel: 1
-            policyViolationId: policyViolationId
-            policyViolationPolicyId: policyViolationPolicyId
+            policyWaiverWaivedBy: policyWaiverWaivedBy
+            policyWaiverThreatLevel: 5
+            policyViolationThreatLevel: 5
+            policyWaiverPolicyName: policyWaiverPolicyName
             applicationCategoryDescription: applicationCategoryDescription
-            organizationId: organizationId
             componentEffectiveLicenseName: componentEffectiveLicenseName
+            reviewerName: reviewerName
+            policyWaiverComment: policyWaiverComment
             vulnerabilityId: vulnerabilityId
+            noteToReviewer: noteToReviewer
             componentLabelDescription: componentLabelDescription
             sbomSpecification: sbomSpecification
             componentLabelName: componentLabelName
+            applicationStageSeverityCounts:
+            - applicationStageSeverityCounts
+            - applicationStageSeverityCounts
+            policyViolationWaiverStatus: policyViolationWaiverStatus
+            applicationName: applicationName
+            vulnerabilityStatus: vulnerabilityStatus
+            reportId: reportId
+            componentViolationStates:
+            - componentViolationStates
+            - componentViolationStates
+            applicationViolationPolicyTypes:
+            - applicationViolationPolicyTypes
+            - applicationViolationPolicyTypes
+            applicationLastEvaluationTimeEpochMs: 0
+            componentLicenseThreatGroupName: componentLicenseThreatGroupName
+            componentViolationPolicyTypes:
+            - componentViolationPolicyTypes
+            - componentViolationPolicyTypes
+            applicationViolationStates:
+            - applicationViolationStates
+            - applicationViolationStates
+            applicationPublicId: applicationPublicId
+            policyViolationThreatCategory: policyViolationThreatCategory
+            policyWaiverScopeOwnerType: policyWaiverScopeOwnerType
+            policyId: policyId
+            policyWaiverReason: policyWaiverReason
+            applicationCategoryColor: applicationCategoryColor
+            policyWaiverPolicyId: policyWaiverPolicyId
+            resultIndex: 2
+            componentLabelColor: componentLabelColor
+            componentEffectiveLicenseId: componentEffectiveLicenseId
+            policyWaiverScope: policyWaiverScope
+            policyEvaluationStage: policyEvaluationStage
+            applicationCategoryName: applicationCategoryName
+          - policyThreatLevel: 1
+            policyViolationConstraintName: policyViolationConstraintName
+            componentLabelId: componentLabelId
+            policyWaiverId: policyWaiverId
+            policyWaiverIsAuto: true
+            policyThreatCategory: policyThreatCategory
+            policyWaiverExpiresAt: policyWaiverExpiresAt
+            policyViolationId: policyViolationId
+            policyViolationPolicyId: policyViolationPolicyId
+            applicationCategoryNames:
+            - applicationCategoryNames
+            - applicationCategoryNames
+            organizationId: organizationId
+            policyWaiverExpiryStatus: policyWaiverExpiryStatus
+            policyWaiverCreatedAt: policyWaiverCreatedAt
+            requesterName: requesterName
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
-            policyViolationWaiverStatus: policyViolationWaiverStatus
-            applicationName: applicationName
+            policyWaiverPolicyType: policyWaiverPolicyType
             applicationVersion: applicationVersion
-            vulnerabilityStatus: vulnerabilityStatus
             policyViolationPolicyName: policyViolationPolicyName
             organizationName: organizationName
-            reportId: reportId
             policyName: policyName
-            componentLicenseThreatGroupName: componentLicenseThreatGroupName
-            applicationPublicId: applicationPublicId
-            componentLicenseThreatLevel: 0
-            policyViolationThreatCategory: policyViolationThreatCategory
-            policyId: policyId
-            applicationCategoryColor: applicationCategoryColor
-            resultIndex: 5
-            componentLabelColor: componentLabelColor
-            componentEffectiveLicenseId: componentEffectiveLicenseId
+            policyWaiverRequestStatus: policyWaiverRequestStatus
+            policyWaiverScopeOwnerId: policyWaiverScopeOwnerId
+            policyWaiverAuto: true
+            vulnerabilityFirstSeenEpochMs: 7
+            applicationViolationStages:
+            - applicationViolationStages
+            - applicationViolationStages
+            componentLicenseThreatLevel: 6
+            vulnerabilitySeverity: 9.301444
             applicationId: applicationId
+            rejectionReason: rejectionReason
             componentIdentifier:
               coordinates:
                 key: coordinates
               format: format
+            reviewTime: reviewTime
+            vulnerabilityDescription: vulnerabilityDescription
+            itemType: itemType
+            policyWaiverWaivedBy: policyWaiverWaivedBy
+            policyWaiverThreatLevel: 5
+            policyViolationThreatLevel: 5
+            policyWaiverPolicyName: policyWaiverPolicyName
+            applicationCategoryDescription: applicationCategoryDescription
+            componentEffectiveLicenseName: componentEffectiveLicenseName
+            reviewerName: reviewerName
+            policyWaiverComment: policyWaiverComment
+            vulnerabilityId: vulnerabilityId
+            noteToReviewer: noteToReviewer
+            componentLabelDescription: componentLabelDescription
+            sbomSpecification: sbomSpecification
+            componentLabelName: componentLabelName
+            applicationStageSeverityCounts:
+            - applicationStageSeverityCounts
+            - applicationStageSeverityCounts
+            policyViolationWaiverStatus: policyViolationWaiverStatus
+            applicationName: applicationName
+            vulnerabilityStatus: vulnerabilityStatus
+            reportId: reportId
+            componentViolationStates:
+            - componentViolationStates
+            - componentViolationStates
+            applicationViolationPolicyTypes:
+            - applicationViolationPolicyTypes
+            - applicationViolationPolicyTypes
+            applicationLastEvaluationTimeEpochMs: 0
+            componentLicenseThreatGroupName: componentLicenseThreatGroupName
+            componentViolationPolicyTypes:
+            - componentViolationPolicyTypes
+            - componentViolationPolicyTypes
+            applicationViolationStates:
+            - applicationViolationStates
+            - applicationViolationStates
+            applicationPublicId: applicationPublicId
+            policyViolationThreatCategory: policyViolationThreatCategory
+            policyWaiverScopeOwnerType: policyWaiverScopeOwnerType
+            policyId: policyId
+            policyWaiverReason: policyWaiverReason
+            applicationCategoryColor: applicationCategoryColor
+            policyWaiverPolicyId: policyWaiverPolicyId
+            resultIndex: 2
+            componentLabelColor: componentLabelColor
+            componentEffectiveLicenseId: componentEffectiveLicenseId
+            policyWaiverScope: policyWaiverScope
             policyEvaluationStage: policyEvaluationStage
             applicationCategoryName: applicationCategoryName
-            vulnerabilityDescription: vulnerabilityDescription
         - additionalInfo: additionalInfo
           groupBy: groupBy
           groupIdentifier: itemType
           searchResultItemDTOS:
-          - policyThreatLevel: 6
-            itemType: itemType
+          - policyThreatLevel: 1
             policyViolationConstraintName: policyViolationConstraintName
             componentLabelId: componentLabelId
+            policyWaiverId: policyWaiverId
+            policyWaiverIsAuto: true
             policyThreatCategory: policyThreatCategory
-            policyViolationThreatLevel: 1
+            policyWaiverExpiresAt: policyWaiverExpiresAt
             policyViolationId: policyViolationId
             policyViolationPolicyId: policyViolationPolicyId
-            applicationCategoryDescription: applicationCategoryDescription
+            applicationCategoryNames:
+            - applicationCategoryNames
+            - applicationCategoryNames
             organizationId: organizationId
-            componentEffectiveLicenseName: componentEffectiveLicenseName
-            vulnerabilityId: vulnerabilityId
-            componentLabelDescription: componentLabelDescription
-            sbomSpecification: sbomSpecification
-            componentLabelName: componentLabelName
+            policyWaiverExpiryStatus: policyWaiverExpiryStatus
+            policyWaiverCreatedAt: policyWaiverCreatedAt
+            requesterName: requesterName
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
-            policyViolationWaiverStatus: policyViolationWaiverStatus
-            applicationName: applicationName
+            policyWaiverPolicyType: policyWaiverPolicyType
             applicationVersion: applicationVersion
-            vulnerabilityStatus: vulnerabilityStatus
             policyViolationPolicyName: policyViolationPolicyName
             organizationName: organizationName
-            reportId: reportId
             policyName: policyName
-            componentLicenseThreatGroupName: componentLicenseThreatGroupName
-            applicationPublicId: applicationPublicId
-            componentLicenseThreatLevel: 0
-            policyViolationThreatCategory: policyViolationThreatCategory
-            policyId: policyId
-            applicationCategoryColor: applicationCategoryColor
-            resultIndex: 5
-            componentLabelColor: componentLabelColor
-            componentEffectiveLicenseId: componentEffectiveLicenseId
+            policyWaiverRequestStatus: policyWaiverRequestStatus
+            policyWaiverScopeOwnerId: policyWaiverScopeOwnerId
+            policyWaiverAuto: true
+            vulnerabilityFirstSeenEpochMs: 7
+            applicationViolationStages:
+            - applicationViolationStages
+            - applicationViolationStages
+            componentLicenseThreatLevel: 6
+            vulnerabilitySeverity: 9.301444
             applicationId: applicationId
+            rejectionReason: rejectionReason
             componentIdentifier:
               coordinates:
                 key: coordinates
               format: format
-            policyEvaluationStage: policyEvaluationStage
-            applicationCategoryName: applicationCategoryName
+            reviewTime: reviewTime
             vulnerabilityDescription: vulnerabilityDescription
-          - policyThreatLevel: 6
             itemType: itemType
-            policyViolationConstraintName: policyViolationConstraintName
-            componentLabelId: componentLabelId
-            policyThreatCategory: policyThreatCategory
-            policyViolationThreatLevel: 1
-            policyViolationId: policyViolationId
-            policyViolationPolicyId: policyViolationPolicyId
+            policyWaiverWaivedBy: policyWaiverWaivedBy
+            policyWaiverThreatLevel: 5
+            policyViolationThreatLevel: 5
+            policyWaiverPolicyName: policyWaiverPolicyName
             applicationCategoryDescription: applicationCategoryDescription
-            organizationId: organizationId
             componentEffectiveLicenseName: componentEffectiveLicenseName
+            reviewerName: reviewerName
+            policyWaiverComment: policyWaiverComment
             vulnerabilityId: vulnerabilityId
+            noteToReviewer: noteToReviewer
             componentLabelDescription: componentLabelDescription
             sbomSpecification: sbomSpecification
             componentLabelName: componentLabelName
+            applicationStageSeverityCounts:
+            - applicationStageSeverityCounts
+            - applicationStageSeverityCounts
+            policyViolationWaiverStatus: policyViolationWaiverStatus
+            applicationName: applicationName
+            vulnerabilityStatus: vulnerabilityStatus
+            reportId: reportId
+            componentViolationStates:
+            - componentViolationStates
+            - componentViolationStates
+            applicationViolationPolicyTypes:
+            - applicationViolationPolicyTypes
+            - applicationViolationPolicyTypes
+            applicationLastEvaluationTimeEpochMs: 0
+            componentLicenseThreatGroupName: componentLicenseThreatGroupName
+            componentViolationPolicyTypes:
+            - componentViolationPolicyTypes
+            - componentViolationPolicyTypes
+            applicationViolationStates:
+            - applicationViolationStates
+            - applicationViolationStates
+            applicationPublicId: applicationPublicId
+            policyViolationThreatCategory: policyViolationThreatCategory
+            policyWaiverScopeOwnerType: policyWaiverScopeOwnerType
+            policyId: policyId
+            policyWaiverReason: policyWaiverReason
+            applicationCategoryColor: applicationCategoryColor
+            policyWaiverPolicyId: policyWaiverPolicyId
+            resultIndex: 2
+            componentLabelColor: componentLabelColor
+            componentEffectiveLicenseId: componentEffectiveLicenseId
+            policyWaiverScope: policyWaiverScope
+            policyEvaluationStage: policyEvaluationStage
+            applicationCategoryName: applicationCategoryName
+          - policyThreatLevel: 1
+            policyViolationConstraintName: policyViolationConstraintName
+            componentLabelId: componentLabelId
+            policyWaiverId: policyWaiverId
+            policyWaiverIsAuto: true
+            policyThreatCategory: policyThreatCategory
+            policyWaiverExpiresAt: policyWaiverExpiresAt
+            policyViolationId: policyViolationId
+            policyViolationPolicyId: policyViolationPolicyId
+            applicationCategoryNames:
+            - applicationCategoryNames
+            - applicationCategoryNames
+            organizationId: organizationId
+            policyWaiverExpiryStatus: policyWaiverExpiryStatus
+            policyWaiverCreatedAt: policyWaiverCreatedAt
+            requesterName: requesterName
             applicationCategoryId: applicationCategoryId
             componentHash: componentHash
             componentName: componentName
-            policyViolationWaiverStatus: policyViolationWaiverStatus
-            applicationName: applicationName
+            policyWaiverPolicyType: policyWaiverPolicyType
             applicationVersion: applicationVersion
-            vulnerabilityStatus: vulnerabilityStatus
             policyViolationPolicyName: policyViolationPolicyName
             organizationName: organizationName
-            reportId: reportId
             policyName: policyName
-            componentLicenseThreatGroupName: componentLicenseThreatGroupName
-            applicationPublicId: applicationPublicId
-            componentLicenseThreatLevel: 0
-            policyViolationThreatCategory: policyViolationThreatCategory
-            policyId: policyId
-            applicationCategoryColor: applicationCategoryColor
-            resultIndex: 5
-            componentLabelColor: componentLabelColor
-            componentEffectiveLicenseId: componentEffectiveLicenseId
+            policyWaiverRequestStatus: policyWaiverRequestStatus
+            policyWaiverScopeOwnerId: policyWaiverScopeOwnerId
+            policyWaiverAuto: true
+            vulnerabilityFirstSeenEpochMs: 7
+            applicationViolationStages:
+            - applicationViolationStages
+            - applicationViolationStages
+            componentLicenseThreatLevel: 6
+            vulnerabilitySeverity: 9.301444
             applicationId: applicationId
+            rejectionReason: rejectionReason
             componentIdentifier:
               coordinates:
                 key: coordinates
               format: format
+            reviewTime: reviewTime
+            vulnerabilityDescription: vulnerabilityDescription
+            itemType: itemType
+            policyWaiverWaivedBy: policyWaiverWaivedBy
+            policyWaiverThreatLevel: 5
+            policyViolationThreatLevel: 5
+            policyWaiverPolicyName: policyWaiverPolicyName
+            applicationCategoryDescription: applicationCategoryDescription
+            componentEffectiveLicenseName: componentEffectiveLicenseName
+            reviewerName: reviewerName
+            policyWaiverComment: policyWaiverComment
+            vulnerabilityId: vulnerabilityId
+            noteToReviewer: noteToReviewer
+            componentLabelDescription: componentLabelDescription
+            sbomSpecification: sbomSpecification
+            componentLabelName: componentLabelName
+            applicationStageSeverityCounts:
+            - applicationStageSeverityCounts
+            - applicationStageSeverityCounts
+            policyViolationWaiverStatus: policyViolationWaiverStatus
+            applicationName: applicationName
+            vulnerabilityStatus: vulnerabilityStatus
+            reportId: reportId
+            componentViolationStates:
+            - componentViolationStates
+            - componentViolationStates
+            applicationViolationPolicyTypes:
+            - applicationViolationPolicyTypes
+            - applicationViolationPolicyTypes
+            applicationLastEvaluationTimeEpochMs: 0
+            componentLicenseThreatGroupName: componentLicenseThreatGroupName
+            componentViolationPolicyTypes:
+            - componentViolationPolicyTypes
+            - componentViolationPolicyTypes
+            applicationViolationStates:
+            - applicationViolationStates
+            - applicationViolationStates
+            applicationPublicId: applicationPublicId
+            policyViolationThreatCategory: policyViolationThreatCategory
+            policyWaiverScopeOwnerType: policyWaiverScopeOwnerType
+            policyId: policyId
+            policyWaiverReason: policyWaiverReason
+            applicationCategoryColor: applicationCategoryColor
+            policyWaiverPolicyId: policyWaiverPolicyId
+            resultIndex: 2
+            componentLabelColor: componentLabelColor
+            componentEffectiveLicenseId: componentEffectiveLicenseId
+            policyWaiverScope: policyWaiverScope
             policyEvaluationStage: policyEvaluationStage
             applicationCategoryName: applicationCategoryName
-            vulnerabilityDescription: vulnerabilityDescription
       properties:
         groupingByDTOS:
           items:
@@ -36549,49 +36923,95 @@ components:
       type: object
     SearchResultItemDTO:
       example:
-        policyThreatLevel: 6
-        itemType: itemType
+        policyThreatLevel: 1
         policyViolationConstraintName: policyViolationConstraintName
         componentLabelId: componentLabelId
+        policyWaiverId: policyWaiverId
+        policyWaiverIsAuto: true
         policyThreatCategory: policyThreatCategory
-        policyViolationThreatLevel: 1
+        policyWaiverExpiresAt: policyWaiverExpiresAt
         policyViolationId: policyViolationId
         policyViolationPolicyId: policyViolationPolicyId
-        applicationCategoryDescription: applicationCategoryDescription
+        applicationCategoryNames:
+        - applicationCategoryNames
+        - applicationCategoryNames
         organizationId: organizationId
-        componentEffectiveLicenseName: componentEffectiveLicenseName
-        vulnerabilityId: vulnerabilityId
-        componentLabelDescription: componentLabelDescription
-        sbomSpecification: sbomSpecification
-        componentLabelName: componentLabelName
+        policyWaiverExpiryStatus: policyWaiverExpiryStatus
+        policyWaiverCreatedAt: policyWaiverCreatedAt
+        requesterName: requesterName
         applicationCategoryId: applicationCategoryId
         componentHash: componentHash
         componentName: componentName
-        policyViolationWaiverStatus: policyViolationWaiverStatus
-        applicationName: applicationName
+        policyWaiverPolicyType: policyWaiverPolicyType
         applicationVersion: applicationVersion
-        vulnerabilityStatus: vulnerabilityStatus
         policyViolationPolicyName: policyViolationPolicyName
         organizationName: organizationName
-        reportId: reportId
         policyName: policyName
-        componentLicenseThreatGroupName: componentLicenseThreatGroupName
-        applicationPublicId: applicationPublicId
-        componentLicenseThreatLevel: 0
-        policyViolationThreatCategory: policyViolationThreatCategory
-        policyId: policyId
-        applicationCategoryColor: applicationCategoryColor
-        resultIndex: 5
-        componentLabelColor: componentLabelColor
-        componentEffectiveLicenseId: componentEffectiveLicenseId
+        policyWaiverRequestStatus: policyWaiverRequestStatus
+        policyWaiverScopeOwnerId: policyWaiverScopeOwnerId
+        policyWaiverAuto: true
+        vulnerabilityFirstSeenEpochMs: 7
+        applicationViolationStages:
+        - applicationViolationStages
+        - applicationViolationStages
+        componentLicenseThreatLevel: 6
+        vulnerabilitySeverity: 9.301444
         applicationId: applicationId
+        rejectionReason: rejectionReason
         componentIdentifier:
           coordinates:
             key: coordinates
           format: format
+        reviewTime: reviewTime
+        vulnerabilityDescription: vulnerabilityDescription
+        itemType: itemType
+        policyWaiverWaivedBy: policyWaiverWaivedBy
+        policyWaiverThreatLevel: 5
+        policyViolationThreatLevel: 5
+        policyWaiverPolicyName: policyWaiverPolicyName
+        applicationCategoryDescription: applicationCategoryDescription
+        componentEffectiveLicenseName: componentEffectiveLicenseName
+        reviewerName: reviewerName
+        policyWaiverComment: policyWaiverComment
+        vulnerabilityId: vulnerabilityId
+        noteToReviewer: noteToReviewer
+        componentLabelDescription: componentLabelDescription
+        sbomSpecification: sbomSpecification
+        componentLabelName: componentLabelName
+        applicationStageSeverityCounts:
+        - applicationStageSeverityCounts
+        - applicationStageSeverityCounts
+        policyViolationWaiverStatus: policyViolationWaiverStatus
+        applicationName: applicationName
+        vulnerabilityStatus: vulnerabilityStatus
+        reportId: reportId
+        componentViolationStates:
+        - componentViolationStates
+        - componentViolationStates
+        applicationViolationPolicyTypes:
+        - applicationViolationPolicyTypes
+        - applicationViolationPolicyTypes
+        applicationLastEvaluationTimeEpochMs: 0
+        componentLicenseThreatGroupName: componentLicenseThreatGroupName
+        componentViolationPolicyTypes:
+        - componentViolationPolicyTypes
+        - componentViolationPolicyTypes
+        applicationViolationStates:
+        - applicationViolationStates
+        - applicationViolationStates
+        applicationPublicId: applicationPublicId
+        policyViolationThreatCategory: policyViolationThreatCategory
+        policyWaiverScopeOwnerType: policyWaiverScopeOwnerType
+        policyId: policyId
+        policyWaiverReason: policyWaiverReason
+        applicationCategoryColor: applicationCategoryColor
+        policyWaiverPolicyId: policyWaiverPolicyId
+        resultIndex: 2
+        componentLabelColor: componentLabelColor
+        componentEffectiveLicenseId: componentEffectiveLicenseId
+        policyWaiverScope: policyWaiverScope
         policyEvaluationStage: policyEvaluationStage
         applicationCategoryName: applicationCategoryName
-        vulnerabilityDescription: vulnerabilityDescription
       properties:
         applicationCategoryColor:
           type: string
@@ -36601,14 +37021,37 @@ components:
           type: string
         applicationCategoryName:
           type: string
+        applicationCategoryNames:
+          items:
+            type: string
+          type: array
         applicationId:
           type: string
+        applicationLastEvaluationTimeEpochMs:
+          format: int64
+          type: integer
         applicationName:
           type: string
         applicationPublicId:
           type: string
+        applicationStageSeverityCounts:
+          items:
+            type: string
+          type: array
         applicationVersion:
           type: string
+        applicationViolationPolicyTypes:
+          items:
+            type: string
+          type: array
+        applicationViolationStages:
+          items:
+            type: string
+          type: array
+        applicationViolationStates:
+          items:
+            type: string
+          type: array
         componentEffectiveLicenseId:
           type: string
         componentEffectiveLicenseName:
@@ -36632,7 +37075,17 @@ components:
           type: integer
         componentName:
           type: string
+        componentViolationPolicyTypes:
+          items:
+            type: string
+          type: array
+        componentViolationStates:
+          items:
+            type: string
+          type: array
         itemType:
+          type: string
+        noteToReviewer:
           type: string
         organizationId:
           type: string
@@ -36664,17 +37117,66 @@ components:
           type: integer
         policyViolationWaiverStatus:
           type: string
+        policyWaiverAuto:
+          type: boolean
+        policyWaiverComment:
+          type: string
+        policyWaiverCreatedAt:
+          type: string
+        policyWaiverExpiresAt:
+          type: string
+        policyWaiverExpiryStatus:
+          type: string
+        policyWaiverId:
+          type: string
+        policyWaiverIsAuto:
+          type: boolean
+        policyWaiverPolicyId:
+          type: string
+        policyWaiverPolicyName:
+          type: string
+        policyWaiverPolicyType:
+          type: string
+        policyWaiverReason:
+          type: string
+        policyWaiverRequestStatus:
+          type: string
+        policyWaiverScope:
+          type: string
+        policyWaiverScopeOwnerId:
+          type: string
+        policyWaiverScopeOwnerType:
+          type: string
+        policyWaiverThreatLevel:
+          format: int32
+          type: integer
+        policyWaiverWaivedBy:
+          type: string
+        rejectionReason:
+          type: string
         reportId:
+          type: string
+        requesterName:
           type: string
         resultIndex:
           format: int32
           type: integer
+        reviewTime:
+          type: string
+        reviewerName:
+          type: string
         sbomSpecification:
           type: string
         vulnerabilityDescription:
           type: string
+        vulnerabilityFirstSeenEpochMs:
+          format: int64
+          type: integer
         vulnerabilityId:
           type: string
+        vulnerabilitySeverity:
+          format: float
+          type: number
         vulnerabilityStatus:
           type: string
       type: object
@@ -37214,6 +37716,7 @@ components:
           - repository_container
           - repository_manager
           - repository
+          - hosted_repository_component
           - global
           type: string
       type: object
@@ -37492,19 +37995,9 @@ components:
       type: object
     uploadScan_request:
       properties:
-        client:
-          type: string
         componentId:
           type: string
-        correlationId:
-          type: string
-        evaluationMode:
-          type: string
         policyEvaluationStage:
-          type: string
-        purl:
-          type: string
-        requestedBy:
           type: string
         scanFile:
           format: binary
