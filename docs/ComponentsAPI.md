@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**GetComponentDetails**](ComponentsAPI.md#GetComponentDetails) | **Post** /api/v2/components/details | 
 [**GetComponentVersions**](ComponentsAPI.md#GetComponentVersions) | **Post** /api/v2/components/versions | 
 [**GetSuggestedRemediationForComponent**](ComponentsAPI.md#GetSuggestedRemediationForComponent) | **Post** /api/v2/components/remediation/{ownerType}/{ownerId} | 
+[**GetSuggestedRemediationForComponents**](ComponentsAPI.md#GetSuggestedRemediationForComponents) | **Post** /api/v2/components/remediation/{ownerType}/{ownerId}/bulk | 
 [**SetComponentLabel**](ComponentsAPI.md#SetComponentLabel) | **Post** /api/v2/components/{componentHash}/labels/{labelName}/{ownerType}s/{internalOwnerId} | 
 
 
@@ -298,6 +299,87 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSuggestedRemediationForComponents
+
+> GetSuggestedRemediationForComponents(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiBulkComponentRemediationRequestDTO(apiBulkComponentRemediationRequestDTO).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | Possible values: application, organization, repository. 
+	ownerId := "ownerId_example" // string | Possible values: applicationId, organizationId or repositoryId.
+	stageId := "stageId_example" // string | Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies remediation types in the response. Possible values are develop, build, stage-release, release and operate. (optional)
+	identificationSource := "identificationSource_example" // string | Enter the identification source if you want the remediation result based on third-party scan information (non-Sonatype). The identification source can be obtained from the Component Details Page in the UI. (optional)
+	scanId := "scanId_example" // string | Enter the scanId (reportId) if you want the remediation result based on third-party scan information (non-Sonatype). (optional)
+	includeParentRemediation := true // bool | Enter true if you want to include parent remediation for transitive dependency in the response based on your application policy scan. (optional) (default to false)
+	apiBulkComponentRemediationRequestDTO := *sonatypeiq.NewApiBulkComponentRemediationRequestDTO() // ApiBulkComponentRemediationRequestDTO |  (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponents(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiBulkComponentRemediationRequestDTO(apiBulkComponentRemediationRequestDTO).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Possible values: application, organization, repository.  | 
+**ownerId** | **string** | Possible values: applicationId, organizationId or repositoryId. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSuggestedRemediationForComponentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **stageId** | **string** | Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies remediation types in the response. Possible values are develop, build, stage-release, release and operate. | 
+ **identificationSource** | **string** | Enter the identification source if you want the remediation result based on third-party scan information (non-Sonatype). The identification source can be obtained from the Component Details Page in the UI. | 
+ **scanId** | **string** | Enter the scanId (reportId) if you want the remediation result based on third-party scan information (non-Sonatype). | 
+ **includeParentRemediation** | **bool** | Enter true if you want to include parent remediation for transitive dependency in the response based on your application policy scan. | [default to false]
+ **apiBulkComponentRemediationRequestDTO** | [**ApiBulkComponentRemediationRequestDTO**](ApiBulkComponentRemediationRequestDTO.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

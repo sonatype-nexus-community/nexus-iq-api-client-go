@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.205.0-03
+  version: 1.206.0-01
 servers:
 - url: /
 security:
@@ -1989,6 +1989,95 @@ paths:
           description: Use this method to obtain remediation suggestions for policy
             violations on a component basis. Remediations obtained from this method
             are same as those appearing on the Component Details Page in the UI.
+      tags:
+      - Components
+  /api/v2/components/remediation/{ownerType}/{ownerId}/bulk:
+    post:
+      description: Bulk variant of the component remediation endpoint. Accepts a list
+        of components and returns a per-component result for each. This is intended
+        for callers (such as the ServiceNow AppVR integration) that need remediations
+        for many components against the same owner/stage and would otherwise have
+        to make one call per component. The batch is capped at 200 components; larger
+        requests return 400.
+      operationId: getSuggestedRemediationForComponents
+      parameters:
+      - description: "Possible values: application, organization, repository. "
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository
+          pattern: application|organization|repository
+          type: string
+        style: simple
+      - description: "Possible values: applicationId, organizationId or repositoryId."
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies\
+          \ remediation types in the response. Possible values are develop, build,\
+          \ stage-release, release and operate."
+        explode: true
+        in: query
+        name: stageId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Enter the identification source if you want the remediation result
+          based on third-party scan information (non-Sonatype). The identification
+          source can be obtained from the Component Details Page in the UI.
+        explode: true
+        in: query
+        name: identificationSource
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Enter the scanId (reportId) if you want the remediation result
+          based on third-party scan information (non-Sonatype).
+        explode: true
+        in: query
+        name: scanId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Enter true if you want to include parent remediation for transitive
+          dependency in the response based on your application policy scan.
+        explode: true
+        in: query
+        name: includeParentRemediation
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiBulkComponentRemediationRequestDTO"
+      responses:
+        "200":
+          description: "The response returns a list of results, one per input component,\
+            \ in the same order as the input. Each result echoes the input component\
+            \ and contains either a remediation payload (same shape as the single-component\
+            \ endpoint's response) or, for per-component input-validation failures\
+            \ (null entry, missing componentIdentifier/packageUrl, malformed identifier\
+            \ or purl, HDS-unknown component), an error message. All other failures\
+            \ — batch-level input errors (missing components, oversized batch, invalid\
+            \ stageId, invalid scanId for repositories), authorization/license issues,\
+            \ downstream infrastructure failures, and batch-level deadline (HTTP 503)\
+            \ — return the usual error status codes instead of a 200."
       tags:
       - Components
   /api/v2/components/versions:
@@ -4182,13 +4271,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Possible values are 1.1|1.2|1.3|1.4|1.5|1.6.
+      - description: Possible values are 1.1|1.2|1.3|1.4|1.5|1.6|1.7.
         explode: false
         in: path
         name: cdxVersion
         required: true
         schema:
-          pattern: 1.1|1.2|1.3|1.4|1.5|1.6
+          pattern: 1.1|1.2|1.3|1.4|1.5|1.6|1.7
           type: string
         style: simple
       responses:
@@ -4225,13 +4314,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Possible values are 1.1|1.2|1.3|1.4|1.5|1.6.
+      - description: Possible values are 1.1|1.2|1.3|1.4|1.5|1.6|1.7.
         explode: false
         in: path
         name: cdxVersion
         required: true
         schema:
-          pattern: 1.1|1.2|1.3|1.4|1.5|1.6
+          pattern: 1.1|1.2|1.3|1.4|1.5|1.6|1.7
           type: string
         style: simple
       responses:
@@ -7947,6 +8036,58 @@ paths:
       tags:
       - Policy Waiver Requests
   /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/{policyWaiverRequestId}:
+    delete:
+      description: |-
+        Use this method to withdraw a pending policy waiver request that you originally submitted.
+
+        The request row is removed; this is intended for cleaning up requests created by mistake (wrong scope, wrong rationale, etc.). The action is recorded in the audit log so the withdrawal remains traceable. Only the original requester may withdraw, and only while the request is in the REQUESTED state. Once a request has been APPROVED or REJECTED, withdraw is rejected — those terminal states must be handled by a reviewer through the review endpoint.
+
+        Permissions required: View IQ Elements (the caller must also be the requester of the waiver request; other callers receive 404).
+      operationId: withdrawPolicyWaiverRequest
+      parameters:
+      - description: "The scope of the policy waiver request. Possible values are\
+          \ application, organization, repository, repository_manager, repository_container."
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          - repository
+          pattern: application|organization|repository|repository_manager|repository_container
+          type: string
+        style: simple
+      - description: The id for the ownerType provided above. E.g. applicationId if
+          the ownerType is application.
+        explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The id of the policy waiver request to be withdrawn.
+        explode: false
+        in: path
+        name: policyWaiverRequestId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: The policy waiver request was withdrawn.
+        "400":
+          description: The policy waiver request is not in the REQUESTED state.
+        "404":
+          description: The policy waiver request does not exist or the caller is not
+            its requester.
+      tags:
+      - Policy Waiver Requests
     get:
       description: |-
         Use this method to retrieve policy waiver request details for the policyWaiverRequestId specified.
@@ -13311,6 +13452,37 @@ components:
         threatLevel:
           format: int32
           type: integer
+      type: object
+    ApiBulkComponentRemediationRequestDTO:
+      example:
+        components:
+        - thirdParty: true
+          proprietary: true
+          sha256: sha256
+          displayName: displayName
+          packageUrl: packageUrl
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+          originalPurl: originalPurl
+          hash: hash
+        - thirdParty: true
+          proprietary: true
+          sha256: sha256
+          displayName: displayName
+          packageUrl: packageUrl
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+          originalPurl: originalPurl
+          hash: hash
+      properties:
+        components:
+          items:
+            $ref: "#/components/schemas/ApiComponentDTOV2"
+          type: array
       type: object
     ApiBulkWaiversDTO:
       description: Request to create bulk policy waivers for repository policy violations
@@ -24942,6 +25114,7 @@ components:
         expireWhenRemediationAvailable: true
         policyWaiverRequestId: policyWaiverRequestId
         threatLevel: 0
+        canReview: true
         requesterId: requesterId
         policyName: policyName
         componentUpgradeAvailable: true
@@ -24962,6 +25135,8 @@ components:
       properties:
         associatedPackageUrl:
           type: string
+        canReview:
+          type: boolean
         comment:
           type: string
         componentIdentifier:
@@ -25161,6 +25336,7 @@ components:
           expireWhenRemediationAvailable: true
           policyWaiverRequestId: policyWaiverRequestId
           threatLevel: 0
+          canReview: true
           requesterId: requesterId
           policyName: policyName
           componentUpgradeAvailable: true
@@ -25242,6 +25418,7 @@ components:
           expireWhenRemediationAvailable: true
           policyWaiverRequestId: policyWaiverRequestId
           threatLevel: 0
+          canReview: true
           requesterId: requesterId
           policyName: policyName
           componentUpgradeAvailable: true
@@ -25324,6 +25501,7 @@ components:
           expireWhenRemediationAvailable: true
           policyWaiverRequestId: policyWaiverRequestId
           threatLevel: 0
+          canReview: true
           requesterId: requesterId
           policyName: policyName
           componentUpgradeAvailable: true
@@ -25405,6 +25583,7 @@ components:
           expireWhenRemediationAvailable: true
           policyWaiverRequestId: policyWaiverRequestId
           threatLevel: 0
+          canReview: true
           requesterId: requesterId
           policyName: policyName
           componentUpgradeAvailable: true
@@ -33837,6 +34016,16 @@ components:
           - componentFormat
           - componentName
           - componentCoordinate
+          - componentCoordinateArtifactId
+          - componentCoordinateGroupId
+          - componentCoordinateName
+          - componentCoordinateExtension
+          - componentCoordinateArchitecture
+          - componentCoordinatePlatform
+          - componentCoordinateVersion
+          - componentCoordinateClassifier
+          - componentCoordinateQualifier
+          - componentCoordinatePackageId
           - vulnerabilityId
           - vulnerabilitySeverity
           - vulnerabilityStatus
@@ -33867,6 +34056,19 @@ components:
           - componentEffectiveLicenseName
           - componentLicenseThreatGroupName
           - componentLicenseThreatLevel
+          - allowedContextIds
+          - documentKey
+          - policyWaiverId
+          - policyWaiverPolicyName
+          - policyWaiverPolicyId
+          - policyWaiverReason
+          - policyWaiverComment
+          - policyWaiverCreatedAt
+          - policyWaiverExpiresAt
+          - policyWaiverScopeOwnerId
+          - policyWaiverScopeOwnerType
+          - policyWaiverThreatLevel
+          - policyWaiverWaivedBy
           type: string
         searchResultItemDTOS:
           items:

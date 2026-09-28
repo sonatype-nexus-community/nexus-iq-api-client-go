@@ -77,6 +77,20 @@ func Test_sonatypeiq_ComponentsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ComponentsAPIService GetSuggestedRemediationForComponents", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var ownerId string
+
+		httpRes, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponents(context.Background(), ownerType, ownerId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ComponentsAPIService SetComponentLabel", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

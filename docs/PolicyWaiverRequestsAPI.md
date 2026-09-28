@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**GetPolicyWaiverRequests**](PolicyWaiverRequestsAPI.md#GetPolicyWaiverRequests) | **Get** /api/v2/policyWaiverRequests/{ownerType}/{ownerId} | 
 [**ReviewPolicyWaiverRequest**](PolicyWaiverRequestsAPI.md#ReviewPolicyWaiverRequest) | **Post** /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/review/{policyWaiverRequestId} | 
 [**UpdatePolicyWaiverRequest**](PolicyWaiverRequestsAPI.md#UpdatePolicyWaiverRequest) | **Put** /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/{policyWaiverRequestId} | 
+[**WithdrawPolicyWaiverRequest**](PolicyWaiverRequestsAPI.md#WithdrawPolicyWaiverRequest) | **Delete** /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/{policyWaiverRequestId} | 
 
 
 
@@ -391,6 +392,80 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WithdrawPolicyWaiverRequest
+
+> WithdrawPolicyWaiverRequest(ctx, ownerType, ownerId, policyWaiverRequestId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | The scope of the policy waiver request. Possible values are application, organization, repository, repository_manager, repository_container.
+	ownerId := "ownerId_example" // string | The id for the ownerType provided above. E.g. applicationId if the ownerType is application.
+	policyWaiverRequestId := "policyWaiverRequestId_example" // string | The id of the policy waiver request to be withdrawn.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.PolicyWaiverRequestsAPI.WithdrawPolicyWaiverRequest(context.Background(), ownerType, ownerId, policyWaiverRequestId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PolicyWaiverRequestsAPI.WithdrawPolicyWaiverRequest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | The scope of the policy waiver request. Possible values are application, organization, repository, repository_manager, repository_container. | 
+**ownerId** | **string** | The id for the ownerType provided above. E.g. applicationId if the ownerType is application. | 
+**policyWaiverRequestId** | **string** | The id of the policy waiver request to be withdrawn. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWithdrawPolicyWaiverRequestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

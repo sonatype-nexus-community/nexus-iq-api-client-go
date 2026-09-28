@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssociatedPackageUrl** | Pointer to **string** |  | [optional] 
+**CanReview** | Pointer to **bool** |  | [optional] 
 **Comment** | Pointer to **string** |  | [optional] 
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
 **ComponentName** | Pointer to **string** |  | [optional] 
@@ -80,6 +81,31 @@ SetAssociatedPackageUrl sets AssociatedPackageUrl field to given value.
 `func (o *ApiPolicyWaiverRequestDTO) HasAssociatedPackageUrl() bool`
 
 HasAssociatedPackageUrl returns a boolean if a field has been set.
+
+### GetCanReview
+
+`func (o *ApiPolicyWaiverRequestDTO) GetCanReview() bool`
+
+GetCanReview returns the CanReview field if non-nil, zero value otherwise.
+
+### GetCanReviewOk
+
+`func (o *ApiPolicyWaiverRequestDTO) GetCanReviewOk() (*bool, bool)`
+
+GetCanReviewOk returns a tuple with the CanReview field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanReview
+
+`func (o *ApiPolicyWaiverRequestDTO) SetCanReview(v bool)`
+
+SetCanReview sets CanReview field to given value.
+
+### HasCanReview
+
+`func (o *ApiPolicyWaiverRequestDTO) HasCanReview() bool`
+
+HasCanReview returns a boolean if a field has been set.
 
 ### GetComment
 
