@@ -109,7 +109,7 @@ import (
 
 func main() {
 	ownerType := "ownerType_example" // string | Enter the ownerType for which you want to retrieve role memberships.
-	internalOwnerId := "internalOwnerId_example" // string | Enter the corresponding id for the ownerType specified above. For applications, use the public ID. For organizations, repositories, and repository managers, use the internal ID.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the corresponding id for the ownerType specified above. For applications, use the public ID. For organizations, repositories, repository managers, and repository containers, use the internal ID (REPOSITORY_CONTAINER_ID for repository containers).
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **ownerType** | **string** | Enter the ownerType for which you want to retrieve role memberships. | 
-**internalOwnerId** | **string** | Enter the corresponding id for the ownerType specified above. For applications, use the public ID. For organizations, repositories, and repository managers, use the internal ID. | 
+**internalOwnerId** | **string** | Enter the corresponding id for the ownerType specified above. For applications, use the public ID. For organizations, repositories, repository managers, and repository containers, use the internal ID (REPOSITORY_CONTAINER_ID for repository containers). | 
 
 ### Other Parameters
 
@@ -329,7 +329,7 @@ func main() {
 	roleId := "roleId_example" // string | Enter the roleId for the role to be granted.  Use the Roles REST API for roleIds and descriptions.
 	memberType := "memberType_example" // string | Enter the value for memberType, to specify a user or a user group.
 	memberName := "memberName_example" // string | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above.
-	validateMember := true // bool | If true, attempts to validate if the specified user or group exists before assigning the role. If false or omitted, the request behaves as before (no validation check). (optional) (default to false)
+	validateMember := true // bool | If true, the member is looked up in the configured security realms as the requested memberType before the role is granted, and the request fails if no user (for memberType user) or user group (for memberType group) of that name is found. A group of the requested name does not satisfy a user grant, or vice versa. If false or omitted, the member is not looked up in any security realm before the role is granted. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -365,7 +365,7 @@ Name | Type | Description  | Notes
 
 
 
- **validateMember** | **bool** | If true, attempts to validate if the specified user or group exists before assigning the role. If false or omitted, the request behaves as before (no validation check). | [default to false]
+ **validateMember** | **bool** | If true, the member is looked up in the configured security realms as the requested memberType before the role is granted, and the request fails if no user (for memberType user) or user group (for memberType group) of that name is found. A group of the requested name does not satisfy a user grant, or vice versa. If false or omitted, the member is not looked up in any security realm before the role is granted. | [default to false]
 
 ### Return type
 
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
 
 ## GrantRoleMembershipGlobalOrRepositoryContainer
 
-> GrantRoleMembershipGlobalOrRepositoryContainer(ctx, ownerType, roleId, memberType, memberName).Execute()
+> GrantRoleMembershipGlobalOrRepositoryContainer(ctx, ownerType, roleId, memberType, memberName).ValidateMember(validateMember).Execute()
 
 
 
@@ -410,10 +410,11 @@ func main() {
 	roleId := "roleId_example" // string | Enter the roleId for the role to be granted.  Use the Roles REST API for roleIds and descriptions.
 	memberType := "memberType_example" // string | Enter the value for memberType, to specify a user or a user group.
 	memberName := "memberName_example" // string | Enter the value for memberName. This can be a username or group name depending upon the value of memberType above.
+	validateMember := true // bool | If true, the member is looked up in the configured security realms as the requested memberType before the role is granted, and the request fails if no user (for memberType user) or user group (for memberType group) of that name is found. A group of the requested name does not satisfy a user grant, or vice versa. If false or omitted, the member is not looked up in any security realm before the role is granted. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.RoleMembershipsAPI.GrantRoleMembershipGlobalOrRepositoryContainer(context.Background(), ownerType, roleId, memberType, memberName).Execute()
+	r, err := apiClient.RoleMembershipsAPI.GrantRoleMembershipGlobalOrRepositoryContainer(context.Background(), ownerType, roleId, memberType, memberName).ValidateMember(validateMember).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RoleMembershipsAPI.GrantRoleMembershipGlobalOrRepositoryContainer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -443,6 +444,7 @@ Name | Type | Description  | Notes
 
 
 
+ **validateMember** | **bool** | If true, the member is looked up in the configured security realms as the requested memberType before the role is granted, and the request fails if no user (for memberType user) or user group (for memberType group) of that name is found. A group of the requested name does not satisfy a user grant, or vice versa. If false or omitted, the member is not looked up in any security realm before the role is granted. | [default to false]
 
 ### Return type
 
@@ -714,7 +716,7 @@ import (
 
 func main() {
 	ownerType := "ownerType_example" // string | Enter the ownerType for which you want to set role members.
-	internalOwnerId := "internalOwnerId_example" // string | Enter the id associated with the ownerType specified above. For applications, use the public ID. For organizations, repositories, and repository managers, use the internal ID.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the id associated with the ownerType specified above. For applications, use the public ID. For organizations, repositories, repository managers, and repository containers, use the internal ID (REPOSITORY_CONTAINER_ID for repository containers).
 	roleId := "roleId_example" // string | Enter the roleId for the role whose members should be set.  Use the Roles REST API for roleIds and descriptions.
 	apiMemberWithDetailsDTO := []sonatypeiq.ApiMemberWithDetailsDTO{*sonatypeiq.NewApiMemberWithDetailsDTO()} // []ApiMemberWithDetailsDTO | List of members to assign to this role. Provide an empty list to remove all members.
 
@@ -735,7 +737,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **ownerType** | **string** | Enter the ownerType for which you want to set role members. | 
-**internalOwnerId** | **string** | Enter the id associated with the ownerType specified above. For applications, use the public ID. For organizations, repositories, and repository managers, use the internal ID. | 
+**internalOwnerId** | **string** | Enter the id associated with the ownerType specified above. For applications, use the public ID. For organizations, repositories, repository managers, and repository containers, use the internal ID (REPOSITORY_CONTAINER_ID for repository containers). | 
 **roleId** | **string** | Enter the roleId for the role whose members should be set.  Use the Roles REST API for roleIds and descriptions. | 
 
 ### Other Parameters

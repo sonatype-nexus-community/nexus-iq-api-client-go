@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApplicationReports** | Pointer to [**ApiReportRetentionPoliciesDTO**](ApiReportRetentionPoliciesDTO.md) |  | [optional] 
+**ContainerReports** | Pointer to [**ApiReportRetentionPolicyDTO**](ApiReportRetentionPolicyDTO.md) |  | [optional] 
 **SuccessMetrics** | Pointer to [**ApiSuccessMetricsRetentionPolicyDTO**](ApiSuccessMetricsRetentionPolicyDTO.md) |  | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetApplicationReports sets ApplicationReports field to given value.
 `func (o *ApiDataRetentionPoliciesDTO) HasApplicationReports() bool`
 
 HasApplicationReports returns a boolean if a field has been set.
+
+### GetContainerReports
+
+`func (o *ApiDataRetentionPoliciesDTO) GetContainerReports() ApiReportRetentionPolicyDTO`
+
+GetContainerReports returns the ContainerReports field if non-nil, zero value otherwise.
+
+### GetContainerReportsOk
+
+`func (o *ApiDataRetentionPoliciesDTO) GetContainerReportsOk() (*ApiReportRetentionPolicyDTO, bool)`
+
+GetContainerReportsOk returns a tuple with the ContainerReports field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContainerReports
+
+`func (o *ApiDataRetentionPoliciesDTO) SetContainerReports(v ApiReportRetentionPolicyDTO)`
+
+SetContainerReports sets ContainerReports field to given value.
+
+### HasContainerReports
+
+`func (o *ApiDataRetentionPoliciesDTO) HasContainerReports() bool`
+
+HasContainerReports returns a boolean if a field has been set.
 
 ### GetSuccessMetrics
 

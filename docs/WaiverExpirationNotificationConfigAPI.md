@@ -30,8 +30,8 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | The owner type (organization, repository_manager, or repository_container).
-	ownerId := "ownerId_example" // string | The internal owner ID assigned by IQ Server.
+	ownerType := "ownerType_example" // string | The owner type (organization, repository_manager, repository_container, or application).
+	ownerId := "ownerId_example" // string | The internal owner id (public id is also accepted for applications).
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -51,8 +51,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** | The owner type (organization, repository_manager, or repository_container). | 
-**ownerId** | **string** | The internal owner ID assigned by IQ Server. | 
+**ownerType** | **string** | The owner type (organization, repository_manager, repository_container, or application). | 
+**ownerId** | **string** | The internal owner id (public id is also accepted for applications). | 
 
 ### Other Parameters
 
@@ -103,8 +103,8 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | The owner type (organization, repository_manager, or repository_container).
-	ownerId := "ownerId_example" // string | The internal owner ID assigned by IQ Server.
+	ownerType := "ownerType_example" // string | The owner type (organization, repository_manager, repository_container, or application).
+	ownerId := "ownerId_example" // string | The internal owner id (public id is also accepted for applications).
 	apiWaiverExpirationNotificationConfigDTO := *sonatypeiq.NewApiWaiverExpirationNotificationConfigDTO() // ApiWaiverExpirationNotificationConfigDTO | The notification configuration to save.
 
 	configuration := sonatypeiq.NewConfiguration()
@@ -123,8 +123,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** | The owner type (organization, repository_manager, or repository_container). | 
-**ownerId** | **string** | The internal owner ID assigned by IQ Server. | 
+**ownerType** | **string** | The owner type (organization, repository_manager, repository_container, or application). | 
+**ownerId** | **string** | The internal owner id (public id is also accepted for applications). | 
 
 ### Other Parameters
 

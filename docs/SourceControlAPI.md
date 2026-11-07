@@ -14,6 +14,8 @@ Method | HTTP request | Description
 [**GetRelayWebhookSecret**](SourceControlAPI.md#GetRelayWebhookSecret) | **Get** /api/v2/sourceControl/relayWebhookSecret | 
 [**GetRelayWebhookUrl**](SourceControlAPI.md#GetRelayWebhookUrl) | **Get** /api/v2/sourceControl/relayWebhookUrl | 
 [**GetSourceControl1**](SourceControlAPI.md#GetSourceControl1) | **Get** /api/v2/sourceControl/{ownerType}/{internalOwnerId} | 
+[**GetSourceControlReadiness**](SourceControlAPI.md#GetSourceControlReadiness) | **Get** /api/v2/sourceControl/{ownerType}/{internalOwnerId}/readiness | 
+[**GetSourceControlReadinessForOrganization**](SourceControlAPI.md#GetSourceControlReadinessForOrganization) | **Get** /api/v2/sourceControl/readiness | 
 [**GetUserMappingsByOwner**](SourceControlAPI.md#GetUserMappingsByOwner) | **Get** /api/v2/sourceControl/automaticRoleAssignment/userMappings/{ownerType}/{internalOwnerId} | 
 [**RegisterWithRelay**](SourceControlAPI.md#RegisterWithRelay) | **Post** /api/v2/sourceControl/relay/register | 
 [**RotateRelayApiKey**](SourceControlAPI.md#RotateRelayApiKey) | **Post** /api/v2/sourceControl/relay/rotate-key | 
@@ -681,6 +683,147 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSourceControlReadiness
+
+> ApiSourceControlReadinessDTO GetSourceControlReadiness(ctx, ownerType, internalOwnerId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	ownerType := "ownerType_example" // string | Enter the value for ownerType. Readiness applies to applications.
+	internalOwnerId := "internalOwnerId_example" // string | Enter the internal ownerId of the application.
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SourceControlAPI.GetSourceControlReadiness(context.Background(), ownerType, internalOwnerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.GetSourceControlReadiness``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSourceControlReadiness`: ApiSourceControlReadinessDTO
+	fmt.Fprintf(os.Stdout, "Response from `SourceControlAPI.GetSourceControlReadiness`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**ownerType** | **string** | Enter the value for ownerType. Readiness applies to applications. | 
+**internalOwnerId** | **string** | Enter the internal ownerId of the application. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSourceControlReadinessRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ApiSourceControlReadinessDTO**](ApiSourceControlReadinessDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSourceControlReadinessForOrganization
+
+> GetSourceControlReadinessForOrganization(ctx).OrganizationId(organizationId).Page(page).PageSize(pageSize).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	organizationId := "organizationId_example" // string | Enter the internal id of the organization.
+	page := int32(56) // int32 | Page number, starting at 1. (optional) (default to 1)
+	pageSize := int32(56) // int32 | Results per page. Defaults to 100, maximum 500. (optional) (default to 100)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	r, err := apiClient.SourceControlAPI.GetSourceControlReadinessForOrganization(context.Background()).OrganizationId(organizationId).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SourceControlAPI.GetSourceControlReadinessForOrganization``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSourceControlReadinessForOrganizationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **organizationId** | **string** | Enter the internal id of the organization. | 
+ **page** | **int32** | Page number, starting at 1. | [default to 1]
+ **pageSize** | **int32** | Results per page. Defaults to 100, maximum 500. | [default to 100]
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -286,7 +286,7 @@ import (
 
 func main() {
 	username := "username_example" // string | Enter the username.
-	realm := "realm_example" // string | Enter the realmId. Possible values are `Internal`, `SAML` , `OAUTH2` , and `Crowd`. (optional) (default to "Internal")
+	realm := "realm_example" // string | Enter the realmId. Possible values are `Internal`, `SAML` , `OAUTH2` , `Crowd`, or the id or name of a configured LDAP server. An unrecognized value returns `400 Bad Request`. (optional) (default to "Internal")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -316,7 +316,7 @@ Other parameters are passed through a pointer to a apiGetUserTokenByUsernameAndR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **realm** | **string** | Enter the realmId. Possible values are &#x60;Internal&#x60;, &#x60;SAML&#x60; , &#x60;OAUTH2&#x60; , and &#x60;Crowd&#x60;. | [default to &quot;Internal&quot;]
+ **realm** | **string** | Enter the realmId. Possible values are &#x60;Internal&#x60;, &#x60;SAML&#x60; , &#x60;OAUTH2&#x60; , &#x60;Crowd&#x60;, or the id or name of a configured LDAP server. An unrecognized value returns &#x60;400 Bad Request&#x60;. | [default to &quot;Internal&quot;]
 
 ### Return type
 
@@ -420,7 +420,7 @@ import (
 func main() {
 	createdAfter := "createdAfter_example" // string | Enter the start date for the date range in `yyyy-mm-dd` format. (optional)
 	createdBefore := "createdBefore_example" // string | Enter the end date for the date range in `yyyy-mm-dd` format. (optional)
-	realm := "realm_example" // string | Enter the `realmId`. Possible values are `Internal`, `SAML` , `OAUTH2`, and `Crowd`. (optional) (default to "Internal")
+	realm := "realm_example" // string | Enter the `realmId`. Possible values are `Internal`, `SAML` , `OAUTH2`, `Crowd`, or the id or name of a configured LDAP server. An unrecognized value returns `400 Bad Request`. (optional) (default to "Internal")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -447,7 +447,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **createdAfter** | **string** | Enter the start date for the date range in &#x60;yyyy-mm-dd&#x60; format. | 
  **createdBefore** | **string** | Enter the end date for the date range in &#x60;yyyy-mm-dd&#x60; format. | 
- **realm** | **string** | Enter the &#x60;realmId&#x60;. Possible values are &#x60;Internal&#x60;, &#x60;SAML&#x60; , &#x60;OAUTH2&#x60;, and &#x60;Crowd&#x60;. | [default to &quot;Internal&quot;]
+ **realm** | **string** | Enter the &#x60;realmId&#x60;. Possible values are &#x60;Internal&#x60;, &#x60;SAML&#x60; , &#x60;OAUTH2&#x60;, &#x60;Crowd&#x60;, or the id or name of a configured LDAP server. An unrecognized value returns &#x60;400 Bad Request&#x60;. | [default to &quot;Internal&quot;]
 
 ### Return type
 

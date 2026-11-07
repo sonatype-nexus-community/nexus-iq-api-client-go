@@ -150,6 +150,32 @@ func Test_sonatypeiq_SourceControlAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test SourceControlAPIService GetSourceControlReadiness", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var ownerType string
+		var internalOwnerId string
+
+		resp, httpRes, err := apiClient.SourceControlAPI.GetSourceControlReadiness(context.Background(), ownerType, internalOwnerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test SourceControlAPIService GetSourceControlReadinessForOrganization", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.SourceControlAPI.GetSourceControlReadinessForOrganization(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SourceControlAPIService GetUserMappingsByOwner", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

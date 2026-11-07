@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IsMulti** | Pointer to **bool** |  | [optional] 
 **LicenseId** | Pointer to **string** |  | [optional] 
+**LicenseLongName** | Pointer to **string** |  | [optional] 
 **LicenseName** | Pointer to **string** |  | [optional] 
 **LicenseText** | Pointer to **string** |  | [optional] 
 **Obligations** | Pointer to [**[]LicenseObligationDTO**](LicenseObligationDTO.md) |  | [optional] 
@@ -80,6 +81,31 @@ SetLicenseId sets LicenseId field to given value.
 `func (o *ApiLicenseLegalMetadataDTO) HasLicenseId() bool`
 
 HasLicenseId returns a boolean if a field has been set.
+
+### GetLicenseLongName
+
+`func (o *ApiLicenseLegalMetadataDTO) GetLicenseLongName() string`
+
+GetLicenseLongName returns the LicenseLongName field if non-nil, zero value otherwise.
+
+### GetLicenseLongNameOk
+
+`func (o *ApiLicenseLegalMetadataDTO) GetLicenseLongNameOk() (*string, bool)`
+
+GetLicenseLongNameOk returns a tuple with the LicenseLongName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicenseLongName
+
+`func (o *ApiLicenseLegalMetadataDTO) SetLicenseLongName(v string)`
+
+SetLicenseLongName sets LicenseLongName field to given value.
+
+### HasLicenseLongName
+
+`func (o *ApiLicenseLegalMetadataDTO) HasLicenseLongName() bool`
+
+HasLicenseLongName returns a boolean if a field has been set.
 
 ### GetLicenseName
 

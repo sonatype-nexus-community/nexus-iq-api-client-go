@@ -84,9 +84,10 @@ func Test_sonatypeiq_ComponentsAPIService(t *testing.T) {
 		var ownerType string
 		var ownerId string
 
-		httpRes, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponents(context.Background(), ownerType, ownerId).Execute()
+		resp, httpRes, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponents(context.Background(), ownerType, ownerId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

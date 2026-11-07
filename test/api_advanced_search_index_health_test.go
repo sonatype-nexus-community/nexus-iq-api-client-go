@@ -46,11 +46,35 @@ func Test_sonatypeiq_AdvancedSearchIndexHealthAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AdvancedSearchIndexHealthAPIService CompleteUnlock", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.CompleteUnlock(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AdvancedSearchIndexHealthAPIService GetActiveJob", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.GetActiveJob(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AdvancedSearchIndexHealthAPIService GetGenerations", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.GetGenerations(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -86,11 +110,73 @@ func Test_sonatypeiq_AdvancedSearchIndexHealthAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AdvancedSearchIndexHealthAPIService GetJobHistory", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.GetJobHistory(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AdvancedSearchIndexHealthAPIService MarkUnlockReadyToTest", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.MarkUnlockReadyToTest(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AdvancedSearchIndexHealthAPIService RevertGeneration", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var generationId string
+
+		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.RevertGeneration(context.Background(), generationId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AdvancedSearchIndexHealthAPIService RunAnalyze", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.RunAnalyze(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AdvancedSearchIndexHealthAPIService StartJob", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.StartJob(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AdvancedSearchIndexHealthAPIService StartUnlockIndexing", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AdvancedSearchIndexHealthAPI.StartUnlockIndexing(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

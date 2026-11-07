@@ -49,6 +49,9 @@ Name | Type | Description | Notes
 **PolicyViolationWaiverStatus** | Pointer to **string** |  | [optional] 
 **PolicyWaiverAuto** | Pointer to **bool** |  | [optional] 
 **PolicyWaiverComment** | Pointer to **string** |  | [optional] 
+**PolicyWaiverComponentMatchStrategy** | Pointer to **string** |  | [optional] 
+**PolicyWaiverComponentName** | Pointer to **string** |  | [optional] 
+**PolicyWaiverComponentVersion** | Pointer to **string** |  | [optional] 
 **PolicyWaiverCreatedAt** | Pointer to **string** |  | [optional] 
 **PolicyWaiverExpiresAt** | Pointer to **string** |  | [optional] 
 **PolicyWaiverExpiryStatus** | Pointer to **string** |  | [optional] 
@@ -1220,6 +1223,81 @@ SetPolicyWaiverComment sets PolicyWaiverComment field to given value.
 `func (o *SearchResultItemDTO) HasPolicyWaiverComment() bool`
 
 HasPolicyWaiverComment returns a boolean if a field has been set.
+
+### GetPolicyWaiverComponentMatchStrategy
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverComponentMatchStrategy() string`
+
+GetPolicyWaiverComponentMatchStrategy returns the PolicyWaiverComponentMatchStrategy field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverComponentMatchStrategyOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverComponentMatchStrategyOk() (*string, bool)`
+
+GetPolicyWaiverComponentMatchStrategyOk returns a tuple with the PolicyWaiverComponentMatchStrategy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverComponentMatchStrategy
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverComponentMatchStrategy(v string)`
+
+SetPolicyWaiverComponentMatchStrategy sets PolicyWaiverComponentMatchStrategy field to given value.
+
+### HasPolicyWaiverComponentMatchStrategy
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverComponentMatchStrategy() bool`
+
+HasPolicyWaiverComponentMatchStrategy returns a boolean if a field has been set.
+
+### GetPolicyWaiverComponentName
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverComponentName() string`
+
+GetPolicyWaiverComponentName returns the PolicyWaiverComponentName field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverComponentNameOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverComponentNameOk() (*string, bool)`
+
+GetPolicyWaiverComponentNameOk returns a tuple with the PolicyWaiverComponentName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverComponentName
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverComponentName(v string)`
+
+SetPolicyWaiverComponentName sets PolicyWaiverComponentName field to given value.
+
+### HasPolicyWaiverComponentName
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverComponentName() bool`
+
+HasPolicyWaiverComponentName returns a boolean if a field has been set.
+
+### GetPolicyWaiverComponentVersion
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverComponentVersion() string`
+
+GetPolicyWaiverComponentVersion returns the PolicyWaiverComponentVersion field if non-nil, zero value otherwise.
+
+### GetPolicyWaiverComponentVersionOk
+
+`func (o *SearchResultItemDTO) GetPolicyWaiverComponentVersionOk() (*string, bool)`
+
+GetPolicyWaiverComponentVersionOk returns a tuple with the PolicyWaiverComponentVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyWaiverComponentVersion
+
+`func (o *SearchResultItemDTO) SetPolicyWaiverComponentVersion(v string)`
+
+SetPolicyWaiverComponentVersion sets PolicyWaiverComponentVersion field to given value.
+
+### HasPolicyWaiverComponentVersion
+
+`func (o *SearchResultItemDTO) HasPolicyWaiverComponentVersion() bool`
+
+HasPolicyWaiverComponentVersion returns a boolean if a field has been set.
 
 ### GetPolicyWaiverCreatedAt
 

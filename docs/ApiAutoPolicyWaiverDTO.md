@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **OwnerName** | Pointer to **string** |  | [optional] 
 **OwnerType** | Pointer to **string** |  | [optional] 
 **PathForward** | Pointer to **bool** |  | [optional] 
+**PathForwardMode** | Pointer to **string** |  | [optional] 
 **PublicId** | Pointer to **string** |  | [optional] 
 **Reachability** | Pointer to **bool** |  | [optional] 
 **ScopesOperatorAny** | Pointer to **bool** |  | [optional] 
@@ -235,6 +236,31 @@ SetPathForward sets PathForward field to given value.
 `func (o *ApiAutoPolicyWaiverDTO) HasPathForward() bool`
 
 HasPathForward returns a boolean if a field has been set.
+
+### GetPathForwardMode
+
+`func (o *ApiAutoPolicyWaiverDTO) GetPathForwardMode() string`
+
+GetPathForwardMode returns the PathForwardMode field if non-nil, zero value otherwise.
+
+### GetPathForwardModeOk
+
+`func (o *ApiAutoPolicyWaiverDTO) GetPathForwardModeOk() (*string, bool)`
+
+GetPathForwardModeOk returns a tuple with the PathForwardMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPathForwardMode
+
+`func (o *ApiAutoPolicyWaiverDTO) SetPathForwardMode(v string)`
+
+SetPathForwardMode sets PathForwardMode field to given value.
+
+### HasPathForwardMode
+
+`func (o *ApiAutoPolicyWaiverDTO) HasPathForwardMode() bool`
+
+HasPathForwardMode returns a boolean if a field has been set.
 
 ### GetPublicId
 

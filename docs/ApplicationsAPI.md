@@ -314,7 +314,7 @@ import (
 )
 
 func main() {
-	publicId := []string{"Inner_example"} // []string | Enter the applicationId. (optional)
+	publicId := []string{"Inner_example"} // []string | Enter the publicId. (optional)
 	includeCategories := true // bool | Set this parameter to `true` to obtain the application tags (application categories) in the response. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
@@ -340,7 +340,7 @@ Other parameters are passed through a pointer to a apiGetApplicationsRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **publicId** | **[]string** | Enter the applicationId. | 
+ **publicId** | **[]string** | Enter the publicId. | 
  **includeCategories** | **bool** | Set this parameter to &#x60;true&#x60; to obtain the application tags (application categories) in the response. | [default to false]
 
 ### Return type

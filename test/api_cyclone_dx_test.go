@@ -30,9 +30,26 @@ func Test_sonatypeiq_CycloneDXAPIService(t *testing.T) {
 		var reportId string
 		var cdxVersion string
 
-		httpRes, err := apiClient.CycloneDXAPI.GetByReportId(context.Background(), applicationId, reportId, cdxVersion).Execute()
+		resp, httpRes, err := apiClient.CycloneDXAPI.GetByReportId(context.Background(), applicationId, reportId, cdxVersion).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CycloneDXAPIService GetByReportIdWithVersion", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var hrcId string
+		var reportId string
+		var cdxVersion string
+
+		resp, httpRes, err := apiClient.CycloneDXAPI.GetByReportIdWithVersion(context.Background(), hrcId, reportId, cdxVersion).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -45,9 +62,26 @@ func Test_sonatypeiq_CycloneDXAPIService(t *testing.T) {
 		var stageId string
 		var cdxVersion string
 
-		httpRes, err := apiClient.CycloneDXAPI.GetLatest(context.Background(), applicationId, stageId, cdxVersion).Execute()
+		resp, httpRes, err := apiClient.CycloneDXAPI.GetLatest(context.Background(), applicationId, stageId, cdxVersion).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CycloneDXAPIService GetLatestWithVersion", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var hrcId string
+		var stageId string
+		var cdxVersion string
+
+		resp, httpRes, err := apiClient.CycloneDXAPI.GetLatestWithVersion(context.Background(), hrcId, stageId, cdxVersion).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

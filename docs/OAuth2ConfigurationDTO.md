@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EmailClaim** | Pointer to **string** |  | [optional] 
 **ExactMatchClaimsJson** | Pointer to **string** |  | [optional] 
+**ExpectedAudience** | Pointer to **string** |  | [optional] 
 **FirstNameClaim** | Pointer to **string** |  | [optional] 
 **GroupsClaim** | Pointer to **string** |  | [optional] 
 **IdpIssuer** | Pointer to **string** |  | [optional] 
@@ -83,6 +84,31 @@ SetExactMatchClaimsJson sets ExactMatchClaimsJson field to given value.
 `func (o *OAuth2ConfigurationDTO) HasExactMatchClaimsJson() bool`
 
 HasExactMatchClaimsJson returns a boolean if a field has been set.
+
+### GetExpectedAudience
+
+`func (o *OAuth2ConfigurationDTO) GetExpectedAudience() string`
+
+GetExpectedAudience returns the ExpectedAudience field if non-nil, zero value otherwise.
+
+### GetExpectedAudienceOk
+
+`func (o *OAuth2ConfigurationDTO) GetExpectedAudienceOk() (*string, bool)`
+
+GetExpectedAudienceOk returns a tuple with the ExpectedAudience field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpectedAudience
+
+`func (o *OAuth2ConfigurationDTO) SetExpectedAudience(v string)`
+
+SetExpectedAudience sets ExpectedAudience field to given value.
+
+### HasExpectedAudience
+
+`func (o *OAuth2ConfigurationDTO) HasExpectedAudience() bool`
+
+HasExpectedAudience returns a boolean if a field has been set.
 
 ### GetFirstNameClaim
 

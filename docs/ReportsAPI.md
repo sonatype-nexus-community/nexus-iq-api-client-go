@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**GetComponentsInQuarantine**](ReportsAPI.md#GetComponentsInQuarantine) | **Get** /api/v2/reports/components/quarantined | 
 [**GetComponentsWithWaivers**](ReportsAPI.md#GetComponentsWithWaivers) | **Get** /api/v2/reports/components/waivers | 
 [**GetMetrics**](ReportsAPI.md#GetMetrics) | **Post** /api/v2/reports/metrics | 
+[**GetReportHistory**](ReportsAPI.md#GetReportHistory) | **Get** /api/v2/reports/hostedRepositoryComponent/{hrcId}/history | 
 [**GetReportHistoryForApplication**](ReportsAPI.md#GetReportHistoryForApplication) | **Get** /api/v2/reports/applications/{applicationId}/history | 
 [**GetStaleWaivers**](ReportsAPI.md#GetStaleWaivers) | **Get** /api/v2/reports/waivers/stale | 
 
@@ -332,6 +333,80 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/json, text/csv
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetReportHistory
+
+> ApiReportHistoryDTO GetReportHistory(ctx, hrcId).Stage(stage).Limit(limit).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	hrcId := "hrcId_example" // string | 
+	stage := "stage_example" // string |  (optional)
+	limit := int32(56) // int32 |  (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GetReportHistory(context.Background(), hrcId).Stage(stage).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GetReportHistory``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetReportHistory`: ApiReportHistoryDTO
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GetReportHistory`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**hrcId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetReportHistoryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **stage** | **string** |  | 
+ **limit** | **int32** |  | 
+
+### Return type
+
+[**ApiReportHistoryDTO**](ApiReportHistoryDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

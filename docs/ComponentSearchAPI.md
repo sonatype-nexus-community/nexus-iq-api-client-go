@@ -169,7 +169,7 @@ import (
 func main() {
 	stageId := "stageId_example" // string | Specify the evaluation report stage.
 	hash := "hash_example" // string | Enter the component hash. (optional)
-	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier | Specify the componentIdentifier object containing the format and coordinates. (optional)
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier | Enter the component format and coordinates as JSON. (optional)
 	packageUrl := "packageUrl_example" // string | Enter the packageUrl. (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
@@ -197,7 +197,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **stageId** | **string** | Specify the evaluation report stage. | 
  **hash** | **string** | Enter the component hash. | 
- **componentIdentifier** | [**ComponentIdentifier**](ComponentIdentifier.md) | Specify the componentIdentifier object containing the format and coordinates. | 
+ **componentIdentifier** | [**ComponentIdentifier**](ComponentIdentifier.md) | Enter the component format and coordinates as JSON. | 
  **packageUrl** | **string** | Enter the packageUrl. | 
 
 ### Return type

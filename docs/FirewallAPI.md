@@ -1397,7 +1397,7 @@ Other parameters are passed through a pointer to a apiGetQuarantinedComponentVie
 
 ## GetRepositoryContainer
 
-> ApiRepositoryContainerDTO GetRepositoryContainer(ctx).Execute()
+> ApiRepositoryContainerDTO GetRepositoryContainer(ctx).RepositoryContainerId(repositoryContainerId).Execute()
 
 
 
@@ -1416,10 +1416,11 @@ import (
 )
 
 func main() {
+	repositoryContainerId := "repositoryContainerId_example" // string | Enter the repository container ID (REPOSITORY_CONTAINER_ID for repository containers). Defaults to REPOSITORY_CONTAINER_ID when omitted. (optional) (default to "REPOSITORY_CONTAINER_ID")
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirewallAPI.GetRepositoryContainer(context.Background()).Execute()
+	resp, r, err := apiClient.FirewallAPI.GetRepositoryContainer(context.Background()).RepositoryContainerId(repositoryContainerId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetRepositoryContainer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1431,12 +1432,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetRepositoryContainerRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **repositoryContainerId** | **string** | Enter the repository container ID (REPOSITORY_CONTAINER_ID for repository containers). Defaults to REPOSITORY_CONTAINER_ID when omitted. | [default to &quot;REPOSITORY_CONTAINER_ID&quot;]
 
 ### Return type
 

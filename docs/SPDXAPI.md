@@ -4,9 +4,90 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**GetByScanId**](SPDXAPI.md#GetByScanId) | **Get** /api/v2/spdx/hostedRepositoryComponent/{hrcId}/reports/{scanId} | 
 [**GetByScanId1**](SPDXAPI.md#GetByScanId1) | **Get** /api/v2/spdx/{applicationId}/reports/{scanId} | 
+[**GetLatestForStage**](SPDXAPI.md#GetLatestForStage) | **Get** /api/v2/spdx/hostedRepositoryComponent/{hrcId}/stages/{stageId} | 
 [**GetLatestForStage1**](SPDXAPI.md#GetLatestForStage1) | **Get** /api/v2/spdx/{applicationId}/stages/{stageId} | 
 
+
+
+## GetByScanId
+
+> string GetByScanId(ctx, hrcId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	hrcId := "hrcId_example" // string | Enter the hosted repository component ID (UUID) you want to generate the SBOM(s) for.
+	scanId := "scanId_example" // string | Enter the scanId of the hosted repository component scan.
+	format := "format_example" // string | Enter the format for the SBOM(s) to be generated. (optional) (default to "json")
+	generateCycloneDx := true // bool | Set to `true` to generate an equivalent CycloneDx SBOM. Both SBOMs will be combined as a tar.gz archive. (optional) (default to false)
+	spdxVersion := "spdxVersion_example" // string | Enter the desired SPDX version, possible values are 2.2|2.3|3.0 (3.0 only supports JSON format) (optional) (default to "2.3")
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SPDXAPI.GetByScanId(context.Background(), hrcId, scanId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SPDXAPI.GetByScanId``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetByScanId`: string
+	fmt.Fprintf(os.Stdout, "Response from `SPDXAPI.GetByScanId`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**hrcId** | **string** | Enter the hosted repository component ID (UUID) you want to generate the SBOM(s) for. | 
+**scanId** | **string** | Enter the scanId of the hosted repository component scan. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetByScanIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **format** | **string** | Enter the format for the SBOM(s) to be generated. | [default to &quot;json&quot;]
+ **generateCycloneDx** | **bool** | Set to &#x60;true&#x60; to generate an equivalent CycloneDx SBOM. Both SBOMs will be combined as a tar.gz archive. | [default to false]
+ **spdxVersion** | **string** | Enter the desired SPDX version, possible values are 2.2|2.3|3.0 (3.0 only supports JSON format) | [default to &quot;2.3&quot;]
+
+### Return type
+
+**string**
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/octet-stream, application/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetByScanId1
@@ -60,6 +141,85 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetByScanId1Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **format** | **string** | Enter the format for the SBOM(s) to be generated. | [default to &quot;json&quot;]
+ **generateCycloneDx** | **bool** | Set to &#x60;true&#x60; to generate an equivalent CycloneDx SBOM. Both SBOMs will be combined as a tar.gz archive. | [default to false]
+ **spdxVersion** | **string** | Enter the desired SPDX version, possible values are 2.2|2.3|3.0 (3.0 only supports JSON format) | [default to &quot;2.3&quot;]
+
+### Return type
+
+**string**
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/octet-stream, application/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetLatestForStage
+
+> string GetLatestForStage(ctx, hrcId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	hrcId := "hrcId_example" // string | Enter the hosted repository component ID (UUID) you want to generate the SBOM(s) for.
+	stageId := "stageId_example" // string | Specify the stageId for the hosted repository component evaluation.
+	format := "format_example" // string | Enter the format for the SBOM(s) to be generated. (optional) (default to "json")
+	generateCycloneDx := true // bool | Set to `true` to generate an equivalent CycloneDx SBOM. Both SBOMs will be combined as a tar.gz archive. (optional) (default to false)
+	spdxVersion := "spdxVersion_example" // string | Enter the desired SPDX version, possible values are 2.2|2.3|3.0 (3.0 only supports JSON format) (optional) (default to "2.3")
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.SPDXAPI.GetLatestForStage(context.Background(), hrcId, stageId).Format(format).GenerateCycloneDx(generateCycloneDx).SpdxVersion(spdxVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SPDXAPI.GetLatestForStage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLatestForStage`: string
+	fmt.Fprintf(os.Stdout, "Response from `SPDXAPI.GetLatestForStage`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**hrcId** | **string** | Enter the hosted repository component ID (UUID) you want to generate the SBOM(s) for. | 
+**stageId** | **string** | Specify the stageId for the hosted repository component evaluation. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetLatestForStageRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

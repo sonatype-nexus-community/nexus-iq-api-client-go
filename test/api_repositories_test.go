@@ -22,6 +22,37 @@ func Test_sonatypeiq_RepositoriesAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test RepositoriesAPIService GetComponent", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var repositoryManagerId string
+		var repositoryId string
+		var componentId string
+
+		resp, httpRes, err := apiClient.RepositoriesAPI.GetComponent(context.Background(), repositoryManagerId, repositoryId, componentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RepositoriesAPIService GetComponents", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var repositoryManagerId string
+		var repositoryId string
+
+		resp, httpRes, err := apiClient.RepositoriesAPI.GetComponents(context.Background(), repositoryManagerId, repositoryId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test RepositoriesAPIService GetQuarantinedByPath", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -30,6 +61,37 @@ func Test_sonatypeiq_RepositoriesAPIService(t *testing.T) {
 		var repositoryPublicId string
 
 		resp, httpRes, err := apiClient.RepositoriesAPI.GetQuarantinedByPath(context.Background(), repositoryManagerInstanceId, repositoryPublicId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RepositoriesAPIService GetQueueStats", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var repositoryManagerId string
+		var repositoryId string
+
+		resp, httpRes, err := apiClient.RepositoriesAPI.GetQueueStats(context.Background(), repositoryManagerId, repositoryId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RepositoriesAPIService GetViolations", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var repositoryManagerId string
+		var repositoryId string
+		var componentId string
+
+		resp, httpRes, err := apiClient.RepositoriesAPI.GetViolations(context.Background(), repositoryManagerId, repositoryId, componentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

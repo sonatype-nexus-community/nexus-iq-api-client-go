@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssociatedPackageUrl** | Pointer to **string** |  | [optional] 
+**CanDelete** | Pointer to **bool** |  | [optional] 
 **CanReview** | Pointer to **bool** |  | [optional] 
 **Comment** | Pointer to **string** |  | [optional] 
 **ComponentIdentifier** | Pointer to [**ApiComponentIdentifierDTOV2**](ApiComponentIdentifierDTOV2.md) |  | [optional] 
@@ -12,6 +13,7 @@ Name | Type | Description | Notes
 **ComponentUpgradeAvailable** | Pointer to **bool** |  | [optional] 
 **ConstraintFacts** | Pointer to [**[]ConstraintFact**](ConstraintFact.md) |  | [optional] 
 **ConstraintFactsJson** | Pointer to **string** |  | [optional] 
+**ContainerImageId** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to [**ComponentDisplayName**](ComponentDisplayName.md) |  | [optional] 
 **ExpireWhenRemediationAvailable** | Pointer to **bool** |  | [optional] 
 **ExpiryTime** | Pointer to **time.Time** |  | [optional] 
@@ -81,6 +83,31 @@ SetAssociatedPackageUrl sets AssociatedPackageUrl field to given value.
 `func (o *ApiPolicyWaiverRequestDTO) HasAssociatedPackageUrl() bool`
 
 HasAssociatedPackageUrl returns a boolean if a field has been set.
+
+### GetCanDelete
+
+`func (o *ApiPolicyWaiverRequestDTO) GetCanDelete() bool`
+
+GetCanDelete returns the CanDelete field if non-nil, zero value otherwise.
+
+### GetCanDeleteOk
+
+`func (o *ApiPolicyWaiverRequestDTO) GetCanDeleteOk() (*bool, bool)`
+
+GetCanDeleteOk returns a tuple with the CanDelete field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanDelete
+
+`func (o *ApiPolicyWaiverRequestDTO) SetCanDelete(v bool)`
+
+SetCanDelete sets CanDelete field to given value.
+
+### HasCanDelete
+
+`func (o *ApiPolicyWaiverRequestDTO) HasCanDelete() bool`
+
+HasCanDelete returns a boolean if a field has been set.
 
 ### GetCanReview
 
@@ -256,6 +283,31 @@ SetConstraintFactsJson sets ConstraintFactsJson field to given value.
 `func (o *ApiPolicyWaiverRequestDTO) HasConstraintFactsJson() bool`
 
 HasConstraintFactsJson returns a boolean if a field has been set.
+
+### GetContainerImageId
+
+`func (o *ApiPolicyWaiverRequestDTO) GetContainerImageId() string`
+
+GetContainerImageId returns the ContainerImageId field if non-nil, zero value otherwise.
+
+### GetContainerImageIdOk
+
+`func (o *ApiPolicyWaiverRequestDTO) GetContainerImageIdOk() (*string, bool)`
+
+GetContainerImageIdOk returns a tuple with the ContainerImageId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContainerImageId
+
+`func (o *ApiPolicyWaiverRequestDTO) SetContainerImageId(v string)`
+
+SetContainerImageId sets ContainerImageId field to given value.
+
+### HasContainerImageId
+
+`func (o *ApiPolicyWaiverRequestDTO) HasContainerImageId() bool`
+
+HasContainerImageId returns a boolean if a field has been set.
 
 ### GetDisplayName
 

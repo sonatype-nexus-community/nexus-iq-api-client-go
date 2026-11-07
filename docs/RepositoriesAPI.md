@@ -4,10 +4,165 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**GetComponent**](RepositoriesAPI.md#GetComponent) | **Get** /api/v2/repositories/{repositoryManagerId}/{repositoryId}/components/{componentId} | 
+[**GetComponents**](RepositoriesAPI.md#GetComponents) | **Get** /api/v2/repositories/{repositoryManagerId}/{repositoryId}/components | 
 [**GetQuarantinedByPath**](RepositoriesAPI.md#GetQuarantinedByPath) | **Post** /api/v2/repositories/{repositoryManagerInstanceId}/{repositoryPublicId}/components/quarantined/pathnames | 
+[**GetQueueStats**](RepositoriesAPI.md#GetQueueStats) | **Get** /api/v2/repositories/{repositoryManagerId}/{repositoryId}/queue/stats | 
+[**GetViolations**](RepositoriesAPI.md#GetViolations) | **Get** /api/v2/repositories/{repositoryManagerId}/{repositoryId}/components/{componentId}/violations | 
 [**ReleaseQuarantineWithoutReEval**](RepositoriesAPI.md#ReleaseQuarantineWithoutReEval) | **Post** /api/v2/repositories/quarantine/{quarantineId}/release | 
 [**UploadScan**](RepositoriesAPI.md#UploadScan) | **Post** /api/v2/repositories/{repositoryManagerId}/{repositoryId}/components | 
 
+
+
+## GetComponent
+
+> ApiHostedRepositoryComponentDTO GetComponent(ctx, repositoryManagerId, repositoryId, componentId).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	repositoryManagerId := "repositoryManagerId_example" // string | 
+	repositoryId := "repositoryId_example" // string | 
+	componentId := "componentId_example" // string | 
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.RepositoriesAPI.GetComponent(context.Background(), repositoryManagerId, repositoryId, componentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.GetComponent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetComponent`: ApiHostedRepositoryComponentDTO
+	fmt.Fprintf(os.Stdout, "Response from `RepositoriesAPI.GetComponent`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**repositoryManagerId** | **string** |  | 
+**repositoryId** | **string** |  | 
+**componentId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetComponentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**ApiHostedRepositoryComponentDTO**](ApiHostedRepositoryComponentDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetComponents
+
+> ApiHostedRepositoryComponentListDTO GetComponents(ctx, repositoryManagerId, repositoryId).Page(page).PageSize(pageSize).Filter(filter).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	repositoryManagerId := "repositoryManagerId_example" // string | 
+	repositoryId := "repositoryId_example" // string | 
+	page := int32(56) // int32 |  (optional) (default to 1)
+	pageSize := int32(56) // int32 |  (optional) (default to 25)
+	filter := "filter_example" // string |  (optional)
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.RepositoriesAPI.GetComponents(context.Background(), repositoryManagerId, repositoryId).Page(page).PageSize(pageSize).Filter(filter).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.GetComponents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetComponents`: ApiHostedRepositoryComponentListDTO
+	fmt.Fprintf(os.Stdout, "Response from `RepositoriesAPI.GetComponents`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**repositoryManagerId** | **string** |  | 
+**repositoryId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetComponentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int32** |  | [default to 1]
+ **pageSize** | **int32** |  | [default to 25]
+ **filter** | **string** |  | 
+
+### Return type
+
+[**ApiHostedRepositoryComponentListDTO**](ApiHostedRepositoryComponentListDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetQuarantinedByPath
@@ -78,6 +233,151 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetQueueStats
+
+> ApiQueueStatsDTO GetQueueStats(ctx, repositoryManagerId, repositoryId).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	repositoryManagerId := "repositoryManagerId_example" // string | 
+	repositoryId := "repositoryId_example" // string | 
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.RepositoriesAPI.GetQueueStats(context.Background(), repositoryManagerId, repositoryId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.GetQueueStats``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetQueueStats`: ApiQueueStatsDTO
+	fmt.Fprintf(os.Stdout, "Response from `RepositoriesAPI.GetQueueStats`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**repositoryManagerId** | **string** |  | 
+**repositoryId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetQueueStatsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ApiQueueStatsDTO**](ApiQueueStatsDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetViolations
+
+> ApiComponentViolationListDTO GetViolations(ctx, repositoryManagerId, repositoryId, componentId).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+	repositoryManagerId := "repositoryManagerId_example" // string | 
+	repositoryId := "repositoryId_example" // string | 
+	componentId := "componentId_example" // string | 
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.RepositoriesAPI.GetViolations(context.Background(), repositoryManagerId, repositoryId, componentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RepositoriesAPI.GetViolations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetViolations`: ApiComponentViolationListDTO
+	fmt.Fprintf(os.Stdout, "Response from `RepositoriesAPI.GetViolations`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**repositoryManagerId** | **string** |  | 
+**repositoryId** | **string** |  | 
+**componentId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetViolationsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**ApiComponentViolationListDTO**](ApiComponentViolationListDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

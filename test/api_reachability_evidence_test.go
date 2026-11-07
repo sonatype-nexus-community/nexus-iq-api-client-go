@@ -22,6 +22,22 @@ func Test_sonatypeiq_ReachabilityEvidenceAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test ReachabilityEvidenceAPIService GetReachabilityEvidence", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var hrcId string
+		var reportId string
+		var vulnerabilityId string
+
+		resp, httpRes, err := apiClient.ReachabilityEvidenceAPI.GetReachabilityEvidence(context.Background(), hrcId, reportId, vulnerabilityId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ReachabilityEvidenceAPIService GetReachabilityEvidence1", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

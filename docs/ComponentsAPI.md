@@ -243,8 +243,8 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | Possible values: application, organization, repository. 
-	ownerId := "ownerId_example" // string | Possible values: applicationId, organizationId or repositoryId.
+	ownerType := "ownerType_example" // string | Possible values: application, organization, repository, hosted_repository_component.
+	ownerId := "ownerId_example" // string | Possible values: applicationId, organizationId, repositoryId or hostedRepositoryComponentId.
 	stageId := "stageId_example" // string | Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies remediation types in the response. Possible values are develop, build, stage-release, release and operate. (optional)
 	identificationSource := "identificationSource_example" // string | Enter the identification source if you want the remediation result based on third-party scan information (non-Sonatype). The identification source can be obtained from the Component Details Page in the UI. (optional)
 	scanId := "scanId_example" // string | Enter the scanId (reportId) if you want the remediation result based on third-party scan information (non-Sonatype). (optional)
@@ -269,8 +269,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** | Possible values: application, organization, repository.  | 
-**ownerId** | **string** | Possible values: applicationId, organizationId or repositoryId. | 
+**ownerType** | **string** | Possible values: application, organization, repository, hosted_repository_component. | 
+**ownerId** | **string** | Possible values: applicationId, organizationId, repositoryId or hostedRepositoryComponentId. | 
 
 ### Other Parameters
 
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 ## GetSuggestedRemediationForComponents
 
-> GetSuggestedRemediationForComponents(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiBulkComponentRemediationRequestDTO(apiBulkComponentRemediationRequestDTO).Execute()
+> ApiBulkComponentRemediationDTO GetSuggestedRemediationForComponents(ctx, ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiBulkComponentRemediationRequestDTO(apiBulkComponentRemediationRequestDTO).Execute()
 
 
 
@@ -326,8 +326,8 @@ import (
 )
 
 func main() {
-	ownerType := "ownerType_example" // string | Possible values: application, organization, repository. 
-	ownerId := "ownerId_example" // string | Possible values: applicationId, organizationId or repositoryId.
+	ownerType := "ownerType_example" // string | Possible values: application, organization, repository, hosted_repository_component.
+	ownerId := "ownerId_example" // string | Possible values: applicationId, organizationId, repositoryId or hostedRepositoryComponentId.
 	stageId := "stageId_example" // string | Enter the stageId to obtain next-non-failing and next-non-failing-with-dependencies remediation types in the response. Possible values are develop, build, stage-release, release and operate. (optional)
 	identificationSource := "identificationSource_example" // string | Enter the identification source if you want the remediation result based on third-party scan information (non-Sonatype). The identification source can be obtained from the Component Details Page in the UI. (optional)
 	scanId := "scanId_example" // string | Enter the scanId (reportId) if you want the remediation result based on third-party scan information (non-Sonatype). (optional)
@@ -336,11 +336,13 @@ func main() {
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponents(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiBulkComponentRemediationRequestDTO(apiBulkComponentRemediationRequestDTO).Execute()
+	resp, r, err := apiClient.ComponentsAPI.GetSuggestedRemediationForComponents(context.Background(), ownerType, ownerId).StageId(stageId).IdentificationSource(identificationSource).ScanId(scanId).IncludeParentRemediation(includeParentRemediation).ApiBulkComponentRemediationRequestDTO(apiBulkComponentRemediationRequestDTO).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ComponentsAPI.GetSuggestedRemediationForComponents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `GetSuggestedRemediationForComponents`: ApiBulkComponentRemediationDTO
+	fmt.Fprintf(os.Stdout, "Response from `ComponentsAPI.GetSuggestedRemediationForComponents`: %v\n", resp)
 }
 ```
 
@@ -350,8 +352,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**ownerType** | **string** | Possible values: application, organization, repository.  | 
-**ownerId** | **string** | Possible values: applicationId, organizationId or repositoryId. | 
+**ownerType** | **string** | Possible values: application, organization, repository, hosted_repository_component. | 
+**ownerId** | **string** | Possible values: applicationId, organizationId, repositoryId or hostedRepositoryComponentId. | 
 
 ### Other Parameters
 
@@ -370,7 +372,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApiBulkComponentRemediationDTO**](ApiBulkComponentRemediationDTO.md)
 
 ### Authorization
 
@@ -379,7 +381,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

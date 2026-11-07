@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CloneDirectory** | Pointer to **string** |  | [optional] 
 **CommitEmail** | Pointer to **string** |  | [optional] 
+**CommitMessageTemplate** | Pointer to **string** |  | [optional] 
 **CommitUsername** | Pointer to **string** |  | [optional] 
 **DefaultBranchMonitoringIntervalHours** | Pointer to **int32** |  | [optional] 
 **DefaultBranchMonitoringStartTime** | Pointer to **string** |  | [optional] 
@@ -87,6 +88,31 @@ SetCommitEmail sets CommitEmail field to given value.
 `func (o *ApiSourceControlConfigurationDTO) HasCommitEmail() bool`
 
 HasCommitEmail returns a boolean if a field has been set.
+
+### GetCommitMessageTemplate
+
+`func (o *ApiSourceControlConfigurationDTO) GetCommitMessageTemplate() string`
+
+GetCommitMessageTemplate returns the CommitMessageTemplate field if non-nil, zero value otherwise.
+
+### GetCommitMessageTemplateOk
+
+`func (o *ApiSourceControlConfigurationDTO) GetCommitMessageTemplateOk() (*string, bool)`
+
+GetCommitMessageTemplateOk returns a tuple with the CommitMessageTemplate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommitMessageTemplate
+
+`func (o *ApiSourceControlConfigurationDTO) SetCommitMessageTemplate(v string)`
+
+SetCommitMessageTemplate sets CommitMessageTemplate field to given value.
+
+### HasCommitMessageTemplate
+
+`func (o *ApiSourceControlConfigurationDTO) HasCommitMessageTemplate() bool`
+
+HasCommitMessageTemplate returns a boolean if a field has been set.
 
 ### GetCommitUsername
 

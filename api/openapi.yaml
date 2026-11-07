@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Sonatype Lifecycle Public REST API
-  version: 1.207.0-01
+  version: 1.208.0-02
 servers:
 - url: /
 security:
@@ -123,6 +123,9 @@ tags:
 - name: GitHub App
 - description: GitHub App configuration operations
   name: GitHub App Configuration
+- description: "Use this REST API to retrieve the data from a hosted repository component\
+    \ report, that is generated after an evaluation."
+  name: Hosted Repository Component Report Data
 - description: "Use this REST API to list, grant, and revoke legacy status for policy\
     \ violations of an application."
   name: Legacy Violations
@@ -138,6 +141,8 @@ tags:
 - description: Use this REST API to manage license overrides for components in your
     applicationsorganizations and repositories.
   name: License Overrides
+- description: Lifecycle operations
+  name: Lifecycle
 - description: "Use this REST API to create new organizations, retrieve, edit or delete\
     \ existing organizations."
   name: Organizations
@@ -174,6 +179,8 @@ tags:
   name: Reports
 - description: Use this REST API to manage quarantined components.
   name: Repositories
+- description: Hosted repository component management
+  name: Repository Components
 - description: |-
     Use this REST API to manage authorizations for users or user groups.
 
@@ -541,12 +548,12 @@ paths:
   /api/v2/applications:
     get:
       description: |-
-        Use this method to retrieve the application details for the applicationId(s) provided.
+        Use this method to retrieve the application details for the publicId(s) provided.
 
         Permissions required: View IQ Elements
       operationId: getApplications
       parameters:
-      - description: Enter the applicationId.
+      - description: Enter the publicId.
         explode: true
         in: query
         name: publicId
@@ -1783,7 +1790,7 @@ paths:
       description: |-
         Use this method to retrieve details of a claimed component by specifying its hash.
 
-        Permissions required: Claim components
+        Permissions required: View IQ Elements
       operationId: get
       parameters:
       - description: The hash of the claimed component.
@@ -1952,7 +1959,7 @@ paths:
         appearing on the Component Details Page in the UI.
       operationId: getSuggestedRemediationForComponent
       parameters:
-      - description: "Possible values: application, organization, repository. "
+      - description: "Possible values: application, organization, repository, hosted_repository_component."
         explode: false
         in: path
         name: ownerType
@@ -1962,10 +1969,12 @@ paths:
           - application
           - organization
           - repository
-          pattern: application|organization|repository
+          - hosted_repository_component
+          pattern: application|organization|repository|hosted_repository_component
           type: string
         style: simple
-      - description: "Possible values: applicationId, organizationId or repositoryId."
+      - description: "Possible values: applicationId, organizationId, repositoryId\
+          \ or hostedRepositoryComponentId."
         explode: false
         in: path
         name: ownerId
@@ -2038,7 +2047,7 @@ paths:
         requests return 400.
       operationId: getSuggestedRemediationForComponents
       parameters:
-      - description: "Possible values: application, organization, repository. "
+      - description: "Possible values: application, organization, repository, hosted_repository_component."
         explode: false
         in: path
         name: ownerType
@@ -2048,10 +2057,12 @@ paths:
           - application
           - organization
           - repository
-          pattern: application|organization|repository
+          - hosted_repository_component
+          pattern: application|organization|repository|hosted_repository_component
           type: string
         style: simple
-      - description: "Possible values: applicationId, organizationId or repositoryId."
+      - description: "Possible values: applicationId, organizationId, repositoryId\
+          \ or hostedRepositoryComponentId."
         explode: false
         in: path
         name: ownerId
@@ -2105,6 +2116,10 @@ paths:
               $ref: "#/components/schemas/ApiBulkComponentRemediationRequestDTO"
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiBulkComponentRemediationDTO"
           description: "The response returns a list of results, one per input component,\
             \ in the same order as the input. Each result echoes the input component\
             \ and contains either a remediation payload (same shape as the single-component\
@@ -4003,6 +4018,116 @@ paths:
           description: Successfully retrieved the Zscaler quota.
       tags:
       - Config Zscaler
+  /api/v2/cycloneDx/{cdxVersion}/hostedRepositoryComponent/{hrcId}/reports/{reportId}:
+    get:
+      description: "Use this method to generate a CycloneDX SBOM for a hosted repository\
+        \ component.<p>Permissions Required: View IQ Elements"
+      operationId: getByReportIdWithVersion
+      parameters:
+      - description: Enter the hosted repository component ID (UUID) you want to generate
+          the SBOM for.
+        explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the reportId to generate the SBOM for the hosted repository
+          component for a specific scan report.
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Possible values are 1.1|1.2|1.3|1.4|1.5|1.6|1.7.
+        explode: false
+        in: path
+        name: cdxVersion
+        required: true
+        schema:
+          pattern: 1.1|1.2|1.3|1.4|1.5|1.6|1.7
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: CycloneDX SBOM in JSON format
+                type: object
+            application/xml:
+              schema:
+                description: CycloneDX SBOM in XML format
+                type: string
+          description: A downloadable file will be generated.
+          headers:
+            Content-Disposition:
+              description: Attachment file name for the generated SBOM
+              explode: false
+              schema:
+                example: attachment; filename="hrc-abc123-bom.json"; filename*=UTF-8''hrc-abc123-bom.json
+                type: string
+              style: simple
+      tags:
+      - CycloneDX
+  /api/v2/cycloneDx/{cdxVersion}/hostedRepositoryComponent/{hrcId}/stages/{stageId}:
+    get:
+      description: "Use this method to generate a CycloneDX SBOM for a hosted repository\
+        \ component.<p>Permissions Required: View IQ Elements"
+      operationId: getLatestWithVersion
+      parameters:
+      - description: Enter the hosted repository component ID (UUID) you want to generate
+          the SBOM for.
+        explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the stageId to generate the SBOM based on the latest hosted
+          repository component policy evaluation at that stage.
+        explode: false
+        in: path
+        name: stageId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Possible values are 1.1|1.2|1.3|1.4|1.5|1.6|1.7.
+        explode: false
+        in: path
+        name: cdxVersion
+        required: true
+        schema:
+          pattern: 1.1|1.2|1.3|1.4|1.5|1.6|1.7
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: CycloneDX SBOM in JSON format
+                type: object
+            application/xml:
+              schema:
+                description: CycloneDX SBOM in XML format
+                type: string
+          description: A downloadable file will be generated.
+          headers:
+            Content-Disposition:
+              description: Attachment file name for the generated SBOM
+              explode: false
+              schema:
+                example: attachment; filename="hrc-abc123-bom.json"; filename*=UTF-8''hrc-abc123-bom.json
+                type: string
+              style: simple
+      tags:
+      - CycloneDX
   /api/v2/cycloneDx/{cdxVersion}/{applicationId}/reports/{reportId}:
     get:
       description: "Use this method to generate a CycloneDX SBOM for an application.<p>Permissions\
@@ -4040,9 +4165,23 @@ paths:
       responses:
         "200":
           content:
-            application/json: {}
-            application/xml: {}
+            application/json:
+              schema:
+                description: CycloneDX SBOM in JSON format
+                type: object
+            application/xml:
+              schema:
+                description: CycloneDX SBOM in XML format
+                type: string
           description: A downloadable file will be generated.
+          headers:
+            Content-Disposition:
+              description: Attachment file name for the generated SBOM
+              explode: false
+              schema:
+                example: attachment; filename="myapp-bom.json"; filename*=UTF-8''myapp-bom.json
+                type: string
+              style: simple
       tags:
       - CycloneDX
   /api/v2/cycloneDx/{cdxVersion}/{applicationId}/stages/{stageId}:
@@ -4083,9 +4222,23 @@ paths:
       responses:
         "200":
           content:
-            application/json: {}
-            application/xml: {}
+            application/json:
+              schema:
+                description: CycloneDX SBOM in JSON format
+                type: object
+            application/xml:
+              schema:
+                description: CycloneDX SBOM in XML format
+                type: string
           description: A downloadable file will be generated.
+          headers:
+            Content-Disposition:
+              description: Attachment file name for the generated SBOM
+              explode: false
+              schema:
+                example: attachment; filename="myapp-bom.json"; filename*=UTF-8''myapp-bom.json
+                type: string
+              style: simple
       tags:
       - CycloneDX
   /api/v2/dataRetentionPolicies/organizations/{organizationId}:
@@ -4113,15 +4266,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiDataRetentionPoliciesDTO"
-          description: "The response JSON contains the policy settings for both applicationReports\
-            \ and successMetrics. Policy settings for application reports are shown\
-            \ for each stage of development. <ul><li>inheritPolicy IS a boolean flag\
-            \ indicating whether the policy is inherited from a parent organization.</li><li>enablePurging\
-            \ IS a boolean flag indicating if automatic purging is enabled or disabled.</li><li>maxCount\
-            \ IS the maximum no. of reports to retain.</li><li>maxAge IS the maximum\
-            \ age that a report is allowed to reach before it is purged. Possible\
-            \ values are days, weeks, months, years.</li></ul>The latest application\
-            \ report is always retained, regardless of its age."
+          description: "The response JSON contains the policy settings for applicationReports,\
+            \ successMetrics, and, when available, containerReports. Policy settings\
+            \ for application reports are shown for each stage of development. <ul><li>inheritPolicy\
+            \ IS a boolean flag indicating whether the policy is inherited from a\
+            \ parent organization.</li><li>enablePurging IS a boolean flag indicating\
+            \ if automatic purging is enabled or disabled.</li><li>maxCount IS the\
+            \ maximum no. of reports to retain.</li><li>maxAge IS the maximum age\
+            \ that a report is allowed to reach before it is purged. Possible values\
+            \ are days, weeks, months, years.</li></ul>The latest application report\
+            \ is always retained, regardless of its age. The optional containerReports\
+            \ key carries the retention policy for container image evaluation reports,\
+            \ with the same settings as an application report policy. It is only present\
+            \ when container image evaluation is both licensed and enabled; on other\
+            \ installations it is omitted."
       tags:
       - Data Retention Policies
     put:
@@ -4158,7 +4316,11 @@ paths:
           \ or disabled status for automatic purging. </li><li>maxCount IS the maximum\
           \ no. of reports to retain.</li><li>maxAge IS the maximum age that a report\
           \ is allowed to reach before it is purged. Possible values are days, weeks,\
-          \ months, years.</li></ul>"
+          \ months, years.</li></ul>\nThe optional containerReports key sets the retention\
+          \ policy for container image evaluation reports. It takes the same settings\
+          \ and limits as an application report policy. It is only available when\
+          \ container image evaluation is both licensed and enabled; on other installations\
+          \ it is omitted from the response and rejected in a request."
         required: true
       responses:
         "200":
@@ -4190,15 +4352,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiDataRetentionPoliciesDTO"
-          description: "The response JSON contains the policy settings for both applicationReports\
-            \ and successMetrics. Policy settings for application reports are shown\
-            \ for each stage of development. <ul><li>inheritPolicy IS a boolean flag\
-            \ indicating whether the policy is inherited from a parent organization.</li><li>enablePurging\
-            \ IS a boolean flag indicating if automatic purging is enabled or disabled.</li><li>maxCount\
-            \ IS the maximum no. of reports to retain.</li><li>maxAge IS the maximum\
-            \ age that a report is allowed to reach before it is purged. Possible\
-            \ values are days, weeks, months, years.</li></ul>The latest application\
-            \ report is always retained, regardless of its age."
+          description: "The response JSON contains the policy settings for applicationReports,\
+            \ successMetrics, and, when available, containerReports. Policy settings\
+            \ for application reports are shown for each stage of development. <ul><li>inheritPolicy\
+            \ IS a boolean flag indicating whether the policy is inherited from a\
+            \ parent organization.</li><li>enablePurging IS a boolean flag indicating\
+            \ if automatic purging is enabled or disabled.</li><li>maxCount IS the\
+            \ maximum no. of reports to retain.</li><li>maxAge IS the maximum age\
+            \ that a report is allowed to reach before it is purged. Possible values\
+            \ are days, weeks, months, years.</li></ul>The latest application report\
+            \ is always retained, regardless of its age. The optional containerReports\
+            \ key carries the retention policy for container image evaluation reports,\
+            \ with the same settings as an application report policy. It is only present\
+            \ when container image evaluation is both licensed and enabled; on other\
+            \ installations it is omitted."
       tags:
       - Data Retention Policies
   /api/v2/developer/priorities/{applicationId}/{scanId}:
@@ -5358,6 +5525,8 @@ paths:
                 $ref: "#/components/schemas/ApiRepositoryListDTO"
           description: The response contains the configuration details of the requested
             repository manager.
+        "404":
+          description: The repository manager does not exist.
       tags:
       - Firewall
     post:
@@ -5386,6 +5555,11 @@ paths:
       responses:
         "204":
           description: Repositories updated successfully.
+        "400":
+          description: "The request body is invalid, or the repository manager does\
+            \ not support this operation."
+        "404":
+          description: The repository manager does not exist.
       tags:
       - Firewall
   /api/v2/firewall/repositories/{ownerType}/{ownerId}/waivers/bulk:
@@ -5472,6 +5646,17 @@ paths:
 
         Permissions required: View IQ Elements
       operationId: getRepositoryContainer
+      parameters:
+      - description: Enter the repository container ID (REPOSITORY_CONTAINER_ID for
+          repository containers). Defaults to REPOSITORY_CONTAINER_ID when omitted.
+        explode: true
+        in: query
+        name: repositoryContainerId
+        required: false
+        schema:
+          default: REPOSITORY_CONTAINER_ID
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -5479,6 +5664,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiRepositoryContainerDTO"
           description: The response contains the ID and name for the repository container.
+        "404":
+          description: The repository container does not exist.
       tags:
       - Firewall
   /api/v2/firewall/repositoryManagers:
@@ -5517,6 +5704,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiRepositoryManagerDTO"
           description: The response contains the details of the new repository manager.
+        "400":
+          description: The request body is invalid.
       tags:
       - Firewall
   /api/v2/firewall/repositoryManagers/{repositoryManagerId}:
@@ -5770,6 +5959,215 @@ paths:
       summary: Delete a GitHub App
       tags:
       - GitHub App
+  /api/v2/hostedRepositoryComponent/{hrcId}/reports/{reportId}/vulnerabilities/{vulnerabilityId}/reachability-evidence:
+    get:
+      description: |-
+        Get reachability evidence for a specific vulnerability showing call paths from entry points to the vulnerable method, for a hosted repository component.
+
+        Permissions required: View IQ Elements
+      operationId: getReachabilityEvidence
+      parameters:
+      - description: The hosted repository component ID (UUID)
+        explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The report/scan ID
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "The vulnerability ID (e.g., CVE-2023-35116)"
+        explode: false
+        in: path
+        name: vulnerabilityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiReachabilityEvidenceResponse"
+          description: Returns reachability evidence with call paths for the specified
+            vulnerability.
+        "404":
+          description: "Hosted repository component, report, or vulnerability evidence\
+            \ not found."
+      tags:
+      - Reachability Evidence
+  /api/v2/hostedRepositoryComponent/{hrcId}/reports/{scanId}/dependencyTree:
+    get:
+      description: |-
+        Use this method to retrieve the dependencies related to the component identified at the time of hosted repository component evaluation. This is currently available only for Java (Maven) and NPM components.
+
+        Permissions required: View IQ Elements
+      operationId: getDependencyTree
+      parameters:
+      - description: Enter the hosted repository component ID (UUID).
+        explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ' Enter the reportId (scanId) created at the time of evaluation.'
+        explode: false
+        in: path
+        name: scanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiDependencyTreeResponseDTO"
+          description: "The response fields contain the 'Dependency Tree' data under\
+            \ the 'children' section. The 'children' section may contain more tree\
+            \ nodes. Every direct dependency can have zero or more transitive dependencies.\
+            \ Each tree node contains the packageUrl, component identifier and a dependency\
+            \ tree node (if it exists.) The component identifier section contains\
+            \ the format and coordinates for the component."
+        "400":
+          description: Missing or invalid parameter.
+        "404":
+          description: The requested dependency tree was not found.
+      tags:
+      - Hosted Repository Component Report Data
+  /api/v2/hostedRepositoryComponent/{hrcId}/reports/{scanId}/policy:
+    get:
+      description: |-
+        Use this method to retrieve the policy violation data generated as a result of a hosted repository component evaluation, for each component identified in the evaluation.
+
+        Permissions required: View IQ Elements
+      operationId: getPolicyViolations
+      parameters:
+      - description: Enter the hosted repository component ID (UUID).
+        explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the reportId (scanId) created at the time of evaluation.
+        explode: false
+        in: path
+        name: scanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Set to true to include policy violation times (open, legacy,\
+          \ waived, fixed) in the response if set."
+        explode: true
+        in: query
+        name: includeViolationTimes
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: "Page number (1-indexed). Must be provided together with 'pageSize'.\
+          \ When omitted, all components are returned."
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          minimum: 1
+          type: integer
+        style: form
+      - description: "Number of components per page (1-500). Must be provided together\
+          \ with 'page'. When omitted, all components are returned."
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          format: int32
+          maximum: 500
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiReportPolicyDataDTOV2"
+          description: "The response fields contain the policy violation data for\
+            \ the reportId (scanId) specified in the method call. The fields corresponding\
+            \ to 'violations' include the violation details for each policy, for the\
+            \ component. When 'page' and 'pageSize' are provided, the response includes\
+            \ 'page', 'pageSize', 'pageCount', and 'total' fields to support pagination."
+        "400":
+          description: Invalid pagination parameters.
+      tags:
+      - Hosted Repository Component Report Data
+  /api/v2/hostedRepositoryComponent/{hrcId}/reports/{scanId}/raw:
+    get:
+      description: |-
+        Use this method to retrieve the 'raw' data generated as a result of a hosted repository component evaluation. 'raw' data includes: the components identified in the scan, and the licenses and vulnerabilities associated with the identified components. Optionally set `includeCustomSecurityVulnerabilityData=true` to include any configured security vulnerability custom data (remediation, cweId, cvssVector, cvssSeverity) for each securityIssue. NOT to be confused with `SecurityVulnerabilityOverride` (hash-based violation-state override).
+
+        Permissions required: View IQ Elements
+      operationId: getRawData
+      parameters:
+      - description: Enter the hosted repository component ID (UUID).
+        explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the reportId (scanId) created at the time of evaluating
+          the hosted repository component.
+        explode: false
+        in: path
+        name: scanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Set to true to include security vulnerability custom data (remediation,\
+          \ cweId, cvssVector, cvssSeverity) for each securityIssue. Defaults to false."
+        explode: true
+        in: query
+        name: includeCustomSecurityVulnerabilityData
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiReportRawDataDTOV2"
+          description: "The response fields contain the 'raw' data for the reportId\
+            \ (scanId) specified in the method call. The fields corresponding to 'dependencyData'\
+            \ will indicate if the component is a direct dependency (true/false),\
+            \ an InnerSource component(true/false), the associated parentComponentPurls\
+            \ (package URLs of the parent component ownerApplicationName (name of\
+            \ the owner application), ownerApplicatonId (internal ID of the owner\
+            \ application, innerSourceComponentPurl (the package URL of the InnerSourceComponent.)"
+      tags:
+      - Hosted Repository Component Report Data
   /api/v2/labels/{ownerType}/{ownerId}:
     get:
       description: |-
@@ -6647,16 +7045,25 @@ paths:
         schema:
           type: string
         style: simple
-      - description: "Enter the componentIdentifier consisting of format and coordinates\
-          \ as a JSON e.g., `?componentIdentifier={\"format\":\"maven\",\"coordinates\"\
-          :\"{...}}\"}"
-        explode: true
+      - content:
+          application/json:
+            examples:
+              maven:
+                description: maven
+                summary: Maven component
+                value:
+                  coordinates:
+                    artifactId: commons-lang3
+                    extension: jar
+                    groupId: org.apache.commons
+                    version: 3.20.0
+                  format: maven
+            schema:
+              $ref: "#/components/schemas/ComponentIdentifier"
+        description: Enter the component format and coordinates as JSON.
         in: query
         name: componentIdentifier
         required: true
-        schema:
-          $ref: "#/components/schemas/ComponentIdentifier"
-        style: form
       responses:
         "200":
           content:
@@ -6762,14 +7169,25 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Enter the component format and coordinates.
-        explode: true
+      - content:
+          application/json:
+            examples:
+              maven:
+                description: maven
+                summary: Maven component
+                value:
+                  coordinates:
+                    artifactId: commons-lang3
+                    extension: jar
+                    groupId: org.apache.commons
+                    version: 3.20.0
+                  format: maven
+            schema:
+              $ref: "#/components/schemas/ComponentIdentifier"
+        description: Enter the component format and coordinates as JSON.
         in: query
         name: componentIdentifier
         required: true
-        schema:
-          $ref: "#/components/schemas/ComponentIdentifier"
-        style: form
       responses:
         "200":
           content:
@@ -6832,6 +7250,26 @@ paths:
           description: The license override was deleted successfully.
       tags:
       - License Overrides
+  /api/v2/lifecycle/repositoryManagers:
+    get:
+      description: |-
+        Retrieve all configured Nexus Repository Manager instances with their hosted repository counts.
+
+        **Connection Status:**
+        - `CONNECTED`: Repository manager is configured (IQ Server connection established in NXRM)
+        - `DISCONNECTED`: Repository manager is not configured (no IQ Server connection in NXRM)
+
+        Note: This is a system-level read-only operation that requires authentication.
+      operationId: getRepositoryManagers_1
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiLifecycleRepositoryManagerListDTO"
+          description: List of repository managers retrieved successfully
+      tags:
+      - Lifecycle
   /api/v2/malware-defense/evaluate:
     post:
       description: Evaluate malware for a list of components.<p>Use this endpoint
@@ -7750,11 +8188,15 @@ paths:
   /api/v2/policyWaiverRequests/{ownerType}/{ownerId}/{policyWaiverRequestId}:
     delete:
       description: |-
-        Use this method to withdraw a pending policy waiver request that you originally submitted.
+        Use this method to delete a policy waiver request.
 
-        The request row is removed; this is intended for cleaning up requests created by mistake (wrong scope, wrong rationale, etc.). The action is recorded in the audit log so the withdrawal remains traceable. Only the original requester may withdraw, and only while the request is in the REQUESTED state. Once a request has been APPROVED or REJECTED, withdraw is rejected — those terminal states must be handled by a reviewer through the review endpoint.
+        The request row is removed permanently; this is intended for cleaning up requests created by mistake (wrong scope, wrong rationale, etc.) or rejected requests an admin no longer wants to track. The action is recorded in the audit log so the deletion remains traceable.
 
-        Permissions required: View IQ Elements (the caller must also be the requester of the waiver request; other callers receive 404).
+        Two authorization paths grant delete access: (1) the original requester of the waiver request may always delete their own request; or (2) a caller holding the 'Waive Policy Violations' permission on the owner scope may delete any request on that scope. For container-image waiver requests stored under the virtual REPOSITORY_CONTAINER_ID owner, a Firewall admin holding the permission on the underlying Docker repository may also delete the request.
+
+        Only requests in the REQUESTED or REJECTED state may be deleted. APPROVED requests represent a decision on record and cannot be deleted — they must be handled through the review endpoint or by deleting the resulting policy waiver directly.
+
+        Permissions required: View IQ Elements. To delete a request that is not your own, 'Waive Policy Violations' is additionally required on the owner scope (or on the underlying Docker repository for container-image requests). Callers who satisfy neither path receive 404 rather than 403 to avoid leaking waiver-request IDs.
       operationId: withdrawPolicyWaiverRequest
       parameters:
       - description: "The scope of the policy waiver request. Possible values are\
@@ -7792,12 +8234,13 @@ paths:
         style: simple
       responses:
         "204":
-          description: The policy waiver request was withdrawn.
+          description: The policy waiver request was deleted.
         "400":
-          description: The policy waiver request is not in the REQUESTED state.
+          description: "The policy waiver request is APPROVED and cannot be deleted,\
+            \ or a concurrent modification prevented the delete."
         "404":
-          description: The policy waiver request does not exist or the caller is not
-            its requester.
+          description: "The policy waiver request does not exist, is not visible to\
+            \ the caller, or the caller is not authorized to delete it."
       tags:
       - Policy Waiver Requests
     get:
@@ -8600,8 +9043,20 @@ paths:
     get:
       description: "Use this method to retrieve previous application scan reports\
         \ (100 max.) for the specified application. You can view application reports\
-        \ only for applications to which you have access.  \n\nPermissions required:\
-        \ View IQ Elements "
+        \ only for applications to which you have access.  \n\nReports are returned\
+        \ most recent first and are limited to the <code>limit</code> parameter (100\
+        \ max.). When <code>stage</code> is specified, only reports of that stage\
+        \ are returned. When <code>stage</code> is omitted, the response covers all\
+        \ stages: one report of every stage is included, and the remaining slots are\
+        \ filled with the most recent reports across stages. As long as <code>limit</code>\
+        \ is at least the number of stages the application has reports on, no such\
+        \ stage is missing from the response; when there are more stages than slots,\
+        \ the stages with the most recent reports are the ones included. The most\
+        \ recent report is always included. Because per-stage coverage takes slots\
+        \ that would otherwise hold newer reports, an unfiltered response is not necessarily\
+        \ the strict <code>limit</code> most recent reports -- request a <code>stage</code>\
+        \ if you need strict recency within one stage. \n\nPermissions required: View\
+        \ IQ Elements "
       operationId: getReportHistoryForApplication
       parameters:
       - description: 'Enter the internal application Id. You can use the Applications
@@ -8727,6 +9182,61 @@ paths:
             \ and the component is not an unknown component ."
       tags:
       - Reports
+  /api/v2/reports/hostedRepositoryComponent/{hrcId}/history:
+    get:
+      description: "Use this method to retrieve previous scan reports (100 max.) for\
+        \ the specified hosted repository component.  \n\nReports are returned most\
+        \ recent first and are limited to the <code>limit</code> parameter (100 max.).\
+        \ When <code>stage</code> is specified, only reports of that stage are returned.\
+        \ When <code>stage</code> is omitted, the response covers all stages: one\
+        \ report of every stage is included, and the remaining slots are filled with\
+        \ the most recent reports across stages. As long as <code>limit</code> is\
+        \ at least the number of stages the component has reports on, no such stage\
+        \ is missing from the response; when there are more stages than slots, the\
+        \ stages with the most recent reports are the ones included. The most recent\
+        \ report is always included. Because per-stage coverage takes slots that would\
+        \ otherwise hold newer reports, an unfiltered response is not necessarily\
+        \ the strict <code>limit</code> most recent reports -- request a <code>stage</code>\
+        \ if you need strict recency within one stage. "
+      operationId: getReportHistory
+      parameters:
+      - explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: stage
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiReportHistoryDTO"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiReportHistoryDTO"
+          description: default response
+      tags:
+      - Reports
   /api/v2/reports/metrics:
     post:
       description: |-
@@ -8815,6 +9325,63 @@ paths:
       tags:
       - Repositories
   /api/v2/repositories/{repositoryManagerId}/{repositoryId}/components:
+    get:
+      operationId: getComponents
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repositoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 25
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiHostedRepositoryComponentListDTO"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiHostedRepositoryComponentListDTO"
+          description: default response
+      tags:
+      - Repositories
     post:
       operationId: uploadScan
       parameters:
@@ -8848,6 +9415,175 @@ paths:
           description: default response
       tags:
       - Repositories
+  /api/v2/repositories/{repositoryManagerId}/{repositoryId}/components/{componentId}:
+    get:
+      operationId: getComponent
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repositoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: componentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiHostedRepositoryComponentDTO"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiHostedRepositoryComponentDTO"
+          description: default response
+      tags:
+      - Repositories
+  /api/v2/repositories/{repositoryManagerId}/{repositoryId}/components/{componentId}/violations:
+    get:
+      operationId: getViolations
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repositoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: componentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiComponentViolationListDTO"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiComponentViolationListDTO"
+          description: default response
+      tags:
+      - Repositories
+  /api/v2/repositories/{repositoryManagerId}/{repositoryId}/queue/stats:
+    get:
+      operationId: getQueueStats
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repositoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiQueueStatsDTO"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiQueueStatsDTO"
+          description: default response
+      tags:
+      - Repositories
+  /api/v2/repositories/{repositoryManagerInstanceId}/components:
+    delete:
+      description: "Delete specific hosted repository components from IQ by their\
+        \ component IDs. Cancels pending scan queue jobs and removes the components\
+        \ and all associated data. <p>Permissions Required: Evaluate Applications"
+      operationId: deleteComponents
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerInstanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+      responses:
+        "204":
+          description: Components deleted
+        "404":
+          description: Repository manager or component not found
+      tags:
+      - Repository Components
+  /api/v2/repositories/{repositoryManagerInstanceId}/repositories:
+    delete:
+      description: "Delete all components from the specified hosted repositories in\
+        \ IQ. Cancels all pending scan queue jobs and removes all components and associated\
+        \ data. <p>Permissions Required: Evaluate Applications"
+      operationId: deleteRepositoryComponents
+      parameters:
+      - explode: false
+        in: path
+        name: repositoryManagerInstanceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+      responses:
+        "204":
+          description: All components deleted for specified repositories
+        "404":
+          description: Repository manager or repository not found
+      tags:
+      - Repository Components
   /api/v2/repositories/{repositoryManagerInstanceId}/{repositoryPublicId}/components/quarantined/pathnames:
     post:
       description: |-
@@ -9019,6 +9755,7 @@ paths:
         name: memberName
         required: true
         schema:
+          pattern: .+
           type: string
         style: simple
       responses:
@@ -9077,12 +9814,27 @@ paths:
         name: memberName
         required: true
         schema:
+          pattern: .+
           type: string
         style: simple
+      - description: |-
+          If true, the member is looked up in the configured security realms as the requested memberType before the role is granted, and the request fails if no user (for memberType user) or user group (for memberType group) of that name is found. A group of the requested name does not satisfy a user grant, or vice versa.
+          If false or omitted, the member is not looked up in any security realm before the role is granted.
+        explode: true
+        in: query
+        name: validateMember
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
       responses:
         "204":
           description: The specified role has been granted to the users or user groups
             on the given context.
+        "404":
+          description: validateMember was true and no user or user group of the requested
+            memberType with the given name exists in any configured security realm.
       tags:
       - Role Memberships
   /api/v2/roleMemberships/{ownerType}/roles:
@@ -9133,9 +9885,10 @@ paths:
           enum:
           - application
           - organization
+          - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository_manager|repository
+          pattern: application|organization|repository_manager|repository|repository_container
           type: string
         style: simple
       - description: Enter the corresponding id for the ownerType specified above.
@@ -9153,9 +9906,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/ApiRoleMemberMappingListDTO"
           description: "The response contains the assigned role Ids, users and user\
-            \ groups for the application, organization, repository manager, or repository\
-            \ requested. It also includes members who inherit a role based on the\
-            \ organization hierarchy."
+            \ groups for the application, organization, repository manager, repository,\
+            \ or repository container requested. It also includes members who inherit\
+            \ a role based on the organization hierarchy."
+        "403":
+          description: The caller lacks the required permission on the requested context.
+        "404":
+          description: ownerType is repository_container and internalOwnerId does
+            not name an available repository container.
       tags:
       - Role Memberships
   /api/v2/roleMemberships/{ownerType}/{internalOwnerId}/role/{roleId}/members:
@@ -9175,14 +9933,16 @@ paths:
           enum:
           - application
           - organization
+          - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository_manager|repository
+          pattern: application|organization|repository_manager|repository|repository_container
           type: string
         style: simple
       - description: "Enter the id associated with the ownerType specified above.\
           \ For applications, use the public ID. For organizations, repositories,\
-          \ and repository managers, use the internal ID."
+          \ repository managers, and repository containers, use the internal ID (REPOSITORY_CONTAINER_ID\
+          \ for repository containers)."
         explode: false
         in: path
         name: internalOwnerId
@@ -9215,12 +9975,17 @@ paths:
         "204":
           description: The role membership has been successfully updated with the
             provided members.
+        "403":
+          description: The caller lacks the required permission on the requested context.
+        "404":
+          description: ownerType is repository_container and internalOwnerId does
+            not name an available repository container.
       tags:
       - Role Memberships
   /api/v2/roleMemberships/{ownerType}/{internalOwnerId}/role/{roleId}/{memberType}/{memberName}:
     delete:
       description: |-
-        Use this method to revoke a role from a user or user group, on a specific application, organization, repository manager, or repository.
+        Use this method to revoke a role from a user or user group, on a specific application, organization, repository manager, repository, or repository container.
 
         Permissions required: Edit access control
       operationId: revokeRoleMembershipApplicationOrOrganization
@@ -9235,9 +10000,10 @@ paths:
           enum:
           - application
           - organization
+          - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository_manager|repository
+          pattern: application|organization|repository_manager|repository|repository_container
           type: string
         style: simple
       - description: Enter the internalId associated with the ownerType specified
@@ -9277,16 +10043,22 @@ paths:
         name: memberName
         required: true
         schema:
+          pattern: .+
           type: string
         style: simple
       responses:
         "204":
           description: The specified role has been revoked from the user or user group
+        "403":
+          description: The caller lacks the required permission on the requested context.
+        "404":
+          description: ownerType is repository_container and internalOwnerId does
+            not name an available repository container.
       tags:
       - Role Memberships
     put:
       description: |-
-        Use this method to grant a role to a user or user group for the specified application, organization, repository manager, or repository.
+        Use this method to grant a role to a user or user group for the specified application, organization, repository manager, repository, or repository container.
 
         Permissions required: Edit access control
       operationId: grantRoleMembershipApplicationOrOrganization
@@ -9301,9 +10073,10 @@ paths:
           enum:
           - application
           - organization
+          - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository_manager|repository
+          pattern: application|organization|repository_manager|repository|repository_container
           type: string
         style: simple
       - description: Enter the value for the internalId associated with the ownerType
@@ -9346,11 +10119,12 @@ paths:
         name: memberName
         required: true
         schema:
+          pattern: .+
           type: string
         style: simple
       - description: |-
-          If true, attempts to validate if the specified user or group exists before assigning the role.
-          If false or omitted, the request behaves as before (no validation check).
+          If true, the member is looked up in the configured security realms as the requested memberType before the role is granted, and the request fails if no user (for memberType user) or user group (for memberType group) of that name is found. A group of the requested name does not satisfy a user grant, or vice versa.
+          If false or omitted, the member is not looked up in any security realm before the role is granted.
         explode: true
         in: query
         name: validateMember
@@ -9363,6 +10137,13 @@ paths:
         "204":
           description: The specified roleId has been has been granted to the user
             or user group for the requested context.
+        "403":
+          description: The caller lacks the required permission on the requested context.
+        "404":
+          description: validateMember was true and no user or user group of the requested
+            memberType with the given name exists in any configured security realm;
+            or ownerType is repository_container and internalOwnerId does not name
+            an available repository container.
       tags:
       - Role Memberships
   /api/v2/roleMemberships/{ownerType}/{internalOwnerId}/roles:
@@ -9382,14 +10163,16 @@ paths:
           enum:
           - application
           - organization
+          - repository_container
           - repository_manager
           - repository
-          pattern: application|organization|repository_manager|repository
+          pattern: application|organization|repository_manager|repository|repository_container
           type: string
         style: simple
       - description: "Enter the corresponding id for the ownerType specified above.\
           \ For applications, use the public ID. For organizations, repositories,\
-          \ and repository managers, use the internal ID."
+          \ repository managers, and repository containers, use the internal ID (REPOSITORY_CONTAINER_ID\
+          \ for repository containers)."
         explode: false
         in: path
         name: internalOwnerId
@@ -9406,6 +10189,11 @@ paths:
           description: |-
             The response contains all roles with their members organized by owner, including inherited members from parent organizations or repository hierarchies. Also includes a flag indicating whether group search is
             enabled.
+        "403":
+          description: The caller lacks the required permission on the requested context.
+        "404":
+          description: ownerType is repository_container and internalOwnerId does
+            not name an available repository container.
       tags:
       - Role Memberships
   /api/v2/roles:
@@ -9808,6 +10596,20 @@ paths:
           description: Analyze status
       tags:
       - Advanced Search Index Health
+  /api/v2/search/advanced/index/analyze/run:
+    post:
+      description: "Run Analyze: recount estate, compute duration estimate, stamp\
+        \ completion time."
+      operationId: runAnalyze
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSearchIndexAnalyzeDTO"
+          description: Analyze result
+      tags:
+      - Advanced Search Index Health
   /api/v2/search/advanced/index/cancel:
     post:
       description: |-
@@ -9820,6 +10622,52 @@ paths:
           description: Cancel requested.
       tags:
       - Advanced Search
+  /api/v2/search/advanced/index/generations:
+    get:
+      description: Return the serving and previous retired index generations.
+      operationId: getGenerations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSearchIndexGenerationsDTO"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSearchIndexGenerationsDTO"
+          description: default response
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/generations/{generationId}/revert:
+    post:
+      description: Revert Advanced Search to the previous retired generation.
+      operationId: revertGeneration
+      parameters:
+      - explode: false
+        in: path
+        name: generationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSearchIndexGenerationDTO"
+          description: default response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSearchIndexGenerationDTO"
+          description: default response
+      tags:
+      - Advanced Search Index Health
   /api/v2/search/advanced/index/jobs:
     post:
       description: Start an index job (FULL_REBUILD or FIRST_TIME_INDEX).
@@ -9848,13 +10696,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchIndexJob"
-          description: default response
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SearchIndexJob"
-          description: default response
+          description: The active job
+        "204":
+          description: No job is active
       tags:
       - Advanced Search Index Health
   /api/v2/search/advanced/index/jobs/cancel:
@@ -9867,12 +10711,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchIndexJob"
+          description: The cancelled job
+        "204":
+          description: No job was active
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/jobs/history:
+    get:
+      description: Return recent index job history.
+      operationId: getJobHistory
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ApiSearchIndexHistoryEntryDTO"
+                type: array
           description: default response
         default:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SearchIndexJob"
+                items:
+                  $ref: "#/components/schemas/ApiSearchIndexHistoryEntryDTO"
+                type: array
           description: default response
       tags:
       - Advanced Search Index Health
@@ -9943,6 +10816,47 @@ paths:
           description: default response
       tags:
       - Advanced Search Index Health
+  /api/v2/search/advanced/index/unlock/complete:
+    post:
+      description: Mark unlock UNLOCKED after admin Test step. This also turns Nexus
+        One on for users.
+      operationId: completeUnlock
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSearchIndexUnlockStateDTO"
+          description: Unlock state
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/unlock/ready-to-test:
+    post:
+      description: Mark unlock READY_TO_TEST after index job completes.
+      operationId: markUnlockReadyToTest
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSearchIndexUnlockStateDTO"
+          description: Unlock state
+      tags:
+      - Advanced Search Index Health
+  /api/v2/search/advanced/index/unlock/start:
+    post:
+      description: Start Nexus One index setup (first-time or regenerate). Moves unlock
+        to INDEXING.
+      operationId: startUnlockIndexing
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchIndexJob"
+          description: Started job
+      tags:
+      - Advanced Search Index Health
   /api/v2/search/component:
     get:
       description: |-
@@ -9967,15 +10881,25 @@ paths:
         schema:
           type: string
         style: form
-      - description: Specify the componentIdentifier object containing the format
-          and coordinates.
-        explode: true
+      - content:
+          application/json:
+            examples:
+              maven:
+                description: maven
+                summary: Maven component
+                value:
+                  coordinates:
+                    artifactId: commons-lang3
+                    extension: jar
+                    groupId: org.apache.commons
+                    version: 3.20.0
+                  format: maven
+            schema:
+              $ref: "#/components/schemas/ComponentIdentifier"
+        description: Enter the component format and coordinates as JSON.
         in: query
         name: componentIdentifier
         required: false
-        schema:
-          $ref: "#/components/schemas/ComponentIdentifier"
-        style: form
       - description: Enter the packageUrl.
         explode: true
         in: query
@@ -10211,6 +11135,51 @@ paths:
           description: The relay base URL is not configured.
         "412":
           description: The relay integration feature flag is disabled.
+      tags:
+      - Source Control
+  /api/v2/sourceControl/readiness:
+    get:
+      description: |-
+        Use this method to determine source control readiness for every application in an organization that you have permission to view. Results are ordered by application public id and paginated.
+
+        Permissions required: View IQ Elements
+      operationId: getSourceControlReadinessForOrganization
+      parameters:
+      - description: Enter the internal id of the organization.
+        explode: true
+        in: query
+        name: organizationId
+        required: true
+        schema:
+          minLength: 1
+          type: string
+        style: form
+      - description: "Page number, starting at 1."
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          format: int32
+          minimum: 1
+          type: integer
+        style: form
+      - description: "Results per page. Defaults to 100, maximum 500."
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 100
+          format: int32
+          maximum: 500
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          description: Success
       tags:
       - Source Control
   /api/v2/sourceControl/relay/deregister:
@@ -10515,6 +11484,45 @@ paths:
             shows the updated values.
       tags:
       - Source Control
+  /api/v2/sourceControl/{ownerType}/{internalOwnerId}/readiness:
+    get:
+      description: |-
+        Use this method to determine whether a repository is configured such that IQ will evaluate it. Reports whether an initial Source-stage evaluation has run, the default branch monitoring state, whether pull request evaluation is permitted, and stable reason codes when it is not fully ready.
+
+        Permissions required: View IQ Elements
+      operationId: getSourceControlReadiness
+      parameters:
+      - description: Enter the value for ownerType. Readiness applies to applications.
+        explode: false
+        in: path
+        name: ownerType
+        required: true
+        schema:
+          enum:
+          - application
+          - organization
+          pattern: application|organization
+          type: string
+        style: simple
+      - description: Enter the internal ownerId of the application.
+        explode: false
+        in: path
+        name: internalOwnerId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiSourceControlReadinessDTO"
+          description: Success
+        "404":
+          description: The application could not be found
+      tags:
+      - Source Control
   /api/v2/sourceControlMetrics/{ownerType}/{internalOwnerId}:
     get:
       description: |-
@@ -10558,6 +11566,163 @@ paths:
             \ indicates the summary of the outcome of the pull request.</li></ul>"
       tags:
       - Source Control Metrics
+  /api/v2/spdx/hostedRepositoryComponent/{hrcId}/reports/{scanId}:
+    get:
+      description: "Use this method to generate SBOM(s) based on a specific hosted\
+        \ repository component scan.<p>Permissions Required: View IQ Elements"
+      operationId: getByScanId
+      parameters:
+      - description: Enter the hosted repository component ID (UUID) you want to generate
+          the SBOM(s) for.
+        explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the scanId of the hosted repository component scan.
+        explode: false
+        in: path
+        name: scanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the format for the SBOM(s) to be generated.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          default: json
+          type: string
+        style: form
+      - description: Set to `true` to generate an equivalent CycloneDx SBOM. Both
+          SBOMs will be combined as a tar.gz archive.
+        explode: true
+        in: query
+        name: generateCycloneDx
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: "Enter the desired SPDX version, possible values are 2.2|2.3|3.0\
+          \ (3.0 only supports JSON format)"
+        explode: true
+        in: query
+        name: spdxVersion
+        required: false
+        schema:
+          default: "2.3"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: SBOM in JSON format
+                type: string
+            application/octet-stream:
+              schema:
+                description: SBOM archive (tar.gz)
+                format: binary
+                type: string
+            application/xml:
+              schema:
+                description: SBOM in XML format
+                type: string
+          description: The requested SBOM(s).
+          headers:
+            Content-Disposition:
+              description: Attachment file name for the generated SBOM
+              explode: false
+              schema:
+                type: string
+              style: simple
+      tags:
+      - SPDX
+  /api/v2/spdx/hostedRepositoryComponent/{hrcId}/stages/{stageId}:
+    get:
+      description: "Use this method to generate SBOM(s) based on the latest hosted\
+        \ repository component evaluation at a specific stage.<p>Permissions Required:\
+        \ View IQ Elements"
+      operationId: getLatestForStage
+      parameters:
+      - description: Enter the hosted repository component ID (UUID) you want to generate
+          the SBOM(s) for.
+        explode: false
+        in: path
+        name: hrcId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Specify the stageId for the hosted repository component evaluation.
+        explode: false
+        in: path
+        name: stageId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Enter the format for the SBOM(s) to be generated.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          default: json
+          type: string
+        style: form
+      - description: Set to `true` to generate an equivalent CycloneDx SBOM. Both
+          SBOMs will be combined as a tar.gz archive.
+        explode: true
+        in: query
+        name: generateCycloneDx
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: "Enter the desired SPDX version, possible values are 2.2|2.3|3.0\
+          \ (3.0 only supports JSON format)"
+        explode: true
+        in: query
+        name: spdxVersion
+        required: false
+        schema:
+          default: "2.3"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: SBOM in JSON format
+                type: string
+            application/octet-stream:
+              schema:
+                description: SBOM archive (tar.gz)
+                format: binary
+                type: string
+            application/xml:
+              schema:
+                description: SBOM in XML format
+                type: string
+          description: The requested SBOM(s).
+          headers:
+            Content-Disposition:
+              description: Attachment file name for the generated SBOM
+              explode: false
+              schema:
+                type: string
+              style: simple
+      tags:
+      - SPDX
   /api/v2/spdx/{applicationId}/reports/{scanId}:
     get:
       description: |-
@@ -10629,6 +11794,13 @@ paths:
                 description: SBOM in XML format
                 type: string
           description: The requested SBOM(s).
+          headers:
+            Content-Disposition:
+              description: Attachment file name for the generated SBOM
+              explode: false
+              schema:
+                type: string
+              style: simple
       tags:
       - SPDX
   /api/v2/spdx/{applicationId}/stages/{stageId}:
@@ -10703,6 +11875,13 @@ paths:
                 description: SBOM in XML format
                 type: string
           description: The requested SBOM(s).
+          headers:
+            Content-Disposition:
+              description: Attachment file name for the generated SBOM
+              explode: false
+              schema:
+                type: string
+              style: simple
       tags:
       - SPDX
   /api/v2/userTokens:
@@ -10730,7 +11909,8 @@ paths:
           type: string
         style: form
       - description: "Enter the `realmId`. Possible values are `Internal`, `SAML`\
-          \ , `OAUTH2`, and `Crowd`."
+          \ , `OAUTH2`, `Crowd`, or the id or name of a configured LDAP server. An\
+          \ unrecognized value returns `400 Bad Request`."
         explode: true
         in: query
         name: realm
@@ -10749,6 +11929,8 @@ paths:
                 type: array
           description: "The response contains a list of user tokens, each containing\
             \ a `userCode`, `username` and the name of the IQ server `realm`."
+        "400":
+          description: The `realm` query parameter does not match any known realm.
       tags:
       - User Tokens
   /api/v2/userTokens/currentUser:
@@ -10861,7 +12043,8 @@ paths:
           type: string
         style: simple
       - description: "Enter the realmId. Possible values are `Internal`, `SAML` ,\
-          \ `OAUTH2` , and `Crowd`."
+          \ `OAUTH2` , `Crowd`, or the id or name of a configured LDAP server. An\
+          \ unrecognized value returns `400 Bad Request`."
         explode: true
         in: query
         name: realm
@@ -10878,6 +12061,8 @@ paths:
                 $ref: "#/components/schemas/ApiUserTokenDTO"
           description: "The response contains the `userCode`, `username` and the name\
             \ of the IQ server `realm`."
+        "400":
+          description: The `realm` query parameter does not match any known realm.
       tags:
       - User Tokens
   /api/v2/users:
@@ -11215,16 +12400,22 @@ paths:
         \ required: View IQ Elements"
       operationId: getConfig_1
       parameters:
-      - description: "The owner type (organization, repository_manager, or repository_container)."
+      - description: "The owner type (organization, repository_manager, repository_container,\
+          \ or application)."
         explode: false
         in: path
         name: ownerType
         required: true
         schema:
-          pattern: organization|repository_manager|repository_container
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          pattern: organization|repository_manager|repository_container|application
           type: string
         style: simple
-      - description: The internal owner ID assigned by IQ Server.
+      - description: The internal owner id (public id is also accepted for applications).
         explode: false
         in: path
         name: ownerId
@@ -11247,16 +12438,22 @@ paths:
         \ parent.<p>Permissions required: Edit IQ Elements"
       operationId: saveConfig
       parameters:
-      - description: "The owner type (organization, repository_manager, or repository_container)."
+      - description: "The owner type (organization, repository_manager, repository_container,\
+          \ or application)."
         explode: false
         in: path
         name: ownerType
         required: true
         schema:
-          pattern: organization|repository_manager|repository_container
+          enum:
+          - application
+          - organization
+          - repository_container
+          - repository_manager
+          pattern: organization|repository_manager|repository_container|application
           type: string
         style: simple
-      - description: The internal owner ID assigned by IQ Server.
+      - description: The internal owner id (public id is also accepted for applications).
         explode: false
         in: path
         name: ownerId
@@ -13118,14 +14315,15 @@ components:
     ApiAutoPolicyWaiverDTO:
       example:
         ownerType: ownerType
+        pathForwardMode: SPECIFIC_VIOLATION_RESOLVED
+        creatorId: creatorId
+        creatorName: creatorName
+        ownerId: ownerId
         scopesOperatorAny: true
         ownerName: ownerName
         createTime: 2000-01-23T04:56:07.000+00:00
-        creatorId: creatorId
-        creatorName: creatorName
         pathForward: true
         reachability: true
-        ownerId: ownerId
         publicId: publicId
         threatLevel: 0
         autoPolicyWaiverId: autoPolicyWaiverId
@@ -13147,6 +14345,11 @@ components:
           type: string
         pathForward:
           type: boolean
+        pathForwardMode:
+          enum:
+          - SPECIFIC_VIOLATION_RESOLVED
+          - ALL_VIOLATIONS_RESOLVED
+          type: string
         publicId:
           type: string
         reachability:
@@ -13337,6 +14540,289 @@ components:
           format: int32
           type: integer
       type: object
+    ApiBulkComponentRemediationDTO:
+      example:
+        results:
+        - remediation:
+            suggestedVersionChange:
+              directDependencyData:
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              data:
+                component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              directDependency: true
+              type: next-no-violations
+              isGolden: true
+            versionChanges:
+            - directDependencyData:
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              data:
+                component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              directDependency: true
+              type: next-no-violations
+            - directDependencyData:
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              data:
+                component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              directDependency: true
+              type: next-no-violations
+          component:
+            thirdParty: true
+            proprietary: true
+            sha256: sha256
+            displayName: displayName
+            packageUrl: packageUrl
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+            originalPurl: originalPurl
+            hash: hash
+          error: error
+        - remediation:
+            suggestedVersionChange:
+              directDependencyData:
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              data:
+                component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              directDependency: true
+              type: next-no-violations
+              isGolden: true
+            versionChanges:
+            - directDependencyData:
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              data:
+                component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              directDependency: true
+              type: next-no-violations
+            - directDependencyData:
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              - component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              data:
+                component:
+                  thirdParty: true
+                  proprietary: true
+                  sha256: sha256
+                  displayName: displayName
+                  packageUrl: packageUrl
+                  componentIdentifier:
+                    coordinates:
+                      key: coordinates
+                    format: format
+                  originalPurl: originalPurl
+                  hash: hash
+              directDependency: true
+              type: next-no-violations
+          component:
+            thirdParty: true
+            proprietary: true
+            sha256: sha256
+            displayName: displayName
+            packageUrl: packageUrl
+            componentIdentifier:
+              coordinates:
+                key: coordinates
+              format: format
+            originalPurl: originalPurl
+            hash: hash
+          error: error
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/ApiBulkComponentRemediationResultDTO"
+          type: array
+      type: object
     ApiBulkComponentRemediationRequestDTO:
       example:
         components:
@@ -13367,6 +14853,153 @@ components:
           items:
             $ref: "#/components/schemas/ApiComponentDTOV2"
           type: array
+      type: object
+    ApiBulkComponentRemediationResultDTO:
+      example:
+        remediation:
+          suggestedVersionChange:
+            directDependencyData:
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            data:
+              component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            directDependency: true
+            type: next-no-violations
+            isGolden: true
+          versionChanges:
+          - directDependencyData:
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            data:
+              component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            directDependency: true
+            type: next-no-violations
+          - directDependencyData:
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            - component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            data:
+              component:
+                thirdParty: true
+                proprietary: true
+                sha256: sha256
+                displayName: displayName
+                packageUrl: packageUrl
+                componentIdentifier:
+                  coordinates:
+                    key: coordinates
+                  format: format
+                originalPurl: originalPurl
+                hash: hash
+            directDependency: true
+            type: next-no-violations
+        component:
+          thirdParty: true
+          proprietary: true
+          sha256: sha256
+          displayName: displayName
+          packageUrl: packageUrl
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+          originalPurl: originalPurl
+          hash: hash
+        error: error
+      properties:
+        component:
+          $ref: "#/components/schemas/ApiComponentDTOV2"
+        error:
+          type: string
+        remediation:
+          $ref: "#/components/schemas/ApiComponentRemediationValueDTO"
       type: object
     ApiBulkWaiversDTO:
       description: Request to create bulk policy waivers for repository policy violations
@@ -15481,6 +17114,11 @@ components:
         componentReleasedFromQuarantine:
           $ref: "#/components/schemas/ApiRepositoryComponentPolicyViolationDTO"
       type: object
+    ApiComponentRemediationDTO:
+      properties:
+        remediation:
+          $ref: "#/components/schemas/ApiComponentRemediationValueDTO"
+      type: object
     ApiComponentRemediationValueDTO:
       example:
         suggestedVersionChange:
@@ -15665,6 +17303,63 @@ components:
         transitivePolicyViolations:
           items:
             $ref: "#/components/schemas/ApiStagePolicyViolationComponentDTO"
+          type: array
+      type: object
+    ApiComponentViolationDTO:
+      example:
+        policyId: policyId
+        actionTypeId: actionTypeId
+        policyName: policyName
+        id: id
+        threatCategory: threatCategory
+        threatLevel: 1
+        waived: true
+      properties:
+        actionTypeId:
+          type: string
+        id:
+          type: string
+        policyId:
+          type: string
+        policyName:
+          type: string
+        threatCategory:
+          type: string
+        threatLevel:
+          format: int32
+          type: integer
+        waived:
+          type: boolean
+      type: object
+    ApiComponentViolationListDTO:
+      example:
+        maxThreatLevel: 0
+        violations:
+        - policyId: policyId
+          actionTypeId: actionTypeId
+          policyName: policyName
+          id: id
+          threatCategory: threatCategory
+          threatLevel: 1
+          waived: true
+        - policyId: policyId
+          actionTypeId: actionTypeId
+          policyName: policyName
+          id: id
+          threatCategory: threatCategory
+          threatLevel: 1
+          waived: true
+        totalViolations: 6
+      properties:
+        maxThreatLevel:
+          format: int32
+          type: integer
+        totalViolations:
+          format: int32
+          type: integer
+        violations:
+          items:
+            $ref: "#/components/schemas/ApiComponentViolationDTO"
           type: array
       type: object
     ApiComponentWaiversDTO:
@@ -21298,6 +22993,11 @@ components:
       type: object
     ApiDataRetentionPoliciesDTO:
       example:
+        containerReports:
+          inheritPolicy: true
+          enablePurging: true
+          maxAge: maxAge
+          maxCount: 0
         successMetrics:
           inheritPolicy: true
           enablePurging: true
@@ -21312,6 +23012,8 @@ components:
       properties:
         applicationReports:
           $ref: "#/components/schemas/ApiReportRetentionPoliciesDTO"
+        containerReports:
+          $ref: "#/components/schemas/ApiReportRetentionPolicyDTO"
         successMetrics:
           $ref: "#/components/schemas/ApiSuccessMetricsRetentionPolicyDTO"
       type: object
@@ -22000,6 +23702,146 @@ components:
             $ref: "#/components/schemas/ApiHashComponentIdentifierDTO"
           type: array
       type: object
+    ApiHostedRepositoryComponentDTO:
+      example:
+        displayName: displayName
+        scanId: scanId
+        stageTypeId: stageTypeId
+        severeViolationCount: 2
+        quarantined: true
+        criticalViolationCount: 6
+        matchStateId: matchStateId
+        pathname: pathname
+        maxThreatLevel: 5
+        applicationPublicId: applicationPublicId
+        componentCount: 0
+        violationCount: 7
+        lastEvaluationTime: 1
+        identifiedName: identifiedName
+        id: id
+        componentIdentifier:
+          coordinates:
+            key: coordinates
+          format: format
+        moderateViolationCount: 5
+        hash: hash
+      properties:
+        applicationPublicId:
+          type: string
+        componentCount:
+          format: int32
+          type: integer
+        componentIdentifier:
+          $ref: "#/components/schemas/ComponentIdentifier"
+        criticalViolationCount:
+          format: int32
+          type: integer
+        displayName:
+          type: string
+        hash:
+          type: string
+        id:
+          type: string
+        identifiedName:
+          type: string
+        lastEvaluationTime:
+          format: int64
+          type: integer
+        matchStateId:
+          type: string
+        maxThreatLevel:
+          format: int32
+          type: integer
+        moderateViolationCount:
+          format: int32
+          type: integer
+        pathname:
+          type: string
+        quarantined:
+          type: boolean
+        scanId:
+          type: string
+        severeViolationCount:
+          format: int32
+          type: integer
+        stageTypeId:
+          type: string
+        violationCount:
+          format: int32
+          type: integer
+      type: object
+    ApiHostedRepositoryComponentListDTO:
+      example:
+        components:
+        - displayName: displayName
+          scanId: scanId
+          stageTypeId: stageTypeId
+          severeViolationCount: 2
+          quarantined: true
+          criticalViolationCount: 6
+          matchStateId: matchStateId
+          pathname: pathname
+          maxThreatLevel: 5
+          applicationPublicId: applicationPublicId
+          componentCount: 0
+          violationCount: 7
+          lastEvaluationTime: 1
+          identifiedName: identifiedName
+          id: id
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+          moderateViolationCount: 5
+          hash: hash
+        - displayName: displayName
+          scanId: scanId
+          stageTypeId: stageTypeId
+          severeViolationCount: 2
+          quarantined: true
+          criticalViolationCount: 6
+          matchStateId: matchStateId
+          pathname: pathname
+          maxThreatLevel: 5
+          applicationPublicId: applicationPublicId
+          componentCount: 0
+          violationCount: 7
+          lastEvaluationTime: 1
+          identifiedName: identifiedName
+          id: id
+          componentIdentifier:
+            coordinates:
+              key: coordinates
+            format: format
+          moderateViolationCount: 5
+          hash: hash
+        hasQueuedScans: true
+        hasNextPage: true
+        repositoryPublicId: repositoryPublicId
+        pageSize: 3
+        page: 9
+        totalCount: 2
+      properties:
+        components:
+          items:
+            $ref: "#/components/schemas/ApiHostedRepositoryComponentDTO"
+          type: array
+        hasNextPage:
+          type: boolean
+        hasQueuedScans:
+          type: boolean
+        page:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        repositoryPublicId:
+          type: string
+        totalCount:
+          format: int32
+          type: integer
+      type: object
     ApiJiraConfigurationDTO:
       example:
         password: password
@@ -22459,6 +24301,7 @@ components:
           threatGroup:
             name: name
             threatLevel: 0
+          licenseLongName: licenseLongName
           obligations:
           - obligationTexts:
             - obligationTexts
@@ -22478,6 +24321,7 @@ components:
           threatGroup:
             name: name
             threatLevel: 0
+          licenseLongName: licenseLongName
           obligations:
           - obligationTexts:
             - obligationTexts
@@ -22788,6 +24632,7 @@ components:
           threatGroup:
             name: name
             threatLevel: 0
+          licenseLongName: licenseLongName
           obligations:
           - obligationTexts:
             - obligationTexts
@@ -22807,6 +24652,7 @@ components:
           threatGroup:
             name: name
             threatLevel: 0
+          licenseLongName: licenseLongName
           obligations:
           - obligationTexts:
             - obligationTexts
@@ -23064,6 +24910,7 @@ components:
         threatGroup:
           name: name
           threatLevel: 0
+        licenseLongName: licenseLongName
         obligations:
         - obligationTexts:
           - obligationTexts
@@ -23082,6 +24929,8 @@ components:
         isMulti:
           type: boolean
         licenseId:
+          type: string
+        licenseLongName:
           type: string
         licenseName:
           type: string
@@ -23213,6 +25062,59 @@ components:
           type: string
         url:
           type: string
+      type: object
+    ApiLifecycleRepositoryManagerDTO:
+      example:
+        baseUrl: baseUrl
+        instanceId: instanceId
+        hostedRepositoryCount: 0
+        connectionStatus: CONNECTED
+        name: name
+        id: id
+        lastActivityTime: 6
+      properties:
+        baseUrl:
+          type: string
+        connectionStatus:
+          enum:
+          - CONNECTED
+          - DISCONNECTED
+          type: string
+        hostedRepositoryCount:
+          format: int32
+          type: integer
+        id:
+          type: string
+        instanceId:
+          type: string
+        lastActivityTime:
+          format: int64
+          type: integer
+        name:
+          type: string
+      type: object
+    ApiLifecycleRepositoryManagerListDTO:
+      example:
+        repositoryManagers:
+        - baseUrl: baseUrl
+          instanceId: instanceId
+          hostedRepositoryCount: 0
+          connectionStatus: CONNECTED
+          name: name
+          id: id
+          lastActivityTime: 6
+        - baseUrl: baseUrl
+          instanceId: instanceId
+          hostedRepositoryCount: 0
+          connectionStatus: CONNECTED
+          name: name
+          id: id
+          lastActivityTime: 6
+      properties:
+        repositoryManagers:
+          items:
+            $ref: "#/components/schemas/ApiLifecycleRepositoryManagerDTO"
+          type: array
       type: object
     ApiMailConfigurationDTO:
       example:
@@ -23765,6 +25667,7 @@ components:
           - MANAGE_AUTOMATIC_SCM_CONFIGURATION
           - LEGAL_REVIEWER
           - CREATE_PULL_REQUESTS
+          - MANAGE_AGENT_ORGANIZATION_SETTINGS
           type: string
       type: object
     ApiPolicyDTO:
@@ -24936,6 +26839,7 @@ components:
       type: object
     ApiPolicyWaiverRequestDTO:
       example:
+        containerImageId: containerImageId
         scopeOwnerId: scopeOwnerId
         scopeOwnerType: scopeOwnerType
         reasonText: reasonText
@@ -24996,6 +26900,7 @@ components:
         vulnerabilityId: vulnerabilityId
         noteToReviewer: noteToReviewer
         requesterName: requesterName
+        canDelete: true
         componentName: componentName
         expireWhenRemediationAvailable: true
         policyWaiverRequestId: policyWaiverRequestId
@@ -25021,6 +26926,8 @@ components:
       properties:
         associatedPackageUrl:
           type: string
+        canDelete:
+          type: boolean
         canReview:
           type: boolean
         comment:
@@ -25036,6 +26943,8 @@ components:
             $ref: "#/components/schemas/ConstraintFact"
           type: array
         constraintFactsJson:
+          type: string
+        containerImageId:
           type: string
         displayName:
           $ref: "#/components/schemas/ComponentDisplayName"
@@ -25158,7 +27067,8 @@ components:
     ApiPolicyWaiverRequestsApplicableToViolationDTO:
       example:
         expiredWaiverRequests:
-        - scopeOwnerId: scopeOwnerId
+        - containerImageId: containerImageId
+          scopeOwnerId: scopeOwnerId
           scopeOwnerType: scopeOwnerType
           reasonText: reasonText
           reviewerId: reviewerId
@@ -25218,6 +27128,7 @@ components:
           vulnerabilityId: vulnerabilityId
           noteToReviewer: noteToReviewer
           requesterName: requesterName
+          canDelete: true
           componentName: componentName
           expireWhenRemediationAvailable: true
           policyWaiverRequestId: policyWaiverRequestId
@@ -25240,7 +27151,8 @@ components:
             format: format
           hash: hash
           status: status
-        - scopeOwnerId: scopeOwnerId
+        - containerImageId: containerImageId
+          scopeOwnerId: scopeOwnerId
           scopeOwnerType: scopeOwnerType
           reasonText: reasonText
           reviewerId: reviewerId
@@ -25300,6 +27212,7 @@ components:
           vulnerabilityId: vulnerabilityId
           noteToReviewer: noteToReviewer
           requesterName: requesterName
+          canDelete: true
           componentName: componentName
           expireWhenRemediationAvailable: true
           policyWaiverRequestId: policyWaiverRequestId
@@ -25323,7 +27236,8 @@ components:
           hash: hash
           status: status
         activeWaiverRequests:
-        - scopeOwnerId: scopeOwnerId
+        - containerImageId: containerImageId
+          scopeOwnerId: scopeOwnerId
           scopeOwnerType: scopeOwnerType
           reasonText: reasonText
           reviewerId: reviewerId
@@ -25383,6 +27297,7 @@ components:
           vulnerabilityId: vulnerabilityId
           noteToReviewer: noteToReviewer
           requesterName: requesterName
+          canDelete: true
           componentName: componentName
           expireWhenRemediationAvailable: true
           policyWaiverRequestId: policyWaiverRequestId
@@ -25405,7 +27320,8 @@ components:
             format: format
           hash: hash
           status: status
-        - scopeOwnerId: scopeOwnerId
+        - containerImageId: containerImageId
+          scopeOwnerId: scopeOwnerId
           scopeOwnerType: scopeOwnerType
           reasonText: reasonText
           reviewerId: reviewerId
@@ -25465,6 +27381,7 @@ components:
           vulnerabilityId: vulnerabilityId
           noteToReviewer: noteToReviewer
           requesterName: requesterName
+          canDelete: true
           componentName: componentName
           expireWhenRemediationAvailable: true
           policyWaiverRequestId: policyWaiverRequestId
@@ -25923,6 +27840,30 @@ components:
           items:
             $ref: "#/components/schemas/ApiPullRequestResult"
           type: array
+      type: object
+    ApiQueueStatsDTO:
+      example:
+        total: 5
+        pending: 1
+        processing: 5
+        completed: 0
+        failed: 6
+      properties:
+        completed:
+          format: int32
+          type: integer
+        failed:
+          format: int32
+          type: integer
+        pending:
+          format: int32
+          type: integer
+        processing:
+          format: int32
+          type: integer
+        total:
+          format: int32
+          type: integer
       type: object
     ApiReachabilityEvidenceResponse:
       example:
@@ -31282,25 +33223,65 @@ components:
       type: object
     ApiSearchIndexAnalyzeDTO:
       example:
-        applicationCount: 0
-        lastCleanupAt: 2000-01-23T04:56:07.000+00:00
-        lastSuccessfulCutoverAt: 2000-01-23T04:56:07.000+00:00
+        indexIncompatible: true
         servingGenerationId: servingGenerationId
+        indexBackend: indexBackend
         estateCapturedAt: 2000-01-23T04:56:07.000+00:00
-        nouxUnlockState: nouxUnlockState
+        pendingChangeCount: 7
+        lastRunState: lastRunState
+        stampedAtEpochMs: 4
+        indexStorageRef: indexStorageRef
+        lastIncrementalDocumentsAdded: 3
+        servingSince: 2000-01-23T04:56:07.000+00:00
+        lastIndexStartedAt: 2000-01-23T04:56:07.000+00:00
+        failedChangeCount: 2
+        rebuildRecommended: true
+        activeIndexId: activeIndexId
+        lastIndexJobStatus: lastIndexJobStatus
+        queueLagState: queueLagState
+        lastIncrementalDocumentsDeleted: 2
+        rebuildRequired: true
+        indexName: indexName
+        lastAnalysisCompletedAt: 2000-01-23T04:56:07.000+00:00
+        indexVersion: 7
+        estateStale: true
+        queueLagSeconds: 1
+        pendingChangeState: pendingChangeState
+        componentCount: 1
+        etaLowMinutes: 5
+        healthStatus: healthStatus
+        lastIndexId: lastIndexId
+        lastIncrementalFinishedAt: 2000-01-23T04:56:07.000+00:00
+        etaHighMinutes: 5
+        lastIndexJobType: lastIndexJobType
+        searchableDocumentCount: 1
+        indexedApplicationCount: 9
+        lastSuccessfulCutoverAt: 2000-01-23T04:56:07.000+00:00
         advancedSearchEnabled: true
+        stampedIndexVersion: 5
+        indexPath: indexPath
+        ownerApplicationCount: 4
+        pendingChangeCountByType:
+          key: 1
+        servingDocCount: 6
+        lastIndexCompletedAt: 2000-01-23T04:56:07.000+00:00
+        servingSizeBytes: 1
+        schemaUpgradeRequired: true
+        applicationCount: 0
+        servingIndexId: servingIndexId
+        lastIndexJobId: lastIndexJobId
+        nouxUnlockState: nouxUnlockState
         buildingGenerationId: buildingGenerationId
         recommendedOp: recommendedOp
-        pendingChangeCount: 2
-        queueLagSeconds: 7
-        componentCount: 6
-        etaLowMinutes: 5
+        stampedIqVersion: stampedIqVersion
+        servingSchemaVersion: 7
         violationCount: 9
-        healthStatus: healthStatus
+        churnRatio: 6.027456183070403
+        failedChangeState: failedChangeState
         activeJobId: activeJobId
-        failedChangeCount: 5
-        etaHighMinutes: 1
       properties:
+        activeIndexId:
+          type: string
         activeJobId:
           type: string
         advancedSearchEnabled:
@@ -31310,12 +33291,17 @@ components:
           type: integer
         buildingGenerationId:
           type: string
+        churnRatio:
+          format: double
+          type: number
         componentCount:
           format: int64
           type: integer
         estateCapturedAt:
           format: date-time
           type: string
+        estateStale:
+          type: boolean
         etaHighMinutes:
           format: int32
           type: integer
@@ -31325,29 +33311,279 @@ components:
         failedChangeCount:
           format: int64
           type: integer
+        failedChangeState:
+          type: string
         healthStatus:
           type: string
-        lastCleanupAt:
+        indexBackend:
+          type: string
+        indexIncompatible:
+          type: boolean
+        indexName:
+          type: string
+        indexPath:
+          type: string
+        indexStorageRef:
+          type: string
+        indexVersion:
+          format: int32
+          type: integer
+        indexedApplicationCount:
+          format: int64
+          type: integer
+        lastAnalysisCompletedAt:
           format: date-time
+          type: string
+        lastIncrementalDocumentsAdded:
+          format: int64
+          type: integer
+        lastIncrementalDocumentsDeleted:
+          format: int64
+          type: integer
+        lastIncrementalFinishedAt:
+          format: date-time
+          type: string
+        lastIndexCompletedAt:
+          format: date-time
+          type: string
+        lastIndexId:
+          type: string
+        lastIndexJobId:
+          type: string
+        lastIndexJobStatus:
+          type: string
+        lastIndexJobType:
+          type: string
+        lastIndexStartedAt:
+          format: date-time
+          type: string
+        lastRunState:
           type: string
         lastSuccessfulCutoverAt:
           format: date-time
           type: string
         nouxUnlockState:
           type: string
+        ownerApplicationCount:
+          format: int64
+          type: integer
         pendingChangeCount:
           format: int64
           type: integer
+        pendingChangeCountByType:
+          additionalProperties:
+            format: int64
+            type: integer
+          type: object
+        pendingChangeState:
+          type: string
         queueLagSeconds:
           format: int64
           type: integer
+        queueLagState:
+          type: string
+        rebuildRecommended:
+          type: boolean
+        rebuildRequired:
+          type: boolean
         recommendedOp:
           type: string
+        schemaUpgradeRequired:
+          type: boolean
+        searchableDocumentCount:
+          format: int64
+          type: integer
+        servingDocCount:
+          format: int64
+          type: integer
         servingGenerationId:
+          type: string
+        servingIndexId:
+          type: string
+        servingSchemaVersion:
+          format: int32
+          type: integer
+        servingSince:
+          format: date-time
+          type: string
+        servingSizeBytes:
+          format: int64
+          type: integer
+        stampedAtEpochMs:
+          format: int64
+          type: integer
+        stampedIndexVersion:
+          format: int32
+          type: integer
+        stampedIqVersion:
           type: string
         violationCount:
           format: int64
           type: integer
+      type: object
+    ApiSearchIndexGenerationDTO:
+      example:
+        createdByUserId: createdByUserId
+        role: role
+        schemaVersion: 6
+        docCount: 0
+        createdByJobId: createdByJobId
+        sizeBytes: 1
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        jobFinishedAt: 2000-01-23T04:56:07.000+00:00
+        productVersion: productVersion
+        jobStartedAt: 2000-01-23T04:56:07.000+00:00
+        createdByTrigger: createdByTrigger
+        servingSince: 2000-01-23T04:56:07.000+00:00
+        indexId: indexId
+        retiredAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        createdByJobId:
+          type: string
+        createdByTrigger:
+          type: string
+        createdByUserId:
+          type: string
+        docCount:
+          format: int64
+          type: integer
+        id:
+          type: string
+        indexId:
+          type: string
+        jobFinishedAt:
+          format: date-time
+          type: string
+        jobStartedAt:
+          format: date-time
+          type: string
+        productVersion:
+          type: string
+        retiredAt:
+          format: date-time
+          type: string
+        role:
+          type: string
+        schemaVersion:
+          format: int32
+          type: integer
+        servingSince:
+          format: date-time
+          type: string
+        sizeBytes:
+          format: int64
+          type: integer
+      type: object
+    ApiSearchIndexGenerationsDTO:
+      example:
+        previousRetired:
+          createdByUserId: createdByUserId
+          role: role
+          schemaVersion: 6
+          docCount: 0
+          createdByJobId: createdByJobId
+          sizeBytes: 1
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          jobFinishedAt: 2000-01-23T04:56:07.000+00:00
+          productVersion: productVersion
+          jobStartedAt: 2000-01-23T04:56:07.000+00:00
+          createdByTrigger: createdByTrigger
+          servingSince: 2000-01-23T04:56:07.000+00:00
+          indexId: indexId
+          retiredAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+        serving:
+          createdByUserId: createdByUserId
+          role: role
+          schemaVersion: 6
+          docCount: 0
+          createdByJobId: createdByJobId
+          sizeBytes: 1
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          jobFinishedAt: 2000-01-23T04:56:07.000+00:00
+          productVersion: productVersion
+          jobStartedAt: 2000-01-23T04:56:07.000+00:00
+          createdByTrigger: createdByTrigger
+          servingSince: 2000-01-23T04:56:07.000+00:00
+          indexId: indexId
+          retiredAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+      properties:
+        previousRetired:
+          $ref: "#/components/schemas/ApiSearchIndexGenerationDTO"
+        serving:
+          $ref: "#/components/schemas/ApiSearchIndexGenerationDTO"
+      type: object
+    ApiSearchIndexHistoryEntryDTO:
+      example:
+        phase: phase
+        createdByUserId: createdByUserId
+        schemaVersion: 1
+        indexLocation: indexLocation
+        errorMessage: errorMessage
+        errorCode: errorCode
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        buildingGenerationId: buildingGenerationId
+        docCount: 0
+        trigger: trigger
+        finishedAt: 2000-01-23T04:56:07.000+00:00
+        sizeBytes: 5
+        jobId: jobId
+        indexType: indexType
+        productVersion: productVersion
+        indexId: indexId
+        progressPercent: 6
+        jobType: jobType
+        status: status
+      properties:
+        buildingGenerationId:
+          type: string
+        createdByUserId:
+          type: string
+        docCount:
+          format: int64
+          type: integer
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        finishedAt:
+          format: date-time
+          type: string
+        indexId:
+          type: string
+        indexLocation:
+          type: string
+        indexType:
+          type: string
+        jobId:
+          type: string
+        jobType:
+          type: string
+        phase:
+          type: string
+        productVersion:
+          type: string
+        progressPercent:
+          format: int32
+          type: integer
+        schemaVersion:
+          format: int32
+          type: integer
+        sizeBytes:
+          format: int64
+          type: integer
+        startedAt:
+          format: date-time
+          type: string
+        status:
+          type: string
+        trigger:
+          type: string
       type: object
     ApiSearchIndexJobRequestDTO:
       example:
@@ -31362,6 +33598,13 @@ components:
           description: "What asked for the job: UNLOCK_WIZARD, HEALTH_UI, SUPPORT\
             \ or SYSTEM. Defaults to HEALTH_UI."
           example: HEALTH_UI
+          type: string
+      type: object
+    ApiSearchIndexUnlockStateDTO:
+      example:
+        nouxUnlockState: nouxUnlockState
+      properties:
+        nouxUnlockState:
           type: string
       type: object
     ApiSearchResultDTOV2:
@@ -31739,6 +33982,7 @@ components:
         defaultBranchMonitoringIntervalHours: 0
         gitExecutable: gitExecutable
         gitTimeoutSeconds: 6
+        commitMessageTemplate: commitMessageTemplate
         useUsernameInRepositoryCloneUrl: true
         prEventPurgeWindow: 5
         defaultBranchMonitoringStartTime: defaultBranchMonitoringStartTime
@@ -31748,6 +33992,8 @@ components:
         cloneDirectory:
           type: string
         commitEmail:
+          type: string
+        commitMessageTemplate:
           type: string
         commitUsername:
           type: string
@@ -31872,6 +34118,83 @@ components:
           type: array
         stageId:
           type: string
+      type: object
+    ApiSourceControlReadinessDTO:
+      description: Whether a repository is configured such that IQ will evaluate it
+      example:
+        ownerType: ownerType
+        dbmState: NOT_EVALUATED
+        reasons:
+        - SCM_EVALUATIONS_NOT_ENABLED
+        - SCM_EVALUATIONS_NOT_ENABLED
+        hasCompletedInitialSourceEvaluation: true
+        prEvaluationEligible: true
+        publicId: publicId
+        internalOwnerId: internalOwnerId
+        lastSourceEvaluationTime: 2000-01-23T04:56:07.000+00:00
+      properties:
+        dbmState:
+          description: Default branch monitoring state. ACTIVE means nothing is suppressing
+            monitoring; it is not a guarantee that a scan is imminent
+          enum:
+          - NOT_EVALUATED
+          - SUPPRESSED
+          - ACTIVE
+          type: string
+        hasCompletedInitialSourceEvaluation:
+          description: Whether a Source-stage evaluation has completed for this repository
+            at least once
+          type: boolean
+        internalOwnerId:
+          description: Internal id of the owner
+          type: string
+        lastSourceEvaluationTime:
+          description: "When the most recent Source-stage evaluation ran, if any"
+          format: date-time
+          type: string
+        ownerType:
+          description: Owner type of the configuration; always 'application'
+          type: string
+        prEvaluationEligible:
+          description: "Whether configuration permits pull request (Develop-stage)\
+            \ evaluation. Describes configuration only, not whether any pull request\
+            \ currently exists"
+          type: boolean
+        publicId:
+          description: Public id of the application
+          type: string
+        reasons:
+          description: "Stable reason codes explaining why the repository is not fully\
+            \ ready. Empty when the repository is ready, so callers may gate on this\
+            \ list being empty"
+          enum:
+          - SCM_EVALUATIONS_NOT_ENABLED
+          - PR_COMMENTING_NOT_ENABLED
+          - NO_REPOSITORY_URL
+          - NO_SOURCE_EVALUATION_YET
+          - AWAITING_MONITORING_WINDOW
+          - EXTERNAL_EVALUATION_SUPPRESSION
+          - LICENSE_NOT_SUPPORTED
+          - SCM_CREDENTIALS_INVALID
+          - DEFAULT_BRANCH_MONITORING_DISABLED
+          - PR_EVALUATION_NOT_SUPPORTED
+          items:
+            description: "Stable reason codes explaining why the repository is not\
+              \ fully ready. Empty when the repository is ready, so callers may gate\
+              \ on this list being empty"
+            enum:
+            - SCM_EVALUATIONS_NOT_ENABLED
+            - PR_COMMENTING_NOT_ENABLED
+            - NO_REPOSITORY_URL
+            - NO_SOURCE_EVALUATION_YET
+            - AWAITING_MONITORING_WINDOW
+            - EXTERNAL_EVALUATION_SUPPRESSION
+            - LICENSE_NOT_SUPPORTED
+            - SCM_CREDENTIALS_INVALID
+            - DEFAULT_BRANCH_MONITORING_DISABLED
+            - PR_EVALUATION_NOT_SUPPORTED
+            type: string
+          type: array
       type: object
     ApiStagePolicyViolationComponentDTO:
       example:
@@ -33228,6 +35551,7 @@ components:
               isKev: true
             epssData:
               currentScore: 6.027456183070403
+            attackVector: attackVector
             categories:
             - categories
             - categories
@@ -33253,6 +35577,9 @@ components:
             - vulnerableVersionRanges
             - vulnerableVersionRanges
             isAdvancedVulnerabilityDetection: true
+            threatTypes:
+            - threatTypes
+            - threatTypes
             detectionType: detectionType
             vulnerabilityLink: https://openapi-generator.tech
             componentExplanationMarkdown: componentExplanationMarkdown
@@ -33930,6 +36257,7 @@ components:
           policyWaiverThreatLevel: 5
           policyViolationThreatLevel: 5
           policyWaiverPolicyName: policyWaiverPolicyName
+          policyWaiverComponentMatchStrategy: policyWaiverComponentMatchStrategy
           applicationCategoryDescription: applicationCategoryDescription
           componentEffectiveLicenseName: componentEffectiveLicenseName
           reviewerName: reviewerName
@@ -33949,9 +36277,11 @@ components:
           componentViolationStates:
           - componentViolationStates
           - componentViolationStates
+          policyWaiverComponentName: policyWaiverComponentName
           applicationViolationPolicyTypes:
           - applicationViolationPolicyTypes
           - applicationViolationPolicyTypes
+          policyWaiverComponentVersion: policyWaiverComponentVersion
           applicationLastEvaluationTimeEpochMs: 0
           componentLicenseThreatGroupName: componentLicenseThreatGroupName
           componentViolationPolicyTypes:
@@ -34019,6 +36349,7 @@ components:
           policyWaiverThreatLevel: 5
           policyViolationThreatLevel: 5
           policyWaiverPolicyName: policyWaiverPolicyName
+          policyWaiverComponentMatchStrategy: policyWaiverComponentMatchStrategy
           applicationCategoryDescription: applicationCategoryDescription
           componentEffectiveLicenseName: componentEffectiveLicenseName
           reviewerName: reviewerName
@@ -34038,9 +36369,11 @@ components:
           componentViolationStates:
           - componentViolationStates
           - componentViolationStates
+          policyWaiverComponentName: policyWaiverComponentName
           applicationViolationPolicyTypes:
           - applicationViolationPolicyTypes
           - applicationViolationPolicyTypes
+          policyWaiverComponentVersion: policyWaiverComponentVersion
           applicationLastEvaluationTimeEpochMs: 0
           componentLicenseThreatGroupName: componentLicenseThreatGroupName
           componentViolationPolicyTypes:
@@ -34093,6 +36426,7 @@ components:
           - componentCoordinateQualifier
           - componentCoordinatePackageId
           - vulnerabilityId
+          - vulnerabilityAlias
           - vulnerabilitySeverity
           - vulnerabilityStatus
           - vulnerabilityDescription
@@ -34142,6 +36476,9 @@ components:
           - policyWaiverExpiryStatus
           - policyWaiverPolicyType
           - policyWaiverScope
+          - policyWaiverComponentName
+          - policyWaiverComponentVersion
+          - policyWaiverComponentMatchStrategy
           - policyWaiverRequestStatus
           - requesterName
           - reviewerName
@@ -34643,6 +36980,7 @@ components:
         lastNameClaim: lastNameClaim
         idpIssuer: idpIssuer
         idpJwsAlgorithm: idpJwsAlgorithm
+        expectedAudience: expectedAudience
         idpJwks: idpJwks
         emailClaim: emailClaim
         firstNameClaim: firstNameClaim
@@ -34653,6 +36991,8 @@ components:
         emailClaim:
           type: string
         exactMatchClaimsJson:
+          type: string
+        expectedAudience:
           type: string
         firstNameClaim:
           type: string
@@ -36584,6 +38924,7 @@ components:
             policyWaiverThreatLevel: 5
             policyViolationThreatLevel: 5
             policyWaiverPolicyName: policyWaiverPolicyName
+            policyWaiverComponentMatchStrategy: policyWaiverComponentMatchStrategy
             applicationCategoryDescription: applicationCategoryDescription
             componentEffectiveLicenseName: componentEffectiveLicenseName
             reviewerName: reviewerName
@@ -36603,9 +38944,11 @@ components:
             componentViolationStates:
             - componentViolationStates
             - componentViolationStates
+            policyWaiverComponentName: policyWaiverComponentName
             applicationViolationPolicyTypes:
             - applicationViolationPolicyTypes
             - applicationViolationPolicyTypes
+            policyWaiverComponentVersion: policyWaiverComponentVersion
             applicationLastEvaluationTimeEpochMs: 0
             componentLicenseThreatGroupName: componentLicenseThreatGroupName
             componentViolationPolicyTypes:
@@ -36673,6 +39016,7 @@ components:
             policyWaiverThreatLevel: 5
             policyViolationThreatLevel: 5
             policyWaiverPolicyName: policyWaiverPolicyName
+            policyWaiverComponentMatchStrategy: policyWaiverComponentMatchStrategy
             applicationCategoryDescription: applicationCategoryDescription
             componentEffectiveLicenseName: componentEffectiveLicenseName
             reviewerName: reviewerName
@@ -36692,9 +39036,11 @@ components:
             componentViolationStates:
             - componentViolationStates
             - componentViolationStates
+            policyWaiverComponentName: policyWaiverComponentName
             applicationViolationPolicyTypes:
             - applicationViolationPolicyTypes
             - applicationViolationPolicyTypes
+            policyWaiverComponentVersion: policyWaiverComponentVersion
             applicationLastEvaluationTimeEpochMs: 0
             componentLicenseThreatGroupName: componentLicenseThreatGroupName
             componentViolationPolicyTypes:
@@ -36766,6 +39112,7 @@ components:
             policyWaiverThreatLevel: 5
             policyViolationThreatLevel: 5
             policyWaiverPolicyName: policyWaiverPolicyName
+            policyWaiverComponentMatchStrategy: policyWaiverComponentMatchStrategy
             applicationCategoryDescription: applicationCategoryDescription
             componentEffectiveLicenseName: componentEffectiveLicenseName
             reviewerName: reviewerName
@@ -36785,9 +39132,11 @@ components:
             componentViolationStates:
             - componentViolationStates
             - componentViolationStates
+            policyWaiverComponentName: policyWaiverComponentName
             applicationViolationPolicyTypes:
             - applicationViolationPolicyTypes
             - applicationViolationPolicyTypes
+            policyWaiverComponentVersion: policyWaiverComponentVersion
             applicationLastEvaluationTimeEpochMs: 0
             componentLicenseThreatGroupName: componentLicenseThreatGroupName
             componentViolationPolicyTypes:
@@ -36855,6 +39204,7 @@ components:
             policyWaiverThreatLevel: 5
             policyViolationThreatLevel: 5
             policyWaiverPolicyName: policyWaiverPolicyName
+            policyWaiverComponentMatchStrategy: policyWaiverComponentMatchStrategy
             applicationCategoryDescription: applicationCategoryDescription
             componentEffectiveLicenseName: componentEffectiveLicenseName
             reviewerName: reviewerName
@@ -36874,9 +39224,11 @@ components:
             componentViolationStates:
             - componentViolationStates
             - componentViolationStates
+            policyWaiverComponentName: policyWaiverComponentName
             applicationViolationPolicyTypes:
             - applicationViolationPolicyTypes
             - applicationViolationPolicyTypes
+            policyWaiverComponentVersion: policyWaiverComponentVersion
             applicationLastEvaluationTimeEpochMs: 0
             componentLicenseThreatGroupName: componentLicenseThreatGroupName
             componentViolationPolicyTypes:
@@ -36969,6 +39321,7 @@ components:
         policyWaiverThreatLevel: 5
         policyViolationThreatLevel: 5
         policyWaiverPolicyName: policyWaiverPolicyName
+        policyWaiverComponentMatchStrategy: policyWaiverComponentMatchStrategy
         applicationCategoryDescription: applicationCategoryDescription
         componentEffectiveLicenseName: componentEffectiveLicenseName
         reviewerName: reviewerName
@@ -36988,9 +39341,11 @@ components:
         componentViolationStates:
         - componentViolationStates
         - componentViolationStates
+        policyWaiverComponentName: policyWaiverComponentName
         applicationViolationPolicyTypes:
         - applicationViolationPolicyTypes
         - applicationViolationPolicyTypes
+        policyWaiverComponentVersion: policyWaiverComponentVersion
         applicationLastEvaluationTimeEpochMs: 0
         componentLicenseThreatGroupName: componentLicenseThreatGroupName
         componentViolationPolicyTypes:
@@ -37120,6 +39475,12 @@ components:
         policyWaiverAuto:
           type: boolean
         policyWaiverComment:
+          type: string
+        policyWaiverComponentMatchStrategy:
+          type: string
+        policyWaiverComponentName:
+          type: string
+        policyWaiverComponentVersion:
           type: string
         policyWaiverCreatedAt:
           type: string
@@ -37257,6 +39618,7 @@ components:
           isKev: true
         epssData:
           currentScore: 6.027456183070403
+        attackVector: attackVector
         categories:
         - categories
         - categories
@@ -37282,6 +39644,9 @@ components:
         - vulnerableVersionRanges
         - vulnerableVersionRanges
         isAdvancedVulnerabilityDetection: true
+        threatTypes:
+        - threatTypes
+        - threatTypes
         detectionType: detectionType
         vulnerabilityLink: https://openapi-generator.tech
         componentExplanationMarkdown: componentExplanationMarkdown
@@ -37290,6 +39655,8 @@ components:
           items:
             $ref: "#/components/schemas/ReferenceLink"
           type: array
+        attackVector:
+          type: string
         categories:
           items:
             type: string
@@ -37341,6 +39708,10 @@ components:
           type: array
         source:
           $ref: "#/components/schemas/VulnerabilitySource"
+        threatTypes:
+          items:
+            type: string
+          type: array
         vulnIds:
           items:
             type: string
@@ -37569,6 +39940,7 @@ components:
           lastNameClaim: lastNameClaim
           idpIssuer: idpIssuer
           idpJwsAlgorithm: idpJwsAlgorithm
+          expectedAudience: expectedAudience
           idpJwks: idpJwks
           emailClaim: emailClaim
           firstNameClaim: firstNameClaim

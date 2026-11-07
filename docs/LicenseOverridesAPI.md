@@ -187,7 +187,7 @@ import (
 func main() {
 	ownerType := "ownerType_example" // string | Select the `ownerType` for which you want to retrieve the applied license overrides.
 	ownerId := "ownerId_example" // string | Enter the id of the application, organization or the repository.
-	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier | Enter the componentIdentifier consisting of format and coordinates as a JSON e.g., `?componentIdentifier={\"format\":\"maven\",\"coordinates\":\"{...}}\"}
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier | Enter the component format and coordinates as JSON.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **componentIdentifier** | [**ComponentIdentifier**](ComponentIdentifier.md) | Enter the componentIdentifier consisting of format and coordinates as a JSON e.g., &#x60;?componentIdentifier&#x3D;{\&quot;format\&quot;:\&quot;maven\&quot;,\&quot;coordinates\&quot;:\&quot;{...}}\&quot;} | 
+ **componentIdentifier** | [**ComponentIdentifier**](ComponentIdentifier.md) | Enter the component format and coordinates as JSON. | 
 
 ### Return type
 
@@ -262,7 +262,7 @@ import (
 func main() {
 	ownerType := "ownerType_example" // string | Select the `ownerType` for which you want to retrieve the applied license overrides.
 	ownerId := "ownerId_example" // string | Enter the id of the owner.
-	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier | Enter the component format and coordinates.
+	componentIdentifier := *sonatypeiq.NewComponentIdentifier() // ComponentIdentifier | Enter the component format and coordinates as JSON.
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **componentIdentifier** | [**ComponentIdentifier**](ComponentIdentifier.md) | Enter the component format and coordinates. | 
+ **componentIdentifier** | [**ComponentIdentifier**](ComponentIdentifier.md) | Enter the component format and coordinates as JSON. | 
 
 ### Return type
 
