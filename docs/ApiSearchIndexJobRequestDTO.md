@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DocTypes** | Pointer to **[]string** | Doc types to derive from the database, for a FULL_REBUILD. The rest are copied from the index serving now and keep the mappings and shard count they were built with. Absent, null or empty derives every doc type, and so does naming all of them. Naming any reference doc type derives all six, because one pass derives them together, and application is always derived. | [optional] 
 **JobType** | Pointer to **string** | Job to run: FULL_REBUILD or FIRST_TIME_INDEX. | [optional] 
 **Trigger** | Pointer to **string** | What asked for the job: UNLOCK_WIZARD, HEALTH_UI, SUPPORT or SYSTEM. Defaults to HEALTH_UI. | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewApiSearchIndexJobRequestDTOWithDefaults instantiates a new ApiSearchIndexJobRequestDTO object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDocTypes
+
+`func (o *ApiSearchIndexJobRequestDTO) GetDocTypes() []string`
+
+GetDocTypes returns the DocTypes field if non-nil, zero value otherwise.
+
+### GetDocTypesOk
+
+`func (o *ApiSearchIndexJobRequestDTO) GetDocTypesOk() (*[]string, bool)`
+
+GetDocTypesOk returns a tuple with the DocTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocTypes
+
+`func (o *ApiSearchIndexJobRequestDTO) SetDocTypes(v []string)`
+
+SetDocTypes sets DocTypes field to given value.
+
+### HasDocTypes
+
+`func (o *ApiSearchIndexJobRequestDTO) HasDocTypes() bool`
+
+HasDocTypes returns a boolean if a field has been set.
 
 ### GetJobType
 

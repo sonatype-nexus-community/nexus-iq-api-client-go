@@ -12,8 +12,8 @@ Method | HTTP request | Description
 [**GetJob**](AdvancedSearchIndexHealthAPI.md#GetJob) | **Get** /api/v2/search/advanced/index/jobs/{jobId} | 
 [**GetJobEvents**](AdvancedSearchIndexHealthAPI.md#GetJobEvents) | **Get** /api/v2/search/advanced/index/jobs/{jobId}/events | 
 [**GetJobHistory**](AdvancedSearchIndexHealthAPI.md#GetJobHistory) | **Get** /api/v2/search/advanced/index/jobs/history | 
+[**GetSetup**](AdvancedSearchIndexHealthAPI.md#GetSetup) | **Get** /api/v2/search/advanced/index/setup | 
 [**MarkUnlockReadyToTest**](AdvancedSearchIndexHealthAPI.md#MarkUnlockReadyToTest) | **Post** /api/v2/search/advanced/index/unlock/ready-to-test | 
-[**RevertGeneration**](AdvancedSearchIndexHealthAPI.md#RevertGeneration) | **Post** /api/v2/search/advanced/index/generations/{generationId}/revert | 
 [**RunAnalyze**](AdvancedSearchIndexHealthAPI.md#RunAnalyze) | **Post** /api/v2/search/advanced/index/analyze/run | 
 [**StartJob**](AdvancedSearchIndexHealthAPI.md#StartJob) | **Post** /api/v2/search/advanced/index/jobs | 
 [**StartUnlockIndexing**](AdvancedSearchIndexHealthAPI.md#StartUnlockIndexing) | **Post** /api/v2/search/advanced/index/unlock/start | 
@@ -533,6 +533,67 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetSetup
+
+> ApiSearchIndexSetupDTO GetSetup(ctx).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
+)
+
+func main() {
+
+	configuration := sonatypeiq.NewConfiguration()
+	apiClient := sonatypeiq.NewAPIClient(configuration)
+	resp, r, err := apiClient.AdvancedSearchIndexHealthAPI.GetSetup(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AdvancedSearchIndexHealthAPI.GetSetup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSetup`: ApiSearchIndexSetupDTO
+	fmt.Fprintf(os.Stdout, "Response from `AdvancedSearchIndexHealthAPI.GetSetup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSetupRequest struct via the builder pattern
+
+
+### Return type
+
+[**ApiSearchIndexSetupDTO**](ApiSearchIndexSetupDTO.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## MarkUnlockReadyToTest
 
 > ApiSearchIndexUnlockStateDTO MarkUnlockReadyToTest(ctx).Execute()
@@ -579,76 +640,6 @@ Other parameters are passed through a pointer to a apiMarkUnlockReadyToTestReque
 ### Return type
 
 [**ApiSearchIndexUnlockStateDTO**](ApiSearchIndexUnlockStateDTO.md)
-
-### Authorization
-
-[BasicAuth](../README.md#BasicAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RevertGeneration
-
-> ApiSearchIndexGenerationDTO RevertGeneration(ctx, generationId).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	sonatypeiq "github.com/sonatype-nexus-community/nexus-iq-api-client-go"
-)
-
-func main() {
-	generationId := "generationId_example" // string | 
-
-	configuration := sonatypeiq.NewConfiguration()
-	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.AdvancedSearchIndexHealthAPI.RevertGeneration(context.Background(), generationId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `AdvancedSearchIndexHealthAPI.RevertGeneration``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `RevertGeneration`: ApiSearchIndexGenerationDTO
-	fmt.Fprintf(os.Stdout, "Response from `AdvancedSearchIndexHealthAPI.RevertGeneration`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**generationId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRevertGenerationRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**ApiSearchIndexGenerationDTO**](ApiSearchIndexGenerationDTO.md)
 
 ### Authorization
 

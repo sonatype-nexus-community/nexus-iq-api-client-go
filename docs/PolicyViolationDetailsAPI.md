@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 ## GetPolicyViolations1
 
-> ApiApplicationViolationListDTOV2 GetPolicyViolations1(ctx).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).Execute()
+> ApiApplicationViolationListDTOV2 GetPolicyViolations1(ctx).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).IncludeDependencyType(includeDependencyType).Execute()
 
 
 
@@ -387,10 +387,11 @@ func main() {
 	openTimeAfter := "openTimeAfter_example" // string | Enter the date (format YYYY-MM-DD) from which you want to retrieve the violation details (optional)
 	openTimeBefore := "openTimeBefore_example" // string | Enter the date (format YYYY-MM-DD) until which you want to retrieve the violation details (optional)
 	type_ := []string{"Type_example"} // []string | Set one or more policy violation type (active, legacy, waived) to include (optional)
+	includeDependencyType := true // bool | Set to true to include the `dependencyType` of each violating component (Direct, Transitive, Inner Source Direct, Inner Source Transitive or Unknown). Defaults to false because resolving it reads the scan report once per application and stage; callers that do not set it see an unchanged response. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.PolicyViolationDetailsAPI.GetPolicyViolations1(context.Background()).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).Execute()
+	resp, r, err := apiClient.PolicyViolationDetailsAPI.GetPolicyViolations1(context.Background()).P(p).OpenTimeAfter(openTimeAfter).OpenTimeBefore(openTimeBefore).Type_(type_).IncludeDependencyType(includeDependencyType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PolicyViolationDetailsAPI.GetPolicyViolations1``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -415,6 +416,7 @@ Name | Type | Description  | Notes
  **openTimeAfter** | **string** | Enter the date (format YYYY-MM-DD) from which you want to retrieve the violation details | 
  **openTimeBefore** | **string** | Enter the date (format YYYY-MM-DD) until which you want to retrieve the violation details | 
  **type_** | **[]string** | Set one or more policy violation type (active, legacy, waived) to include | 
+ **includeDependencyType** | **bool** | Set to true to include the &#x60;dependencyType&#x60; of each violating component (Direct, Transitive, Inner Source Direct, Inner Source Transitive or Unknown). Defaults to false because resolving it reads the scan report once per application and stage; callers that do not set it see an unchanged response. | [default to false]
 
 ### Return type
 

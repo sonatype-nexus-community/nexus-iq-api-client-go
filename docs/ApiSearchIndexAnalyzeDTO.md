@@ -58,6 +58,7 @@ Name | Type | Description | Notes
 **StampedAtEpochMs** | Pointer to **int64** |  | [optional] 
 **StampedIndexVersion** | Pointer to **int32** |  | [optional] 
 **StampedIqVersion** | Pointer to **string** |  | [optional] 
+**UnaliasedNexusOneIndexCount** | Pointer to **int32** |  | [optional] 
 **ViolationCount** | Pointer to **int64** |  | [optional] 
 
 ## Methods
@@ -1428,6 +1429,31 @@ SetStampedIqVersion sets StampedIqVersion field to given value.
 `func (o *ApiSearchIndexAnalyzeDTO) HasStampedIqVersion() bool`
 
 HasStampedIqVersion returns a boolean if a field has been set.
+
+### GetUnaliasedNexusOneIndexCount
+
+`func (o *ApiSearchIndexAnalyzeDTO) GetUnaliasedNexusOneIndexCount() int32`
+
+GetUnaliasedNexusOneIndexCount returns the UnaliasedNexusOneIndexCount field if non-nil, zero value otherwise.
+
+### GetUnaliasedNexusOneIndexCountOk
+
+`func (o *ApiSearchIndexAnalyzeDTO) GetUnaliasedNexusOneIndexCountOk() (*int32, bool)`
+
+GetUnaliasedNexusOneIndexCountOk returns a tuple with the UnaliasedNexusOneIndexCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnaliasedNexusOneIndexCount
+
+`func (o *ApiSearchIndexAnalyzeDTO) SetUnaliasedNexusOneIndexCount(v int32)`
+
+SetUnaliasedNexusOneIndexCount sets UnaliasedNexusOneIndexCount field to given value.
+
+### HasUnaliasedNexusOneIndexCount
+
+`func (o *ApiSearchIndexAnalyzeDTO) HasUnaliasedNexusOneIndexCount() bool`
+
+HasUnaliasedNexusOneIndexCount returns a boolean if a field has been set.
 
 ### GetViolationCount
 

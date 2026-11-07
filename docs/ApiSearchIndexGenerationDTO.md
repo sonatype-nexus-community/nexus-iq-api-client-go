@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **JobFinishedAt** | Pointer to **time.Time** |  | [optional] 
 **JobStartedAt** | Pointer to **time.Time** |  | [optional] 
 **ProductVersion** | Pointer to **string** |  | [optional] 
-**RetiredAt** | Pointer to **time.Time** |  | [optional] 
 **Role** | Pointer to **string** |  | [optional] 
 **SchemaVersion** | Pointer to **int32** |  | [optional] 
 **ServingSince** | Pointer to **time.Time** |  | [optional] 
@@ -288,31 +287,6 @@ SetProductVersion sets ProductVersion field to given value.
 `func (o *ApiSearchIndexGenerationDTO) HasProductVersion() bool`
 
 HasProductVersion returns a boolean if a field has been set.
-
-### GetRetiredAt
-
-`func (o *ApiSearchIndexGenerationDTO) GetRetiredAt() time.Time`
-
-GetRetiredAt returns the RetiredAt field if non-nil, zero value otherwise.
-
-### GetRetiredAtOk
-
-`func (o *ApiSearchIndexGenerationDTO) GetRetiredAtOk() (*time.Time, bool)`
-
-GetRetiredAtOk returns a tuple with the RetiredAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRetiredAt
-
-`func (o *ApiSearchIndexGenerationDTO) SetRetiredAt(v time.Time)`
-
-SetRetiredAt sets RetiredAt field to given value.
-
-### HasRetiredAt
-
-`func (o *ApiSearchIndexGenerationDTO) HasRetiredAt() bool`
-
-HasRetiredAt returns a boolean if a field has been set.
 
 ### GetRole
 

@@ -22,6 +22,32 @@ func Test_sonatypeiq_GitHubAppConfigurationAPIService(t *testing.T) {
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
 
+	t.Run("Test GitHubAppConfigurationAPIService CheckPermissions", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var githubAppId string
+
+		httpRes, err := apiClient.GitHubAppConfigurationAPI.CheckPermissions(context.Background(), githubAppId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test GitHubAppConfigurationAPIService DeleteGitHubApp", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var githubAppId string
+
+		httpRes, err := apiClient.GitHubAppConfigurationAPI.DeleteGitHubApp(context.Background(), githubAppId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test GitHubAppConfigurationAPIService GenerateManifest", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -49,6 +75,17 @@ func Test_sonatypeiq_GitHubAppConfigurationAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		httpRes, err := apiClient.GitHubAppConfigurationAPI.HandleRedirect(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test GitHubAppConfigurationAPIService ListGitHubApps", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.GitHubAppConfigurationAPI.ListGitHubApps(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

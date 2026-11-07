@@ -659,7 +659,7 @@ import (
 
 func main() {
 	policyViolationId := "policyViolationId_example" // string | Enter the policyViolationId for which you want to trigger the waiver request event.
-	apiRequestPolicyWaiverDTO := *sonatypeiq.NewApiRequestPolicyWaiverDTO() // ApiRequestPolicyWaiverDTO | The request JSON should contain<ol><li>comment (optional, default null) to indicate the waiver request reason</li><li>policyViolationLink (link to the policy violation page in the Lifecycle UI)</li><li>addWaiverLink (link to the Add Waiver page in the Lifecycle UI)</li></ol> (optional)
+	apiRequestPolicyWaiverDTO := *sonatypeiq.NewApiRequestPolicyWaiverDTO() // ApiRequestPolicyWaiverDTO | The request JSON should contain<ol><li>comment (optional, default null) to indicate the waiver request reason</li><li>policyViolationLink (link to the policy violation page in the UI)</li><li>addWaiverLink (link to the Add Waiver page in the UI)</li></ol> (optional)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
@@ -687,7 +687,7 @@ Other parameters are passed through a pointer to a apiRequestPolicyWaiverRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **apiRequestPolicyWaiverDTO** | [**ApiRequestPolicyWaiverDTO**](ApiRequestPolicyWaiverDTO.md) | The request JSON should contain&lt;ol&gt;&lt;li&gt;comment (optional, default null) to indicate the waiver request reason&lt;/li&gt;&lt;li&gt;policyViolationLink (link to the policy violation page in the Lifecycle UI)&lt;/li&gt;&lt;li&gt;addWaiverLink (link to the Add Waiver page in the Lifecycle UI)&lt;/li&gt;&lt;/ol&gt; | 
+ **apiRequestPolicyWaiverDTO** | [**ApiRequestPolicyWaiverDTO**](ApiRequestPolicyWaiverDTO.md) | The request JSON should contain&lt;ol&gt;&lt;li&gt;comment (optional, default null) to indicate the waiver request reason&lt;/li&gt;&lt;li&gt;policyViolationLink (link to the policy violation page in the UI)&lt;/li&gt;&lt;li&gt;addWaiverLink (link to the Add Waiver page in the UI)&lt;/li&gt;&lt;/ol&gt; | 
 
 ### Return type
 

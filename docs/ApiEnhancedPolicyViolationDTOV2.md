@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Component** | Pointer to [**ApiComponentDTOV2**](ApiComponentDTOV2.md) |  | [optional] 
 **ConstraintViolations** | Pointer to [**[]ApiConstraintViolationDTO**](ApiConstraintViolationDTO.md) |  | [optional] 
+**DependencyType** | Pointer to **string** |  | [optional] 
 **FixTime** | Pointer to **time.Time** |  | [optional] 
 **IsLegacy** | Pointer to **bool** |  | [optional] 
 **IsWaived** | Pointer to **bool** |  | [optional] 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **PolicyId** | Pointer to **string** |  | [optional] 
 **PolicyName** | Pointer to **string** |  | [optional] 
 **PolicyViolationId** | Pointer to **string** |  | [optional] 
+**ReachabilityStatus** | Pointer to **string** |  | [optional] 
 **ReportId** | Pointer to **string** |  | [optional] 
 **ReportUrl** | Pointer to **string** |  | [optional] 
 **StageId** | Pointer to **string** |  | [optional] 
@@ -88,6 +90,31 @@ SetConstraintViolations sets ConstraintViolations field to given value.
 `func (o *ApiEnhancedPolicyViolationDTOV2) HasConstraintViolations() bool`
 
 HasConstraintViolations returns a boolean if a field has been set.
+
+### GetDependencyType
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetDependencyType() string`
+
+GetDependencyType returns the DependencyType field if non-nil, zero value otherwise.
+
+### GetDependencyTypeOk
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetDependencyTypeOk() (*string, bool)`
+
+GetDependencyTypeOk returns a tuple with the DependencyType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDependencyType
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) SetDependencyType(v string)`
+
+SetDependencyType sets DependencyType field to given value.
+
+### HasDependencyType
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) HasDependencyType() bool`
+
+HasDependencyType returns a boolean if a field has been set.
 
 ### GetFixTime
 
@@ -288,6 +315,31 @@ SetPolicyViolationId sets PolicyViolationId field to given value.
 `func (o *ApiEnhancedPolicyViolationDTOV2) HasPolicyViolationId() bool`
 
 HasPolicyViolationId returns a boolean if a field has been set.
+
+### GetReachabilityStatus
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetReachabilityStatus() string`
+
+GetReachabilityStatus returns the ReachabilityStatus field if non-nil, zero value otherwise.
+
+### GetReachabilityStatusOk
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) GetReachabilityStatusOk() (*string, bool)`
+
+GetReachabilityStatusOk returns a tuple with the ReachabilityStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReachabilityStatus
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) SetReachabilityStatus(v string)`
+
+SetReachabilityStatus sets ReachabilityStatus field to given value.
+
+### HasReachabilityStatus
+
+`func (o *ApiEnhancedPolicyViolationDTOV2) HasReachabilityStatus() bool`
+
+HasReachabilityStatus returns a boolean if a field has been set.
 
 ### GetReportId
 

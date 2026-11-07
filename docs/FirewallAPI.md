@@ -1195,7 +1195,7 @@ Name | Type | Description  | Notes
 
 ## GetQuarantineList
 
-> ApiFirewallQuarantinedComponentDtoResult GetQuarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).SortBy(sortBy).Asc(asc).Execute()
+> ApiFirewallQuarantinedComponentDtoResult GetQuarantineList(ctx).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).ManagerType(managerType).SortBy(sortBy).Asc(asc).Execute()
 
 
 
@@ -1220,12 +1220,13 @@ func main() {
 	componentName := "componentName_example" // string | Enter the component name. (optional)
 	repositoryPublicId := "repositoryPublicId_example" // string | Enter the repository public ID of the quarantined component. (optional)
 	quarantineTime := int32(56) // int32 | Enter the quarantine time of the component. (optional)
+	managerType := []string{"Inner_example"} // []string | Enter the repository manager types to include, `virtual` and/or `traditional`. Ignored unless Firewall Enterprise and its config plane are enabled. (optional)
 	sortBy := "sortBy_example" // string | Enter `quarantineTime` to sort the results by quarantine time. (optional)
 	asc := true // bool | Select the sort order. (optional) (default to false)
 
 	configuration := sonatypeiq.NewConfiguration()
 	apiClient := sonatypeiq.NewAPIClient(configuration)
-	resp, r, err := apiClient.FirewallAPI.GetQuarantineList(context.Background()).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).SortBy(sortBy).Asc(asc).Execute()
+	resp, r, err := apiClient.FirewallAPI.GetQuarantineList(context.Background()).Page(page).PageSize(pageSize).PolicyId(policyId).ComponentName(componentName).RepositoryPublicId(repositoryPublicId).QuarantineTime(quarantineTime).ManagerType(managerType).SortBy(sortBy).Asc(asc).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FirewallAPI.GetQuarantineList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1252,6 +1253,7 @@ Name | Type | Description  | Notes
  **componentName** | **string** | Enter the component name. | 
  **repositoryPublicId** | **string** | Enter the repository public ID of the quarantined component. | 
  **quarantineTime** | **int32** | Enter the quarantine time of the component. | 
+ **managerType** | **[]string** | Enter the repository manager types to include, &#x60;virtual&#x60; and/or &#x60;traditional&#x60;. Ignored unless Firewall Enterprise and its config plane are enabled. | 
  **sortBy** | **string** | Enter &#x60;quarantineTime&#x60; to sort the results by quarantine time. | 
  **asc** | **bool** | Select the sort order. | [default to false]
 

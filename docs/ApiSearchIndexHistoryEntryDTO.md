@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **BuildingGenerationId** | Pointer to **string** |  | [optional] 
 **CreatedByUserId** | Pointer to **string** |  | [optional] 
 **DocCount** | Pointer to **int64** |  | [optional] 
+**DocTypeScope** | Pointer to **string** |  | [optional] 
 **ErrorCode** | Pointer to **string** |  | [optional] 
 **ErrorMessage** | Pointer to **string** |  | [optional] 
 **FinishedAt** | Pointer to **time.Time** |  | [optional] 
@@ -117,6 +118,31 @@ SetDocCount sets DocCount field to given value.
 `func (o *ApiSearchIndexHistoryEntryDTO) HasDocCount() bool`
 
 HasDocCount returns a boolean if a field has been set.
+
+### GetDocTypeScope
+
+`func (o *ApiSearchIndexHistoryEntryDTO) GetDocTypeScope() string`
+
+GetDocTypeScope returns the DocTypeScope field if non-nil, zero value otherwise.
+
+### GetDocTypeScopeOk
+
+`func (o *ApiSearchIndexHistoryEntryDTO) GetDocTypeScopeOk() (*string, bool)`
+
+GetDocTypeScopeOk returns a tuple with the DocTypeScope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocTypeScope
+
+`func (o *ApiSearchIndexHistoryEntryDTO) SetDocTypeScope(v string)`
+
+SetDocTypeScope sets DocTypeScope field to given value.
+
+### HasDocTypeScope
+
+`func (o *ApiSearchIndexHistoryEntryDTO) HasDocTypeScope() bool`
+
+HasDocTypeScope returns a boolean if a field has been set.
 
 ### GetErrorCode
 

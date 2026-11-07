@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ComponentIdentifier** | Pointer to [**ComponentIdentifier**](ComponentIdentifier.md) |  | [optional] 
 **DisplayName** | Pointer to **string** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
+**ManagerType** | Pointer to **string** |  | [optional] 
 **MatchState** | Pointer to **string** |  | [optional] 
 **Pathname** | Pointer to **string** |  | [optional] 
 **PolicyName** | Pointer to **string** |  | [optional] 
@@ -109,6 +110,31 @@ SetHash sets Hash field to given value.
 `func (o *ApiFirewallQuarantinedComponentDto) HasHash() bool`
 
 HasHash returns a boolean if a field has been set.
+
+### GetManagerType
+
+`func (o *ApiFirewallQuarantinedComponentDto) GetManagerType() string`
+
+GetManagerType returns the ManagerType field if non-nil, zero value otherwise.
+
+### GetManagerTypeOk
+
+`func (o *ApiFirewallQuarantinedComponentDto) GetManagerTypeOk() (*string, bool)`
+
+GetManagerTypeOk returns a tuple with the ManagerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagerType
+
+`func (o *ApiFirewallQuarantinedComponentDto) SetManagerType(v string)`
+
+SetManagerType sets ManagerType field to given value.
+
+### HasManagerType
+
+`func (o *ApiFirewallQuarantinedComponentDto) HasManagerType() bool`
+
+HasManagerType returns a boolean if a field has been set.
 
 ### GetMatchState
 

@@ -6,20 +6,24 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** |  | [optional] 
 **ActiveSlot** | Pointer to **string** |  | [optional] 
-**BuildingGenerationId** | Pointer to **string** |  | [optional] 
+**BuildingIndexName** | Pointer to **string** |  | [optional] 
 **CancelRequestedAt** | Pointer to **time.Time** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **CreatedByUserId** | Pointer to **string** |  | [optional] 
+**DocCount** | Pointer to **int64** |  | [optional] 
+**DocTypeScope** | Pointer to **string** |  | [optional] 
 **ErrorCode** | Pointer to **string** |  | [optional] 
 **ErrorMessage** | Pointer to **string** |  | [optional] 
 **EtaFinishAt** | Pointer to **time.Time** |  | [optional] 
 **FinishedAt** | Pointer to **time.Time** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
+**IqVersion** | Pointer to **string** |  | [optional] 
 **JobType** | Pointer to **string** |  | [optional] 
 **Phase** | Pointer to **string** |  | [optional] 
 **ProgressPercent** | Pointer to **int32** |  | [optional] 
 **RecommendedOp** | Pointer to **string** |  | [optional] 
-**ServingGenerationIdAtStart** | Pointer to **string** |  | [optional] 
+**SchemaVersion** | Pointer to **int32** |  | [optional] 
+**SizeBytes** | Pointer to **int64** |  | [optional] 
 **StartedAt** | Pointer to **time.Time** |  | [optional] 
 **Status** | Pointer to **string** |  | [optional] 
 **Trigger** | Pointer to **string** |  | [optional] 
@@ -94,30 +98,30 @@ SetActiveSlot sets ActiveSlot field to given value.
 
 HasActiveSlot returns a boolean if a field has been set.
 
-### GetBuildingGenerationId
+### GetBuildingIndexName
 
-`func (o *SearchIndexJob) GetBuildingGenerationId() string`
+`func (o *SearchIndexJob) GetBuildingIndexName() string`
 
-GetBuildingGenerationId returns the BuildingGenerationId field if non-nil, zero value otherwise.
+GetBuildingIndexName returns the BuildingIndexName field if non-nil, zero value otherwise.
 
-### GetBuildingGenerationIdOk
+### GetBuildingIndexNameOk
 
-`func (o *SearchIndexJob) GetBuildingGenerationIdOk() (*string, bool)`
+`func (o *SearchIndexJob) GetBuildingIndexNameOk() (*string, bool)`
 
-GetBuildingGenerationIdOk returns a tuple with the BuildingGenerationId field if it's non-nil, zero value otherwise
+GetBuildingIndexNameOk returns a tuple with the BuildingIndexName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBuildingGenerationId
+### SetBuildingIndexName
 
-`func (o *SearchIndexJob) SetBuildingGenerationId(v string)`
+`func (o *SearchIndexJob) SetBuildingIndexName(v string)`
 
-SetBuildingGenerationId sets BuildingGenerationId field to given value.
+SetBuildingIndexName sets BuildingIndexName field to given value.
 
-### HasBuildingGenerationId
+### HasBuildingIndexName
 
-`func (o *SearchIndexJob) HasBuildingGenerationId() bool`
+`func (o *SearchIndexJob) HasBuildingIndexName() bool`
 
-HasBuildingGenerationId returns a boolean if a field has been set.
+HasBuildingIndexName returns a boolean if a field has been set.
 
 ### GetCancelRequestedAt
 
@@ -193,6 +197,56 @@ SetCreatedByUserId sets CreatedByUserId field to given value.
 `func (o *SearchIndexJob) HasCreatedByUserId() bool`
 
 HasCreatedByUserId returns a boolean if a field has been set.
+
+### GetDocCount
+
+`func (o *SearchIndexJob) GetDocCount() int64`
+
+GetDocCount returns the DocCount field if non-nil, zero value otherwise.
+
+### GetDocCountOk
+
+`func (o *SearchIndexJob) GetDocCountOk() (*int64, bool)`
+
+GetDocCountOk returns a tuple with the DocCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocCount
+
+`func (o *SearchIndexJob) SetDocCount(v int64)`
+
+SetDocCount sets DocCount field to given value.
+
+### HasDocCount
+
+`func (o *SearchIndexJob) HasDocCount() bool`
+
+HasDocCount returns a boolean if a field has been set.
+
+### GetDocTypeScope
+
+`func (o *SearchIndexJob) GetDocTypeScope() string`
+
+GetDocTypeScope returns the DocTypeScope field if non-nil, zero value otherwise.
+
+### GetDocTypeScopeOk
+
+`func (o *SearchIndexJob) GetDocTypeScopeOk() (*string, bool)`
+
+GetDocTypeScopeOk returns a tuple with the DocTypeScope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDocTypeScope
+
+`func (o *SearchIndexJob) SetDocTypeScope(v string)`
+
+SetDocTypeScope sets DocTypeScope field to given value.
+
+### HasDocTypeScope
+
+`func (o *SearchIndexJob) HasDocTypeScope() bool`
+
+HasDocTypeScope returns a boolean if a field has been set.
 
 ### GetErrorCode
 
@@ -319,6 +373,31 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### GetIqVersion
+
+`func (o *SearchIndexJob) GetIqVersion() string`
+
+GetIqVersion returns the IqVersion field if non-nil, zero value otherwise.
+
+### GetIqVersionOk
+
+`func (o *SearchIndexJob) GetIqVersionOk() (*string, bool)`
+
+GetIqVersionOk returns a tuple with the IqVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIqVersion
+
+`func (o *SearchIndexJob) SetIqVersion(v string)`
+
+SetIqVersion sets IqVersion field to given value.
+
+### HasIqVersion
+
+`func (o *SearchIndexJob) HasIqVersion() bool`
+
+HasIqVersion returns a boolean if a field has been set.
+
 ### GetJobType
 
 `func (o *SearchIndexJob) GetJobType() string`
@@ -419,30 +498,55 @@ SetRecommendedOp sets RecommendedOp field to given value.
 
 HasRecommendedOp returns a boolean if a field has been set.
 
-### GetServingGenerationIdAtStart
+### GetSchemaVersion
 
-`func (o *SearchIndexJob) GetServingGenerationIdAtStart() string`
+`func (o *SearchIndexJob) GetSchemaVersion() int32`
 
-GetServingGenerationIdAtStart returns the ServingGenerationIdAtStart field if non-nil, zero value otherwise.
+GetSchemaVersion returns the SchemaVersion field if non-nil, zero value otherwise.
 
-### GetServingGenerationIdAtStartOk
+### GetSchemaVersionOk
 
-`func (o *SearchIndexJob) GetServingGenerationIdAtStartOk() (*string, bool)`
+`func (o *SearchIndexJob) GetSchemaVersionOk() (*int32, bool)`
 
-GetServingGenerationIdAtStartOk returns a tuple with the ServingGenerationIdAtStart field if it's non-nil, zero value otherwise
+GetSchemaVersionOk returns a tuple with the SchemaVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetServingGenerationIdAtStart
+### SetSchemaVersion
 
-`func (o *SearchIndexJob) SetServingGenerationIdAtStart(v string)`
+`func (o *SearchIndexJob) SetSchemaVersion(v int32)`
 
-SetServingGenerationIdAtStart sets ServingGenerationIdAtStart field to given value.
+SetSchemaVersion sets SchemaVersion field to given value.
 
-### HasServingGenerationIdAtStart
+### HasSchemaVersion
 
-`func (o *SearchIndexJob) HasServingGenerationIdAtStart() bool`
+`func (o *SearchIndexJob) HasSchemaVersion() bool`
 
-HasServingGenerationIdAtStart returns a boolean if a field has been set.
+HasSchemaVersion returns a boolean if a field has been set.
+
+### GetSizeBytes
+
+`func (o *SearchIndexJob) GetSizeBytes() int64`
+
+GetSizeBytes returns the SizeBytes field if non-nil, zero value otherwise.
+
+### GetSizeBytesOk
+
+`func (o *SearchIndexJob) GetSizeBytesOk() (*int64, bool)`
+
+GetSizeBytesOk returns a tuple with the SizeBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSizeBytes
+
+`func (o *SearchIndexJob) SetSizeBytes(v int64)`
+
+SetSizeBytes sets SizeBytes field to given value.
+
+### HasSizeBytes
+
+`func (o *SearchIndexJob) HasSizeBytes() bool`
+
+HasSizeBytes returns a boolean if a field has been set.
 
 ### GetStartedAt
 
