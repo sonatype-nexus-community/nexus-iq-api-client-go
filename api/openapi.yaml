@@ -40796,19 +40796,112 @@ components:
       type: object
     SystemConfig:
       example:
-        baseUrl: baseUrl
+        userAgentSuffix: userAgentSuffix
+        webhookSecretPassphrase: webhookSecretPassphrase
+        integrationsSupportedVersionCount: 6
+        policyMonitoringHour: 5
+        successMetricsStageId: successMetricsStageId
+        maxAdvancedSearchClauseCount: 1
+        purgeScanFiles: purgeScanFiles
         forceBaseUrl: true
+        advancedSearchCSVExportDelimiter: advancedSearchCSVExportDelimiter
+        baseUrl: baseUrl
+        ADVANCED_REPORTING_INSIGHTS_ENABLED: true
+        alpObservedLicenseDetectionEnabled: true
+        apiAccessAllowList:
+        - apiAccessAllowList
+        - apiAccessAllowList
+        hdsUrl: hdsUrl
+        waivedComponentUpgradeMonitoringEnabled: true
+        eventBus.maxThreadPoolSize: 0
+        frameAncestorsAllowlist:
+        - frameAncestorsAllowlist
+        - frameAncestorsAllowlist
+        sessionTimeout: 5
+        csrfProtection: true
       properties:
+        ADVANCED_REPORTING_INSIGHTS_ENABLED:
+          nullable: true
+          type: boolean
+        advancedSearchCSVExportDelimiter:
+          nullable: true
+          type: string
+        alpObservedLicenseDetectionEnabled:
+          nullable: true
+          type: boolean
+        apiAccessAllowList:
+          items:
+            type: string
+          nullable: true
+          type: array
         baseUrl:
           nullable: true
           type: string
+        csrfProtection:
+          nullable: true
+          type: boolean
+        eventBus.maxThreadPoolSize:
+          nullable: true
+          type: integer
         forceBaseUrl:
           nullable: true
           type: boolean
+        frameAncestorsAllowlist:
+          items:
+            type: string
+          nullable: true
+          type: array
+        hdsUrl:
+          nullable: true
+          type: string
+        integrationsSupportedVersionCount:
+          nullable: true
+          type: integer
+        maxAdvancedSearchClauseCount:
+          nullable: true
+          type: integer
+        policyMonitoringHour:
+          nullable: true
+          type: integer
+        purgeScanFiles:
+          nullable: true
+          type: string
+        sessionTimeout:
+          nullable: true
+          type: integer
+        successMetricsStageId:
+          nullable: true
+          type: string
+        userAgentSuffix:
+          nullable: true
+          type: string
+        waivedComponentUpgradeMonitoringEnabled:
+          nullable: true
+          type: boolean
+        webhookSecretPassphrase:
+          nullable: true
+          type: string
     SystemConfigProperty:
       enum:
       - baseUrl
       - forceBaseUrl
+      - sessionTimeout
+      - eventBus.maxThreadPoolSize
+      - policyMonitoringHour
+      - maxAdvancedSearchClauseCount
+      - integrationsSupportedVersionCount
+      - csrfProtection
+      - waivedComponentUpgradeMonitoringEnabled
+      - ADVANCED_REPORTING_INSIGHTS_ENABLED
+      - alpObservedLicenseDetectionEnabled
+      - userAgentSuffix
+      - hdsUrl
+      - webhookSecretPassphrase
+      - advancedSearchCSVExportDelimiter
+      - successMetricsStageId
+      - purgeScanFiles
+      - frameAncestorsAllowlist
+      - apiAccessAllowList
       type: string
     Tag:
       example:

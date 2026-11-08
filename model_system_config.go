@@ -19,8 +19,25 @@ var _ MappedNullable = &SystemConfig{}
 
 // SystemConfig struct for SystemConfig
 type SystemConfig struct {
+	ADVANCED_REPORTING_INSIGHTS_ENABLED NullableBool `json:"ADVANCED_REPORTING_INSIGHTS_ENABLED,omitempty"`
+	AdvancedSearchCSVExportDelimiter NullableString `json:"advancedSearchCSVExportDelimiter,omitempty"`
+	AlpObservedLicenseDetectionEnabled NullableBool `json:"alpObservedLicenseDetectionEnabled,omitempty"`
+	ApiAccessAllowList []string `json:"apiAccessAllowList,omitempty"`
 	BaseUrl NullableString `json:"baseUrl,omitempty"`
+	CsrfProtection NullableBool `json:"csrfProtection,omitempty"`
+	EventBusMaxThreadPoolSize NullableInt32 `json:"eventBus.maxThreadPoolSize,omitempty"`
 	ForceBaseUrl NullableBool `json:"forceBaseUrl,omitempty"`
+	FrameAncestorsAllowlist []string `json:"frameAncestorsAllowlist,omitempty"`
+	HdsUrl NullableString `json:"hdsUrl,omitempty"`
+	IntegrationsSupportedVersionCount NullableInt32 `json:"integrationsSupportedVersionCount,omitempty"`
+	MaxAdvancedSearchClauseCount NullableInt32 `json:"maxAdvancedSearchClauseCount,omitempty"`
+	PolicyMonitoringHour NullableInt32 `json:"policyMonitoringHour,omitempty"`
+	PurgeScanFiles NullableString `json:"purgeScanFiles,omitempty"`
+	SessionTimeout NullableInt32 `json:"sessionTimeout,omitempty"`
+	SuccessMetricsStageId NullableString `json:"successMetricsStageId,omitempty"`
+	UserAgentSuffix NullableString `json:"userAgentSuffix,omitempty"`
+	WaivedComponentUpgradeMonitoringEnabled NullableBool `json:"waivedComponentUpgradeMonitoringEnabled,omitempty"`
+	WebhookSecretPassphrase NullableString `json:"webhookSecretPassphrase,omitempty"`
 }
 
 // NewSystemConfig instantiates a new SystemConfig object
@@ -38,6 +55,165 @@ func NewSystemConfig() *SystemConfig {
 func NewSystemConfigWithDefaults() *SystemConfig {
 	this := SystemConfig{}
 	return &this
+}
+
+// GetADVANCED_REPORTING_INSIGHTS_ENABLED returns the ADVANCED_REPORTING_INSIGHTS_ENABLED field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetADVANCED_REPORTING_INSIGHTS_ENABLED() bool {
+	if o == nil || IsNil(o.ADVANCED_REPORTING_INSIGHTS_ENABLED.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.ADVANCED_REPORTING_INSIGHTS_ENABLED.Get()
+}
+
+// GetADVANCED_REPORTING_INSIGHTS_ENABLEDOk returns a tuple with the ADVANCED_REPORTING_INSIGHTS_ENABLED field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetADVANCED_REPORTING_INSIGHTS_ENABLEDOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ADVANCED_REPORTING_INSIGHTS_ENABLED.Get(), o.ADVANCED_REPORTING_INSIGHTS_ENABLED.IsSet()
+}
+
+// HasADVANCED_REPORTING_INSIGHTS_ENABLED returns a boolean if a field has been set.
+func (o *SystemConfig) HasADVANCED_REPORTING_INSIGHTS_ENABLED() bool {
+	if o != nil && o.ADVANCED_REPORTING_INSIGHTS_ENABLED.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetADVANCED_REPORTING_INSIGHTS_ENABLED gets a reference to the given NullableBool and assigns it to the ADVANCED_REPORTING_INSIGHTS_ENABLED field.
+func (o *SystemConfig) SetADVANCED_REPORTING_INSIGHTS_ENABLED(v bool) {
+	o.ADVANCED_REPORTING_INSIGHTS_ENABLED.Set(&v)
+}
+// SetADVANCED_REPORTING_INSIGHTS_ENABLEDNil sets the value for ADVANCED_REPORTING_INSIGHTS_ENABLED to be an explicit nil
+func (o *SystemConfig) SetADVANCED_REPORTING_INSIGHTS_ENABLEDNil() {
+	o.ADVANCED_REPORTING_INSIGHTS_ENABLED.Set(nil)
+}
+
+// UnsetADVANCED_REPORTING_INSIGHTS_ENABLED ensures that no value is present for ADVANCED_REPORTING_INSIGHTS_ENABLED, not even an explicit nil
+func (o *SystemConfig) UnsetADVANCED_REPORTING_INSIGHTS_ENABLED() {
+	o.ADVANCED_REPORTING_INSIGHTS_ENABLED.Unset()
+}
+
+// GetAdvancedSearchCSVExportDelimiter returns the AdvancedSearchCSVExportDelimiter field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetAdvancedSearchCSVExportDelimiter() string {
+	if o == nil || IsNil(o.AdvancedSearchCSVExportDelimiter.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AdvancedSearchCSVExportDelimiter.Get()
+}
+
+// GetAdvancedSearchCSVExportDelimiterOk returns a tuple with the AdvancedSearchCSVExportDelimiter field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetAdvancedSearchCSVExportDelimiterOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AdvancedSearchCSVExportDelimiter.Get(), o.AdvancedSearchCSVExportDelimiter.IsSet()
+}
+
+// HasAdvancedSearchCSVExportDelimiter returns a boolean if a field has been set.
+func (o *SystemConfig) HasAdvancedSearchCSVExportDelimiter() bool {
+	if o != nil && o.AdvancedSearchCSVExportDelimiter.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAdvancedSearchCSVExportDelimiter gets a reference to the given NullableString and assigns it to the AdvancedSearchCSVExportDelimiter field.
+func (o *SystemConfig) SetAdvancedSearchCSVExportDelimiter(v string) {
+	o.AdvancedSearchCSVExportDelimiter.Set(&v)
+}
+// SetAdvancedSearchCSVExportDelimiterNil sets the value for AdvancedSearchCSVExportDelimiter to be an explicit nil
+func (o *SystemConfig) SetAdvancedSearchCSVExportDelimiterNil() {
+	o.AdvancedSearchCSVExportDelimiter.Set(nil)
+}
+
+// UnsetAdvancedSearchCSVExportDelimiter ensures that no value is present for AdvancedSearchCSVExportDelimiter, not even an explicit nil
+func (o *SystemConfig) UnsetAdvancedSearchCSVExportDelimiter() {
+	o.AdvancedSearchCSVExportDelimiter.Unset()
+}
+
+// GetAlpObservedLicenseDetectionEnabled returns the AlpObservedLicenseDetectionEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetAlpObservedLicenseDetectionEnabled() bool {
+	if o == nil || IsNil(o.AlpObservedLicenseDetectionEnabled.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.AlpObservedLicenseDetectionEnabled.Get()
+}
+
+// GetAlpObservedLicenseDetectionEnabledOk returns a tuple with the AlpObservedLicenseDetectionEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetAlpObservedLicenseDetectionEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AlpObservedLicenseDetectionEnabled.Get(), o.AlpObservedLicenseDetectionEnabled.IsSet()
+}
+
+// HasAlpObservedLicenseDetectionEnabled returns a boolean if a field has been set.
+func (o *SystemConfig) HasAlpObservedLicenseDetectionEnabled() bool {
+	if o != nil && o.AlpObservedLicenseDetectionEnabled.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAlpObservedLicenseDetectionEnabled gets a reference to the given NullableBool and assigns it to the AlpObservedLicenseDetectionEnabled field.
+func (o *SystemConfig) SetAlpObservedLicenseDetectionEnabled(v bool) {
+	o.AlpObservedLicenseDetectionEnabled.Set(&v)
+}
+// SetAlpObservedLicenseDetectionEnabledNil sets the value for AlpObservedLicenseDetectionEnabled to be an explicit nil
+func (o *SystemConfig) SetAlpObservedLicenseDetectionEnabledNil() {
+	o.AlpObservedLicenseDetectionEnabled.Set(nil)
+}
+
+// UnsetAlpObservedLicenseDetectionEnabled ensures that no value is present for AlpObservedLicenseDetectionEnabled, not even an explicit nil
+func (o *SystemConfig) UnsetAlpObservedLicenseDetectionEnabled() {
+	o.AlpObservedLicenseDetectionEnabled.Unset()
+}
+
+// GetApiAccessAllowList returns the ApiAccessAllowList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetApiAccessAllowList() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.ApiAccessAllowList
+}
+
+// GetApiAccessAllowListOk returns a tuple with the ApiAccessAllowList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetApiAccessAllowListOk() ([]string, bool) {
+	if o == nil || IsNil(o.ApiAccessAllowList) {
+		return nil, false
+	}
+	return o.ApiAccessAllowList, true
+}
+
+// HasApiAccessAllowList returns a boolean if a field has been set.
+func (o *SystemConfig) HasApiAccessAllowList() bool {
+	if o != nil && !IsNil(o.ApiAccessAllowList) {
+		return true
+	}
+
+	return false
+}
+
+// SetApiAccessAllowList gets a reference to the given []string and assigns it to the ApiAccessAllowList field.
+func (o *SystemConfig) SetApiAccessAllowList(v []string) {
+	o.ApiAccessAllowList = v
 }
 
 // GetBaseUrl returns the BaseUrl field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -82,6 +258,90 @@ func (o *SystemConfig) UnsetBaseUrl() {
 	o.BaseUrl.Unset()
 }
 
+// GetCsrfProtection returns the CsrfProtection field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetCsrfProtection() bool {
+	if o == nil || IsNil(o.CsrfProtection.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.CsrfProtection.Get()
+}
+
+// GetCsrfProtectionOk returns a tuple with the CsrfProtection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetCsrfProtectionOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CsrfProtection.Get(), o.CsrfProtection.IsSet()
+}
+
+// HasCsrfProtection returns a boolean if a field has been set.
+func (o *SystemConfig) HasCsrfProtection() bool {
+	if o != nil && o.CsrfProtection.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCsrfProtection gets a reference to the given NullableBool and assigns it to the CsrfProtection field.
+func (o *SystemConfig) SetCsrfProtection(v bool) {
+	o.CsrfProtection.Set(&v)
+}
+// SetCsrfProtectionNil sets the value for CsrfProtection to be an explicit nil
+func (o *SystemConfig) SetCsrfProtectionNil() {
+	o.CsrfProtection.Set(nil)
+}
+
+// UnsetCsrfProtection ensures that no value is present for CsrfProtection, not even an explicit nil
+func (o *SystemConfig) UnsetCsrfProtection() {
+	o.CsrfProtection.Unset()
+}
+
+// GetEventBusMaxThreadPoolSize returns the EventBusMaxThreadPoolSize field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetEventBusMaxThreadPoolSize() int32 {
+	if o == nil || IsNil(o.EventBusMaxThreadPoolSize.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.EventBusMaxThreadPoolSize.Get()
+}
+
+// GetEventBusMaxThreadPoolSizeOk returns a tuple with the EventBusMaxThreadPoolSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetEventBusMaxThreadPoolSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EventBusMaxThreadPoolSize.Get(), o.EventBusMaxThreadPoolSize.IsSet()
+}
+
+// HasEventBusMaxThreadPoolSize returns a boolean if a field has been set.
+func (o *SystemConfig) HasEventBusMaxThreadPoolSize() bool {
+	if o != nil && o.EventBusMaxThreadPoolSize.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEventBusMaxThreadPoolSize gets a reference to the given NullableInt32 and assigns it to the EventBusMaxThreadPoolSize field.
+func (o *SystemConfig) SetEventBusMaxThreadPoolSize(v int32) {
+	o.EventBusMaxThreadPoolSize.Set(&v)
+}
+// SetEventBusMaxThreadPoolSizeNil sets the value for EventBusMaxThreadPoolSize to be an explicit nil
+func (o *SystemConfig) SetEventBusMaxThreadPoolSizeNil() {
+	o.EventBusMaxThreadPoolSize.Set(nil)
+}
+
+// UnsetEventBusMaxThreadPoolSize ensures that no value is present for EventBusMaxThreadPoolSize, not even an explicit nil
+func (o *SystemConfig) UnsetEventBusMaxThreadPoolSize() {
+	o.EventBusMaxThreadPoolSize.Unset()
+}
+
 // GetForceBaseUrl returns the ForceBaseUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SystemConfig) GetForceBaseUrl() bool {
 	if o == nil || IsNil(o.ForceBaseUrl.Get()) {
@@ -124,6 +384,459 @@ func (o *SystemConfig) UnsetForceBaseUrl() {
 	o.ForceBaseUrl.Unset()
 }
 
+// GetFrameAncestorsAllowlist returns the FrameAncestorsAllowlist field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetFrameAncestorsAllowlist() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.FrameAncestorsAllowlist
+}
+
+// GetFrameAncestorsAllowlistOk returns a tuple with the FrameAncestorsAllowlist field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetFrameAncestorsAllowlistOk() ([]string, bool) {
+	if o == nil || IsNil(o.FrameAncestorsAllowlist) {
+		return nil, false
+	}
+	return o.FrameAncestorsAllowlist, true
+}
+
+// HasFrameAncestorsAllowlist returns a boolean if a field has been set.
+func (o *SystemConfig) HasFrameAncestorsAllowlist() bool {
+	if o != nil && !IsNil(o.FrameAncestorsAllowlist) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrameAncestorsAllowlist gets a reference to the given []string and assigns it to the FrameAncestorsAllowlist field.
+func (o *SystemConfig) SetFrameAncestorsAllowlist(v []string) {
+	o.FrameAncestorsAllowlist = v
+}
+
+// GetHdsUrl returns the HdsUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetHdsUrl() string {
+	if o == nil || IsNil(o.HdsUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.HdsUrl.Get()
+}
+
+// GetHdsUrlOk returns a tuple with the HdsUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetHdsUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HdsUrl.Get(), o.HdsUrl.IsSet()
+}
+
+// HasHdsUrl returns a boolean if a field has been set.
+func (o *SystemConfig) HasHdsUrl() bool {
+	if o != nil && o.HdsUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHdsUrl gets a reference to the given NullableString and assigns it to the HdsUrl field.
+func (o *SystemConfig) SetHdsUrl(v string) {
+	o.HdsUrl.Set(&v)
+}
+// SetHdsUrlNil sets the value for HdsUrl to be an explicit nil
+func (o *SystemConfig) SetHdsUrlNil() {
+	o.HdsUrl.Set(nil)
+}
+
+// UnsetHdsUrl ensures that no value is present for HdsUrl, not even an explicit nil
+func (o *SystemConfig) UnsetHdsUrl() {
+	o.HdsUrl.Unset()
+}
+
+// GetIntegrationsSupportedVersionCount returns the IntegrationsSupportedVersionCount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetIntegrationsSupportedVersionCount() int32 {
+	if o == nil || IsNil(o.IntegrationsSupportedVersionCount.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.IntegrationsSupportedVersionCount.Get()
+}
+
+// GetIntegrationsSupportedVersionCountOk returns a tuple with the IntegrationsSupportedVersionCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetIntegrationsSupportedVersionCountOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IntegrationsSupportedVersionCount.Get(), o.IntegrationsSupportedVersionCount.IsSet()
+}
+
+// HasIntegrationsSupportedVersionCount returns a boolean if a field has been set.
+func (o *SystemConfig) HasIntegrationsSupportedVersionCount() bool {
+	if o != nil && o.IntegrationsSupportedVersionCount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIntegrationsSupportedVersionCount gets a reference to the given NullableInt32 and assigns it to the IntegrationsSupportedVersionCount field.
+func (o *SystemConfig) SetIntegrationsSupportedVersionCount(v int32) {
+	o.IntegrationsSupportedVersionCount.Set(&v)
+}
+// SetIntegrationsSupportedVersionCountNil sets the value for IntegrationsSupportedVersionCount to be an explicit nil
+func (o *SystemConfig) SetIntegrationsSupportedVersionCountNil() {
+	o.IntegrationsSupportedVersionCount.Set(nil)
+}
+
+// UnsetIntegrationsSupportedVersionCount ensures that no value is present for IntegrationsSupportedVersionCount, not even an explicit nil
+func (o *SystemConfig) UnsetIntegrationsSupportedVersionCount() {
+	o.IntegrationsSupportedVersionCount.Unset()
+}
+
+// GetMaxAdvancedSearchClauseCount returns the MaxAdvancedSearchClauseCount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetMaxAdvancedSearchClauseCount() int32 {
+	if o == nil || IsNil(o.MaxAdvancedSearchClauseCount.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxAdvancedSearchClauseCount.Get()
+}
+
+// GetMaxAdvancedSearchClauseCountOk returns a tuple with the MaxAdvancedSearchClauseCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetMaxAdvancedSearchClauseCountOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MaxAdvancedSearchClauseCount.Get(), o.MaxAdvancedSearchClauseCount.IsSet()
+}
+
+// HasMaxAdvancedSearchClauseCount returns a boolean if a field has been set.
+func (o *SystemConfig) HasMaxAdvancedSearchClauseCount() bool {
+	if o != nil && o.MaxAdvancedSearchClauseCount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxAdvancedSearchClauseCount gets a reference to the given NullableInt32 and assigns it to the MaxAdvancedSearchClauseCount field.
+func (o *SystemConfig) SetMaxAdvancedSearchClauseCount(v int32) {
+	o.MaxAdvancedSearchClauseCount.Set(&v)
+}
+// SetMaxAdvancedSearchClauseCountNil sets the value for MaxAdvancedSearchClauseCount to be an explicit nil
+func (o *SystemConfig) SetMaxAdvancedSearchClauseCountNil() {
+	o.MaxAdvancedSearchClauseCount.Set(nil)
+}
+
+// UnsetMaxAdvancedSearchClauseCount ensures that no value is present for MaxAdvancedSearchClauseCount, not even an explicit nil
+func (o *SystemConfig) UnsetMaxAdvancedSearchClauseCount() {
+	o.MaxAdvancedSearchClauseCount.Unset()
+}
+
+// GetPolicyMonitoringHour returns the PolicyMonitoringHour field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetPolicyMonitoringHour() int32 {
+	if o == nil || IsNil(o.PolicyMonitoringHour.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.PolicyMonitoringHour.Get()
+}
+
+// GetPolicyMonitoringHourOk returns a tuple with the PolicyMonitoringHour field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetPolicyMonitoringHourOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PolicyMonitoringHour.Get(), o.PolicyMonitoringHour.IsSet()
+}
+
+// HasPolicyMonitoringHour returns a boolean if a field has been set.
+func (o *SystemConfig) HasPolicyMonitoringHour() bool {
+	if o != nil && o.PolicyMonitoringHour.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicyMonitoringHour gets a reference to the given NullableInt32 and assigns it to the PolicyMonitoringHour field.
+func (o *SystemConfig) SetPolicyMonitoringHour(v int32) {
+	o.PolicyMonitoringHour.Set(&v)
+}
+// SetPolicyMonitoringHourNil sets the value for PolicyMonitoringHour to be an explicit nil
+func (o *SystemConfig) SetPolicyMonitoringHourNil() {
+	o.PolicyMonitoringHour.Set(nil)
+}
+
+// UnsetPolicyMonitoringHour ensures that no value is present for PolicyMonitoringHour, not even an explicit nil
+func (o *SystemConfig) UnsetPolicyMonitoringHour() {
+	o.PolicyMonitoringHour.Unset()
+}
+
+// GetPurgeScanFiles returns the PurgeScanFiles field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetPurgeScanFiles() string {
+	if o == nil || IsNil(o.PurgeScanFiles.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PurgeScanFiles.Get()
+}
+
+// GetPurgeScanFilesOk returns a tuple with the PurgeScanFiles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetPurgeScanFilesOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PurgeScanFiles.Get(), o.PurgeScanFiles.IsSet()
+}
+
+// HasPurgeScanFiles returns a boolean if a field has been set.
+func (o *SystemConfig) HasPurgeScanFiles() bool {
+	if o != nil && o.PurgeScanFiles.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPurgeScanFiles gets a reference to the given NullableString and assigns it to the PurgeScanFiles field.
+func (o *SystemConfig) SetPurgeScanFiles(v string) {
+	o.PurgeScanFiles.Set(&v)
+}
+// SetPurgeScanFilesNil sets the value for PurgeScanFiles to be an explicit nil
+func (o *SystemConfig) SetPurgeScanFilesNil() {
+	o.PurgeScanFiles.Set(nil)
+}
+
+// UnsetPurgeScanFiles ensures that no value is present for PurgeScanFiles, not even an explicit nil
+func (o *SystemConfig) UnsetPurgeScanFiles() {
+	o.PurgeScanFiles.Unset()
+}
+
+// GetSessionTimeout returns the SessionTimeout field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetSessionTimeout() int32 {
+	if o == nil || IsNil(o.SessionTimeout.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.SessionTimeout.Get()
+}
+
+// GetSessionTimeoutOk returns a tuple with the SessionTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetSessionTimeoutOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SessionTimeout.Get(), o.SessionTimeout.IsSet()
+}
+
+// HasSessionTimeout returns a boolean if a field has been set.
+func (o *SystemConfig) HasSessionTimeout() bool {
+	if o != nil && o.SessionTimeout.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSessionTimeout gets a reference to the given NullableInt32 and assigns it to the SessionTimeout field.
+func (o *SystemConfig) SetSessionTimeout(v int32) {
+	o.SessionTimeout.Set(&v)
+}
+// SetSessionTimeoutNil sets the value for SessionTimeout to be an explicit nil
+func (o *SystemConfig) SetSessionTimeoutNil() {
+	o.SessionTimeout.Set(nil)
+}
+
+// UnsetSessionTimeout ensures that no value is present for SessionTimeout, not even an explicit nil
+func (o *SystemConfig) UnsetSessionTimeout() {
+	o.SessionTimeout.Unset()
+}
+
+// GetSuccessMetricsStageId returns the SuccessMetricsStageId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetSuccessMetricsStageId() string {
+	if o == nil || IsNil(o.SuccessMetricsStageId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SuccessMetricsStageId.Get()
+}
+
+// GetSuccessMetricsStageIdOk returns a tuple with the SuccessMetricsStageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetSuccessMetricsStageIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SuccessMetricsStageId.Get(), o.SuccessMetricsStageId.IsSet()
+}
+
+// HasSuccessMetricsStageId returns a boolean if a field has been set.
+func (o *SystemConfig) HasSuccessMetricsStageId() bool {
+	if o != nil && o.SuccessMetricsStageId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccessMetricsStageId gets a reference to the given NullableString and assigns it to the SuccessMetricsStageId field.
+func (o *SystemConfig) SetSuccessMetricsStageId(v string) {
+	o.SuccessMetricsStageId.Set(&v)
+}
+// SetSuccessMetricsStageIdNil sets the value for SuccessMetricsStageId to be an explicit nil
+func (o *SystemConfig) SetSuccessMetricsStageIdNil() {
+	o.SuccessMetricsStageId.Set(nil)
+}
+
+// UnsetSuccessMetricsStageId ensures that no value is present for SuccessMetricsStageId, not even an explicit nil
+func (o *SystemConfig) UnsetSuccessMetricsStageId() {
+	o.SuccessMetricsStageId.Unset()
+}
+
+// GetUserAgentSuffix returns the UserAgentSuffix field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetUserAgentSuffix() string {
+	if o == nil || IsNil(o.UserAgentSuffix.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.UserAgentSuffix.Get()
+}
+
+// GetUserAgentSuffixOk returns a tuple with the UserAgentSuffix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetUserAgentSuffixOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.UserAgentSuffix.Get(), o.UserAgentSuffix.IsSet()
+}
+
+// HasUserAgentSuffix returns a boolean if a field has been set.
+func (o *SystemConfig) HasUserAgentSuffix() bool {
+	if o != nil && o.UserAgentSuffix.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetUserAgentSuffix gets a reference to the given NullableString and assigns it to the UserAgentSuffix field.
+func (o *SystemConfig) SetUserAgentSuffix(v string) {
+	o.UserAgentSuffix.Set(&v)
+}
+// SetUserAgentSuffixNil sets the value for UserAgentSuffix to be an explicit nil
+func (o *SystemConfig) SetUserAgentSuffixNil() {
+	o.UserAgentSuffix.Set(nil)
+}
+
+// UnsetUserAgentSuffix ensures that no value is present for UserAgentSuffix, not even an explicit nil
+func (o *SystemConfig) UnsetUserAgentSuffix() {
+	o.UserAgentSuffix.Unset()
+}
+
+// GetWaivedComponentUpgradeMonitoringEnabled returns the WaivedComponentUpgradeMonitoringEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetWaivedComponentUpgradeMonitoringEnabled() bool {
+	if o == nil || IsNil(o.WaivedComponentUpgradeMonitoringEnabled.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.WaivedComponentUpgradeMonitoringEnabled.Get()
+}
+
+// GetWaivedComponentUpgradeMonitoringEnabledOk returns a tuple with the WaivedComponentUpgradeMonitoringEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetWaivedComponentUpgradeMonitoringEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.WaivedComponentUpgradeMonitoringEnabled.Get(), o.WaivedComponentUpgradeMonitoringEnabled.IsSet()
+}
+
+// HasWaivedComponentUpgradeMonitoringEnabled returns a boolean if a field has been set.
+func (o *SystemConfig) HasWaivedComponentUpgradeMonitoringEnabled() bool {
+	if o != nil && o.WaivedComponentUpgradeMonitoringEnabled.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetWaivedComponentUpgradeMonitoringEnabled gets a reference to the given NullableBool and assigns it to the WaivedComponentUpgradeMonitoringEnabled field.
+func (o *SystemConfig) SetWaivedComponentUpgradeMonitoringEnabled(v bool) {
+	o.WaivedComponentUpgradeMonitoringEnabled.Set(&v)
+}
+// SetWaivedComponentUpgradeMonitoringEnabledNil sets the value for WaivedComponentUpgradeMonitoringEnabled to be an explicit nil
+func (o *SystemConfig) SetWaivedComponentUpgradeMonitoringEnabledNil() {
+	o.WaivedComponentUpgradeMonitoringEnabled.Set(nil)
+}
+
+// UnsetWaivedComponentUpgradeMonitoringEnabled ensures that no value is present for WaivedComponentUpgradeMonitoringEnabled, not even an explicit nil
+func (o *SystemConfig) UnsetWaivedComponentUpgradeMonitoringEnabled() {
+	o.WaivedComponentUpgradeMonitoringEnabled.Unset()
+}
+
+// GetWebhookSecretPassphrase returns the WebhookSecretPassphrase field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SystemConfig) GetWebhookSecretPassphrase() string {
+	if o == nil || IsNil(o.WebhookSecretPassphrase.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.WebhookSecretPassphrase.Get()
+}
+
+// GetWebhookSecretPassphraseOk returns a tuple with the WebhookSecretPassphrase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SystemConfig) GetWebhookSecretPassphraseOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.WebhookSecretPassphrase.Get(), o.WebhookSecretPassphrase.IsSet()
+}
+
+// HasWebhookSecretPassphrase returns a boolean if a field has been set.
+func (o *SystemConfig) HasWebhookSecretPassphrase() bool {
+	if o != nil && o.WebhookSecretPassphrase.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookSecretPassphrase gets a reference to the given NullableString and assigns it to the WebhookSecretPassphrase field.
+func (o *SystemConfig) SetWebhookSecretPassphrase(v string) {
+	o.WebhookSecretPassphrase.Set(&v)
+}
+// SetWebhookSecretPassphraseNil sets the value for WebhookSecretPassphrase to be an explicit nil
+func (o *SystemConfig) SetWebhookSecretPassphraseNil() {
+	o.WebhookSecretPassphrase.Set(nil)
+}
+
+// UnsetWebhookSecretPassphrase ensures that no value is present for WebhookSecretPassphrase, not even an explicit nil
+func (o *SystemConfig) UnsetWebhookSecretPassphrase() {
+	o.WebhookSecretPassphrase.Unset()
+}
+
 func (o SystemConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -134,11 +847,62 @@ func (o SystemConfig) MarshalJSON() ([]byte, error) {
 
 func (o SystemConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if o.ADVANCED_REPORTING_INSIGHTS_ENABLED.IsSet() {
+		toSerialize["ADVANCED_REPORTING_INSIGHTS_ENABLED"] = o.ADVANCED_REPORTING_INSIGHTS_ENABLED.Get()
+	}
+	if o.AdvancedSearchCSVExportDelimiter.IsSet() {
+		toSerialize["advancedSearchCSVExportDelimiter"] = o.AdvancedSearchCSVExportDelimiter.Get()
+	}
+	if o.AlpObservedLicenseDetectionEnabled.IsSet() {
+		toSerialize["alpObservedLicenseDetectionEnabled"] = o.AlpObservedLicenseDetectionEnabled.Get()
+	}
+	if o.ApiAccessAllowList != nil {
+		toSerialize["apiAccessAllowList"] = o.ApiAccessAllowList
+	}
 	if o.BaseUrl.IsSet() {
 		toSerialize["baseUrl"] = o.BaseUrl.Get()
 	}
+	if o.CsrfProtection.IsSet() {
+		toSerialize["csrfProtection"] = o.CsrfProtection.Get()
+	}
+	if o.EventBusMaxThreadPoolSize.IsSet() {
+		toSerialize["eventBus.maxThreadPoolSize"] = o.EventBusMaxThreadPoolSize.Get()
+	}
 	if o.ForceBaseUrl.IsSet() {
 		toSerialize["forceBaseUrl"] = o.ForceBaseUrl.Get()
+	}
+	if o.FrameAncestorsAllowlist != nil {
+		toSerialize["frameAncestorsAllowlist"] = o.FrameAncestorsAllowlist
+	}
+	if o.HdsUrl.IsSet() {
+		toSerialize["hdsUrl"] = o.HdsUrl.Get()
+	}
+	if o.IntegrationsSupportedVersionCount.IsSet() {
+		toSerialize["integrationsSupportedVersionCount"] = o.IntegrationsSupportedVersionCount.Get()
+	}
+	if o.MaxAdvancedSearchClauseCount.IsSet() {
+		toSerialize["maxAdvancedSearchClauseCount"] = o.MaxAdvancedSearchClauseCount.Get()
+	}
+	if o.PolicyMonitoringHour.IsSet() {
+		toSerialize["policyMonitoringHour"] = o.PolicyMonitoringHour.Get()
+	}
+	if o.PurgeScanFiles.IsSet() {
+		toSerialize["purgeScanFiles"] = o.PurgeScanFiles.Get()
+	}
+	if o.SessionTimeout.IsSet() {
+		toSerialize["sessionTimeout"] = o.SessionTimeout.Get()
+	}
+	if o.SuccessMetricsStageId.IsSet() {
+		toSerialize["successMetricsStageId"] = o.SuccessMetricsStageId.Get()
+	}
+	if o.UserAgentSuffix.IsSet() {
+		toSerialize["userAgentSuffix"] = o.UserAgentSuffix.Get()
+	}
+	if o.WaivedComponentUpgradeMonitoringEnabled.IsSet() {
+		toSerialize["waivedComponentUpgradeMonitoringEnabled"] = o.WaivedComponentUpgradeMonitoringEnabled.Get()
+	}
+	if o.WebhookSecretPassphrase.IsSet() {
+		toSerialize["webhookSecretPassphrase"] = o.WebhookSecretPassphrase.Get()
 	}
 	return toSerialize, nil
 }

@@ -22,12 +22,46 @@ type SystemConfigProperty string
 const (
 	BASE_URL SystemConfigProperty = "baseUrl"
 	FORCE_BASE_URL SystemConfigProperty = "forceBaseUrl"
+	SESSION_TIMEOUT SystemConfigProperty = "sessionTimeout"
+	EVENT_BUS_MAX_THREAD_POOL_SIZE SystemConfigProperty = "eventBus.maxThreadPoolSize"
+	POLICY_MONITORING_HOUR SystemConfigProperty = "policyMonitoringHour"
+	MAX_ADVANCED_SEARCH_CLAUSE_COUNT SystemConfigProperty = "maxAdvancedSearchClauseCount"
+	INTEGRATIONS_SUPPORTED_VERSION_COUNT SystemConfigProperty = "integrationsSupportedVersionCount"
+	CSRF_PROTECTION SystemConfigProperty = "csrfProtection"
+	WAIVED_COMPONENT_UPGRADE_MONITORING_ENABLED SystemConfigProperty = "waivedComponentUpgradeMonitoringEnabled"
+	ADVANCED_REPORTING_INSIGHTS_ENABLED SystemConfigProperty = "ADVANCED_REPORTING_INSIGHTS_ENABLED"
+	ALP_OBSERVED_LICENSE_DETECTION_ENABLED SystemConfigProperty = "alpObservedLicenseDetectionEnabled"
+	USER_AGENT_SUFFIX SystemConfigProperty = "userAgentSuffix"
+	HDS_URL SystemConfigProperty = "hdsUrl"
+	WEBHOOK_SECRET_PASSPHRASE SystemConfigProperty = "webhookSecretPassphrase"
+	ADVANCED_SEARCH_CSV_EXPORT_DELIMITER SystemConfigProperty = "advancedSearchCSVExportDelimiter"
+	SUCCESS_METRICS_STAGE_ID SystemConfigProperty = "successMetricsStageId"
+	PURGE_SCAN_FILES SystemConfigProperty = "purgeScanFiles"
+	FRAME_ANCESTORS_ALLOWLIST SystemConfigProperty = "frameAncestorsAllowlist"
+	API_ACCESS_ALLOW_LIST SystemConfigProperty = "apiAccessAllowList"
 )
 
 // All allowed values of SystemConfigProperty enum
 var AllowedSystemConfigPropertyEnumValues = []SystemConfigProperty{
 	"baseUrl",
 	"forceBaseUrl",
+	"sessionTimeout",
+	"eventBus.maxThreadPoolSize",
+	"policyMonitoringHour",
+	"maxAdvancedSearchClauseCount",
+	"integrationsSupportedVersionCount",
+	"csrfProtection",
+	"waivedComponentUpgradeMonitoringEnabled",
+	"ADVANCED_REPORTING_INSIGHTS_ENABLED",
+	"alpObservedLicenseDetectionEnabled",
+	"userAgentSuffix",
+	"hdsUrl",
+	"webhookSecretPassphrase",
+	"advancedSearchCSVExportDelimiter",
+	"successMetricsStageId",
+	"purgeScanFiles",
+	"frameAncestorsAllowlist",
+	"apiAccessAllowList",
 }
 
 func (v *SystemConfigProperty) UnmarshalJSON(src []byte) error {
